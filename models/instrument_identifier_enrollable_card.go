@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // InstrumentIdentifierEnrollableCard instrument identifier enrollable card
+//
 // swagger:model InstrumentIdentifierEnrollableCard
 type InstrumentIdentifierEnrollableCard struct {
 
@@ -27,6 +29,7 @@ type InstrumentIdentifierEnrollableCard struct {
 	Card *InstrumentIdentifierEnrollableCardCard `json:"card,omitempty"`
 
 	// Type of Card
+	// Example: enrollable card
 	Type string `json:"type,omitempty"`
 }
 
@@ -53,7 +56,6 @@ func (m *InstrumentIdentifierEnrollableCard) Validate(formats strfmt.Registry) e
 }
 
 func (m *InstrumentIdentifierEnrollableCard) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.BankAccount) { // not required
 		return nil
 	}
@@ -62,6 +64,8 @@ func (m *InstrumentIdentifierEnrollableCard) validateBankAccount(formats strfmt.
 		if err := m.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("BankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BankAccount")
 			}
 			return err
 		}
@@ -71,7 +75,6 @@ func (m *InstrumentIdentifierEnrollableCard) validateBankAccount(formats strfmt.
 }
 
 func (m *InstrumentIdentifierEnrollableCard) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.BillTo) { // not required
 		return nil
 	}
@@ -80,6 +83,8 @@ func (m *InstrumentIdentifierEnrollableCard) validateBillTo(formats strfmt.Regis
 		if err := m.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billTo")
 			}
 			return err
 		}
@@ -89,7 +94,6 @@ func (m *InstrumentIdentifierEnrollableCard) validateBillTo(formats strfmt.Regis
 }
 
 func (m *InstrumentIdentifierEnrollableCard) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Card) { // not required
 		return nil
 	}
@@ -98,6 +102,93 @@ func (m *InstrumentIdentifierEnrollableCard) validateCard(formats strfmt.Registr
 		if err := m.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this instrument identifier enrollable card based on the context it is used
+func (m *InstrumentIdentifierEnrollableCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *InstrumentIdentifierEnrollableCard) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BankAccount != nil {
+
+		if swag.IsZero(m.BankAccount) { // not required
+			return nil
+		}
+
+		if err := m.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("BankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("BankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *InstrumentIdentifierEnrollableCard) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BillTo != nil {
+
+		if swag.IsZero(m.BillTo) { // not required
+			return nil
+		}
+
+		if err := m.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *InstrumentIdentifierEnrollableCard) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Card != nil {
+
+		if swag.IsZero(m.Card) { // not required
+			return nil
+		}
+
+		if err := m.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("card")
 			}
 			return err
 		}
@@ -125,15 +216,18 @@ func (m *InstrumentIdentifierEnrollableCard) UnmarshalBinary(b []byte) error {
 }
 
 // InstrumentIdentifierEnrollableCardBankAccount instrument identifier enrollable card bank account
+//
 // swagger:model InstrumentIdentifierEnrollableCardBankAccount
 type InstrumentIdentifierEnrollableCardBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -158,16 +252,15 @@ func (m *InstrumentIdentifierEnrollableCardBankAccount) Validate(formats strfmt.
 }
 
 func (m *InstrumentIdentifierEnrollableCardBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("BankAccount"+"."+"number", "body", string(m.Number), 1); err != nil {
+	if err := validate.MinLength("BankAccount"+"."+"number", "body", m.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("BankAccount"+"."+"number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("BankAccount"+"."+"number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
@@ -175,19 +268,23 @@ func (m *InstrumentIdentifierEnrollableCardBankAccount) validateNumber(formats s
 }
 
 func (m *InstrumentIdentifierEnrollableCardBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("BankAccount"+"."+"routingNumber", "body", string(m.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("BankAccount"+"."+"routingNumber", "body", m.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("BankAccount"+"."+"routingNumber", "body", string(m.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("BankAccount"+"."+"routingNumber", "body", m.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this instrument identifier enrollable card bank account based on context it is used
+func (m *InstrumentIdentifierEnrollableCardBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -210,30 +307,42 @@ func (m *InstrumentIdentifierEnrollableCardBankAccount) UnmarshalBinary(b []byte
 }
 
 // InstrumentIdentifierEnrollableCardBillTo instrument identifier enrollable card bill to
+//
 // swagger:model InstrumentIdentifierEnrollableCardBillTo
 type InstrumentIdentifierEnrollableCardBillTo struct {
 
 	// First address line registered with card.
+	// Example: 8310 Capital of Texas Highway North
 	Address1 string `json:"address1,omitempty"`
 
 	// Second address line registered with card.
+	// Example: Bluffstone Drive
 	Address2 string `json:"address2,omitempty"`
 
 	// Administrative area registered with card.
+	// Example: TX
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 
 	// Country registered with card.
+	// Example: US
 	Country string `json:"country,omitempty"`
 
 	// Locality registered with card.
+	// Example: Austin
 	Locality string `json:"locality,omitempty"`
 
 	// Postal code registered with card.
+	// Example: 78731
 	PostalCode string `json:"postalCode,omitempty"`
 }
 
 // Validate validates this instrument identifier enrollable card bill to
 func (m *InstrumentIdentifierEnrollableCardBillTo) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this instrument identifier enrollable card bill to based on context it is used
+func (m *InstrumentIdentifierEnrollableCardBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -256,6 +365,7 @@ func (m *InstrumentIdentifierEnrollableCardBillTo) UnmarshalBinary(b []byte) err
 }
 
 // InstrumentIdentifierEnrollableCardCard instrument identifier enrollable card card
+//
 // swagger:model InstrumentIdentifierEnrollableCardCard
 type InstrumentIdentifierEnrollableCardCard struct {
 
@@ -264,6 +374,7 @@ type InstrumentIdentifierEnrollableCardCard struct {
 	// Format: `MM`.
 	// Possible values: `01` through `12`.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	ExpirationMonth string `json:"expirationMonth,omitempty"`
@@ -273,16 +384,19 @@ type InstrumentIdentifierEnrollableCardCard struct {
 	// Format: `YYYY`.
 	// Possible values: `1900` through `2099`.
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	ExpirationYear string `json:"expirationYear,omitempty"`
 
 	// Credit card number (PAN).
+	// Example: 4622943127013705
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
 
 	// Card security code.
+	// Example: 838
 	// Max Length: 4
 	// Min Length: 3
 	SecurityCode string `json:"securityCode,omitempty"`
@@ -315,16 +429,15 @@ func (m *InstrumentIdentifierEnrollableCardCard) Validate(formats strfmt.Registr
 }
 
 func (m *InstrumentIdentifierEnrollableCardCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("card"+"."+"expirationMonth", "body", string(m.ExpirationMonth), 2); err != nil {
+	if err := validate.MinLength("card"+"."+"expirationMonth", "body", m.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("card"+"."+"expirationMonth", "body", string(m.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("card"+"."+"expirationMonth", "body", m.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -332,16 +445,15 @@ func (m *InstrumentIdentifierEnrollableCardCard) validateExpirationMonth(formats
 }
 
 func (m *InstrumentIdentifierEnrollableCardCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("card"+"."+"expirationYear", "body", string(m.ExpirationYear), 4); err != nil {
+	if err := validate.MinLength("card"+"."+"expirationYear", "body", m.ExpirationYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("card"+"."+"expirationYear", "body", string(m.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("card"+"."+"expirationYear", "body", m.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -349,16 +461,15 @@ func (m *InstrumentIdentifierEnrollableCardCard) validateExpirationYear(formats 
 }
 
 func (m *InstrumentIdentifierEnrollableCardCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("card"+"."+"number", "body", string(m.Number), 12); err != nil {
+	if err := validate.MinLength("card"+"."+"number", "body", m.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("card"+"."+"number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("card"+"."+"number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
@@ -366,19 +477,23 @@ func (m *InstrumentIdentifierEnrollableCardCard) validateNumber(formats strfmt.R
 }
 
 func (m *InstrumentIdentifierEnrollableCardCard) validateSecurityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.SecurityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("card"+"."+"securityCode", "body", string(m.SecurityCode), 3); err != nil {
+	if err := validate.MinLength("card"+"."+"securityCode", "body", m.SecurityCode, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("card"+"."+"securityCode", "body", string(m.SecurityCode), 4); err != nil {
+	if err := validate.MaxLength("card"+"."+"securityCode", "body", m.SecurityCode, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this instrument identifier enrollable card card based on context it is used
+func (m *InstrumentIdentifierEnrollableCardCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

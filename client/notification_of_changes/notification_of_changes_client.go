@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new notification of changes API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,21 +25,30 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-GetNotificationOfChangeReport gets notification of changes
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
 
-Download the Notification of Change report. This
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetNotificationOfChangeReport(params *GetNotificationOfChangeReportParams, opts ...ClientOption) (*GetNotificationOfChangeReportOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+	GetNotificationOfChangeReport gets notification of changes
+
+	Download the Notification of Change report. This
+
 report shows eCheck-related fields updated as a result of a
 response to an eCheck settlement transaction.
-
 */
-func (a *Client) GetNotificationOfChangeReport(params *GetNotificationOfChangeReportParams) (*GetNotificationOfChangeReportOK, error) {
+func (a *Client) GetNotificationOfChangeReport(params *GetNotificationOfChangeReportParams, opts ...ClientOption) (*GetNotificationOfChangeReportOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetNotificationOfChangeReportParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getNotificationOfChangeReport",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/notification-of-changes",
@@ -51,7 +59,12 @@ func (a *Client) GetNotificationOfChangeReport(params *GetNotificationOfChangeRe
 		Reader:             &GetNotificationOfChangeReportReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

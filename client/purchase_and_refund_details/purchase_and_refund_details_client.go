@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new purchase and refund details API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,22 +25,31 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-/*
-GetPurchaseAndRefundDetails gets purchase and refund details
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
 
-Download the Purchase and Refund Details
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetPurchaseAndRefundDetails(params *GetPurchaseAndRefundDetailsParams, opts ...ClientOption) (*GetPurchaseAndRefundDetailsOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+	GetPurchaseAndRefundDetails gets purchase and refund details
+
+	Download the Purchase and Refund Details
+
 report. This report report includes all purchases and refund
 transactions, as well as all activities related to transactions
 resulting in an adjustment to the net proceeds.
-
 */
-func (a *Client) GetPurchaseAndRefundDetails(params *GetPurchaseAndRefundDetailsParams) (*GetPurchaseAndRefundDetailsOK, error) {
+func (a *Client) GetPurchaseAndRefundDetails(params *GetPurchaseAndRefundDetailsParams, opts ...ClientOption) (*GetPurchaseAndRefundDetailsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPurchaseAndRefundDetailsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPurchaseAndRefundDetails",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/purchase-refund-details",
@@ -52,7 +60,12 @@ func (a *Client) GetPurchaseAndRefundDetails(params *GetPurchaseAndRefundDetails
 		Reader:             &GetPurchaseAndRefundDetailsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

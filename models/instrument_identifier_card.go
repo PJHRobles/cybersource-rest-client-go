@@ -6,18 +6,21 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // InstrumentIdentifierCard instrument identifier card
+//
 // swagger:model InstrumentIdentifierCard
 type InstrumentIdentifierCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -38,19 +41,23 @@ func (m *InstrumentIdentifierCard) Validate(formats strfmt.Registry) error {
 }
 
 func (m *InstrumentIdentifierCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("number", "body", string(m.Number), 12); err != nil {
+	if err := validate.MinLength("number", "body", m.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this instrument identifier card based on context it is used
+func (m *InstrumentIdentifierCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

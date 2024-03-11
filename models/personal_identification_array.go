@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // PersonalIdentificationArray personal identification array
+//
 // swagger:model PersonalIdentificationArray
 type PersonalIdentificationArray []*PersonalIdentificationArrayItems0
 
@@ -31,6 +32,38 @@ func (m PersonalIdentificationArray) Validate(formats strfmt.Registry) error {
 			if err := m[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName(strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName(strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// ContextValidate validate this personal identification array based on the context it is used
+func (m PersonalIdentificationArray) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	for i := 0; i < len(m); i++ {
+
+		if m[i] != nil {
+
+			if swag.IsZero(m[i]) { // not required
+				return nil
+			}
+
+			if err := m[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName(strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName(strconv.Itoa(i))
 				}
 				return err
 			}
@@ -45,6 +78,7 @@ func (m PersonalIdentificationArray) Validate(formats strfmt.Registry) error {
 }
 
 // PersonalIdentificationArrayItems0 personal identification array items0
+//
 // swagger:model PersonalIdentificationArrayItems0
 type PersonalIdentificationArrayItems0 struct {
 
@@ -53,6 +87,7 @@ type PersonalIdentificationArrayItems0 struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: 1234567890
 	ID string `json:"id,omitempty"`
 
 	// issued by
@@ -65,6 +100,7 @@ type PersonalIdentificationArrayItems0 struct {
 	// Valid values:
 	// - driver license
 	//
+	// Example: driver license
 	Type string `json:"type,omitempty"`
 }
 
@@ -83,7 +119,6 @@ func (m *PersonalIdentificationArrayItems0) Validate(formats strfmt.Registry) er
 }
 
 func (m *PersonalIdentificationArrayItems0) validateIssuedBy(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IssuedBy) { // not required
 		return nil
 	}
@@ -92,6 +127,43 @@ func (m *PersonalIdentificationArrayItems0) validateIssuedBy(formats strfmt.Regi
 		if err := m.IssuedBy.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this personal identification array items0 based on the context it is used
+func (m *PersonalIdentificationArrayItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIssuedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PersonalIdentificationArrayItems0) contextValidateIssuedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.IssuedBy != nil {
+
+		if swag.IsZero(m.IssuedBy) { // not required
+			return nil
+		}
+
+		if err := m.IssuedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
 			}
 			return err
 		}
@@ -119,6 +191,7 @@ func (m *PersonalIdentificationArrayItems0) UnmarshalBinary(b []byte) error {
 }
 
 // PersonalIdentificationArrayItems0IssuedBy personal identification array items0 issued by
+//
 // swagger:model PersonalIdentificationArrayItems0IssuedBy
 type PersonalIdentificationArrayItems0IssuedBy struct {
 
@@ -127,11 +200,17 @@ type PersonalIdentificationArrayItems0IssuedBy struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: CA
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 }
 
 // Validate validates this personal identification array items0 issued by
 func (m *PersonalIdentificationArrayItems0IssuedBy) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this personal identification array items0 issued by based on context it is used
+func (m *PersonalIdentificationArrayItems0IssuedBy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

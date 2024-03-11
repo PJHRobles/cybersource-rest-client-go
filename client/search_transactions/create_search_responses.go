@@ -6,16 +6,16 @@ package search_transactions
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreateSearchReader is a Reader for the CreateSearch structure.
@@ -44,9 +44,8 @@ func (o *CreateSearchReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /tss/v2/searches] createSearch", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewCreateSearchCreated() *CreateSearchCreated {
 	return &CreateSearchCreated{}
 }
 
-/*CreateSearchCreated handles this case with default header values.
+/*
+CreateSearchCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type CreateSearchCreated struct {
 	Payload *CreateSearchCreatedBody
 }
 
+// IsSuccess returns true when this create search created response has a 2xx status code
+func (o *CreateSearchCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create search created response has a 3xx status code
+func (o *CreateSearchCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create search created response has a 4xx status code
+func (o *CreateSearchCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create search created response has a 5xx status code
+func (o *CreateSearchCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create search created response a status code equal to that given
+func (o *CreateSearchCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create search created response
+func (o *CreateSearchCreated) Code() int {
+	return 201
+}
+
 func (o *CreateSearchCreated) Error() string {
+	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreateSearchCreated) String() string {
 	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewCreateSearchBadRequest() *CreateSearchBadRequest {
 	return &CreateSearchBadRequest{}
 }
 
-/*CreateSearchBadRequest handles this case with default header values.
+/*
+CreateSearchBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type CreateSearchBadRequest struct {
 	Payload *CreateSearchBadRequestBody
 }
 
+// IsSuccess returns true when this create search bad request response has a 2xx status code
+func (o *CreateSearchBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create search bad request response has a 3xx status code
+func (o *CreateSearchBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create search bad request response has a 4xx status code
+func (o *CreateSearchBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create search bad request response has a 5xx status code
+func (o *CreateSearchBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create search bad request response a status code equal to that given
+func (o *CreateSearchBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create search bad request response
+func (o *CreateSearchBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateSearchBadRequest) Error() string {
+	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateSearchBadRequest) String() string {
 	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewCreateSearchBadGateway() *CreateSearchBadGateway {
 	return &CreateSearchBadGateway{}
 }
 
-/*CreateSearchBadGateway handles this case with default header values.
+/*
+CreateSearchBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type CreateSearchBadGateway struct {
 	Payload *CreateSearchBadGatewayBody
 }
 
+// IsSuccess returns true when this create search bad gateway response has a 2xx status code
+func (o *CreateSearchBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create search bad gateway response has a 3xx status code
+func (o *CreateSearchBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create search bad gateway response has a 4xx status code
+func (o *CreateSearchBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create search bad gateway response has a 5xx status code
+func (o *CreateSearchBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create search bad gateway response a status code equal to that given
+func (o *CreateSearchBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the create search bad gateway response
+func (o *CreateSearchBadGateway) Code() int {
+	return 502
+}
+
 func (o *CreateSearchBadGateway) Error() string {
+	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *CreateSearchBadGateway) String() string {
 	return fmt.Sprintf("[POST /tss/v2/searches][%d] createSearchBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *CreateSearchBadGateway) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*CreateSearchBadGatewayBody tssV2TransactionsPost502Response
+/*
+CreateSearchBadGatewayBody tssV2TransactionsPost502Response
 swagger:model CreateSearchBadGatewayBody
 */
 type CreateSearchBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *CreateSearchBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this create search bad gateway body based on context it is used
+func (o *CreateSearchBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateSearchBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *CreateSearchBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchBadRequestBody tssV2TransactionsPost400Response
+/*
+CreateSearchBadRequestBody tssV2TransactionsPost400Response
 swagger:model CreateSearchBadRequestBody
 */
 type CreateSearchBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*CreateSearchBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -244,7 +355,6 @@ func (o *CreateSearchBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreateSearchBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -258,6 +368,47 @@ func (o *CreateSearchBadRequestBody) validateDetails(formats strfmt.Registry) er
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createSearchBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createSearchBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search bad request body based on the context it is used
+func (o *CreateSearchBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createSearchBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createSearchBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -286,7 +437,55 @@ func (o *CreateSearchBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchBody create search body
+/*
+CreateSearchBadRequestBodyDetailsItems0 create search bad request body details items0
+swagger:model CreateSearchBadRequestBodyDetailsItems0
+*/
+type CreateSearchBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this create search bad request body details items0
+func (o *CreateSearchBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create search bad request body details items0 based on context it is used
+func (o *CreateSearchBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateSearchBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateSearchBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res CreateSearchBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateSearchBody create search body
+// Example: {"limit":100,"name":"Search By Code","offset":0,"query":"clientReferenceInformation.code:123456 AND submitTimeUtc:[NOW/DAY-7DAYS TO NOW/DAY+1DAY}","save":"false","sort":"id:asc, submitTimeUtc:asc","timezone":"America/Chicago"}
 swagger:model CreateSearchBody
 */
 type CreateSearchBody struct {
@@ -319,6 +518,11 @@ func (o *CreateSearchBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this create search body based on context it is used
+func (o *CreateSearchBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateSearchBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -337,7 +541,9 @@ func (o *CreateSearchBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchCreatedBody tssV2TransactionsPost201Response
+/*
+CreateSearchCreatedBody tssV2TransactionsPost201Response
+// Example: {"_embedded":{"transactionSummaries":[{"_links":{"transactionDetail":{"href":"https://sl73paysvapq002.visa.com:2031/payment/tss/v2/transactions/5217848115816817001541","method":"GET"}},"applicationInformation":{"applications":[{"name":"ics_service_fee_calculate","rCode":"1","rFlag":"SOK","rMessage":"Request was processed successfully","reasonCode":"123","reconciliationId":"55557","returnCode":"1040000","status":"TRANSMITTED"}],"rCode":"1","rFlag":"SOK","reasonCode":"123","status":"TRANSMITTED"},"buyerInformation":{"merchantCustomerId":"123456"},"clientReferenceInformation":{"applicationName":"Service Fee Request","applicationUser":"sandeep_wf","code":"12345"},"consumerAuthenticationInformation":{"transactionId":"00152259513040478521","xid":"12345678"},"deviceInformation":{"ipAddress":"1.10.10.10"},"fraudMarkingInformation":{"reason":"fraud txn"},"id":"5217848115816817001541","merchantDefinedInformation":[{"key":"abc","value":"xyz"}],"merchantId":"sandeep_wf","merchantInformation":{"resellerId":"wfbmcp"},"orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"100.00"},"billTo":{"country":"US","email":"null@cybersource.com","firstName":"Test","lastName":"TSS","phoneNumber":"5120000000"},"shipTo":{"address1":"201S.DivisionSt._1","country":"US","firstName":"Test","lastName":"TSS","phoneNumber":"5120000000"}},"paymentInformation":{"card":{"prefix":"123456","suffix":"1111","type":"001"},"customer":{"customerId":"12345"},"paymentType":{"method":{"name":"method name"},"name":"CARD"}},"pointOfSaleInformation":{"deviceId":"asfaf12312313","partner":{"originalTransactionId":"131231414414"},"terminalId":"1","terminalSerialNumber":"123111123"},"processingInformation":{"businessApplicationId":"12345","paymentSolution":"xyz"},"processorInformation":{"processor":{"name":"FirstData"}},"riskInformation":{"providers":{"fingerprint":{"hash":"tuWmt8Ubw0EAybBF3wrZcEqIcZsLr8YPldTQDUxAg2k=","smart_id":"23442fdadfa","true_ipaddress":"1.101.102.112"}}},"submitTimeUtc":"2018-03-23T06:00:11Z"}]},"_links":{"self":{"href":"https://sl73paysvapq002.visa.com:2031/payment/tss/v2/searches/87e1e4bd-cac2-49b1-919a-4d5e29a2e55d","method":"GET"}},"count":22,"limit":2000,"name":"Search By Code","offset":0,"query":"clientReferenceInformation.code:12345 AND submitTimeUtc:[NOW/DAY-7DAYS TO NOW/DAY+1DAY}","save":"false","searchId":"87e1e4bd-cac2-49b1-919a-4d5e29a2e55d","sort":"id:asc, submitTimeUtc:asc","status":"status","submitTimeUtc":"2018-09-18T16:59:28Z","timezone":"America/Chicago","totalCount":22}
 swagger:model CreateSearchCreatedBody
 */
 type CreateSearchCreatedBody struct {
@@ -413,7 +619,6 @@ func (o *CreateSearchCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreateSearchCreatedBody) validateEmbedded(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Embedded) { // not required
 		return nil
 	}
@@ -422,6 +627,8 @@ func (o *CreateSearchCreatedBody) validateEmbedded(formats strfmt.Registry) erro
 		if err := o.Embedded.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createSearchCreated" + "." + "_embedded")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_embedded")
 			}
 			return err
 		}
@@ -431,7 +638,6 @@ func (o *CreateSearchCreatedBody) validateEmbedded(formats strfmt.Registry) erro
 }
 
 func (o *CreateSearchCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -440,6 +646,8 @@ func (o *CreateSearchCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createSearchCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -449,13 +657,72 @@ func (o *CreateSearchCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *CreateSearchCreatedBody) validateSearchID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SearchID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createSearchCreated"+"."+"searchId", "body", string(o.SearchID), 60); err != nil {
+	if err := validate.MaxLength("createSearchCreated"+"."+"searchId", "body", o.SearchID, 60); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body based on the context it is used
+func (o *CreateSearchCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmbedded(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBody) contextValidateEmbedded(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Embedded != nil {
+
+		if swag.IsZero(o.Embedded) { // not required
+			return nil
+		}
+
+		if err := o.Embedded.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createSearchCreated" + "." + "_embedded")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_embedded")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createSearchCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_links")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -479,7 +746,8 @@ func (o *CreateSearchCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbedded create search created body embedded
+/*
+CreateSearchCreatedBodyEmbedded create search created body embedded
 swagger:model CreateSearchCreatedBodyEmbedded
 */
 type CreateSearchCreatedBodyEmbedded struct {
@@ -503,7 +771,6 @@ func (o *CreateSearchCreatedBodyEmbedded) Validate(formats strfmt.Registry) erro
 }
 
 func (o *CreateSearchCreatedBodyEmbedded) validateTransactionSummaries(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionSummaries) { // not required
 		return nil
 	}
@@ -517,6 +784,47 @@ func (o *CreateSearchCreatedBodyEmbedded) validateTransactionSummaries(formats s
 			if err := o.TransactionSummaries[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createSearchCreated" + "." + "_embedded" + "." + "transactionSummaries" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createSearchCreated" + "." + "_embedded" + "." + "transactionSummaries" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded based on the context it is used
+func (o *CreateSearchCreatedBodyEmbedded) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactionSummaries(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbedded) contextValidateTransactionSummaries(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TransactionSummaries); i++ {
+
+		if o.TransactionSummaries[i] != nil {
+
+			if swag.IsZero(o.TransactionSummaries[i]) { // not required
+				return nil
+			}
+
+			if err := o.TransactionSummaries[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createSearchCreated" + "." + "_embedded" + "." + "transactionSummaries" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createSearchCreated" + "." + "_embedded" + "." + "transactionSummaries" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -545,7 +853,8 @@ func (o *CreateSearchCreatedBodyEmbedded) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0 create search created body embedded transaction summaries items0
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0 create search created body embedded transaction summaries items0
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0 struct {
@@ -685,7 +994,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) Validate(for
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -694,6 +1002,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateLink
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -703,7 +1013,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateLink
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateApplicationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ApplicationInformation) { // not required
 		return nil
 	}
@@ -712,6 +1021,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateAppl
 		if err := o.ApplicationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("applicationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("applicationInformation")
 			}
 			return err
 		}
@@ -721,7 +1032,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateAppl
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -730,6 +1040,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateBuye
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("buyerInformation")
 			}
 			return err
 		}
@@ -739,7 +1051,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateBuye
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -748,6 +1059,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateClie
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clientReferenceInformation")
 			}
 			return err
 		}
@@ -757,7 +1070,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateClie
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateConsumerAuthenticationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
 		return nil
 	}
@@ -766,6 +1078,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateCons
 		if err := o.ConsumerAuthenticationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consumerAuthenticationInformation")
 			}
 			return err
 		}
@@ -775,7 +1089,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateCons
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -784,6 +1097,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateDevi
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deviceInformation")
 			}
 			return err
 		}
@@ -793,7 +1108,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateDevi
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateFraudMarkingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FraudMarkingInformation) { // not required
 		return nil
 	}
@@ -802,6 +1116,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateFrau
 		if err := o.FraudMarkingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fraudMarkingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fraudMarkingInformation")
 			}
 			return err
 		}
@@ -811,12 +1127,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateFrau
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -824,7 +1139,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateID(f
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -838,6 +1152,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerc
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -849,7 +1165,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerc
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -858,6 +1173,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerc
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("merchantInformation")
 			}
 			return err
 		}
@@ -867,7 +1184,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateMerc
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -876,6 +1192,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateOrde
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation")
 			}
 			return err
 		}
@@ -885,7 +1203,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateOrde
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -894,6 +1211,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePaym
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation")
 			}
 			return err
 		}
@@ -903,7 +1222,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePaym
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -912,6 +1230,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePoin
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointOfSaleInformation")
 			}
 			return err
 		}
@@ -921,7 +1241,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validatePoin
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -930,6 +1249,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProc
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation")
 			}
 			return err
 		}
@@ -939,7 +1260,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProc
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -948,6 +1268,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProc
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processorInformation")
 			}
 			return err
 		}
@@ -957,7 +1279,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateProc
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateRiskInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RiskInformation) { // not required
 		return nil
 	}
@@ -966,6 +1287,397 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) validateRisk
 		if err := o.RiskInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateApplicationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateConsumerAuthenticationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateFraudMarkingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRiskInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateApplicationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ApplicationInformation != nil {
+
+		if swag.IsZero(o.ApplicationInformation) { // not required
+			return nil
+		}
+
+		if err := o.ApplicationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("applicationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("applicationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateConsumerAuthenticationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ConsumerAuthenticationInformation != nil {
+
+		if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
+			return nil
+		}
+
+		if err := o.ConsumerAuthenticationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("consumerAuthenticationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateFraudMarkingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FraudMarkingInformation != nil {
+
+		if swag.IsZero(o.FraudMarkingInformation) { // not required
+			return nil
+		}
+
+		if err := o.FraudMarkingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("fraudMarkingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fraudMarkingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) contextValidateRiskInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RiskInformation != nil {
+
+		if swag.IsZero(o.RiskInformation) { // not required
+			return nil
+		}
+
+		if err := o.RiskInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation")
 			}
 			return err
 		}
@@ -992,7 +1704,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0) UnmarshalBin
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation create search created body embedded transaction summaries items0 application information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation create search created body embedded transaction summaries items0 application information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation struct {
@@ -1042,7 +1755,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInf
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation) validateApplications(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Applications) { // not required
 		return nil
 	}
@@ -1056,6 +1768,47 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInf
 			if err := o.Applications[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 application information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateApplications(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformation) contextValidateApplications(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Applications); i++ {
+
+		if o.Applications[i] != nil {
+
+			if swag.IsZero(o.Applications[i]) { // not required
+				return nil
+			}
+
+			if err := o.Applications[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1084,7 +1837,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInf
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0 create search created body embedded transaction summaries items0 application information applications items0
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0 create search created body embedded transaction summaries items0 application information applications items0
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0 struct {
@@ -1129,6 +1883,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInf
 	return nil
 }
 
+// ContextValidate validates this create search created body embedded transaction summaries items0 application information applications items0 based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInformationApplicationsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1147,7 +1906,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ApplicationInf
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation create search created body embedded transaction summaries items0 buyer information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation create search created body embedded transaction summaries items0 buyer information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation struct {
@@ -1190,15 +1950,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation) validateMerchantCustomerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantCustomerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("buyerInformation"+"."+"merchantCustomerId", "body", string(o.MerchantCustomerID), 100); err != nil {
+	if err := validate.MaxLength("buyerInformation"+"."+"merchantCustomerId", "body", o.MerchantCustomerID, 100); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 buyer information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1220,7 +1984,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0BuyerInformati
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation create search created body embedded transaction summaries items0 client reference information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation create search created body embedded transaction summaries items0 client reference information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation struct {
@@ -1258,15 +2023,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenc
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 client reference information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1288,7 +2057,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ClientReferenc
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation create search created body embedded transaction summaries items0 consumer authentication information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation create search created body embedded transaction summaries items0 consumer authentication information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation struct {
@@ -1319,15 +2089,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthen
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation) validateXid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Xid) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("consumerAuthenticationInformation"+"."+"xid", "body", string(o.Xid), 40); err != nil {
+	if err := validate.MaxLength("consumerAuthenticationInformation"+"."+"xid", "body", o.Xid, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 consumer authentication information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthenticationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1349,7 +2123,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ConsumerAuthen
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation create search created body embedded transaction summaries items0 device information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation create search created body embedded transaction summaries items0 device information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation struct {
@@ -1375,15 +2150,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformat
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 device information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1405,7 +2184,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0DeviceInformat
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation create search created body embedded transaction summaries items0 fraud marking information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation create search created body embedded transaction summaries items0 fraud marking information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation struct {
@@ -1423,6 +2203,11 @@ type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInform
 
 // Validate validates this create search created body embedded transaction summaries items0 fraud marking information
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 fraud marking information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1444,7 +2229,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0FraudMarkingIn
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links create search created body embedded transaction summaries items0 links
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links create search created body embedded transaction summaries items0 links
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links struct {
@@ -1468,7 +2254,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) Validat
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) validateTransactionDetail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionDetail) { // not required
 		return nil
 	}
@@ -1477,6 +2262,43 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) validat
 		if err := o.TransactionDetail.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "transactionDetail")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "transactionDetail")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 links based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactionDetail(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) contextValidateTransactionDetail(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.TransactionDetail != nil {
+
+		if swag.IsZero(o.TransactionDetail) { // not required
+			return nil
+		}
+
+		if err := o.TransactionDetail.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "transactionDetail")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "transactionDetail")
 			}
 			return err
 		}
@@ -1503,7 +2325,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0Links) Unmarsh
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail create search created body embedded transaction summaries items0 links transaction detail
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail create search created body embedded transaction summaries items0 links transaction detail
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail struct {
@@ -1517,6 +2340,11 @@ type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDe
 
 // Validate validates this create search created body embedded transaction summaries items0 links transaction detail
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 links transaction detail based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransactionDetail) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1538,7 +2366,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0LinksTransacti
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0 create search created body embedded transaction summaries items0 merchant defined information items0
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0 create search created body embedded transaction summaries items0 merchant defined information items0
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0 struct {
@@ -1605,12 +2434,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefine
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Key) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("key", "body", string(o.Key), 50); err != nil {
+	if err := validate.MaxLength("key", "body", o.Key, 50); err != nil {
 		return err
 	}
 
@@ -1618,15 +2446,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefine
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Value) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("value", "body", string(o.Value), 255); err != nil {
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 merchant defined information items0 based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1648,7 +2480,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantDefine
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation create search created body embedded transaction summaries items0 merchant information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation create search created body embedded transaction summaries items0 merchant information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation struct {
@@ -1673,15 +2506,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInform
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation) validateResellerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResellerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("merchantInformation"+"."+"resellerId", "body", string(o.ResellerID), 26); err != nil {
+	if err := validate.MaxLength("merchantInformation"+"."+"resellerId", "body", o.ResellerID, 26); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 merchant information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1703,7 +2540,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0MerchantInform
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation create search created body embedded transaction summaries items0 order information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation create search created body embedded transaction summaries items0 order information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation struct {
@@ -1741,7 +2579,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -1750,6 +2587,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -1759,7 +2598,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -1768,6 +2606,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -1777,7 +2617,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -1786,6 +2625,93 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 order information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -1812,7 +2738,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails create search created body embedded transaction summaries items0 order information amount details
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails create search created body embedded transaction summaries items0 order information amount details
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails struct {
@@ -1875,12 +2802,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1888,15 +2814,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 order information amount details based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1918,7 +2848,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo create search created body embedded transaction summaries items0 order information bill to
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo create search created body embedded transaction summaries items0 order information bill to
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo struct {
@@ -2040,12 +2971,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2053,12 +2983,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -2066,12 +2995,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -2079,12 +3007,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -2092,15 +3019,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 order information bill to based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2122,7 +3053,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo create search created body embedded transaction summaries items0 order information ship to
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo create search created body embedded transaction summaries items0 order information ship to
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo struct {
@@ -2191,12 +3123,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2204,12 +3135,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2217,12 +3147,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -2230,12 +3159,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -2243,15 +3171,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 order information ship to based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2273,7 +3205,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0OrderInformati
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation create search created body embedded transaction summaries items0 payment information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation create search created body embedded transaction summaries items0 payment information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation struct {
@@ -2311,7 +3244,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -2320,6 +3252,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -2329,7 +3263,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -2338,6 +3271,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -2347,7 +3282,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) validatePaymentType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentType) { // not required
 		return nil
 	}
@@ -2356,6 +3290,93 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 		if err := o.PaymentType.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paymentInformation" + "." + "paymentType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "paymentType")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 payment information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation) contextValidatePaymentType(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentType != nil {
+
+		if swag.IsZero(o.PaymentType) { // not required
+			return nil
+		}
+
+		if err := o.PaymentType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paymentInformation" + "." + "paymentType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInformation" + "." + "paymentType")
 			}
 			return err
 		}
@@ -2382,7 +3403,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard create search created body embedded transaction summaries items0 payment information card
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard create search created body embedded transaction summaries items0 payment information card
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard struct {
@@ -2438,15 +3460,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard) validatePrefix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Prefix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("paymentInformation"+"."+"card"+"."+"prefix", "body", string(o.Prefix), 6); err != nil {
+	if err := validate.MaxLength("paymentInformation"+"."+"card"+"."+"prefix", "body", o.Prefix, 6); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 payment information card based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2468,7 +3494,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer create search created body embedded transaction summaries items0 payment information customer
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer create search created body embedded transaction summaries items0 payment information customer
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer struct {
@@ -2491,6 +3518,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 	return nil
 }
 
+// ContextValidate validates this create search created body embedded transaction summaries items0 payment information customer based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -2509,7 +3541,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType create search created body embedded transaction summaries items0 payment information payment type
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType create search created body embedded transaction summaries items0 payment information payment type
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType struct {
@@ -2524,6 +3557,11 @@ type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformation
 
 // Validate validates this create search created body embedded transaction summaries items0 payment information payment type
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 payment information payment type based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInformationPaymentType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2545,7 +3583,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PaymentInforma
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation create search created body embedded transaction summaries items0 point of sale information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation create search created body embedded transaction summaries items0 point of sale information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation struct {
@@ -2613,7 +3652,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -2622,6 +3660,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pointOfSaleInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointOfSaleInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -2631,12 +3671,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation) validateTerminalID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("pointOfSaleInformation"+"."+"terminalId", "body", string(o.TerminalID), 8); err != nil {
+	if err := validate.MaxLength("pointOfSaleInformation"+"."+"terminalId", "body", o.TerminalID, 8); err != nil {
 		return err
 	}
 
@@ -2644,13 +3683,47 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation) validateTerminalSerialNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalSerialNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("pointOfSaleInformation"+"."+"terminalSerialNumber", "body", string(o.TerminalSerialNumber), 32); err != nil {
+	if err := validate.MaxLength("pointOfSaleInformation"+"."+"terminalSerialNumber", "body", o.TerminalSerialNumber, 32); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 point of sale information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("pointOfSaleInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("pointOfSaleInformation" + "." + "partner")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -2674,7 +3747,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner create search created body embedded transaction summaries items0 point of sale information partner
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner create search created body embedded transaction summaries items0 point of sale information partner
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner struct {
@@ -2708,15 +3782,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner) validateOriginalTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("pointOfSaleInformation"+"."+"partner"+"."+"originalTransactionId", "body", string(o.OriginalTransactionID), 32); err != nil {
+	if err := validate.MaxLength("pointOfSaleInformation"+"."+"partner"+"."+"originalTransactionId", "body", o.OriginalTransactionID, 32); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 point of sale information partner based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2738,7 +3816,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0PointOfSaleInf
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation create search created body embedded transaction summaries items0 processing information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation create search created body embedded transaction summaries items0 processing information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation struct {
@@ -2783,15 +3862,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInfo
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 processing information based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2813,7 +3896,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessingInfo
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation create search created body embedded transaction summaries items0 processor information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation create search created body embedded transaction summaries items0 processor information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation struct {
@@ -2837,7 +3921,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInfor
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation) validateProcessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Processor) { // not required
 		return nil
 	}
@@ -2846,6 +3929,43 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInfor
 		if err := o.Processor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processorInformation" + "." + "processor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processorInformation" + "." + "processor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 processor information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateProcessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformation) contextValidateProcessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Processor != nil {
+
+		if swag.IsZero(o.Processor) { // not required
+			return nil
+		}
+
+		if err := o.Processor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processorInformation" + "." + "processor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processorInformation" + "." + "processor")
 			}
 			return err
 		}
@@ -2872,7 +3992,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInfor
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor create search created body embedded transaction summaries items0 processor information processor
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor create search created body embedded transaction summaries items0 processor information processor
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor struct {
@@ -2898,15 +4019,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInfor
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("processorInformation"+"."+"processor"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("processorInformation"+"."+"processor"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 processor information processor based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInformationProcessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2928,7 +4053,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0ProcessorInfor
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation create search created body embedded transaction summaries items0 risk information
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation create search created body embedded transaction summaries items0 risk information
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation struct {
@@ -2952,7 +4078,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation) validateProviders(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Providers) { // not required
 		return nil
 	}
@@ -2961,6 +4086,43 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 		if err := o.Providers.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("riskInformation" + "." + "providers")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation" + "." + "providers")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 risk information based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformation) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Providers != nil {
+
+		if swag.IsZero(o.Providers) { // not required
+			return nil
+		}
+
+		if err := o.Providers.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("riskInformation" + "." + "providers")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation" + "." + "providers")
 			}
 			return err
 		}
@@ -2987,7 +4149,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders create search created body embedded transaction summaries items0 risk information providers
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders create search created body embedded transaction summaries items0 risk information providers
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders struct {
@@ -3011,7 +4174,6 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders) validateFingerprint(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Fingerprint) { // not required
 		return nil
 	}
@@ -3020,6 +4182,43 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 		if err := o.Fingerprint.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("riskInformation" + "." + "providers" + "." + "fingerprint")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation" + "." + "providers" + "." + "fingerprint")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body embedded transaction summaries items0 risk information providers based on the context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateFingerprint(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProviders) contextValidateFingerprint(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Fingerprint != nil {
+
+		if swag.IsZero(o.Fingerprint) { // not required
+			return nil
+		}
+
+		if err := o.Fingerprint.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("riskInformation" + "." + "providers" + "." + "fingerprint")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("riskInformation" + "." + "providers" + "." + "fingerprint")
 			}
 			return err
 		}
@@ -3046,7 +4245,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 	return nil
 }
 
-/*CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint create search created body embedded transaction summaries items0 risk information providers fingerprint
+/*
+CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint create search created body embedded transaction summaries items0 risk information providers fingerprint
 swagger:model CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint
 */
 type CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint struct {
@@ -3098,12 +4298,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint) validateHash(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Hash) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"hash", "body", string(o.Hash), 255); err != nil {
+	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"hash", "body", o.Hash, 255); err != nil {
 		return err
 	}
 
@@ -3111,12 +4310,11 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint) validateSmartID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SmartID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"smartId", "body", string(o.SmartID), 255); err != nil {
+	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"smartId", "body", o.SmartID, 255); err != nil {
 		return err
 	}
 
@@ -3124,15 +4322,19 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 }
 
 func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint) validateTrueIpaddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TrueIpaddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"true_ipaddress", "body", string(o.TrueIpaddress), 255); err != nil {
+	if err := validate.MaxLength("riskInformation"+"."+"providers"+"."+"fingerprint"+"."+"true_ipaddress", "body", o.TrueIpaddress, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create search created body embedded transaction summaries items0 risk information providers fingerprint based on context it is used
+func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformationProvidersFingerprint) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3154,7 +4356,8 @@ func (o *CreateSearchCreatedBodyEmbeddedTransactionSummariesItems0RiskInformatio
 	return nil
 }
 
-/*CreateSearchCreatedBodyLinks create search created body links
+/*
+CreateSearchCreatedBodyLinks create search created body links
 swagger:model CreateSearchCreatedBodyLinks
 */
 type CreateSearchCreatedBodyLinks struct {
@@ -3178,7 +4381,6 @@ func (o *CreateSearchCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreateSearchCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -3187,6 +4389,43 @@ func (o *CreateSearchCreatedBodyLinks) validateSelf(formats strfmt.Registry) err
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createSearchCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create search created body links based on the context it is used
+func (o *CreateSearchCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateSearchCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createSearchCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createSearchCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -3213,7 +4452,8 @@ func (o *CreateSearchCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateSearchCreatedBodyLinksSelf create search created body links self
+/*
+CreateSearchCreatedBodyLinksSelf create search created body links self
 swagger:model CreateSearchCreatedBodyLinksSelf
 */
 type CreateSearchCreatedBodyLinksSelf struct {
@@ -3230,6 +4470,11 @@ func (o *CreateSearchCreatedBodyLinksSelf) Validate(formats strfmt.Registry) err
 	return nil
 }
 
+// ContextValidate validates this create search created body links self based on context it is used
+func (o *CreateSearchCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateSearchCreatedBodyLinksSelf) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -3241,46 +4486,6 @@ func (o *CreateSearchCreatedBodyLinksSelf) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *CreateSearchCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	var res CreateSearchCreatedBodyLinksSelf
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

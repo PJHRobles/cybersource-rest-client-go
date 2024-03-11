@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new secure file share API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,29 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetFile(params *GetFileParams, opts ...ClientOption) (*GetFileOK, error)
+
+	GetFileDetail(params *GetFileDetailParams, opts ...ClientOption) (*GetFileDetailOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetFile downloads a file with file identifier
 
 Download a file for the given file identifier
 */
-func (a *Client) GetFile(params *GetFileParams) (*GetFileOK, error) {
+func (a *Client) GetFile(params *GetFileParams, opts ...ClientOption) (*GetFileOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetFileParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getFile",
 		Method:             "GET",
 		PathPattern:        "/sfs/v1/files/{fileId}",
@@ -48,7 +58,12 @@ func (a *Client) GetFile(params *GetFileParams) (*GetFileOK, error) {
 		Reader:             &GetFileReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -67,13 +82,12 @@ GetFileDetail gets list of files
 
 Get list of files and it's information of them available inside the report directory
 */
-func (a *Client) GetFileDetail(params *GetFileDetailParams) (*GetFileDetailOK, error) {
+func (a *Client) GetFileDetail(params *GetFileDetailParams, opts ...ClientOption) (*GetFileDetailOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetFileDetailParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getFileDetail",
 		Method:             "GET",
 		PathPattern:        "/sfs/v1/file-details",
@@ -84,7 +98,12 @@ func (a *Client) GetFileDetail(params *GetFileDetailParams) (*GetFileDetailOK, e
 		Reader:             &GetFileDetailReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

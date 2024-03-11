@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // JSONWebKey The public key in JSON Web Key (JWK) format. This format is useful for client side encryption in JavaScript based implementations.
+//
 // swagger:model JsonWebKey
 type JSONWebKey struct {
 
@@ -33,6 +35,11 @@ type JSONWebKey struct {
 
 // Validate validates this Json web key
 func (m *JSONWebKey) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this Json web key based on context it is used
+func (m *JSONWebKey) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

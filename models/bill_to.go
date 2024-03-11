@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // BillTo bill to
+//
 // swagger:model BillTo
 type BillTo struct {
 
@@ -24,10 +26,12 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12 Main Street
 	// Max Length: 60
 	Address1 string `json:"address1,omitempty"`
 
 	// Additional address information.
+	// Example: 20 My Street
 	// Max Length: 60
 	Address2 string `json:"address2,omitempty"`
 
@@ -38,6 +42,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CA
 	// Max Length: 20
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 
@@ -48,6 +53,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CyberSource
 	// Max Length: 60
 	Company string `json:"company,omitempty"`
 
@@ -57,6 +63,7 @@ type BillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: US
 	// Max Length: 3
 	// Min Length: 2
 	Country string `json:"country,omitempty"`
@@ -67,6 +74,7 @@ type BillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: john.smith@example.com
 	// Max Length: 320
 	Email string `json:"email,omitempty"`
 
@@ -77,6 +85,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: John
 	// Max Length: 60
 	FirstName string `json:"firstName,omitempty"`
 
@@ -87,6 +96,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Smith
 	// Max Length: 60
 	LastName string `json:"lastName,omitempty"`
 
@@ -97,6 +107,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Foster City
 	// Max Length: 50
 	Locality string `json:"locality,omitempty"`
 
@@ -105,6 +116,7 @@ type BillTo struct {
 	//   * Electronic checks — contact your payment processor representative to find out if this field is required or optional.
 	//   * PINless debits — optional.
 	//
+	// Example: 555123456
 	// Max Length: 32
 	// Min Length: 6
 	PhoneNumber string `json:"phoneNumber,omitempty"`
@@ -125,6 +137,7 @@ type BillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 90200
 	// Max Length: 10
 	PostalCode string `json:"postalCode,omitempty"`
 }
@@ -184,12 +197,11 @@ func (m *BillTo) Validate(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("address1", "body", string(m.Address1), 60); err != nil {
+	if err := validate.MaxLength("address1", "body", m.Address1, 60); err != nil {
 		return err
 	}
 
@@ -197,12 +209,11 @@ func (m *BillTo) validateAddress1(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("address2", "body", string(m.Address2), 60); err != nil {
+	if err := validate.MaxLength("address2", "body", m.Address2, 60); err != nil {
 		return err
 	}
 
@@ -210,12 +221,11 @@ func (m *BillTo) validateAddress2(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("administrativeArea", "body", string(m.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("administrativeArea", "body", m.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -223,12 +233,11 @@ func (m *BillTo) validateAdministrativeArea(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("company", "body", string(m.Company), 60); err != nil {
+	if err := validate.MaxLength("company", "body", m.Company, 60); err != nil {
 		return err
 	}
 
@@ -236,16 +245,15 @@ func (m *BillTo) validateCompany(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("country", "body", string(m.Country), 2); err != nil {
+	if err := validate.MinLength("country", "body", m.Country, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("country", "body", string(m.Country), 3); err != nil {
+	if err := validate.MaxLength("country", "body", m.Country, 3); err != nil {
 		return err
 	}
 
@@ -253,12 +261,11 @@ func (m *BillTo) validateCountry(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("email", "body", string(m.Email), 320); err != nil {
+	if err := validate.MaxLength("email", "body", m.Email, 320); err != nil {
 		return err
 	}
 
@@ -266,12 +273,11 @@ func (m *BillTo) validateEmail(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("firstName", "body", string(m.FirstName), 60); err != nil {
+	if err := validate.MaxLength("firstName", "body", m.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -279,12 +285,11 @@ func (m *BillTo) validateFirstName(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("lastName", "body", string(m.LastName), 60); err != nil {
+	if err := validate.MaxLength("lastName", "body", m.LastName, 60); err != nil {
 		return err
 	}
 
@@ -292,12 +297,11 @@ func (m *BillTo) validateLastName(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("locality", "body", string(m.Locality), 50); err != nil {
+	if err := validate.MaxLength("locality", "body", m.Locality, 50); err != nil {
 		return err
 	}
 
@@ -305,16 +309,15 @@ func (m *BillTo) validateLocality(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("phoneNumber", "body", string(m.PhoneNumber), 6); err != nil {
+	if err := validate.MinLength("phoneNumber", "body", m.PhoneNumber, 6); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("phoneNumber", "body", string(m.PhoneNumber), 32); err != nil {
+	if err := validate.MaxLength("phoneNumber", "body", m.PhoneNumber, 32); err != nil {
 		return err
 	}
 
@@ -322,15 +325,19 @@ func (m *BillTo) validatePhoneNumber(formats strfmt.Registry) error {
 }
 
 func (m *BillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("postalCode", "body", string(m.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("postalCode", "body", m.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this bill to based on context it is used
+func (m *BillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

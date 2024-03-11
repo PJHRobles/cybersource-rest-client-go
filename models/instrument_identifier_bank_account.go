@@ -6,23 +6,27 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // InstrumentIdentifierBankAccount instrument identifier bank account
+//
 // swagger:model InstrumentIdentifierBankAccount
 type InstrumentIdentifierBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -47,16 +51,15 @@ func (m *InstrumentIdentifierBankAccount) Validate(formats strfmt.Registry) erro
 }
 
 func (m *InstrumentIdentifierBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("number", "body", string(m.Number), 1); err != nil {
+	if err := validate.MinLength("number", "body", m.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
@@ -64,19 +67,23 @@ func (m *InstrumentIdentifierBankAccount) validateNumber(formats strfmt.Registry
 }
 
 func (m *InstrumentIdentifierBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("routingNumber", "body", string(m.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("routingNumber", "body", m.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("routingNumber", "body", string(m.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("routingNumber", "body", m.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this instrument identifier bank account based on context it is used
+func (m *InstrumentIdentifierBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

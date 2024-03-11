@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new payouts API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,20 +25,29 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	OctCreatePayment(params *OctCreatePaymentParams, opts ...ClientOption) (*OctCreatePaymentCreated, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
-OctCreatePayment processes a payout
+	OctCreatePayment processes a payout
 
-Send funds from a selected funding source to a designated credit/debit card account or a prepaid card using
+	Send funds from a selected funding source to a designated credit/debit card account or a prepaid card using
+
 an Original Credit Transaction (OCT).
-
 */
-func (a *Client) OctCreatePayment(params *OctCreatePaymentParams) (*OctCreatePaymentCreated, error) {
+func (a *Client) OctCreatePayment(params *OctCreatePaymentParams, opts ...ClientOption) (*OctCreatePaymentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewOctCreatePaymentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "octCreatePayment",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/payouts",
@@ -50,7 +58,12 @@ func (a *Client) OctCreatePayment(params *OctCreatePaymentParams) (*OctCreatePay
 		Reader:             &OctCreatePaymentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

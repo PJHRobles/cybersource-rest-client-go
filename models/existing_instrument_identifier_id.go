@@ -6,13 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 )
 
 // ExistingInstrumentIdentifierID The ID of the existing instrument identifier to be linked to the newly created payment instrument.
+// Example: 1234567890123456789
+//
 // swagger:model ExistingInstrumentIdentifierId
 type ExistingInstrumentIdentifierID string
 
@@ -31,5 +34,10 @@ func (m ExistingInstrumentIdentifierID) Validate(formats strfmt.Registry) error 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// ContextValidate validates this existing instrument identifier Id based on context it is used
+func (m ExistingInstrumentIdentifierID) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }

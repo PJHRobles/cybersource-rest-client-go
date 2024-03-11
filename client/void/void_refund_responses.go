@@ -6,16 +6,16 @@ package void
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // VoidRefundReader is a Reader for the VoidRefund structure.
@@ -44,9 +44,8 @@ func (o *VoidRefundReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/refunds/{id}/voids] voidRefund", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewVoidRefundCreated() *VoidRefundCreated {
 	return &VoidRefundCreated{}
 }
 
-/*VoidRefundCreated handles this case with default header values.
+/*
+VoidRefundCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type VoidRefundCreated struct {
 	Payload *VoidRefundCreatedBody
 }
 
+// IsSuccess returns true when this void refund created response has a 2xx status code
+func (o *VoidRefundCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this void refund created response has a 3xx status code
+func (o *VoidRefundCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void refund created response has a 4xx status code
+func (o *VoidRefundCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void refund created response has a 5xx status code
+func (o *VoidRefundCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void refund created response a status code equal to that given
+func (o *VoidRefundCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the void refund created response
+func (o *VoidRefundCreated) Code() int {
+	return 201
+}
+
 func (o *VoidRefundCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundCreated  %+v", 201, o.Payload)
+}
+
+func (o *VoidRefundCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewVoidRefundBadRequest() *VoidRefundBadRequest {
 	return &VoidRefundBadRequest{}
 }
 
-/*VoidRefundBadRequest handles this case with default header values.
+/*
+VoidRefundBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type VoidRefundBadRequest struct {
 	Payload *VoidRefundBadRequestBody
 }
 
+// IsSuccess returns true when this void refund bad request response has a 2xx status code
+func (o *VoidRefundBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void refund bad request response has a 3xx status code
+func (o *VoidRefundBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void refund bad request response has a 4xx status code
+func (o *VoidRefundBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this void refund bad request response has a 5xx status code
+func (o *VoidRefundBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void refund bad request response a status code equal to that given
+func (o *VoidRefundBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the void refund bad request response
+func (o *VoidRefundBadRequest) Code() int {
+	return 400
+}
+
 func (o *VoidRefundBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *VoidRefundBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewVoidRefundBadGateway() *VoidRefundBadGateway {
 	return &VoidRefundBadGateway{}
 }
 
-/*VoidRefundBadGateway handles this case with default header values.
+/*
+VoidRefundBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type VoidRefundBadGateway struct {
 	Payload *VoidRefundBadGatewayBody
 }
 
+// IsSuccess returns true when this void refund bad gateway response has a 2xx status code
+func (o *VoidRefundBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void refund bad gateway response has a 3xx status code
+func (o *VoidRefundBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void refund bad gateway response has a 4xx status code
+func (o *VoidRefundBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void refund bad gateway response has a 5xx status code
+func (o *VoidRefundBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this void refund bad gateway response a status code equal to that given
+func (o *VoidRefundBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the void refund bad gateway response
+func (o *VoidRefundBadGateway) Code() int {
+	return 502
+}
+
 func (o *VoidRefundBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *VoidRefundBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/refunds/{id}/voids][%d] voidRefundBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *VoidRefundBadGateway) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-/*VoidRefundBadGatewayBody ptsV2RefundsVoidsPost502Response
+/*
+VoidRefundBadGatewayBody ptsV2RefundsVoidsPost502Response
 swagger:model VoidRefundBadGatewayBody
 */
 type VoidRefundBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *VoidRefundBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this void refund bad gateway body based on context it is used
+func (o *VoidRefundBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *VoidRefundBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *VoidRefundBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundBadRequestBody ptsV2RefundsVoidsPost400Response
+/*
+VoidRefundBadRequestBody ptsV2RefundsVoidsPost400Response
 swagger:model VoidRefundBadRequestBody
 */
 type VoidRefundBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*VoidRefundBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -255,7 +366,6 @@ func (o *VoidRefundBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -269,6 +379,47 @@ func (o *VoidRefundBadRequestBody) validateDetails(formats strfmt.Registry) erro
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("voidRefundBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidRefundBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void refund bad request body based on the context it is used
+func (o *VoidRefundBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidRefundBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("voidRefundBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidRefundBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -297,7 +448,55 @@ func (o *VoidRefundBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundBody void refund body
+/*
+VoidRefundBadRequestBodyDetailsItems0 void refund bad request body details items0
+swagger:model VoidRefundBadRequestBodyDetailsItems0
+*/
+type VoidRefundBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this void refund bad request body details items0
+func (o *VoidRefundBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void refund bad request body details items0 based on context it is used
+func (o *VoidRefundBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *VoidRefundBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *VoidRefundBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res VoidRefundBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+VoidRefundBody void refund body
+// Example: {"clientReferenceInformation":{"code":"test_void"}}
 swagger:model VoidRefundBody
 */
 type VoidRefundBody struct {
@@ -321,7 +520,6 @@ func (o *VoidRefundBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -330,6 +528,43 @@ func (o *VoidRefundBody) validateClientReferenceInformation(formats strfmt.Regis
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void refund body based on the context it is used
+func (o *VoidRefundBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidRefundBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -356,7 +591,9 @@ func (o *VoidRefundBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundCreatedBody ptsV2RefundsVoidsPost201Response
+/*
+VoidRefundCreatedBody ptsV2RefundsVoidsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/voids/4963015122056179201545","method":"GET"}},"clientReferenceInformation":{"code":"test_void"},"id":"4963015122056179201545","orderInformation":{"amountDetails":{"currency":"USD"}},"status":"VOIDED","submitTimeUtc":"2017-06-01T071832Z","voidAmountDetails":{"currency":"usd","voidAmount":"102.21"}}
 swagger:model VoidRefundCreatedBody
 */
 type VoidRefundCreatedBody struct {
@@ -415,7 +652,6 @@ func (o *VoidRefundCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -424,6 +660,8 @@ func (o *VoidRefundCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -433,7 +671,6 @@ func (o *VoidRefundCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -442,6 +679,8 @@ func (o *VoidRefundCreatedBody) validateClientReferenceInformation(formats strfm
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -451,12 +690,11 @@ func (o *VoidRefundCreatedBody) validateClientReferenceInformation(formats strfm
 }
 
 func (o *VoidRefundCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("voidRefundCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -464,7 +702,6 @@ func (o *VoidRefundCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundCreatedBody) validateVoidAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VoidAmountDetails) { // not required
 		return nil
 	}
@@ -473,6 +710,93 @@ func (o *VoidRefundCreatedBody) validateVoidAmountDetails(formats strfmt.Registr
 		if err := o.VoidAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "voidAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void refund created body based on the context it is used
+func (o *VoidRefundCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoidAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidRefundCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidRefundCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidRefundCreatedBody) contextValidateVoidAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.VoidAmountDetails != nil {
+
+		if swag.IsZero(o.VoidAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.VoidAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "voidAmountDetails")
 			}
 			return err
 		}
@@ -499,7 +823,8 @@ func (o *VoidRefundCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundCreatedBodyClientReferenceInformation void refund created body client reference information
+/*
+VoidRefundCreatedBodyClientReferenceInformation void refund created body client reference information
 swagger:model VoidRefundCreatedBodyClientReferenceInformation
 */
 type VoidRefundCreatedBodyClientReferenceInformation struct {
@@ -554,12 +879,11 @@ func (o *VoidRefundCreatedBodyClientReferenceInformation) Validate(formats strfm
 }
 
 func (o *VoidRefundCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidRefundCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -567,15 +891,19 @@ func (o *VoidRefundCreatedBodyClientReferenceInformation) validateCode(formats s
 }
 
 func (o *VoidRefundCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("voidRefundCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void refund created body client reference information based on context it is used
+func (o *VoidRefundCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -597,7 +925,8 @@ func (o *VoidRefundCreatedBodyClientReferenceInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*VoidRefundCreatedBodyLinks void refund created body links
+/*
+VoidRefundCreatedBodyLinks void refund created body links
 swagger:model VoidRefundCreatedBodyLinks
 */
 type VoidRefundCreatedBodyLinks struct {
@@ -621,7 +950,6 @@ func (o *VoidRefundCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidRefundCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -630,6 +958,43 @@ func (o *VoidRefundCreatedBodyLinks) validateSelf(formats strfmt.Registry) error
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void refund created body links based on the context it is used
+func (o *VoidRefundCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidRefundCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -656,7 +1021,8 @@ func (o *VoidRefundCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundCreatedBodyLinksSelf void refund created body links self
+/*
+VoidRefundCreatedBodyLinksSelf void refund created body links self
 swagger:model VoidRefundCreatedBodyLinksSelf
 */
 type VoidRefundCreatedBodyLinksSelf struct {
@@ -670,6 +1036,11 @@ type VoidRefundCreatedBodyLinksSelf struct {
 
 // Validate validates this void refund created body links self
 func (o *VoidRefundCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void refund created body links self based on context it is used
+func (o *VoidRefundCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -691,7 +1062,8 @@ func (o *VoidRefundCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidRefundCreatedBodyVoidAmountDetails void refund created body void amount details
+/*
+VoidRefundCreatedBodyVoidAmountDetails void refund created body void amount details
 swagger:model VoidRefundCreatedBodyVoidAmountDetails
 */
 type VoidRefundCreatedBodyVoidAmountDetails struct {
@@ -730,15 +1102,19 @@ func (o *VoidRefundCreatedBodyVoidAmountDetails) Validate(formats strfmt.Registr
 }
 
 func (o *VoidRefundCreatedBodyVoidAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundCreated"+"."+"voidAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("voidRefundCreated"+"."+"voidAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void refund created body void amount details based on context it is used
+func (o *VoidRefundCreatedBodyVoidAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -760,7 +1136,8 @@ func (o *VoidRefundCreatedBodyVoidAmountDetails) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*VoidRefundParamsBodyClientReferenceInformation void refund params body client reference information
+/*
+VoidRefundParamsBodyClientReferenceInformation void refund params body client reference information
 swagger:model VoidRefundParamsBodyClientReferenceInformation
 */
 type VoidRefundParamsBodyClientReferenceInformation struct {
@@ -802,12 +1179,11 @@ func (o *VoidRefundParamsBodyClientReferenceInformation) Validate(formats strfmt
 }
 
 func (o *VoidRefundParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -815,7 +1191,6 @@ func (o *VoidRefundParamsBodyClientReferenceInformation) validateCode(formats st
 }
 
 func (o *VoidRefundParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -824,6 +1199,43 @@ func (o *VoidRefundParamsBodyClientReferenceInformation) validatePartner(formats
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void refund params body client reference information based on the context it is used
+func (o *VoidRefundParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidRefundParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidRefundRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -850,7 +1262,8 @@ func (o *VoidRefundParamsBodyClientReferenceInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*VoidRefundParamsBodyClientReferenceInformationPartner void refund params body client reference information partner
+/*
+VoidRefundParamsBodyClientReferenceInformationPartner void refund params body client reference information partner
 swagger:model VoidRefundParamsBodyClientReferenceInformationPartner
 */
 type VoidRefundParamsBodyClientReferenceInformationPartner struct {
@@ -894,12 +1307,11 @@ func (o *VoidRefundParamsBodyClientReferenceInformationPartner) Validate(formats
 }
 
 func (o *VoidRefundParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -907,15 +1319,19 @@ func (o *VoidRefundParamsBodyClientReferenceInformationPartner) validateDevelope
 }
 
 func (o *VoidRefundParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("voidRefundRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void refund params body client reference information partner based on context it is used
+func (o *VoidRefundParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

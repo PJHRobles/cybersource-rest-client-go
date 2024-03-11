@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ErrorLinks error links
+//
 // swagger:model ErrorLinks
 type ErrorLinks struct {
 
@@ -51,7 +52,6 @@ func (m *ErrorLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorLinks) validateDocumentation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Documentation) { // not required
 		return nil
 	}
@@ -65,6 +65,8 @@ func (m *ErrorLinks) validateDocumentation(formats strfmt.Registry) error {
 			if err := m.Documentation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("documentation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -76,7 +78,6 @@ func (m *ErrorLinks) validateDocumentation(formats strfmt.Registry) error {
 }
 
 func (m *ErrorLinks) validateNext(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Next) { // not required
 		return nil
 	}
@@ -90,6 +91,8 @@ func (m *ErrorLinks) validateNext(formats strfmt.Registry) error {
 			if err := m.Next[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("next" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -101,7 +104,6 @@ func (m *ErrorLinks) validateNext(formats strfmt.Registry) error {
 }
 
 func (m *ErrorLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Self) { // not required
 		return nil
 	}
@@ -110,6 +112,101 @@ func (m *ErrorLinks) validateSelf(formats strfmt.Registry) error {
 		if err := m.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error links based on the context it is used
+func (m *ErrorLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDocumentation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNext(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorLinks) contextValidateDocumentation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Documentation); i++ {
+
+		if m.Documentation[i] != nil {
+
+			if swag.IsZero(m.Documentation[i]) { // not required
+				return nil
+			}
+
+			if err := m.Documentation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("documentation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ErrorLinks) contextValidateNext(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Next); i++ {
+
+		if m.Next[i] != nil {
+
+			if swag.IsZero(m.Next[i]) { // not required
+				return nil
+			}
+
+			if err := m.Next[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("next" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ErrorLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("self")
 			}
 			return err
 		}
@@ -137,6 +234,7 @@ func (m *ErrorLinks) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorLinksDocumentationItems0 error links documentation items0
+//
 // swagger:model ErrorLinksDocumentationItems0
 type ErrorLinksDocumentationItems0 struct {
 
@@ -152,6 +250,11 @@ type ErrorLinksDocumentationItems0 struct {
 
 // Validate validates this error links documentation items0
 func (m *ErrorLinksDocumentationItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error links documentation items0 based on context it is used
+func (m *ErrorLinksDocumentationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -174,6 +277,7 @@ func (m *ErrorLinksDocumentationItems0) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorLinksNextItems0 error links next items0
+//
 // swagger:model ErrorLinksNextItems0
 type ErrorLinksNextItems0 struct {
 
@@ -189,6 +293,11 @@ type ErrorLinksNextItems0 struct {
 
 // Validate validates this error links next items0
 func (m *ErrorLinksNextItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error links next items0 based on context it is used
+func (m *ErrorLinksNextItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -211,6 +320,7 @@ func (m *ErrorLinksNextItems0) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorLinksSelf error links self
+//
 // swagger:model ErrorLinksSelf
 type ErrorLinksSelf struct {
 
@@ -226,6 +336,11 @@ type ErrorLinksSelf struct {
 
 // Validate validates this error links self
 func (m *ErrorLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error links self based on context it is used
+func (m *ErrorLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

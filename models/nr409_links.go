@@ -6,13 +6,15 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // Nr409Links 409 links
+//
 // swagger:model 409Links
 type Nr409Links struct {
 
@@ -35,7 +37,6 @@ func (m *Nr409Links) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Nr409Links) validatePaymentInstruments(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PaymentInstruments) { // not required
 		return nil
 	}
@@ -44,6 +45,43 @@ func (m *Nr409Links) validatePaymentInstruments(formats strfmt.Registry) error {
 		if err := m.PaymentInstruments.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInstruments")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this 409 links based on the context it is used
+func (m *Nr409Links) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePaymentInstruments(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Nr409Links) contextValidatePaymentInstruments(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PaymentInstruments != nil {
+
+		if swag.IsZero(m.PaymentInstruments) { // not required
+			return nil
+		}
+
+		if err := m.PaymentInstruments.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("paymentInstruments")
 			}
 			return err
 		}
@@ -71,15 +109,22 @@ func (m *Nr409Links) UnmarshalBinary(b []byte) error {
 }
 
 // Nr409LinksPaymentInstruments nr409 links payment instruments
+//
 // swagger:model Nr409LinksPaymentInstruments
 type Nr409LinksPaymentInstruments struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789/paymentinstruments
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this nr409 links payment instruments
 func (m *Nr409LinksPaymentInstruments) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this nr409 links payment instruments based on context it is used
+func (m *Nr409LinksPaymentInstruments) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

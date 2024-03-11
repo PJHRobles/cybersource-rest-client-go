@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // Initiator initiator
+//
 // swagger:model Initiator
 type Initiator struct {
 
@@ -36,7 +38,6 @@ func (m *Initiator) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Initiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -45,6 +46,43 @@ func (m *Initiator) validateMerchantInitiatedTransaction(formats strfmt.Registry
 		if err := m.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this initiator based on the context it is used
+func (m *Initiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Initiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := m.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -72,10 +110,12 @@ func (m *Initiator) UnmarshalBinary(b []byte) error {
 }
 
 // InitiatorMerchantInitiatedTransaction initiator merchant initiated transaction
+//
 // swagger:model InitiatorMerchantInitiatedTransaction
 type InitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -95,15 +135,19 @@ func (m *InitiatorMerchantInitiatedTransaction) Validate(formats strfmt.Registry
 }
 
 func (m *InitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(m.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("merchantInitiatedTransaction"+"."+"previousTransactionId", "body", m.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this initiator merchant initiated transaction based on context it is used
+func (m *InitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

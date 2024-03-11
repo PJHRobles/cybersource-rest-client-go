@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new payments API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,19 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreatePayment(params *CreatePaymentParams, opts ...ClientOption) (*CreatePaymentCreated, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 CreatePayment processes a payment
 
 Authorize the payment for the transaction.
-
 */
-func (a *Client) CreatePayment(params *CreatePaymentParams) (*CreatePaymentCreated, error) {
+func (a *Client) CreatePayment(params *CreatePaymentParams, opts ...ClientOption) (*CreatePaymentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreatePaymentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createPayment",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/payments/",
@@ -49,7 +56,12 @@ func (a *Client) CreatePayment(params *CreatePaymentParams) (*CreatePaymentCreat
 		Reader:             &CreatePaymentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

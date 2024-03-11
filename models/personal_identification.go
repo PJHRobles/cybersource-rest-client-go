@@ -6,13 +6,15 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // PersonalIdentification personal identification
+//
 // swagger:model PersonalIdentification
 type PersonalIdentification struct {
 
@@ -21,6 +23,7 @@ type PersonalIdentification struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: 1234567890
 	ID string `json:"id,omitempty"`
 
 	// issued by
@@ -33,6 +36,7 @@ type PersonalIdentification struct {
 	// Valid values:
 	// - driver license
 	//
+	// Example: driver license
 	Type string `json:"type,omitempty"`
 }
 
@@ -51,7 +55,6 @@ func (m *PersonalIdentification) Validate(formats strfmt.Registry) error {
 }
 
 func (m *PersonalIdentification) validateIssuedBy(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IssuedBy) { // not required
 		return nil
 	}
@@ -60,6 +63,43 @@ func (m *PersonalIdentification) validateIssuedBy(formats strfmt.Registry) error
 		if err := m.IssuedBy.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this personal identification based on the context it is used
+func (m *PersonalIdentification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIssuedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PersonalIdentification) contextValidateIssuedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.IssuedBy != nil {
+
+		if swag.IsZero(m.IssuedBy) { // not required
+			return nil
+		}
+
+		if err := m.IssuedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
 			}
 			return err
 		}
@@ -87,6 +127,7 @@ func (m *PersonalIdentification) UnmarshalBinary(b []byte) error {
 }
 
 // PersonalIdentificationIssuedBy personal identification issued by
+//
 // swagger:model PersonalIdentificationIssuedBy
 type PersonalIdentificationIssuedBy struct {
 
@@ -95,11 +136,17 @@ type PersonalIdentificationIssuedBy struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: CA
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 }
 
 // Validate validates this personal identification issued by
 func (m *PersonalIdentificationIssuedBy) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this personal identification issued by based on context it is used
+func (m *PersonalIdentificationIssuedBy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

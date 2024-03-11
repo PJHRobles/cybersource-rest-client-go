@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // PaymentInstrumentBankAccount payment instrument bank account
+//
 // swagger:model PaymentInstrumentBankAccount
 type PaymentInstrumentBankAccount struct {
 
@@ -21,11 +23,17 @@ type PaymentInstrumentBankAccount struct {
 	//   * X: corporate checking (USD only)
 	//   * G: general ledger
 	//
+	// Example: savings
 	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this payment instrument bank account
 func (m *PaymentInstrumentBankAccount) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument bank account based on context it is used
+func (m *PaymentInstrumentBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

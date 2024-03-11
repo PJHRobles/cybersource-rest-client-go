@@ -6,16 +6,16 @@ package payouts
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // OctCreatePaymentReader is a Reader for the OctCreatePayment structure.
@@ -44,9 +44,8 @@ func (o *OctCreatePaymentReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/payouts] octCreatePayment", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewOctCreatePaymentCreated() *OctCreatePaymentCreated {
 	return &OctCreatePaymentCreated{}
 }
 
-/*OctCreatePaymentCreated handles this case with default header values.
+/*
+OctCreatePaymentCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type OctCreatePaymentCreated struct {
 	Payload *OctCreatePaymentCreatedBody
 }
 
+// IsSuccess returns true when this oct create payment created response has a 2xx status code
+func (o *OctCreatePaymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this oct create payment created response has a 3xx status code
+func (o *OctCreatePaymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this oct create payment created response has a 4xx status code
+func (o *OctCreatePaymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this oct create payment created response has a 5xx status code
+func (o *OctCreatePaymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this oct create payment created response a status code equal to that given
+func (o *OctCreatePaymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the oct create payment created response
+func (o *OctCreatePaymentCreated) Code() int {
+	return 201
+}
+
 func (o *OctCreatePaymentCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentCreated  %+v", 201, o.Payload)
+}
+
+func (o *OctCreatePaymentCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewOctCreatePaymentBadRequest() *OctCreatePaymentBadRequest {
 	return &OctCreatePaymentBadRequest{}
 }
 
-/*OctCreatePaymentBadRequest handles this case with default header values.
+/*
+OctCreatePaymentBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type OctCreatePaymentBadRequest struct {
 	Payload *OctCreatePaymentBadRequestBody
 }
 
+// IsSuccess returns true when this oct create payment bad request response has a 2xx status code
+func (o *OctCreatePaymentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this oct create payment bad request response has a 3xx status code
+func (o *OctCreatePaymentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this oct create payment bad request response has a 4xx status code
+func (o *OctCreatePaymentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this oct create payment bad request response has a 5xx status code
+func (o *OctCreatePaymentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this oct create payment bad request response a status code equal to that given
+func (o *OctCreatePaymentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the oct create payment bad request response
+func (o *OctCreatePaymentBadRequest) Code() int {
+	return 400
+}
+
 func (o *OctCreatePaymentBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *OctCreatePaymentBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewOctCreatePaymentBadGateway() *OctCreatePaymentBadGateway {
 	return &OctCreatePaymentBadGateway{}
 }
 
-/*OctCreatePaymentBadGateway handles this case with default header values.
+/*
+OctCreatePaymentBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type OctCreatePaymentBadGateway struct {
 	Payload *OctCreatePaymentBadGatewayBody
 }
 
+// IsSuccess returns true when this oct create payment bad gateway response has a 2xx status code
+func (o *OctCreatePaymentBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this oct create payment bad gateway response has a 3xx status code
+func (o *OctCreatePaymentBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this oct create payment bad gateway response has a 4xx status code
+func (o *OctCreatePaymentBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this oct create payment bad gateway response has a 5xx status code
+func (o *OctCreatePaymentBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this oct create payment bad gateway response a status code equal to that given
+func (o *OctCreatePaymentBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the oct create payment bad gateway response
+func (o *OctCreatePaymentBadGateway) Code() int {
+	return 502
+}
+
 func (o *OctCreatePaymentBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *OctCreatePaymentBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payouts][%d] octCreatePaymentBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,47 +253,8 @@ func (o *OctCreatePaymentBadGateway) readResponse(response runtime.ClientRespons
 	return nil
 }
 
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*OctCreatePaymentBadGatewayBody ptsV2PayoutsPost502Response
+/*
+OctCreatePaymentBadGatewayBody ptsV2PayoutsPost502Response
 swagger:model OctCreatePaymentBadGatewayBody
 */
 type OctCreatePaymentBadGatewayBody struct {
@@ -226,6 +291,11 @@ func (o *OctCreatePaymentBadGatewayBody) Validate(formats strfmt.Registry) error
 	return nil
 }
 
+// ContextValidate validates this oct create payment bad gateway body based on context it is used
+func (o *OctCreatePaymentBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *OctCreatePaymentBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -244,13 +314,14 @@ func (o *OctCreatePaymentBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentBadRequestBody ptsV2PayoutsPost400Response
+/*
+OctCreatePaymentBadRequestBody ptsV2PayoutsPost400Response
 swagger:model OctCreatePaymentBadRequestBody
 */
 type OctCreatePaymentBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*OctCreatePaymentBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -294,7 +365,6 @@ func (o *OctCreatePaymentBadRequestBody) Validate(formats strfmt.Registry) error
 }
 
 func (o *OctCreatePaymentBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -308,6 +378,47 @@ func (o *OctCreatePaymentBadRequestBody) validateDetails(formats strfmt.Registry
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("octCreatePaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("octCreatePaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment bad request body based on the context it is used
+func (o *OctCreatePaymentBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("octCreatePaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("octCreatePaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -336,7 +447,55 @@ func (o *OctCreatePaymentBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentBody oct create payment body
+/*
+OctCreatePaymentBadRequestBodyDetailsItems0 oct create payment bad request body details items0
+swagger:model OctCreatePaymentBadRequestBodyDetailsItems0
+*/
+type OctCreatePaymentBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this oct create payment bad request body details items0
+func (o *OctCreatePaymentBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this oct create payment bad request body details items0 based on context it is used
+func (o *OctCreatePaymentBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *OctCreatePaymentBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *OctCreatePaymentBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res OctCreatePaymentBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+OctCreatePaymentBody oct create payment body
+// Example: {"clientReferenceInformation":{"code":"33557799"},"merchantInformation":{"merchantCategoryCode":"123","merchantDescriptor":{"administrativeArea":"CA","country":"US","locality":"FC","name":"Thomas","postalCode":"94440"}},"orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"100.00"}},"paymentInformation":{"card":{"expirationMonth":"12","expirationYear":"2025","number":"4111111111111111","sourceAccountType":"CH","type":"001"}},"payoutsOptions":{"acquirerBin":"567890124","retrievalReferenceNumber":"123456789012"},"processingInformation":{"businessApplicationId":"FD","commerceIndicator":"internet","networkRoutingOrder":"ECG"},"recipientInformation":{"address1":"Paseo Padre Boulevard","administrativeArea":"CA","country":"US","dateOfBirth":"19801009","firstName":"John","lastName":"Doe","locality":"Foster City","phoneNumber":"6504320556","postalCode":"94400"},"reconciliationId":"1087488702VIAQNSPQ","senderInformation":{"account":{"fundsSource":"01","number":"1234567890123456789012345678901234"},"address1":"900 Metro Center Blvd.900","administrativeArea":"CA","countryCode":"US","locality":"Foster City","name":"Thomas Jefferson","referenceNumber":"1234567890"}}
 swagger:model OctCreatePaymentBody
 */
 type OctCreatePaymentBody struct {
@@ -402,7 +561,6 @@ func (o *OctCreatePaymentBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *OctCreatePaymentBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -411,6 +569,8 @@ func (o *OctCreatePaymentBody) validateClientReferenceInformation(formats strfmt
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -420,7 +580,6 @@ func (o *OctCreatePaymentBody) validateClientReferenceInformation(formats strfmt
 }
 
 func (o *OctCreatePaymentBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -429,6 +588,8 @@ func (o *OctCreatePaymentBody) validateMerchantInformation(formats strfmt.Regist
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -438,7 +599,6 @@ func (o *OctCreatePaymentBody) validateMerchantInformation(formats strfmt.Regist
 }
 
 func (o *OctCreatePaymentBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -447,6 +607,8 @@ func (o *OctCreatePaymentBody) validateOrderInformation(formats strfmt.Registry)
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -456,7 +618,6 @@ func (o *OctCreatePaymentBody) validateOrderInformation(formats strfmt.Registry)
 }
 
 func (o *OctCreatePaymentBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -465,6 +626,8 @@ func (o *OctCreatePaymentBody) validatePaymentInformation(formats strfmt.Registr
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -474,7 +637,6 @@ func (o *OctCreatePaymentBody) validatePaymentInformation(formats strfmt.Registr
 }
 
 func (o *OctCreatePaymentBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -483,6 +645,8 @@ func (o *OctCreatePaymentBody) validateProcessingInformation(formats strfmt.Regi
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -492,7 +656,6 @@ func (o *OctCreatePaymentBody) validateProcessingInformation(formats strfmt.Regi
 }
 
 func (o *OctCreatePaymentBody) validateRecipientInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecipientInformation) { // not required
 		return nil
 	}
@@ -501,6 +664,8 @@ func (o *OctCreatePaymentBody) validateRecipientInformation(formats strfmt.Regis
 		if err := o.RecipientInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "recipientInformation")
 			}
 			return err
 		}
@@ -510,7 +675,6 @@ func (o *OctCreatePaymentBody) validateRecipientInformation(formats strfmt.Regis
 }
 
 func (o *OctCreatePaymentBody) validateSenderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SenderInformation) { // not required
 		return nil
 	}
@@ -519,6 +683,193 @@ func (o *OctCreatePaymentBody) validateSenderInformation(formats strfmt.Registry
 		if err := o.SenderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "senderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "senderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment body based on the context it is used
+func (o *OctCreatePaymentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRecipientInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSenderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateRecipientInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecipientInformation != nil {
+
+		if swag.IsZero(o.RecipientInformation) { // not required
+			return nil
+		}
+
+		if err := o.RecipientInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "recipientInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentBody) contextValidateSenderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.SenderInformation != nil {
+
+		if swag.IsZero(o.SenderInformation) { // not required
+			return nil
+		}
+
+		if err := o.SenderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "senderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "senderInformation")
 			}
 			return err
 		}
@@ -545,7 +896,9 @@ func (o *OctCreatePaymentBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentCreatedBody ptsV2PayoutsPost201Response
+/*
+OctCreatePaymentCreatedBody ptsV2PayoutsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/payouts/5287556536256000401540","method":"GET"}},"clientReferenceInformation":{"code":"1528755653559"},"id":"5287556536256000401540","orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"100.00"}},"processorInformation":{"approvalCode":"831000","responseCode":"00","responseCodeSource":"5","systemTraceAuditNumber":"897596","transactionId":"016153570198200"},"reconciliationId":"1087488702VIAQNSPQ","status":"ACCEPTED","submitTimeUtc":"2018-06-11T222054Z"}
 swagger:model OctCreatePaymentCreatedBody
 */
 type OctCreatePaymentCreatedBody struct {
@@ -645,7 +998,6 @@ func (o *OctCreatePaymentCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *OctCreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -654,6 +1006,8 @@ func (o *OctCreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) err
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -663,7 +1017,6 @@ func (o *OctCreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) err
 }
 
 func (o *OctCreatePaymentCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -672,6 +1025,8 @@ func (o *OctCreatePaymentCreatedBody) validateClientReferenceInformation(formats
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -681,7 +1036,6 @@ func (o *OctCreatePaymentCreatedBody) validateClientReferenceInformation(formats
 }
 
 func (o *OctCreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -690,6 +1044,8 @@ func (o *OctCreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Re
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -699,12 +1055,11 @@ func (o *OctCreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Re
 }
 
 func (o *OctCreatePaymentCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -712,7 +1067,6 @@ func (o *OctCreatePaymentCreatedBody) validateID(formats strfmt.Registry) error 
 }
 
 func (o *OctCreatePaymentCreatedBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -721,6 +1075,8 @@ func (o *OctCreatePaymentCreatedBody) validateMerchantInformation(formats strfmt
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -730,7 +1086,6 @@ func (o *OctCreatePaymentCreatedBody) validateMerchantInformation(formats strfmt
 }
 
 func (o *OctCreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -739,6 +1094,8 @@ func (o *OctCreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Re
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -748,7 +1105,6 @@ func (o *OctCreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Re
 }
 
 func (o *OctCreatePaymentCreatedBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -757,6 +1113,8 @@ func (o *OctCreatePaymentCreatedBody) validateProcessorInformation(formats strfm
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -766,7 +1124,6 @@ func (o *OctCreatePaymentCreatedBody) validateProcessorInformation(formats strfm
 }
 
 func (o *OctCreatePaymentCreatedBody) validateRecipientInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecipientInformation) { // not required
 		return nil
 	}
@@ -775,6 +1132,8 @@ func (o *OctCreatePaymentCreatedBody) validateRecipientInformation(formats strfm
 		if err := o.RecipientInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation")
 			}
 			return err
 		}
@@ -784,13 +1143,197 @@ func (o *OctCreatePaymentCreatedBody) validateRecipientInformation(formats strfm
 }
 
 func (o *OctCreatePaymentCreatedBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"reconciliationId", "body", string(o.ReconciliationID), 25); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"reconciliationId", "body", o.ReconciliationID, 25); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body based on the context it is used
+func (o *OctCreatePaymentCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRecipientInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBody) contextValidateRecipientInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecipientInformation != nil {
+
+		if swag.IsZero(o.RecipientInformation) { // not required
+			return nil
+		}
+
+		if err := o.RecipientInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -814,7 +1357,8 @@ func (o *OctCreatePaymentCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyClientReferenceInformation oct create payment created body client reference information
+/*
+OctCreatePaymentCreatedBodyClientReferenceInformation oct create payment created body client reference information
 swagger:model OctCreatePaymentCreatedBodyClientReferenceInformation
 */
 type OctCreatePaymentCreatedBodyClientReferenceInformation struct {
@@ -869,12 +1413,11 @@ func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) Validate(formats
 }
 
 func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -882,15 +1425,19 @@ func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) validateCode(for
 }
 
 func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body client reference information based on context it is used
+func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -912,7 +1459,8 @@ func (o *OctCreatePaymentCreatedBodyClientReferenceInformation) UnmarshalBinary(
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyErrorInformation oct create payment created body error information
+/*
+OctCreatePaymentCreatedBodyErrorInformation oct create payment created body error information
 swagger:model OctCreatePaymentCreatedBodyErrorInformation
 */
 type OctCreatePaymentCreatedBodyErrorInformation struct {
@@ -956,7 +1504,6 @@ func (o *OctCreatePaymentCreatedBodyErrorInformation) Validate(formats strfmt.Re
 }
 
 func (o *OctCreatePaymentCreatedBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -970,6 +1517,47 @@ func (o *OctCreatePaymentCreatedBodyErrorInformation) validateDetails(formats st
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("octCreatePaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("octCreatePaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body error information based on the context it is used
+func (o *OctCreatePaymentCreatedBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("octCreatePaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("octCreatePaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -998,7 +1586,8 @@ func (o *OctCreatePaymentCreatedBodyErrorInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyErrorInformationDetailsItems0 oct create payment created body error information details items0
+/*
+OctCreatePaymentCreatedBodyErrorInformationDetailsItems0 oct create payment created body error information details items0
 swagger:model OctCreatePaymentCreatedBodyErrorInformationDetailsItems0
 */
 type OctCreatePaymentCreatedBodyErrorInformationDetailsItems0 struct {
@@ -1020,6 +1609,11 @@ func (o *OctCreatePaymentCreatedBodyErrorInformationDetailsItems0) Validate(form
 	return nil
 }
 
+// ContextValidate validates this oct create payment created body error information details items0 based on context it is used
+func (o *OctCreatePaymentCreatedBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *OctCreatePaymentCreatedBodyErrorInformationDetailsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1038,7 +1632,8 @@ func (o *OctCreatePaymentCreatedBodyErrorInformationDetailsItems0) UnmarshalBina
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyLinks oct create payment created body links
+/*
+OctCreatePaymentCreatedBodyLinks oct create payment created body links
 swagger:model OctCreatePaymentCreatedBodyLinks
 */
 type OctCreatePaymentCreatedBodyLinks struct {
@@ -1062,7 +1657,6 @@ func (o *OctCreatePaymentCreatedBodyLinks) Validate(formats strfmt.Registry) err
 }
 
 func (o *OctCreatePaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -1071,6 +1665,43 @@ func (o *OctCreatePaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry)
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body links based on the context it is used
+func (o *OctCreatePaymentCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -1097,7 +1728,8 @@ func (o *OctCreatePaymentCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyLinksSelf oct create payment created body links self
+/*
+OctCreatePaymentCreatedBodyLinksSelf oct create payment created body links self
 swagger:model OctCreatePaymentCreatedBodyLinksSelf
 */
 type OctCreatePaymentCreatedBodyLinksSelf struct {
@@ -1111,6 +1743,11 @@ type OctCreatePaymentCreatedBodyLinksSelf struct {
 
 // Validate validates this oct create payment created body links self
 func (o *OctCreatePaymentCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body links self based on context it is used
+func (o *OctCreatePaymentCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1132,7 +1769,8 @@ func (o *OctCreatePaymentCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyMerchantInformation oct create payment created body merchant information
+/*
+OctCreatePaymentCreatedBodyMerchantInformation oct create payment created body merchant information
 swagger:model OctCreatePaymentCreatedBodyMerchantInformation
 */
 type OctCreatePaymentCreatedBodyMerchantInformation struct {
@@ -1156,7 +1794,6 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformation) Validate(formats strfmt
 }
 
 func (o *OctCreatePaymentCreatedBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -1165,6 +1802,43 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformation) validateMerchantDescrip
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body merchant information based on the context it is used
+func (o *OctCreatePaymentCreatedBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -1191,7 +1865,8 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor oct create payment created body merchant information merchant descriptor
+/*
+OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor oct create payment created body merchant information merchant descriptor
 swagger:model OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor
 */
 type OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor struct {
@@ -1240,12 +1915,11 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) Valid
 }
 
 func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -1253,15 +1927,19 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) valid
 }
 
 func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", string(o.Locality), 13); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", o.Locality, 13); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body merchant information merchant descriptor based on context it is used
+func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1283,7 +1961,8 @@ func (o *OctCreatePaymentCreatedBodyMerchantInformationMerchantDescriptor) Unmar
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyOrderInformation oct create payment created body order information
+/*
+OctCreatePaymentCreatedBodyOrderInformation oct create payment created body order information
 swagger:model OctCreatePaymentCreatedBodyOrderInformation
 */
 type OctCreatePaymentCreatedBodyOrderInformation struct {
@@ -1307,7 +1986,6 @@ func (o *OctCreatePaymentCreatedBodyOrderInformation) Validate(formats strfmt.Re
 }
 
 func (o *OctCreatePaymentCreatedBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -1316,6 +1994,43 @@ func (o *OctCreatePaymentCreatedBodyOrderInformation) validateAmountDetails(form
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body order information based on the context it is used
+func (o *OctCreatePaymentCreatedBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -1342,7 +2057,8 @@ func (o *OctCreatePaymentCreatedBodyOrderInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyOrderInformationAmountDetails oct create payment created body order information amount details
+/*
+OctCreatePaymentCreatedBodyOrderInformationAmountDetails oct create payment created body order information amount details
 swagger:model OctCreatePaymentCreatedBodyOrderInformationAmountDetails
 */
 type OctCreatePaymentCreatedBodyOrderInformationAmountDetails struct {
@@ -1423,12 +2139,11 @@ func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) Validate(form
 }
 
 func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1436,12 +2151,11 @@ func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateCurre
 }
 
 func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateSettlementAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", string(o.SettlementAmount), 12); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", o.SettlementAmount, 12); err != nil {
 		return err
 	}
 
@@ -1449,12 +2163,11 @@ func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateSettl
 }
 
 func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateSettlementCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", string(o.SettlementCurrency), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", o.SettlementCurrency, 3); err != nil {
 		return err
 	}
 
@@ -1462,15 +2175,19 @@ func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateSettl
 }
 
 func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body order information amount details based on context it is used
+func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1492,7 +2209,8 @@ func (o *OctCreatePaymentCreatedBodyOrderInformationAmountDetails) UnmarshalBina
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyProcessorInformation oct create payment created body processor information
+/*
+OctCreatePaymentCreatedBodyProcessorInformation oct create payment created body processor information
 swagger:model OctCreatePaymentCreatedBodyProcessorInformation
 */
 type OctCreatePaymentCreatedBodyProcessorInformation struct {
@@ -1564,12 +2282,11 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) Validate(formats strfm
 }
 
 func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateApprovalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ApprovalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"approvalCode", "body", string(o.ApprovalCode), 6); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"approvalCode", "body", o.ApprovalCode, 6); err != nil {
 		return err
 	}
 
@@ -1577,12 +2294,11 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateApprovalCode(f
 }
 
 func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -1590,12 +2306,11 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateResponseCode(f
 }
 
 func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateResponseCodeSource(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCodeSource) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"responseCodeSource", "body", string(o.ResponseCodeSource), 1); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"responseCodeSource", "body", o.ResponseCodeSource, 1); err != nil {
 		return err
 	}
 
@@ -1603,12 +2318,11 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateResponseCodeSo
 }
 
 func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateSystemTraceAuditNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SystemTraceAuditNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", string(o.SystemTraceAuditNumber), 6); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", o.SystemTraceAuditNumber, 6); err != nil {
 		return err
 	}
 
@@ -1616,15 +2330,19 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateSystemTraceAud
 }
 
 func (o *OctCreatePaymentCreatedBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 15); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body processor information based on context it is used
+func (o *OctCreatePaymentCreatedBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1646,7 +2364,8 @@ func (o *OctCreatePaymentCreatedBodyProcessorInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyRecipientInformation oct create payment created body recipient information
+/*
+OctCreatePaymentCreatedBodyRecipientInformation oct create payment created body recipient information
 swagger:model OctCreatePaymentCreatedBodyRecipientInformation
 */
 type OctCreatePaymentCreatedBodyRecipientInformation struct {
@@ -1670,7 +2389,6 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformation) Validate(formats strfm
 }
 
 func (o *OctCreatePaymentCreatedBodyRecipientInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -1679,6 +2397,43 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformation) validateCard(formats s
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment created body recipient information based on the context it is used
+func (o *OctCreatePaymentCreatedBodyRecipientInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentCreatedBodyRecipientInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentCreated" + "." + "recipientInformation" + "." + "card")
 			}
 			return err
 		}
@@ -1705,7 +2460,8 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*OctCreatePaymentCreatedBodyRecipientInformationCard oct create payment created body recipient information card
+/*
+OctCreatePaymentCreatedBodyRecipientInformationCard oct create payment created body recipient information card
 swagger:model OctCreatePaymentCreatedBodyRecipientInformationCard
 */
 type OctCreatePaymentCreatedBodyRecipientInformationCard struct {
@@ -1741,12 +2497,11 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) Validate(formats s
 }
 
 func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) validateBalance(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Balance) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"recipientInformation"+"."+"card"+"."+"balance", "body", string(o.Balance), 12); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"recipientInformation"+"."+"card"+"."+"balance", "body", o.Balance, 12); err != nil {
 		return err
 	}
 
@@ -1754,15 +2509,19 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) validateBalance(fo
 }
 
 func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"recipientInformation"+"."+"card"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentCreated"+"."+"recipientInformation"+"."+"card"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment created body recipient information card based on context it is used
+func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1784,7 +2543,8 @@ func (o *OctCreatePaymentCreatedBodyRecipientInformationCard) UnmarshalBinary(b 
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyClientReferenceInformation oct create payment params body client reference information
+/*
+OctCreatePaymentParamsBodyClientReferenceInformation oct create payment params body client reference information
 swagger:model OctCreatePaymentParamsBodyClientReferenceInformation
 */
 type OctCreatePaymentParamsBodyClientReferenceInformation struct {
@@ -1816,15 +2576,19 @@ func (o *OctCreatePaymentParamsBodyClientReferenceInformation) Validate(formats 
 }
 
 func (o *OctCreatePaymentParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body client reference information based on context it is used
+func (o *OctCreatePaymentParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1846,7 +2610,8 @@ func (o *OctCreatePaymentParamsBodyClientReferenceInformation) UnmarshalBinary(b
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyMerchantInformation oct create payment params body merchant information
+/*
+OctCreatePaymentParamsBodyMerchantInformation oct create payment params body merchant information
 swagger:model OctCreatePaymentParamsBodyMerchantInformation
 */
 type OctCreatePaymentParamsBodyMerchantInformation struct {
@@ -1909,12 +2674,11 @@ func (o *OctCreatePaymentParamsBodyMerchantInformation) Validate(formats strfmt.
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformation) validateCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", int64(o.CategoryCode), 9999, false); err != nil {
+	if err := validate.MaximumInt("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", o.CategoryCode, 9999, false); err != nil {
 		return err
 	}
 
@@ -1922,7 +2686,6 @@ func (o *OctCreatePaymentParamsBodyMerchantInformation) validateCategoryCode(for
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -1931,6 +2694,8 @@ func (o *OctCreatePaymentParamsBodyMerchantInformation) validateMerchantDescript
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -1940,13 +2705,47 @@ func (o *OctCreatePaymentParamsBodyMerchantInformation) validateMerchantDescript
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 21); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 21); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body merchant information based on the context it is used
+func (o *OctCreatePaymentParamsBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1970,7 +2769,8 @@ func (o *OctCreatePaymentParamsBodyMerchantInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor oct create payment params body merchant information merchant descriptor
+/*
+OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor oct create payment params body merchant information merchant descriptor
 swagger:model OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor
 */
 type OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor struct {
@@ -2061,12 +2861,11 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) Valida
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -2074,12 +2873,11 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) valida
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateContact(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Contact) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", string(o.Contact), 14); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", o.Contact, 14); err != nil {
 		return err
 	}
 
@@ -2087,12 +2885,11 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) valida
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2100,12 +2897,11 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) valida
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", string(o.Locality), 13); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", o.Locality, 13); err != nil {
 		return err
 	}
 
@@ -2113,15 +2909,19 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) valida
 }
 
 func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", string(o.PostalCode), 14); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", o.PostalCode, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body merchant information merchant descriptor based on context it is used
+func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2143,7 +2943,8 @@ func (o *OctCreatePaymentParamsBodyMerchantInformationMerchantDescriptor) Unmars
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyOrderInformation oct create payment params body order information
+/*
+OctCreatePaymentParamsBodyOrderInformation oct create payment params body order information
 swagger:model OctCreatePaymentParamsBodyOrderInformation
 */
 type OctCreatePaymentParamsBodyOrderInformation struct {
@@ -2174,7 +2975,6 @@ func (o *OctCreatePaymentParamsBodyOrderInformation) Validate(formats strfmt.Reg
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -2183,6 +2983,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformation) validateAmountDetails(forma
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -2192,7 +2994,6 @@ func (o *OctCreatePaymentParamsBodyOrderInformation) validateAmountDetails(forma
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -2201,6 +3002,68 @@ func (o *OctCreatePaymentParamsBodyOrderInformation) validateBillTo(formats strf
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body order information based on the context it is used
+func (o *OctCreatePaymentParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -2227,7 +3090,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyOrderInformationAmountDetails oct create payment params body order information amount details
+/*
+OctCreatePaymentParamsBodyOrderInformationAmountDetails oct create payment params body order information amount details
 swagger:model OctCreatePaymentParamsBodyOrderInformationAmountDetails
 */
 type OctCreatePaymentParamsBodyOrderInformationAmountDetails struct {
@@ -2297,12 +3161,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) Validate(forma
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -2310,7 +3173,6 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateCurren
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcharge(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Surcharge) { // not required
 		return nil
 	}
@@ -2319,6 +3181,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcha
 		if err := o.Surcharge.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
 			}
 			return err
 		}
@@ -2328,13 +3192,47 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcha
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body order information amount details based on the context it is used
+func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSurcharge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) contextValidateSurcharge(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Surcharge != nil {
+
+		if swag.IsZero(o.Surcharge) { // not required
+			return nil
+		}
+
+		if err := o.Surcharge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -2358,7 +3256,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetails) UnmarshalBinar
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge oct create payment params body order information amount details surcharge
+/*
+OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge oct create payment params body order information amount details surcharge
 swagger:model OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge
 */
 type OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge struct {
@@ -2391,15 +3290,19 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) Valid
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"surcharge"+"."+"amount", "body", string(o.Amount), 15); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"surcharge"+"."+"amount", "body", o.Amount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body order information amount details surcharge based on context it is used
+func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2421,7 +3324,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) Unmar
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyOrderInformationBillTo oct create payment params body order information bill to
+/*
+OctCreatePaymentParamsBodyOrderInformationBillTo oct create payment params body order information bill to
 swagger:model OctCreatePaymentParamsBodyOrderInformationBillTo
 */
 type OctCreatePaymentParamsBodyOrderInformationBillTo struct {
@@ -2660,12 +3564,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) Validate(formats strf
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2673,12 +3576,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAddress1(form
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -2686,12 +3588,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAddress2(form
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -2699,12 +3600,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateAdministrativ
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2712,12 +3612,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateCountry(forma
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -2725,12 +3624,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateFirstName(for
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -2738,12 +3636,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateLastName(form
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -2751,12 +3648,11 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validateLocality(form
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -2764,15 +3660,19 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(f
 }
 
 func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body order information bill to based on context it is used
+func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2794,7 +3694,8 @@ func (o *OctCreatePaymentParamsBodyOrderInformationBillTo) UnmarshalBinary(b []b
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyPaymentInformation oct create payment params body payment information
+/*
+OctCreatePaymentParamsBodyPaymentInformation oct create payment params body payment information
 swagger:model OctCreatePaymentParamsBodyPaymentInformation
 */
 type OctCreatePaymentParamsBodyPaymentInformation struct {
@@ -2825,7 +3726,6 @@ func (o *OctCreatePaymentParamsBodyPaymentInformation) Validate(formats strfmt.R
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -2834,6 +3734,8 @@ func (o *OctCreatePaymentParamsBodyPaymentInformation) validateCard(formats strf
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -2843,7 +3745,6 @@ func (o *OctCreatePaymentParamsBodyPaymentInformation) validateCard(formats strf
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -2852,6 +3753,68 @@ func (o *OctCreatePaymentParamsBodyPaymentInformation) validateCustomer(formats 
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body payment information based on the context it is used
+func (o *OctCreatePaymentParamsBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyPaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -2878,7 +3841,8 @@ func (o *OctCreatePaymentParamsBodyPaymentInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyPaymentInformationCard oct create payment params body payment information card
+/*
+OctCreatePaymentParamsBodyPaymentInformationCard oct create payment params body payment information card
 swagger:model OctCreatePaymentParamsBodyPaymentInformationCard
 */
 type OctCreatePaymentParamsBodyPaymentInformationCard struct {
@@ -3003,12 +3967,11 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCard) Validate(formats strf
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -3016,12 +3979,11 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateExpirationMon
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -3029,12 +3991,11 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateExpirationYea
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
@@ -3042,15 +4003,19 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateNumber(format
 }
 
 func (o *OctCreatePaymentParamsBodyPaymentInformationCard) validateSourceAccountType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SourceAccountType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"sourceAccountType", "body", string(o.SourceAccountType), 20); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"sourceAccountType", "body", o.SourceAccountType, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body payment information card based on context it is used
+func (o *OctCreatePaymentParamsBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3072,7 +4037,8 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCard) UnmarshalBinary(b []b
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyPaymentInformationCustomer oct create payment params body payment information customer
+/*
+OctCreatePaymentParamsBodyPaymentInformationCustomer oct create payment params body payment information customer
 swagger:model OctCreatePaymentParamsBodyPaymentInformationCustomer
 */
 type OctCreatePaymentParamsBodyPaymentInformationCustomer struct {
@@ -3095,6 +4061,11 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCustomer) Validate(formats 
 	return nil
 }
 
+// ContextValidate validates this oct create payment params body payment information customer based on context it is used
+func (o *OctCreatePaymentParamsBodyPaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *OctCreatePaymentParamsBodyPaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -3113,7 +4084,8 @@ func (o *OctCreatePaymentParamsBodyPaymentInformationCustomer) UnmarshalBinary(b
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyProcessingInformation oct create payment params body processing information
+/*
+OctCreatePaymentParamsBodyProcessingInformation oct create payment params body processing information
 swagger:model OctCreatePaymentParamsBodyProcessingInformation
 */
 type OctCreatePaymentParamsBodyProcessingInformation struct {
@@ -3222,12 +4194,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) Validate(formats strfm
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformation) validateBusinessApplicationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BusinessApplicationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"businessApplicationId", "body", string(o.BusinessApplicationID), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"businessApplicationId", "body", o.BusinessApplicationID, 2); err != nil {
 		return err
 	}
 
@@ -3235,12 +4206,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) validateBusinessApplic
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformation) validateCommerceIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommerceIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"commerceIndicator", "body", string(o.CommerceIndicator), 13); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"commerceIndicator", "body", o.CommerceIndicator, 13); err != nil {
 		return err
 	}
 
@@ -3248,12 +4218,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) validateCommerceIndica
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformation) validateNetworkRoutingOrder(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NetworkRoutingOrder) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"networkRoutingOrder", "body", string(o.NetworkRoutingOrder), 30); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"networkRoutingOrder", "body", o.NetworkRoutingOrder, 30); err != nil {
 		return err
 	}
 
@@ -3261,7 +4230,6 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) validateNetworkRouting
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformation) validatePayoutsOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PayoutsOptions) { // not required
 		return nil
 	}
@@ -3270,6 +4238,8 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) validatePayoutsOptions
 		if err := o.PayoutsOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "processingInformation" + "." + "payoutsOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "processingInformation" + "." + "payoutsOptions")
 			}
 			return err
 		}
@@ -3279,13 +4249,47 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) validatePayoutsOptions
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformation) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body processing information based on the context it is used
+func (o *OctCreatePaymentParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePayoutsOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodyProcessingInformation) contextValidatePayoutsOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PayoutsOptions != nil {
+
+		if swag.IsZero(o.PayoutsOptions) { // not required
+			return nil
+		}
+
+		if err := o.PayoutsOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "processingInformation" + "." + "payoutsOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "processingInformation" + "." + "payoutsOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -3309,7 +4313,8 @@ func (o *OctCreatePaymentParamsBodyProcessingInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions oct create payment params body processing information payouts options
+/*
+OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions oct create payment params body processing information payouts options
 swagger:model OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions
 */
 type OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions struct {
@@ -3376,12 +4381,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) Validate
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validateAccountFundingReferenceID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountFundingReferenceID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"accountFundingReferenceId", "body", string(o.AccountFundingReferenceID), 15); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"accountFundingReferenceId", "body", o.AccountFundingReferenceID, 15); err != nil {
 		return err
 	}
 
@@ -3389,12 +4393,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validate
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validateAcquirerBin(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AcquirerBin) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"acquirerBin", "body", string(o.AcquirerBin), 11); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"acquirerBin", "body", o.AcquirerBin, 11); err != nil {
 		return err
 	}
 
@@ -3402,12 +4405,11 @@ func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validate
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validateAcquirerMerchantID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AcquirerMerchantID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"acquirerMerchantId", "body", string(o.AcquirerMerchantID), 15); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"acquirerMerchantId", "body", o.AcquirerMerchantID, 15); err != nil {
 		return err
 	}
 
@@ -3415,15 +4417,19 @@ func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validate
 }
 
 func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) validateRetrievalReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RetrievalReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"retrievalReferenceNumber", "body", string(o.RetrievalReferenceNumber), 12); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"processingInformation"+"."+"payoutsOptions"+"."+"retrievalReferenceNumber", "body", o.RetrievalReferenceNumber, 12); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body processing information payouts options based on context it is used
+func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3445,7 +4451,8 @@ func (o *OctCreatePaymentParamsBodyProcessingInformationPayoutsOptions) Unmarsha
 	return nil
 }
 
-/*OctCreatePaymentParamsBodyRecipientInformation oct create payment params body recipient information
+/*
+OctCreatePaymentParamsBodyRecipientInformation oct create payment params body recipient information
 swagger:model OctCreatePaymentParamsBodyRecipientInformation
 */
 type OctCreatePaymentParamsBodyRecipientInformation struct {
@@ -3552,12 +4559,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) Validate(formats strfmt
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"address1", "body", string(o.Address1), 50); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"address1", "body", o.Address1, 50); err != nil {
 		return err
 	}
 
@@ -3565,12 +4571,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateAddress1(format
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -3578,12 +4583,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateAdministrativeA
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -3591,16 +4595,15 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateCountry(formats
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateDateOfBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOfBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MinLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
@@ -3608,12 +4611,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateDateOfBirth(for
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"firstName", "body", string(o.FirstName), 35); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"firstName", "body", o.FirstName, 35); err != nil {
 		return err
 	}
 
@@ -3621,12 +4623,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateFirstName(forma
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"lastName", "body", string(o.LastName), 35); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"lastName", "body", o.LastName, 35); err != nil {
 		return err
 	}
 
@@ -3634,12 +4635,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateLastName(format
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"locality", "body", string(o.Locality), 25); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"locality", "body", o.Locality, 25); err != nil {
 		return err
 	}
 
@@ -3647,12 +4647,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateLocality(format
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validateMiddleInitial(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MiddleInitial) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"middleInitial", "body", string(o.MiddleInitial), 1); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"middleInitial", "body", o.MiddleInitial, 1); err != nil {
 		return err
 	}
 
@@ -3660,12 +4659,11 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validateMiddleInitial(f
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"phoneNumber", "body", string(o.PhoneNumber), 20); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"phoneNumber", "body", o.PhoneNumber, 20); err != nil {
 		return err
 	}
 
@@ -3673,15 +4671,19 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) validatePhoneNumber(for
 }
 
 func (o *OctCreatePaymentParamsBodyRecipientInformation) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"recipientInformation"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body recipient information based on context it is used
+func (o *OctCreatePaymentParamsBodyRecipientInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3703,7 +4705,8 @@ func (o *OctCreatePaymentParamsBodyRecipientInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*OctCreatePaymentParamsBodySenderInformation oct create payment params body sender information
+/*
+OctCreatePaymentParamsBodySenderInformation oct create payment params body sender information
 swagger:model OctCreatePaymentParamsBodySenderInformation
 */
 type OctCreatePaymentParamsBodySenderInformation struct {
@@ -3859,7 +4862,6 @@ func (o *OctCreatePaymentParamsBodySenderInformation) Validate(formats strfmt.Re
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -3868,6 +4870,8 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateAccount(formats st
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("octCreatePaymentRequest" + "." + "senderInformation" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "senderInformation" + "." + "account")
 			}
 			return err
 		}
@@ -3877,12 +4881,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateAccount(formats st
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"address1", "body", string(o.Address1), 50); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"address1", "body", o.Address1, 50); err != nil {
 		return err
 	}
 
@@ -3890,12 +4893,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateAddress1(formats s
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"administrativeArea", "body", o.AdministrativeArea, 2); err != nil {
 		return err
 	}
 
@@ -3903,12 +4905,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateAdministrativeArea
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateCountryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CountryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"countryCode", "body", string(o.CountryCode), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"countryCode", "body", o.CountryCode, 2); err != nil {
 		return err
 	}
 
@@ -3916,16 +4917,15 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateCountryCode(format
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateDateOfBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOfBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MinLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
@@ -3933,12 +4933,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateDateOfBirth(format
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"firstName", "body", string(o.FirstName), 35); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"firstName", "body", o.FirstName, 35); err != nil {
 		return err
 	}
 
@@ -3946,12 +4945,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateFirstName(formats 
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"lastName", "body", string(o.LastName), 35); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"lastName", "body", o.LastName, 35); err != nil {
 		return err
 	}
 
@@ -3959,12 +4957,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateLastName(formats s
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"locality", "body", string(o.Locality), 25); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"locality", "body", o.Locality, 25); err != nil {
 		return err
 	}
 
@@ -3972,12 +4969,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateLocality(formats s
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateMiddleInitial(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MiddleInitial) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"middleInitial", "body", string(o.MiddleInitial), 1); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"middleInitial", "body", o.MiddleInitial, 1); err != nil {
 		return err
 	}
 
@@ -3985,12 +4981,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateMiddleInitial(form
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"name", "body", string(o.Name), 24); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"name", "body", o.Name, 24); err != nil {
 		return err
 	}
 
@@ -3998,12 +4993,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateName(formats strfm
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"phoneNumber", "body", string(o.PhoneNumber), 20); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"phoneNumber", "body", o.PhoneNumber, 20); err != nil {
 		return err
 	}
 
@@ -4011,12 +5005,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validatePhoneNumber(format
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
@@ -4024,12 +5017,11 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validatePostalCode(formats
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"referenceNumber", "body", string(o.ReferenceNumber), 19); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"referenceNumber", "body", o.ReferenceNumber, 19); err != nil {
 		return err
 	}
 
@@ -4037,13 +5029,47 @@ func (o *OctCreatePaymentParamsBodySenderInformation) validateReferenceNumber(fo
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 13); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 13); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this oct create payment params body sender information based on the context it is used
+func (o *OctCreatePaymentParamsBodySenderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *OctCreatePaymentParamsBodySenderInformation) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("octCreatePaymentRequest" + "." + "senderInformation" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("octCreatePaymentRequest" + "." + "senderInformation" + "." + "account")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4067,7 +5093,8 @@ func (o *OctCreatePaymentParamsBodySenderInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*OctCreatePaymentParamsBodySenderInformationAccount oct create payment params body sender information account
+/*
+OctCreatePaymentParamsBodySenderInformationAccount oct create payment params body sender information account
 swagger:model OctCreatePaymentParamsBodySenderInformationAccount
 */
 type OctCreatePaymentParamsBodySenderInformationAccount struct {
@@ -4140,16 +5167,15 @@ func (o *OctCreatePaymentParamsBodySenderInformationAccount) Validate(formats st
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformationAccount) validateFundsSource(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FundsSource) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"fundsSource", "body", string(o.FundsSource), 2); err != nil {
+	if err := validate.MinLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"fundsSource", "body", o.FundsSource, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"fundsSource", "body", string(o.FundsSource), 2); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"fundsSource", "body", o.FundsSource, 2); err != nil {
 		return err
 	}
 
@@ -4157,15 +5183,19 @@ func (o *OctCreatePaymentParamsBodySenderInformationAccount) validateFundsSource
 }
 
 func (o *OctCreatePaymentParamsBodySenderInformationAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"number", "body", string(o.Number), 34); err != nil {
+	if err := validate.MaxLength("octCreatePaymentRequest"+"."+"senderInformation"+"."+"account"+"."+"number", "body", o.Number, 34); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this oct create payment params body sender information account based on context it is used
+func (o *OctCreatePaymentParamsBodySenderInformationAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

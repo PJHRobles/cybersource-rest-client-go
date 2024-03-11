@@ -6,16 +6,16 @@ package transaction_batches
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetTransactionBatchIDReader is a Reader for the GetTransactionBatchID structure.
@@ -62,9 +62,8 @@ func (o *GetTransactionBatchIDReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /pts/v1/transaction-batches/{id}] getTransactionBatchId", response, response.Code())
 	}
 }
 
@@ -73,7 +72,8 @@ func NewGetTransactionBatchIDOK() *GetTransactionBatchIDOK {
 	return &GetTransactionBatchIDOK{}
 }
 
-/*GetTransactionBatchIDOK handles this case with default header values.
+/*
+GetTransactionBatchIDOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -81,7 +81,41 @@ type GetTransactionBatchIDOK struct {
 	Payload *GetTransactionBatchIDOKBody
 }
 
+// IsSuccess returns true when this get transaction batch Id o k response has a 2xx status code
+func (o *GetTransactionBatchIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction batch Id o k response has a 3xx status code
+func (o *GetTransactionBatchIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id o k response has a 4xx status code
+func (o *GetTransactionBatchIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction batch Id o k response has a 5xx status code
+func (o *GetTransactionBatchIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch Id o k response a status code equal to that given
+func (o *GetTransactionBatchIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction batch Id o k response
+func (o *GetTransactionBatchIDOK) Code() int {
+	return 200
+}
+
 func (o *GetTransactionBatchIDOK) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdOK  %+v", 200, o.Payload)
+}
+
+func (o *GetTransactionBatchIDOK) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdOK  %+v", 200, o.Payload)
 }
 
@@ -106,7 +140,8 @@ func NewGetTransactionBatchIDBadRequest() *GetTransactionBatchIDBadRequest {
 	return &GetTransactionBatchIDBadRequest{}
 }
 
-/*GetTransactionBatchIDBadRequest handles this case with default header values.
+/*
+GetTransactionBatchIDBadRequest describes a response with status code 400, with default header values.
 
 Bad Request
 */
@@ -114,7 +149,41 @@ type GetTransactionBatchIDBadRequest struct {
 	Payload *GetTransactionBatchIDBadRequestBody
 }
 
+// IsSuccess returns true when this get transaction batch Id bad request response has a 2xx status code
+func (o *GetTransactionBatchIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch Id bad request response has a 3xx status code
+func (o *GetTransactionBatchIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id bad request response has a 4xx status code
+func (o *GetTransactionBatchIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch Id bad request response has a 5xx status code
+func (o *GetTransactionBatchIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch Id bad request response a status code equal to that given
+func (o *GetTransactionBatchIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get transaction batch Id bad request response
+func (o *GetTransactionBatchIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetTransactionBatchIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetTransactionBatchIDBadRequest) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdBadRequest  %+v", 400, o.Payload)
 }
 
@@ -139,7 +208,8 @@ func NewGetTransactionBatchIDUnauthorized() *GetTransactionBatchIDUnauthorized {
 	return &GetTransactionBatchIDUnauthorized{}
 }
 
-/*GetTransactionBatchIDUnauthorized handles this case with default header values.
+/*
+GetTransactionBatchIDUnauthorized describes a response with status code 401, with default header values.
 
 Not Authorized
 */
@@ -147,7 +217,41 @@ type GetTransactionBatchIDUnauthorized struct {
 	Payload *GetTransactionBatchIDUnauthorizedBody
 }
 
+// IsSuccess returns true when this get transaction batch Id unauthorized response has a 2xx status code
+func (o *GetTransactionBatchIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch Id unauthorized response has a 3xx status code
+func (o *GetTransactionBatchIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id unauthorized response has a 4xx status code
+func (o *GetTransactionBatchIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch Id unauthorized response has a 5xx status code
+func (o *GetTransactionBatchIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch Id unauthorized response a status code equal to that given
+func (o *GetTransactionBatchIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get transaction batch Id unauthorized response
+func (o *GetTransactionBatchIDUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetTransactionBatchIDUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetTransactionBatchIDUnauthorized) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -172,7 +276,8 @@ func NewGetTransactionBatchIDForbidden() *GetTransactionBatchIDForbidden {
 	return &GetTransactionBatchIDForbidden{}
 }
 
-/*GetTransactionBatchIDForbidden handles this case with default header values.
+/*
+GetTransactionBatchIDForbidden describes a response with status code 403, with default header values.
 
 No Authenticated
 */
@@ -180,7 +285,41 @@ type GetTransactionBatchIDForbidden struct {
 	Payload *GetTransactionBatchIDForbiddenBody
 }
 
+// IsSuccess returns true when this get transaction batch Id forbidden response has a 2xx status code
+func (o *GetTransactionBatchIDForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch Id forbidden response has a 3xx status code
+func (o *GetTransactionBatchIDForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id forbidden response has a 4xx status code
+func (o *GetTransactionBatchIDForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch Id forbidden response has a 5xx status code
+func (o *GetTransactionBatchIDForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch Id forbidden response a status code equal to that given
+func (o *GetTransactionBatchIDForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get transaction batch Id forbidden response
+func (o *GetTransactionBatchIDForbidden) Code() int {
+	return 403
+}
+
 func (o *GetTransactionBatchIDForbidden) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetTransactionBatchIDForbidden) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdForbidden  %+v", 403, o.Payload)
 }
 
@@ -205,7 +344,8 @@ func NewGetTransactionBatchIDNotFound() *GetTransactionBatchIDNotFound {
 	return &GetTransactionBatchIDNotFound{}
 }
 
-/*GetTransactionBatchIDNotFound handles this case with default header values.
+/*
+GetTransactionBatchIDNotFound describes a response with status code 404, with default header values.
 
 No Reports Found
 */
@@ -213,7 +353,41 @@ type GetTransactionBatchIDNotFound struct {
 	Payload *GetTransactionBatchIDNotFoundBody
 }
 
+// IsSuccess returns true when this get transaction batch Id not found response has a 2xx status code
+func (o *GetTransactionBatchIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch Id not found response has a 3xx status code
+func (o *GetTransactionBatchIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id not found response has a 4xx status code
+func (o *GetTransactionBatchIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch Id not found response has a 5xx status code
+func (o *GetTransactionBatchIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch Id not found response a status code equal to that given
+func (o *GetTransactionBatchIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction batch Id not found response
+func (o *GetTransactionBatchIDNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTransactionBatchIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetTransactionBatchIDNotFound) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdNotFound  %+v", 404, o.Payload)
 }
 
@@ -238,7 +412,8 @@ func NewGetTransactionBatchIDBadGateway() *GetTransactionBatchIDBadGateway {
 	return &GetTransactionBatchIDBadGateway{}
 }
 
-/*GetTransactionBatchIDBadGateway handles this case with default header values.
+/*
+GetTransactionBatchIDBadGateway describes a response with status code 502, with default header values.
 
 Bad Gateway
 */
@@ -246,7 +421,41 @@ type GetTransactionBatchIDBadGateway struct {
 	Payload *GetTransactionBatchIDBadGatewayBody
 }
 
+// IsSuccess returns true when this get transaction batch Id bad gateway response has a 2xx status code
+func (o *GetTransactionBatchIDBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch Id bad gateway response has a 3xx status code
+func (o *GetTransactionBatchIDBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch Id bad gateway response has a 4xx status code
+func (o *GetTransactionBatchIDBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction batch Id bad gateway response has a 5xx status code
+func (o *GetTransactionBatchIDBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction batch Id bad gateway response a status code equal to that given
+func (o *GetTransactionBatchIDBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the get transaction batch Id bad gateway response
+func (o *GetTransactionBatchIDBadGateway) Code() int {
+	return 502
+}
+
 func (o *GetTransactionBatchIDBadGateway) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *GetTransactionBatchIDBadGateway) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batches/{id}][%d] getTransactionBatchIdBadGateway  %+v", 502, o.Payload)
 }
 
@@ -266,7 +475,8 @@ func (o *GetTransactionBatchIDBadGateway) readResponse(response runtime.ClientRe
 	return nil
 }
 
-/*GetTransactionBatchIDBadGatewayBody ptsV1TransactionBatchesGet502Response
+/*
+GetTransactionBatchIDBadGatewayBody ptsV1TransactionBatchesGet502Response
 swagger:model GetTransactionBatchIDBadGatewayBody
 */
 type GetTransactionBatchIDBadGatewayBody struct {
@@ -296,7 +506,6 @@ func (o *GetTransactionBatchIDBadGatewayBody) Validate(formats strfmt.Registry) 
 }
 
 func (o *GetTransactionBatchIDBadGatewayBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -305,6 +514,43 @@ func (o *GetTransactionBatchIDBadGatewayBody) validateErrorInformation(formats s
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdBadGateway" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdBadGateway" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID bad gateway body based on the context it is used
+func (o *GetTransactionBatchIDBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDBadGatewayBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdBadGateway" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdBadGateway" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -331,7 +577,8 @@ func (o *GetTransactionBatchIDBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDBadGatewayBodyErrorInformation get transaction batch ID bad gateway body error information
+/*
+GetTransactionBatchIDBadGatewayBodyErrorInformation get transaction batch ID bad gateway body error information
 swagger:model GetTransactionBatchIDBadGatewayBodyErrorInformation
 */
 type GetTransactionBatchIDBadGatewayBodyErrorInformation struct {
@@ -345,6 +592,11 @@ type GetTransactionBatchIDBadGatewayBodyErrorInformation struct {
 
 // Validate validates this get transaction batch ID bad gateway body error information
 func (o *GetTransactionBatchIDBadGatewayBodyErrorInformation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID bad gateway body error information based on context it is used
+func (o *GetTransactionBatchIDBadGatewayBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -366,7 +618,8 @@ func (o *GetTransactionBatchIDBadGatewayBodyErrorInformation) UnmarshalBinary(b 
 	return nil
 }
 
-/*GetTransactionBatchIDBadRequestBody ptsV1TransactionBatchesGet400Response
+/*
+GetTransactionBatchIDBadRequestBody ptsV1TransactionBatchesGet400Response
 swagger:model GetTransactionBatchIDBadRequestBody
 */
 type GetTransactionBatchIDBadRequestBody struct {
@@ -396,7 +649,6 @@ func (o *GetTransactionBatchIDBadRequestBody) Validate(formats strfmt.Registry) 
 }
 
 func (o *GetTransactionBatchIDBadRequestBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -405,6 +657,43 @@ func (o *GetTransactionBatchIDBadRequestBody) validateErrorInformation(formats s
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID bad request body based on the context it is used
+func (o *GetTransactionBatchIDBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDBadRequestBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -431,7 +720,8 @@ func (o *GetTransactionBatchIDBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDBadRequestBodyErrorInformation get transaction batch ID bad request body error information
+/*
+GetTransactionBatchIDBadRequestBodyErrorInformation get transaction batch ID bad request body error information
 swagger:model GetTransactionBatchIDBadRequestBodyErrorInformation
 */
 type GetTransactionBatchIDBadRequestBodyErrorInformation struct {
@@ -461,7 +751,6 @@ func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) Validate(formats s
 }
 
 func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -475,6 +764,47 @@ func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) validateDetails(fo
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID bad request body error information based on the context it is used
+func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -503,7 +833,8 @@ func (o *GetTransactionBatchIDBadRequestBodyErrorInformation) UnmarshalBinary(b 
 	return nil
 }
 
-/*GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0 get transaction batch ID bad request body error information details items0
+/*
+GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0 get transaction batch ID bad request body error information details items0
 swagger:model GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0 struct {
@@ -519,6 +850,11 @@ type GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0 struct {
 
 // Validate validates this get transaction batch ID bad request body error information details items0
 func (o *GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID bad request body error information details items0 based on context it is used
+func (o *GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -540,7 +876,8 @@ func (o *GetTransactionBatchIDBadRequestBodyErrorInformationDetailsItems0) Unmar
 	return nil
 }
 
-/*GetTransactionBatchIDForbiddenBody ptsV1TransactionBatchesGet403Response
+/*
+GetTransactionBatchIDForbiddenBody ptsV1TransactionBatchesGet403Response
 swagger:model GetTransactionBatchIDForbiddenBody
 */
 type GetTransactionBatchIDForbiddenBody struct {
@@ -570,7 +907,6 @@ func (o *GetTransactionBatchIDForbiddenBody) Validate(formats strfmt.Registry) e
 }
 
 func (o *GetTransactionBatchIDForbiddenBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -579,6 +915,43 @@ func (o *GetTransactionBatchIDForbiddenBody) validateErrorInformation(formats st
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID forbidden body based on the context it is used
+func (o *GetTransactionBatchIDForbiddenBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDForbiddenBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -605,7 +978,8 @@ func (o *GetTransactionBatchIDForbiddenBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDForbiddenBodyErrorInformation get transaction batch ID forbidden body error information
+/*
+GetTransactionBatchIDForbiddenBodyErrorInformation get transaction batch ID forbidden body error information
 swagger:model GetTransactionBatchIDForbiddenBodyErrorInformation
 */
 type GetTransactionBatchIDForbiddenBodyErrorInformation struct {
@@ -635,7 +1009,6 @@ func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) Validate(formats st
 }
 
 func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -649,6 +1022,47 @@ func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) validateDetails(for
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID forbidden body error information based on the context it is used
+func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -677,7 +1091,8 @@ func (o *GetTransactionBatchIDForbiddenBodyErrorInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0 get transaction batch ID forbidden body error information details items0
+/*
+GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0 get transaction batch ID forbidden body error information details items0
 swagger:model GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0 struct {
@@ -693,6 +1108,11 @@ type GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0 struct {
 
 // Validate validates this get transaction batch ID forbidden body error information details items0
 func (o *GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID forbidden body error information details items0 based on context it is used
+func (o *GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -714,7 +1134,8 @@ func (o *GetTransactionBatchIDForbiddenBodyErrorInformationDetailsItems0) Unmars
 	return nil
 }
 
-/*GetTransactionBatchIDNotFoundBody ptsV1TransactionBatchesGet404Response
+/*
+GetTransactionBatchIDNotFoundBody ptsV1TransactionBatchesGet404Response
 swagger:model GetTransactionBatchIDNotFoundBody
 */
 type GetTransactionBatchIDNotFoundBody struct {
@@ -744,7 +1165,6 @@ func (o *GetTransactionBatchIDNotFoundBody) Validate(formats strfmt.Registry) er
 }
 
 func (o *GetTransactionBatchIDNotFoundBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -753,6 +1173,43 @@ func (o *GetTransactionBatchIDNotFoundBody) validateErrorInformation(formats str
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID not found body based on the context it is used
+func (o *GetTransactionBatchIDNotFoundBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDNotFoundBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -779,7 +1236,8 @@ func (o *GetTransactionBatchIDNotFoundBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDNotFoundBodyErrorInformation get transaction batch ID not found body error information
+/*
+GetTransactionBatchIDNotFoundBodyErrorInformation get transaction batch ID not found body error information
 swagger:model GetTransactionBatchIDNotFoundBodyErrorInformation
 */
 type GetTransactionBatchIDNotFoundBodyErrorInformation struct {
@@ -809,7 +1267,6 @@ func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) Validate(formats str
 }
 
 func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -823,6 +1280,47 @@ func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) validateDetails(form
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID not found body error information based on the context it is used
+func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -851,7 +1349,8 @@ func (o *GetTransactionBatchIDNotFoundBodyErrorInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0 get transaction batch ID not found body error information details items0
+/*
+GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0 get transaction batch ID not found body error information details items0
 swagger:model GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0 struct {
@@ -867,6 +1366,11 @@ type GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0 struct {
 
 // Validate validates this get transaction batch ID not found body error information details items0
 func (o *GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID not found body error information details items0 based on context it is used
+func (o *GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -888,7 +1392,8 @@ func (o *GetTransactionBatchIDNotFoundBodyErrorInformationDetailsItems0) Unmarsh
 	return nil
 }
 
-/*GetTransactionBatchIDOKBody ptsV1TransactionBatchesIdGet200Response
+/*
+GetTransactionBatchIDOKBody ptsV1TransactionBatchesIdGet200Response
 swagger:model GetTransactionBatchIDOKBody
 */
 type GetTransactionBatchIDOKBody struct {
@@ -897,27 +1402,34 @@ type GetTransactionBatchIDOKBody struct {
 	Links *GetTransactionBatchIDOKBodyLinks `json:"_links,omitempty"`
 
 	// Number of transactions accepted.
+	// Example: 50013
 	AcceptedTransactionCount int64 `json:"acceptedTransactionCount,omitempty"`
 
 	// The date when the batch template processing completed.
+	// Example: 2018-01-01
 	CompletionDate string `json:"completionDate,omitempty"`
 
 	// Unique identifier assigned to the batch file.
+	// Example: psy8s1d
 	// Max Length: 8
 	// Min Length: 1
 	// Pattern: ^[a-zA-Z0-9_+-]*$
 	ID string `json:"id,omitempty"`
 
 	// Number of transactions rejected.
+	// Example: 2508
 	RejectedTransactionCount string `json:"rejectedTransactionCount,omitempty"`
 
 	// The status of you batch template processing.
+	// Example: Completed
 	Status string `json:"status,omitempty"`
 
 	// Number of transactions in the transaction.
+	// Example: 7534
 	TransactionCount int64 `json:"transactionCount,omitempty"`
 
 	// Date when the batch template was update.
+	// Example: 2018-01-01
 	UploadDate string `json:"uploadDate,omitempty"`
 }
 
@@ -940,7 +1452,6 @@ func (o *GetTransactionBatchIDOKBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionBatchIDOKBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -949,6 +1460,8 @@ func (o *GetTransactionBatchIDOKBody) validateLinks(formats strfmt.Registry) err
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdOK" + "." + "_links")
 			}
 			return err
 		}
@@ -958,21 +1471,55 @@ func (o *GetTransactionBatchIDOKBody) validateLinks(formats strfmt.Registry) err
 }
 
 func (o *GetTransactionBatchIDOKBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("getTransactionBatchIdOK"+"."+"id", "body", string(o.ID), 1); err != nil {
+	if err := validate.MinLength("getTransactionBatchIdOK"+"."+"id", "body", o.ID, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("getTransactionBatchIdOK"+"."+"id", "body", string(o.ID), 8); err != nil {
+	if err := validate.MaxLength("getTransactionBatchIdOK"+"."+"id", "body", o.ID, 8); err != nil {
 		return err
 	}
 
-	if err := validate.Pattern("getTransactionBatchIdOK"+"."+"id", "body", string(o.ID), `^[a-zA-Z0-9_+-]*$`); err != nil {
+	if err := validate.Pattern("getTransactionBatchIdOK"+"."+"id", "body", o.ID, `^[a-zA-Z0-9_+-]*$`); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID o k body based on the context it is used
+func (o *GetTransactionBatchIDOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDOKBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdOK" + "." + "_links")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -996,7 +1543,8 @@ func (o *GetTransactionBatchIDOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDOKBodyLinks get transaction batch ID o k body links
+/*
+GetTransactionBatchIDOKBodyLinks get transaction batch ID o k body links
 swagger:model GetTransactionBatchIDOKBodyLinks
 */
 type GetTransactionBatchIDOKBodyLinks struct {
@@ -1020,7 +1568,6 @@ func (o *GetTransactionBatchIDOKBodyLinks) Validate(formats strfmt.Registry) err
 }
 
 func (o *GetTransactionBatchIDOKBodyLinks) validateTransactions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Transactions) { // not required
 		return nil
 	}
@@ -1034,6 +1581,47 @@ func (o *GetTransactionBatchIDOKBodyLinks) validateTransactions(formats strfmt.R
 			if err := o.Transactions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchIdOK" + "." + "_links" + "." + "transactions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdOK" + "." + "_links" + "." + "transactions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID o k body links based on the context it is used
+func (o *GetTransactionBatchIDOKBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDOKBodyLinks) contextValidateTransactions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Transactions); i++ {
+
+		if o.Transactions[i] != nil {
+
+			if swag.IsZero(o.Transactions[i]) { // not required
+				return nil
+			}
+
+			if err := o.Transactions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchIdOK" + "." + "_links" + "." + "transactions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdOK" + "." + "_links" + "." + "transactions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1062,12 +1650,14 @@ func (o *GetTransactionBatchIDOKBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionBatchIDOKBodyLinksTransactionsItems0 get transaction batch ID o k body links transactions items0
+/*
+GetTransactionBatchIDOKBodyLinksTransactionsItems0 get transaction batch ID o k body links transactions items0
 swagger:model GetTransactionBatchIDOKBodyLinksTransactionsItems0
 */
 type GetTransactionBatchIDOKBodyLinksTransactionsItems0 struct {
 
 	// Self link for this request
+	// Example: /tss/v2/transactions/5289798134206292501013
 	Href string `json:"href,omitempty"`
 
 	// method
@@ -1076,6 +1666,11 @@ type GetTransactionBatchIDOKBodyLinksTransactionsItems0 struct {
 
 // Validate validates this get transaction batch ID o k body links transactions items0
 func (o *GetTransactionBatchIDOKBodyLinksTransactionsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID o k body links transactions items0 based on context it is used
+func (o *GetTransactionBatchIDOKBodyLinksTransactionsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1097,7 +1692,8 @@ func (o *GetTransactionBatchIDOKBodyLinksTransactionsItems0) UnmarshalBinary(b [
 	return nil
 }
 
-/*GetTransactionBatchIDUnauthorizedBody ptsV1TransactionBatchesGet401Response
+/*
+GetTransactionBatchIDUnauthorizedBody ptsV1TransactionBatchesGet401Response
 swagger:model GetTransactionBatchIDUnauthorizedBody
 */
 type GetTransactionBatchIDUnauthorizedBody struct {
@@ -1127,7 +1723,6 @@ func (o *GetTransactionBatchIDUnauthorizedBody) Validate(formats strfmt.Registry
 }
 
 func (o *GetTransactionBatchIDUnauthorizedBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -1136,6 +1731,43 @@ func (o *GetTransactionBatchIDUnauthorizedBody) validateErrorInformation(formats
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID unauthorized body based on the context it is used
+func (o *GetTransactionBatchIDUnauthorizedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDUnauthorizedBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -1162,7 +1794,8 @@ func (o *GetTransactionBatchIDUnauthorizedBody) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*GetTransactionBatchIDUnauthorizedBodyErrorInformation get transaction batch ID unauthorized body error information
+/*
+GetTransactionBatchIDUnauthorizedBodyErrorInformation get transaction batch ID unauthorized body error information
 swagger:model GetTransactionBatchIDUnauthorizedBodyErrorInformation
 */
 type GetTransactionBatchIDUnauthorizedBodyErrorInformation struct {
@@ -1192,7 +1825,6 @@ func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) Validate(formats
 }
 
 func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1206,6 +1838,47 @@ func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) validateDetails(
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch ID unauthorized body error information based on the context it is used
+func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchIdUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1234,7 +1907,8 @@ func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformation) UnmarshalBinary(
 	return nil
 }
 
-/*GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0 get transaction batch ID unauthorized body error information details items0
+/*
+GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0 get transaction batch ID unauthorized body error information details items0
 swagger:model GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0 struct {
@@ -1250,6 +1924,11 @@ type GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0 struct {
 
 // Validate validates this get transaction batch ID unauthorized body error information details items0
 func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch ID unauthorized body error information details items0 based on context it is used
+func (o *GetTransactionBatchIDUnauthorizedBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

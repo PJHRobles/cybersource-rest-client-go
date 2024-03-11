@@ -13,68 +13,84 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewCreateReportParams creates a new CreateReportParams object
-// with the default values initialized.
+// NewCreateReportParams creates a new CreateReportParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateReportParams() *CreateReportParams {
-	var ()
 	return &CreateReportParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateReportParamsWithTimeout creates a new CreateReportParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateReportParamsWithTimeout(timeout time.Duration) *CreateReportParams {
-	var ()
 	return &CreateReportParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateReportParamsWithContext creates a new CreateReportParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateReportParamsWithContext(ctx context.Context) *CreateReportParams {
-	var ()
 	return &CreateReportParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreateReportParamsWithHTTPClient creates a new CreateReportParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateReportParamsWithHTTPClient(client *http.Client) *CreateReportParams {
-	var ()
 	return &CreateReportParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreateReportParams contains all the parameters to send to the API endpoint
-for the create report operation typically these are written to a http.Request
+/*
+CreateReportParams contains all the parameters to send to the API endpoint
+
+	for the create report operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateReportParams struct {
 
-	/*OrganizationID
-	  Valid Cybersource Organization Id
+	/* OrganizationID.
 
+	   Valid Cybersource Organization Id
 	*/
 	OrganizationID *string
-	/*RequestBody
-	  Report subscription request payload
 
+	/* RequestBody.
+
+	   Report subscription request payload
 	*/
 	RequestBody CreateReportBody
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create report params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateReportParams) WithDefaults() *CreateReportParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create report params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateReportParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create report params
@@ -144,18 +160,18 @@ func (o *CreateReportParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 
 		// query param organizationId
 		var qrOrganizationID string
+
 		if o.OrganizationID != nil {
 			qrOrganizationID = *o.OrganizationID
 		}
 		qOrganizationID := qrOrganizationID
 		if qOrganizationID != "" {
+
 			if err := r.SetQueryParam("organizationId", qOrganizationID); err != nil {
 				return err
 			}
 		}
-
 	}
-
 	if err := r.SetBodyParam(o.RequestBody); err != nil {
 		return err
 	}

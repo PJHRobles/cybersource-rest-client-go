@@ -13,63 +13,78 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewGetResourceV2InfoParams creates a new GetResourceV2InfoParams object
-// with the default values initialized.
+// NewGetResourceV2InfoParams creates a new GetResourceV2InfoParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetResourceV2InfoParams() *GetResourceV2InfoParams {
-	var ()
 	return &GetResourceV2InfoParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetResourceV2InfoParamsWithTimeout creates a new GetResourceV2InfoParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetResourceV2InfoParamsWithTimeout(timeout time.Duration) *GetResourceV2InfoParams {
-	var ()
 	return &GetResourceV2InfoParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetResourceV2InfoParamsWithContext creates a new GetResourceV2InfoParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetResourceV2InfoParamsWithContext(ctx context.Context) *GetResourceV2InfoParams {
-	var ()
 	return &GetResourceV2InfoParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetResourceV2InfoParamsWithHTTPClient creates a new GetResourceV2InfoParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetResourceV2InfoParamsWithHTTPClient(client *http.Client) *GetResourceV2InfoParams {
-	var ()
 	return &GetResourceV2InfoParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetResourceV2InfoParams contains all the parameters to send to the API endpoint
-for the get resource v2 info operation typically these are written to a http.Request
+/*
+GetResourceV2InfoParams contains all the parameters to send to the API endpoint
+
+	for the get resource v2 info operation.
+
+	Typically these are written to a http.Request.
 */
 type GetResourceV2InfoParams struct {
 
-	/*OrganizationID
-	  Valid Cybersource Organization Id
+	/* OrganizationID.
 
+	   Valid Cybersource Organization Id
 	*/
 	OrganizationID *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get resource v2 info params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetResourceV2InfoParams) WithDefaults() *GetResourceV2InfoParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get resource v2 info params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetResourceV2InfoParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get resource v2 info params
@@ -128,16 +143,17 @@ func (o *GetResourceV2InfoParams) WriteToRequest(r runtime.ClientRequest, reg st
 
 		// query param organizationId
 		var qrOrganizationID string
+
 		if o.OrganizationID != nil {
 			qrOrganizationID = *o.OrganizationID
 		}
 		qOrganizationID := qrOrganizationID
 		if qOrganizationID != "" {
+
 			if err := r.SetQueryParam("organizationId", qOrganizationID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

@@ -6,16 +6,16 @@ package refund
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // RefundCaptureReader is a Reader for the RefundCapture structure.
@@ -44,9 +44,8 @@ func (o *RefundCaptureReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/captures/{id}/refunds] refundCapture", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewRefundCaptureCreated() *RefundCaptureCreated {
 	return &RefundCaptureCreated{}
 }
 
-/*RefundCaptureCreated handles this case with default header values.
+/*
+RefundCaptureCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type RefundCaptureCreated struct {
 	Payload *RefundCaptureCreatedBody
 }
 
+// IsSuccess returns true when this refund capture created response has a 2xx status code
+func (o *RefundCaptureCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this refund capture created response has a 3xx status code
+func (o *RefundCaptureCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund capture created response has a 4xx status code
+func (o *RefundCaptureCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refund capture created response has a 5xx status code
+func (o *RefundCaptureCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refund capture created response a status code equal to that given
+func (o *RefundCaptureCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the refund capture created response
+func (o *RefundCaptureCreated) Code() int {
+	return 201
+}
+
 func (o *RefundCaptureCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureCreated  %+v", 201, o.Payload)
+}
+
+func (o *RefundCaptureCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewRefundCaptureBadRequest() *RefundCaptureBadRequest {
 	return &RefundCaptureBadRequest{}
 }
 
-/*RefundCaptureBadRequest handles this case with default header values.
+/*
+RefundCaptureBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type RefundCaptureBadRequest struct {
 	Payload *RefundCaptureBadRequestBody
 }
 
+// IsSuccess returns true when this refund capture bad request response has a 2xx status code
+func (o *RefundCaptureBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refund capture bad request response has a 3xx status code
+func (o *RefundCaptureBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund capture bad request response has a 4xx status code
+func (o *RefundCaptureBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refund capture bad request response has a 5xx status code
+func (o *RefundCaptureBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refund capture bad request response a status code equal to that given
+func (o *RefundCaptureBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the refund capture bad request response
+func (o *RefundCaptureBadRequest) Code() int {
+	return 400
+}
+
 func (o *RefundCaptureBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *RefundCaptureBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewRefundCaptureBadGateway() *RefundCaptureBadGateway {
 	return &RefundCaptureBadGateway{}
 }
 
-/*RefundCaptureBadGateway handles this case with default header values.
+/*
+RefundCaptureBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type RefundCaptureBadGateway struct {
 	Payload *RefundCaptureBadGatewayBody
 }
 
+// IsSuccess returns true when this refund capture bad gateway response has a 2xx status code
+func (o *RefundCaptureBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refund capture bad gateway response has a 3xx status code
+func (o *RefundCaptureBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund capture bad gateway response has a 4xx status code
+func (o *RefundCaptureBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refund capture bad gateway response has a 5xx status code
+func (o *RefundCaptureBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this refund capture bad gateway response a status code equal to that given
+func (o *RefundCaptureBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the refund capture bad gateway response
+func (o *RefundCaptureBadGateway) Code() int {
+	return 502
+}
+
 func (o *RefundCaptureBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *RefundCaptureBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/refunds][%d] refundCaptureBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,157 +253,8 @@ func (o *RefundCaptureBadGateway) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*MerchantDefinedInformationItems0 merchant defined information items0
-swagger:model MerchantDefinedInformationItems0
-*/
-type MerchantDefinedInformationItems0 struct {
-
-	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
-	//
-	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
-	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
-	// transaction.
-	//
-	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// Max Length: 50
-	Key string `json:"key,omitempty"`
-
-	// The value you assign for your merchant-defined data field.
-	//
-	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
-	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
-	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
-	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
-	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For installment payments with Mastercard in Brazil:
-	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 25-44
-	//   - Field: Reference Field 2
-	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 45-64
-	//   - Field: Reference Field 3
-	//
-	// Max Length: 255
-	Value string `json:"value,omitempty"`
-}
-
-// Validate validates this merchant defined information items0
-func (o *MerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateKey(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateValue(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Key) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("key", "body", string(o.Key), 50); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Value) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("value", "body", string(o.Value), 255); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
-	var res MerchantDefinedInformationItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*RefundCaptureBadGatewayBody ptsV2CapturesRefundsPost502Response
+/*
+RefundCaptureBadGatewayBody ptsV2CapturesRefundsPost502Response
 swagger:model RefundCaptureBadGatewayBody
 */
 type RefundCaptureBadGatewayBody struct {
@@ -336,6 +291,11 @@ func (o *RefundCaptureBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this refund capture bad gateway body based on context it is used
+func (o *RefundCaptureBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundCaptureBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -354,13 +314,14 @@ func (o *RefundCaptureBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureBadRequestBody ptsV2CapturesRefundsPost400Response
+/*
+RefundCaptureBadRequestBody ptsV2CapturesRefundsPost400Response
 swagger:model RefundCaptureBadRequestBody
 */
 type RefundCaptureBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*RefundCaptureBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -408,7 +369,6 @@ func (o *RefundCaptureBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundCaptureBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -422,6 +382,47 @@ func (o *RefundCaptureBadRequestBody) validateDetails(formats strfmt.Registry) e
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture bad request body based on the context it is used
+func (o *RefundCaptureBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -450,7 +451,55 @@ func (o *RefundCaptureBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureBody refund capture body
+/*
+RefundCaptureBadRequestBodyDetailsItems0 refund capture bad request body details items0
+swagger:model RefundCaptureBadRequestBodyDetailsItems0
+*/
+type RefundCaptureBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this refund capture bad request body details items0
+func (o *RefundCaptureBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund capture bad request body details items0 based on context it is used
+func (o *RefundCaptureBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *RefundCaptureBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *RefundCaptureBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res RefundCaptureBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+RefundCaptureBody refund capture body
+// Example: {"clientReferenceInformation":{"code":"Testing-VDP-Payments-Refund"},"orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"102.21"}}}
 swagger:model RefundCaptureBody
 */
 type RefundCaptureBody struct {
@@ -469,7 +518,7 @@ type RefundCaptureBody struct {
 
 	// The object containing the custom data that the merchant defines.
 	//
-	MerchantDefinedInformation []*MerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
+	MerchantDefinedInformation []*RefundCaptureParamsBodyMerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
 
 	// merchant information
 	MerchantInformation *RefundCaptureParamsBodyMerchantInformation `json:"merchantInformation,omitempty"`
@@ -538,7 +587,6 @@ func (o *RefundCaptureBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundCaptureBody) validateAggregatorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorInformation) { // not required
 		return nil
 	}
@@ -547,6 +595,8 @@ func (o *RefundCaptureBody) validateAggregatorInformation(formats strfmt.Registr
 		if err := o.AggregatorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation")
 			}
 			return err
 		}
@@ -556,7 +606,6 @@ func (o *RefundCaptureBody) validateAggregatorInformation(formats strfmt.Registr
 }
 
 func (o *RefundCaptureBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -565,6 +614,8 @@ func (o *RefundCaptureBody) validateBuyerInformation(formats strfmt.Registry) er
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -574,7 +625,6 @@ func (o *RefundCaptureBody) validateBuyerInformation(formats strfmt.Registry) er
 }
 
 func (o *RefundCaptureBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -583,6 +633,8 @@ func (o *RefundCaptureBody) validateClientReferenceInformation(formats strfmt.Re
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -592,7 +644,6 @@ func (o *RefundCaptureBody) validateClientReferenceInformation(formats strfmt.Re
 }
 
 func (o *RefundCaptureBody) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -601,6 +652,8 @@ func (o *RefundCaptureBody) validateDeviceInformation(formats strfmt.Registry) e
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "deviceInformation")
 			}
 			return err
 		}
@@ -610,7 +663,6 @@ func (o *RefundCaptureBody) validateDeviceInformation(formats strfmt.Registry) e
 }
 
 func (o *RefundCaptureBody) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -624,6 +676,8 @@ func (o *RefundCaptureBody) validateMerchantDefinedInformation(formats strfmt.Re
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -635,7 +689,6 @@ func (o *RefundCaptureBody) validateMerchantDefinedInformation(formats strfmt.Re
 }
 
 func (o *RefundCaptureBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -644,6 +697,8 @@ func (o *RefundCaptureBody) validateMerchantInformation(formats strfmt.Registry)
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -653,7 +708,6 @@ func (o *RefundCaptureBody) validateMerchantInformation(formats strfmt.Registry)
 }
 
 func (o *RefundCaptureBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -662,6 +716,8 @@ func (o *RefundCaptureBody) validateOrderInformation(formats strfmt.Registry) er
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -671,7 +727,6 @@ func (o *RefundCaptureBody) validateOrderInformation(formats strfmt.Registry) er
 }
 
 func (o *RefundCaptureBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -680,6 +735,8 @@ func (o *RefundCaptureBody) validatePaymentInformation(formats strfmt.Registry) 
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -689,7 +746,6 @@ func (o *RefundCaptureBody) validatePaymentInformation(formats strfmt.Registry) 
 }
 
 func (o *RefundCaptureBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -698,6 +754,8 @@ func (o *RefundCaptureBody) validatePointOfSaleInformation(formats strfmt.Regist
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -707,7 +765,6 @@ func (o *RefundCaptureBody) validatePointOfSaleInformation(formats strfmt.Regist
 }
 
 func (o *RefundCaptureBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -716,6 +773,272 @@ func (o *RefundCaptureBody) validateProcessingInformation(formats strfmt.Registr
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture body based on the context it is used
+func (o *RefundCaptureBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAggregatorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateAggregatorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AggregatorInformation != nil {
+
+		if swag.IsZero(o.AggregatorInformation) { // not required
+			return nil
+		}
+
+		if err := o.AggregatorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -742,7 +1065,9 @@ func (o *RefundCaptureBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureCreatedBody ptsV2CapturesRefundsPost201Response
+/*
+RefundCaptureCreatedBody ptsV2CapturesRefundsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/refunds/4963014779006178301545","method":"GET"},"void":{"href":"/pts/v2/refunds/4963014779006178301545/voids","method":"POST"}},"clientReferenceInformation":{"code":"Testing-VDP-Payments-Refund"},"id":"4963014779006178301545","orderInformation":{"amountDetails":{"currency":"USD"}},"reconciliationId":"39571012D3DFEKS0","refundAmountDetails":{"currency":"USD","refundAmount":"102.21"},"status":"200","statusInformation":{"message":"Successful transaction.","reason":"SUCCESS"},"submitTimeUtc":"2017-06-01T071757Z"}
 swagger:model RefundCaptureCreatedBody
 */
 type RefundCaptureCreatedBody struct {
@@ -824,7 +1149,6 @@ func (o *RefundCaptureCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundCaptureCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -833,6 +1157,8 @@ func (o *RefundCaptureCreatedBody) validateLinks(formats strfmt.Registry) error 
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -842,7 +1168,6 @@ func (o *RefundCaptureCreatedBody) validateLinks(formats strfmt.Registry) error 
 }
 
 func (o *RefundCaptureCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -851,6 +1176,8 @@ func (o *RefundCaptureCreatedBody) validateClientReferenceInformation(formats st
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -860,12 +1187,11 @@ func (o *RefundCaptureCreatedBody) validateClientReferenceInformation(formats st
 }
 
 func (o *RefundCaptureCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -873,7 +1199,6 @@ func (o *RefundCaptureCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *RefundCaptureCreatedBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -882,6 +1207,8 @@ func (o *RefundCaptureCreatedBody) validateOrderInformation(formats strfmt.Regis
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -891,7 +1218,6 @@ func (o *RefundCaptureCreatedBody) validateOrderInformation(formats strfmt.Regis
 }
 
 func (o *RefundCaptureCreatedBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -900,6 +1226,8 @@ func (o *RefundCaptureCreatedBody) validateProcessorInformation(formats strfmt.R
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -909,12 +1237,11 @@ func (o *RefundCaptureCreatedBody) validateProcessorInformation(formats strfmt.R
 }
 
 func (o *RefundCaptureCreatedBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -922,7 +1249,6 @@ func (o *RefundCaptureCreatedBody) validateReconciliationID(formats strfmt.Regis
 }
 
 func (o *RefundCaptureCreatedBody) validateRefundAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RefundAmountDetails) { // not required
 		return nil
 	}
@@ -931,6 +1257,143 @@ func (o *RefundCaptureCreatedBody) validateRefundAmountDetails(formats strfmt.Re
 		if err := o.RefundAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "refundAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "refundAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture created body based on the context it is used
+func (o *RefundCaptureCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRefundAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureCreatedBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureCreatedBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureCreatedBody) contextValidateRefundAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RefundAmountDetails != nil {
+
+		if swag.IsZero(o.RefundAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.RefundAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "refundAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "refundAmountDetails")
 			}
 			return err
 		}
@@ -957,7 +1420,8 @@ func (o *RefundCaptureCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureCreatedBodyClientReferenceInformation refund capture created body client reference information
+/*
+RefundCaptureCreatedBodyClientReferenceInformation refund capture created body client reference information
 swagger:model RefundCaptureCreatedBodyClientReferenceInformation
 */
 type RefundCaptureCreatedBodyClientReferenceInformation struct {
@@ -1012,12 +1476,11 @@ func (o *RefundCaptureCreatedBodyClientReferenceInformation) Validate(formats st
 }
 
 func (o *RefundCaptureCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -1025,15 +1488,19 @@ func (o *RefundCaptureCreatedBodyClientReferenceInformation) validateCode(format
 }
 
 func (o *RefundCaptureCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture created body client reference information based on context it is used
+func (o *RefundCaptureCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1055,7 +1522,8 @@ func (o *RefundCaptureCreatedBodyClientReferenceInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*RefundCaptureCreatedBodyLinks refund capture created body links
+/*
+RefundCaptureCreatedBodyLinks refund capture created body links
 swagger:model RefundCaptureCreatedBodyLinks
 */
 type RefundCaptureCreatedBodyLinks struct {
@@ -1086,7 +1554,6 @@ func (o *RefundCaptureCreatedBodyLinks) Validate(formats strfmt.Registry) error 
 }
 
 func (o *RefundCaptureCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -1095,6 +1562,8 @@ func (o *RefundCaptureCreatedBodyLinks) validateSelf(formats strfmt.Registry) er
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -1104,7 +1573,6 @@ func (o *RefundCaptureCreatedBodyLinks) validateSelf(formats strfmt.Registry) er
 }
 
 func (o *RefundCaptureCreatedBodyLinks) validateVoid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Void) { // not required
 		return nil
 	}
@@ -1113,6 +1581,68 @@ func (o *RefundCaptureCreatedBodyLinks) validateVoid(formats strfmt.Registry) er
 		if err := o.Void.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "void")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "void")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture created body links based on the context it is used
+func (o *RefundCaptureCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoid(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureCreatedBodyLinks) contextValidateVoid(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Void != nil {
+
+		if swag.IsZero(o.Void) { // not required
+			return nil
+		}
+
+		if err := o.Void.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "void")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "_links" + "." + "void")
 			}
 			return err
 		}
@@ -1139,7 +1669,8 @@ func (o *RefundCaptureCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureCreatedBodyLinksSelf refund capture created body links self
+/*
+RefundCaptureCreatedBodyLinksSelf refund capture created body links self
 swagger:model RefundCaptureCreatedBodyLinksSelf
 */
 type RefundCaptureCreatedBodyLinksSelf struct {
@@ -1153,6 +1684,11 @@ type RefundCaptureCreatedBodyLinksSelf struct {
 
 // Validate validates this refund capture created body links self
 func (o *RefundCaptureCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund capture created body links self based on context it is used
+func (o *RefundCaptureCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1174,7 +1710,8 @@ func (o *RefundCaptureCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureCreatedBodyLinksVoid refund capture created body links void
+/*
+RefundCaptureCreatedBodyLinksVoid refund capture created body links void
 swagger:model RefundCaptureCreatedBodyLinksVoid
 */
 type RefundCaptureCreatedBodyLinksVoid struct {
@@ -1188,6 +1725,11 @@ type RefundCaptureCreatedBodyLinksVoid struct {
 
 // Validate validates this refund capture created body links void
 func (o *RefundCaptureCreatedBodyLinksVoid) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund capture created body links void based on context it is used
+func (o *RefundCaptureCreatedBodyLinksVoid) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1209,7 +1751,8 @@ func (o *RefundCaptureCreatedBodyLinksVoid) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundCaptureCreatedBodyOrderInformation refund capture created body order information
+/*
+RefundCaptureCreatedBodyOrderInformation refund capture created body order information
 swagger:model RefundCaptureCreatedBodyOrderInformation
 */
 type RefundCaptureCreatedBodyOrderInformation struct {
@@ -1233,7 +1776,6 @@ func (o *RefundCaptureCreatedBodyOrderInformation) Validate(formats strfmt.Regis
 }
 
 func (o *RefundCaptureCreatedBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -1242,6 +1784,43 @@ func (o *RefundCaptureCreatedBodyOrderInformation) validateInvoiceDetails(format
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture created body order information based on the context it is used
+func (o *RefundCaptureCreatedBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureCreatedBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -1268,7 +1847,8 @@ func (o *RefundCaptureCreatedBodyOrderInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*RefundCaptureCreatedBodyOrderInformationInvoiceDetails refund capture created body order information invoice details
+/*
+RefundCaptureCreatedBodyOrderInformationInvoiceDetails refund capture created body order information invoice details
 swagger:model RefundCaptureCreatedBodyOrderInformationInvoiceDetails
 */
 type RefundCaptureCreatedBodyOrderInformationInvoiceDetails struct {
@@ -1293,6 +1873,11 @@ func (o *RefundCaptureCreatedBodyOrderInformationInvoiceDetails) Validate(format
 	return nil
 }
 
+// ContextValidate validates this refund capture created body order information invoice details based on context it is used
+func (o *RefundCaptureCreatedBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundCaptureCreatedBodyOrderInformationInvoiceDetails) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1311,7 +1896,8 @@ func (o *RefundCaptureCreatedBodyOrderInformationInvoiceDetails) UnmarshalBinary
 	return nil
 }
 
-/*RefundCaptureCreatedBodyProcessorInformation refund capture created body processor information
+/*
+RefundCaptureCreatedBodyProcessorInformation refund capture created body processor information
 swagger:model RefundCaptureCreatedBodyProcessorInformation
 */
 type RefundCaptureCreatedBodyProcessorInformation struct {
@@ -1416,7 +2002,6 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformation) validateAchVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AchVerification) { // not required
 		return nil
 	}
@@ -1425,6 +2010,8 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) validateAchVerification(f
 		if err := o.AchVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "processorInformation" + "." + "achVerification")
 			}
 			return err
 		}
@@ -1434,12 +2021,11 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) validateAchVerification(f
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformation) validateForwardedAcquirerCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForwardedAcquirerCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", string(o.ForwardedAcquirerCode), 32); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", o.ForwardedAcquirerCode, 32); err != nil {
 		return err
 	}
 
@@ -1447,12 +2033,11 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) validateForwardedAcquirer
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformation) validateMerchantNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", string(o.MerchantNumber), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", o.MerchantNumber, 15); err != nil {
 		return err
 	}
 
@@ -1460,12 +2045,11 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) validateMerchantNumber(fo
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -1473,13 +2057,47 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) validateResponseCode(form
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 18); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 18); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture created body processor information based on the context it is used
+func (o *RefundCaptureCreatedBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAchVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureCreatedBodyProcessorInformation) contextValidateAchVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AchVerification != nil {
+
+		if swag.IsZero(o.AchVerification) { // not required
+			return nil
+		}
+
+		if err := o.AchVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureCreated" + "." + "processorInformation" + "." + "achVerification")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1503,7 +2121,8 @@ func (o *RefundCaptureCreatedBodyProcessorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundCaptureCreatedBodyProcessorInformationAchVerification refund capture created body processor information ach verification
+/*
+RefundCaptureCreatedBodyProcessorInformationAchVerification refund capture created body processor information ach verification
 swagger:model RefundCaptureCreatedBodyProcessorInformationAchVerification
 */
 type RefundCaptureCreatedBodyProcessorInformationAchVerification struct {
@@ -1540,12 +2159,11 @@ func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) Validate(f
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", string(o.ResultCode), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", o.ResultCode, 2); err != nil {
 		return err
 	}
 
@@ -1553,15 +2171,19 @@ func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) validateRe
 }
 
 func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) validateResultCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", string(o.ResultCodeRaw), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", o.ResultCodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture created body processor information ach verification based on context it is used
+func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1583,7 +2205,8 @@ func (o *RefundCaptureCreatedBodyProcessorInformationAchVerification) UnmarshalB
 	return nil
 }
 
-/*RefundCaptureCreatedBodyRefundAmountDetails refund capture created body refund amount details
+/*
+RefundCaptureCreatedBodyRefundAmountDetails refund capture created body refund amount details
 swagger:model RefundCaptureCreatedBodyRefundAmountDetails
 */
 type RefundCaptureCreatedBodyRefundAmountDetails struct {
@@ -1624,12 +2247,11 @@ func (o *RefundCaptureCreatedBodyRefundAmountDetails) Validate(formats strfmt.Re
 }
 
 func (o *RefundCaptureCreatedBodyRefundAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"refundAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"refundAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1637,15 +2259,19 @@ func (o *RefundCaptureCreatedBodyRefundAmountDetails) validateCurrency(formats s
 }
 
 func (o *RefundCaptureCreatedBodyRefundAmountDetails) validateRefundAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RefundAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureCreated"+"."+"refundAmountDetails"+"."+"refundAmount", "body", string(o.RefundAmount), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureCreated"+"."+"refundAmountDetails"+"."+"refundAmount", "body", o.RefundAmount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture created body refund amount details based on context it is used
+func (o *RefundCaptureCreatedBodyRefundAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1667,7 +2293,8 @@ func (o *RefundCaptureCreatedBodyRefundAmountDetails) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*RefundCaptureParamsBodyAggregatorInformation refund capture params body aggregator information
+/*
+RefundCaptureParamsBodyAggregatorInformation refund capture params body aggregator information
 swagger:model RefundCaptureParamsBodyAggregatorInformation
 */
 type RefundCaptureParamsBodyAggregatorInformation struct {
@@ -1733,12 +2360,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformation) validateAggregatorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", string(o.AggregatorID), 20); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", o.AggregatorID, 20); err != nil {
 		return err
 	}
 
@@ -1746,12 +2372,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformation) validateAggregatorID(form
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformation) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -1759,7 +2384,6 @@ func (o *RefundCaptureParamsBodyAggregatorInformation) validateName(formats strf
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformation) validateSubMerchant(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubMerchant) { // not required
 		return nil
 	}
@@ -1768,6 +2392,43 @@ func (o *RefundCaptureParamsBodyAggregatorInformation) validateSubMerchant(forma
 		if err := o.SubMerchant.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body aggregator information based on the context it is used
+func (o *RefundCaptureParamsBodyAggregatorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSubMerchant(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyAggregatorInformation) contextValidateSubMerchant(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.SubMerchant != nil {
+
+		if swag.IsZero(o.SubMerchant) { // not required
+			return nil
+		}
+
+		if err := o.SubMerchant.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
 			}
 			return err
 		}
@@ -1794,7 +2455,8 @@ func (o *RefundCaptureParamsBodyAggregatorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundCaptureParamsBodyAggregatorInformationSubMerchant refund capture params body aggregator information sub merchant
+/*
+RefundCaptureParamsBodyAggregatorInformationSubMerchant refund capture params body aggregator information sub merchant
 swagger:model RefundCaptureParamsBodyAggregatorInformationSubMerchant
 */
 type RefundCaptureParamsBodyAggregatorInformationSubMerchant struct {
@@ -1971,12 +2633,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) Validate(forma
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", string(o.Address1), 38); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", o.Address1, 38); err != nil {
 		return err
 	}
 
@@ -1984,12 +2645,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateAddres
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -1997,12 +2657,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateAdmini
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -2010,12 +2669,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateCountr
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", string(o.Email), 40); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", o.Email, 40); err != nil {
 		return err
 	}
 
@@ -2023,12 +2681,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateEmail(
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", string(o.Locality), 21); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", o.Locality, 21); err != nil {
 		return err
 	}
 
@@ -2036,12 +2693,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateLocali
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -2049,12 +2705,11 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validateName(f
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", string(o.PhoneNumber), 20); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", o.PhoneNumber, 20); err != nil {
 		return err
 	}
 
@@ -2062,15 +2717,19 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validatePhoneN
 }
 
 func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", string(o.PostalCode), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", o.PostalCode, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body aggregator information sub merchant based on context it is used
+func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2092,7 +2751,8 @@ func (o *RefundCaptureParamsBodyAggregatorInformationSubMerchant) UnmarshalBinar
 	return nil
 }
 
-/*RefundCaptureParamsBodyBuyerInformation refund capture params body buyer information
+/*
+RefundCaptureParamsBodyBuyerInformation refund capture params body buyer information
 swagger:model RefundCaptureParamsBodyBuyerInformation
 */
 type RefundCaptureParamsBodyBuyerInformation struct {
@@ -2147,12 +2807,11 @@ func (o *RefundCaptureParamsBodyBuyerInformation) Validate(formats strfmt.Regist
 }
 
 func (o *RefundCaptureParamsBodyBuyerInformation) validateMerchantCustomerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantCustomerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", string(o.MerchantCustomerID), 100); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", o.MerchantCustomerID, 100); err != nil {
 		return err
 	}
 
@@ -2160,15 +2819,19 @@ func (o *RefundCaptureParamsBodyBuyerInformation) validateMerchantCustomerID(for
 }
 
 func (o *RefundCaptureParamsBodyBuyerInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 20); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body buyer information based on context it is used
+func (o *RefundCaptureParamsBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2190,7 +2853,8 @@ func (o *RefundCaptureParamsBodyBuyerInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*RefundCaptureParamsBodyClientReferenceInformation refund capture params body client reference information
+/*
+RefundCaptureParamsBodyClientReferenceInformation refund capture params body client reference information
 swagger:model RefundCaptureParamsBodyClientReferenceInformation
 */
 type RefundCaptureParamsBodyClientReferenceInformation struct {
@@ -2240,12 +2904,11 @@ func (o *RefundCaptureParamsBodyClientReferenceInformation) Validate(formats str
 }
 
 func (o *RefundCaptureParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -2253,7 +2916,6 @@ func (o *RefundCaptureParamsBodyClientReferenceInformation) validateCode(formats
 }
 
 func (o *RefundCaptureParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -2262,6 +2924,43 @@ func (o *RefundCaptureParamsBodyClientReferenceInformation) validatePartner(form
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body client reference information based on the context it is used
+func (o *RefundCaptureParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -2288,7 +2987,8 @@ func (o *RefundCaptureParamsBodyClientReferenceInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*RefundCaptureParamsBodyClientReferenceInformationPartner refund capture params body client reference information partner
+/*
+RefundCaptureParamsBodyClientReferenceInformationPartner refund capture params body client reference information partner
 swagger:model RefundCaptureParamsBodyClientReferenceInformationPartner
 */
 type RefundCaptureParamsBodyClientReferenceInformationPartner struct {
@@ -2349,12 +3049,11 @@ func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) Validate(form
 }
 
 func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -2362,12 +3061,11 @@ func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) validateDevel
 }
 
 func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) validateOriginalTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", string(o.OriginalTransactionID), 32); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", o.OriginalTransactionID, 32); err != nil {
 		return err
 	}
 
@@ -2375,15 +3073,19 @@ func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) validateOrigi
 }
 
 func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body client reference information partner based on context it is used
+func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2405,7 +3107,8 @@ func (o *RefundCaptureParamsBodyClientReferenceInformationPartner) UnmarshalBina
 	return nil
 }
 
-/*RefundCaptureParamsBodyDeviceInformation refund capture params body device information
+/*
+RefundCaptureParamsBodyDeviceInformation refund capture params body device information
 swagger:model RefundCaptureParamsBodyDeviceInformation
 */
 type RefundCaptureParamsBodyDeviceInformation struct {
@@ -2449,12 +3152,11 @@ func (o *RefundCaptureParamsBodyDeviceInformation) Validate(formats strfmt.Regis
 }
 
 func (o *RefundCaptureParamsBodyDeviceInformation) validateHostName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HostName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"hostName", "body", string(o.HostName), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"hostName", "body", o.HostName, 60); err != nil {
 		return err
 	}
 
@@ -2462,12 +3164,11 @@ func (o *RefundCaptureParamsBodyDeviceInformation) validateHostName(formats strf
 }
 
 func (o *RefundCaptureParamsBodyDeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
@@ -2475,15 +3176,19 @@ func (o *RefundCaptureParamsBodyDeviceInformation) validateIPAddress(formats str
 }
 
 func (o *RefundCaptureParamsBodyDeviceInformation) validateUserAgent(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UserAgent) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"userAgent", "body", string(o.UserAgent), 40); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"deviceInformation"+"."+"userAgent", "body", o.UserAgent, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body device information based on context it is used
+func (o *RefundCaptureParamsBodyDeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2505,7 +3210,122 @@ func (o *RefundCaptureParamsBodyDeviceInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*RefundCaptureParamsBodyMerchantInformation refund capture params body merchant information
+/*
+RefundCaptureParamsBodyMerchantDefinedInformationItems0 refund capture params body merchant defined information items0
+swagger:model RefundCaptureParamsBodyMerchantDefinedInformationItems0
+*/
+type RefundCaptureParamsBodyMerchantDefinedInformationItems0 struct {
+
+	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
+	//
+	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
+	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
+	// transaction.
+	//
+	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// Max Length: 50
+	Key string `json:"key,omitempty"`
+
+	// The value you assign for your merchant-defined data field.
+	//
+	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
+	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
+	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
+	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
+	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For installment payments with Mastercard in Brazil:
+	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 25-44
+	//   - Field: Reference Field 2
+	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 45-64
+	//   - Field: Reference Field 3
+	//
+	// Max Length: 255
+	Value string `json:"value,omitempty"`
+}
+
+// Validate validates this refund capture params body merchant defined information items0
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
+	if swag.IsZero(o.Key) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("key", "body", o.Key, 50); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
+	if swag.IsZero(o.Value) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this refund capture params body merchant defined information items0 based on context it is used
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *RefundCaptureParamsBodyMerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
+	var res RefundCaptureParamsBodyMerchantDefinedInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+RefundCaptureParamsBodyMerchantInformation refund capture params body merchant information
 swagger:model RefundCaptureParamsBodyMerchantInformation
 */
 type RefundCaptureParamsBodyMerchantInformation struct {
@@ -2594,12 +3414,11 @@ func (o *RefundCaptureParamsBodyMerchantInformation) Validate(formats strfmt.Reg
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformation) validateCardAcceptorReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardAcceptorReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", string(o.CardAcceptorReferenceNumber), 25); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", o.CardAcceptorReferenceNumber, 25); err != nil {
 		return err
 	}
 
@@ -2607,12 +3426,11 @@ func (o *RefundCaptureParamsBodyMerchantInformation) validateCardAcceptorReferen
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformation) validateCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("refundCaptureRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", int64(o.CategoryCode), 9999, false); err != nil {
+	if err := validate.MaximumInt("refundCaptureRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", o.CategoryCode, 9999, false); err != nil {
 		return err
 	}
 
@@ -2620,7 +3438,6 @@ func (o *RefundCaptureParamsBodyMerchantInformation) validateCategoryCode(format
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -2629,6 +3446,8 @@ func (o *RefundCaptureParamsBodyMerchantInformation) validateMerchantDescriptor(
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -2638,12 +3457,11 @@ func (o *RefundCaptureParamsBodyMerchantInformation) validateMerchantDescriptor(
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformation) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
@@ -2651,13 +3469,47 @@ func (o *RefundCaptureParamsBodyMerchantInformation) validateTaxID(formats strfm
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 21); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 21); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body merchant information based on the context it is used
+func (o *RefundCaptureParamsBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -2681,7 +3533,8 @@ func (o *RefundCaptureParamsBodyMerchantInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*RefundCaptureParamsBodyMerchantInformationMerchantDescriptor refund capture params body merchant information merchant descriptor
+/*
+RefundCaptureParamsBodyMerchantInformationMerchantDescriptor refund capture params body merchant information merchant descriptor
 swagger:model RefundCaptureParamsBodyMerchantInformationMerchantDescriptor
 */
 type RefundCaptureParamsBodyMerchantInformationMerchantDescriptor struct {
@@ -2794,12 +3647,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) Validate(
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2807,12 +3659,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -2820,12 +3671,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateAlternateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AlternateName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", string(o.AlternateName), 13); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", o.AlternateName, 13); err != nil {
 		return err
 	}
 
@@ -2833,12 +3683,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateContact(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Contact) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", string(o.Contact), 14); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", o.Contact, 14); err != nil {
 		return err
 	}
 
@@ -2846,12 +3695,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2859,12 +3707,11 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", string(o.Locality), 13); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", o.Locality, 13); err != nil {
 		return err
 	}
 
@@ -2872,15 +3719,19 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validateL
 }
 
 func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", string(o.PostalCode), 14); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", o.PostalCode, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body merchant information merchant descriptor based on context it is used
+func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2902,7 +3753,8 @@ func (o *RefundCaptureParamsBodyMerchantInformationMerchantDescriptor) Unmarshal
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformation refund capture params body order information
+/*
+RefundCaptureParamsBodyOrderInformation refund capture params body order information
 swagger:model RefundCaptureParamsBodyOrderInformation
 */
 type RefundCaptureParamsBodyOrderInformation struct {
@@ -2961,7 +3813,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) Validate(formats strfmt.Regist
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -2970,6 +3821,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateAmountDetails(formats 
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -2979,7 +3832,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateAmountDetails(formats 
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -2988,6 +3840,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateBillTo(formats strfmt.
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -2997,7 +3851,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateBillTo(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -3006,6 +3859,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateInvoiceDetails(formats
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -3015,7 +3870,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateInvoiceDetails(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -3029,6 +3883,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateLineItems(formats strf
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3040,7 +3896,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateLineItems(formats strf
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -3049,6 +3904,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateShipTo(formats strfmt.
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -3058,7 +3915,6 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateShipTo(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyOrderInformation) validateShippingDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingDetails) { // not required
 		return nil
 	}
@@ -3067,6 +3923,172 @@ func (o *RefundCaptureParamsBodyOrderInformation) validateShippingDetails(format
 		if err := o.ShippingDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body order information based on the context it is used
+func (o *RefundCaptureParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShippingDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformation) contextValidateShippingDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShippingDetails != nil {
+
+		if swag.IsZero(o.ShippingDetails) { // not required
+			return nil
+		}
+
+		if err := o.ShippingDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "shippingDetails")
 			}
 			return err
 		}
@@ -3093,7 +4115,8 @@ func (o *RefundCaptureParamsBodyOrderInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationAmountDetails refund capture params body order information amount details
+/*
+RefundCaptureParamsBodyOrderInformationAmountDetails refund capture params body order information amount details
 swagger:model RefundCaptureParamsBodyOrderInformationAmountDetails
 */
 type RefundCaptureParamsBodyOrderInformationAmountDetails struct {
@@ -3381,7 +4404,6 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) Validate(formats 
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateAmexAdditionalAmounts(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexAdditionalAmounts) { // not required
 		return nil
 	}
@@ -3395,6 +4417,8 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateAmexAddit
 			if err := o.AmexAdditionalAmounts[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3406,12 +4430,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateAmexAddit
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -3419,12 +4442,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateCurrency(
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", string(o.DiscountAmount), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", o.DiscountAmount, 15); err != nil {
 		return err
 	}
 
@@ -3432,12 +4454,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateDiscountA
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateDutyAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DutyAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", string(o.DutyAmount), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", o.DutyAmount, 15); err != nil {
 		return err
 	}
 
@@ -3445,12 +4466,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateDutyAmoun
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateExchangeRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", string(o.ExchangeRate), 13); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", o.ExchangeRate, 13); err != nil {
 		return err
 	}
 
@@ -3458,12 +4478,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateExchangeRateTimeStamp(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRateTimeStamp) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", string(o.ExchangeRateTimeStamp), 14); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", o.ExchangeRateTimeStamp, 14); err != nil {
 		return err
 	}
 
@@ -3471,12 +4490,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateForeignAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", string(o.ForeignAmount), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", o.ForeignAmount, 15); err != nil {
 		return err
 	}
 
@@ -3484,12 +4502,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateForeignAm
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateForeignCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", string(o.ForeignCurrency), 5); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", o.ForeignCurrency, 5); err != nil {
 		return err
 	}
 
@@ -3497,12 +4514,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateForeignCu
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateFreightAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FreightAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", string(o.FreightAmount), 13); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", o.FreightAmount, 13); err != nil {
 		return err
 	}
 
@@ -3510,12 +4526,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateFreightAm
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateGratuityAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.GratuityAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", string(o.GratuityAmount), 13); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", o.GratuityAmount, 13); err != nil {
 		return err
 	}
 
@@ -3523,12 +4538,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateGratuityA
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateNationalTaxIncluded(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NationalTaxIncluded) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", string(o.NationalTaxIncluded), 1); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", o.NationalTaxIncluded, 1); err != nil {
 		return err
 	}
 
@@ -3536,12 +4550,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateNationalT
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateOriginalCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", string(o.OriginalCurrency), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", o.OriginalCurrency, 15); err != nil {
 		return err
 	}
 
@@ -3549,12 +4562,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateOriginalC
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateServiceFeeAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ServiceFeeAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", string(o.ServiceFeeAmount), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", o.ServiceFeeAmount, 15); err != nil {
 		return err
 	}
 
@@ -3562,12 +4574,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateServiceFe
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", string(o.TaxAmount), 12); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", o.TaxAmount, 12); err != nil {
 		return err
 	}
 
@@ -3575,12 +4586,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxAmount
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -3588,12 +4598,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxAppliedLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", string(o.TaxAppliedLevel), 1); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", o.TaxAppliedLevel, 1); err != nil {
 		return err
 	}
 
@@ -3601,7 +4610,6 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -3615,6 +4623,8 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxDetail
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3626,12 +4636,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxDetail
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", string(o.TaxTypeCode), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", o.TaxTypeCode, 3); err != nil {
 		return err
 	}
 
@@ -3639,13 +4648,80 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTaxTypeCo
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body order information amount details based on the context it is used
+func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmexAdditionalAmounts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) contextValidateAmexAdditionalAmounts(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.AmexAdditionalAmounts); i++ {
+
+		if o.AmexAdditionalAmounts[i] != nil {
+
+			if swag.IsZero(o.AmexAdditionalAmounts[i]) { // not required
+				return nil
+			}
+
+			if err := o.AmexAdditionalAmounts[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -3669,7 +4745,8 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetails) UnmarshalBinary(b
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 refund capture params body order information amount details amex additional amounts items0
+/*
+RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 refund capture params body order information amount details amex additional amounts items0
 swagger:model RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0
 */
 type RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 struct {
@@ -3710,12 +4787,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 12); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 12); err != nil {
 		return err
 	}
 
@@ -3723,15 +4799,19 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 3); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information amount details amex additional amounts items0 based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3753,7 +4833,8 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 refund capture params body order information amount details tax details items0
+/*
+RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 refund capture params body order information amount details tax details items0
 swagger:model RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0
 */
 type RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 struct {
@@ -3893,12 +4974,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) V
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -3906,12 +4986,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -3919,12 +4998,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -3932,12 +5010,11 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -3945,15 +5022,19 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information amount details tax details items0 based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3975,7 +5056,8 @@ func (o *RefundCaptureParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) U
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationBillTo refund capture params body order information bill to
+/*
+RefundCaptureParamsBodyOrderInformationBillTo refund capture params body order information bill to
 swagger:model RefundCaptureParamsBodyOrderInformationBillTo
 */
 type RefundCaptureParamsBodyOrderInformationBillTo struct {
@@ -4235,12 +5317,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) Validate(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -4248,12 +5329,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAddress1(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -4261,12 +5341,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAddress2(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -4274,12 +5353,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateAdministrativeAr
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -4287,12 +5365,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateCompany(formats 
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -4300,12 +5377,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateCountry(formats 
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -4313,12 +5389,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateEmail(formats st
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -4326,12 +5401,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateFirstName(format
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -4339,12 +5413,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateLastName(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -4352,12 +5425,11 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validateLocality(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -4365,15 +5437,19 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) validatePhoneNumber(form
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information bill to based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4395,7 +5471,8 @@ func (o *RefundCaptureParamsBodyOrderInformationBillTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationInvoiceDetails refund capture params body order information invoice details
+/*
+RefundCaptureParamsBodyOrderInformationInvoiceDetails refund capture params body order information invoice details
 swagger:model RefundCaptureParamsBodyOrderInformationInvoiceDetails
 */
 type RefundCaptureParamsBodyOrderInformationInvoiceDetails struct {
@@ -4495,12 +5572,11 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) Validate(formats
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", string(o.CommodityCode), 4); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", o.CommodityCode, 4); err != nil {
 		return err
 	}
 
@@ -4508,12 +5584,11 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateCommodit
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchaseContactName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseContactName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", string(o.PurchaseContactName), 36); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", o.PurchaseContactName, 36); err != nil {
 		return err
 	}
 
@@ -4521,12 +5596,11 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderDate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", string(o.PurchaseOrderDate), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", o.PurchaseOrderDate, 10); err != nil {
 		return err
 	}
 
@@ -4534,12 +5608,11 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", string(o.PurchaseOrderNumber), 25); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", o.PurchaseOrderNumber, 25); err != nil {
 		return err
 	}
 
@@ -4547,7 +5620,6 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateTransactionAdviceAddendum(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionAdviceAddendum) { // not required
 		return nil
 	}
@@ -4561,6 +5633,8 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateTransact
 			if err := o.TransactionAdviceAddendum[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -4572,13 +5646,51 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateTransact
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) validateVatInvoiceReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatInvoiceReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", string(o.VatInvoiceReferenceNumber), 15); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", o.VatInvoiceReferenceNumber, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body order information invoice details based on the context it is used
+func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactionAdviceAddendum(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) contextValidateTransactionAdviceAddendum(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TransactionAdviceAddendum); i++ {
+
+		if o.TransactionAdviceAddendum[i] != nil {
+
+			if swag.IsZero(o.TransactionAdviceAddendum[i]) { // not required
+				return nil
+			}
+
+			if err := o.TransactionAdviceAddendum[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundCaptureRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -4602,7 +5714,8 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetails) UnmarshalBinary(
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 refund capture params body order information invoice details transaction advice addendum items0
+/*
+RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 refund capture params body order information invoice details transaction advice addendum items0
 swagger:model RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0
 */
 type RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 struct {
@@ -4633,15 +5746,19 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) validateData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Data) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("data", "body", string(o.Data), 40); err != nil {
+	if err := validate.MaxLength("data", "body", o.Data, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information invoice details transaction advice addendum items0 based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4663,7 +5780,8 @@ func (o *RefundCaptureParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationLineItemsItems0 refund capture params body order information line items items0
+/*
+RefundCaptureParamsBodyOrderInformationLineItemsItems0 refund capture params body order information line items items0
 swagger:model RefundCaptureParamsBodyOrderInformationLineItemsItems0
 */
 type RefundCaptureParamsBodyOrderInformationLineItemsItems0 struct {
@@ -4971,12 +6089,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) Validate(format
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("commodityCode", "body", string(o.CommodityCode), 15); err != nil {
+	if err := validate.MaxLength("commodityCode", "body", o.CommodityCode, 15); err != nil {
 		return err
 	}
 
@@ -4984,12 +6101,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateCommodi
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountAmount", "body", string(o.DiscountAmount), 13); err != nil {
+	if err := validate.MaxLength("discountAmount", "body", o.DiscountAmount, 13); err != nil {
 		return err
 	}
 
@@ -4997,12 +6113,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateDiscountRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountRate", "body", string(o.DiscountRate), 6); err != nil {
+	if err := validate.MaxLength("discountRate", "body", o.DiscountRate, 6); err != nil {
 		return err
 	}
 
@@ -5010,12 +6125,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateInvoiceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("invoiceNumber", "body", string(o.InvoiceNumber), 23); err != nil {
+	if err := validate.MaxLength("invoiceNumber", "body", o.InvoiceNumber, 23); err != nil {
 		return err
 	}
 
@@ -5023,12 +6137,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateInvoice
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProductCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productCode", "body", string(o.ProductCode), 255); err != nil {
+	if err := validate.MaxLength("productCode", "body", o.ProductCode, 255); err != nil {
 		return err
 	}
 
@@ -5036,12 +6149,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productName", "body", string(o.ProductName), 255); err != nil {
+	if err := validate.MaxLength("productName", "body", o.ProductName, 255); err != nil {
 		return err
 	}
 
@@ -5049,12 +6161,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProductSku(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductSku) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productSku", "body", string(o.ProductSku), 255); err != nil {
+	if err := validate.MaxLength("productSku", "body", o.ProductSku, 255); err != nil {
 		return err
 	}
 
@@ -5062,16 +6173,15 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.Minimum("quantity", "body", float64(o.Quantity), 1, false); err != nil {
+	if err := validate.Minimum("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.Maximum("quantity", "body", float64(o.Quantity), 9.999999999e+09, false); err != nil {
+	if err := validate.Maximum("quantity", "body", o.Quantity, 9.999999999e+09, false); err != nil {
 		return err
 	}
 
@@ -5079,12 +6189,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateQuantit
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAmount", "body", string(o.TaxAmount), 15); err != nil {
+	if err := validate.MaxLength("taxAmount", "body", o.TaxAmount, 15); err != nil {
 		return err
 	}
 
@@ -5092,12 +6201,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxAmou
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -5105,7 +6213,6 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxAppl
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -5119,6 +6226,8 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -5130,12 +6239,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxRate", "body", string(o.TaxRate), 7); err != nil {
+	if err := validate.MaxLength("taxRate", "body", o.TaxRate, 7); err != nil {
 		return err
 	}
 
@@ -5143,12 +6251,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxRate
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxStatusIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxStatusIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxStatusIndicator", "body", string(o.TaxStatusIndicator), 1); err != nil {
+	if err := validate.MaxLength("taxStatusIndicator", "body", o.TaxStatusIndicator, 1); err != nil {
 		return err
 	}
 
@@ -5156,12 +6263,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxStat
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxTypeCode", "body", string(o.TaxTypeCode), 4); err != nil {
+	if err := validate.MaxLength("taxTypeCode", "body", o.TaxTypeCode, 4); err != nil {
 		return err
 	}
 
@@ -5169,12 +6275,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTaxType
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("totalAmount", "body", string(o.TotalAmount), 13); err != nil {
+	if err := validate.MaxLength("totalAmount", "body", o.TotalAmount, 13); err != nil {
 		return err
 	}
 
@@ -5182,12 +6287,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTotalAm
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTypeOfSupply(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TypeOfSupply) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("typeOfSupply", "body", string(o.TypeOfSupply), 2); err != nil {
+	if err := validate.MaxLength("typeOfSupply", "body", o.TypeOfSupply, 2); err != nil {
 		return err
 	}
 
@@ -5195,12 +6299,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateTypeOfS
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateUnitOfMeasure(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitOfMeasure) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitOfMeasure", "body", string(o.UnitOfMeasure), 12); err != nil {
+	if err := validate.MaxLength("unitOfMeasure", "body", o.UnitOfMeasure, 12); err != nil {
 		return err
 	}
 
@@ -5208,13 +6311,51 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateUnitOfM
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body order information line items items0 based on the context it is used
+func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -5238,7 +6379,8 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0) UnmarshalBinary
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 refund capture params body order information line items items0 tax details items0
+/*
+RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 refund capture params body order information line items items0 tax details items0
 swagger:model RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0
 */
 type RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 struct {
@@ -5378,12 +6520,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -5391,12 +6532,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -5404,12 +6544,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -5417,12 +6556,11 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -5430,15 +6568,19 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information line items items0 tax details items0 based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5460,7 +6602,8 @@ func (o *RefundCaptureParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationShipTo refund capture params body order information ship to
+/*
+RefundCaptureParamsBodyOrderInformationShipTo refund capture params body order information ship to
 swagger:model RefundCaptureParamsBodyOrderInformationShipTo
 */
 type RefundCaptureParamsBodyOrderInformationShipTo struct {
@@ -5518,12 +6661,11 @@ func (o *RefundCaptureParamsBodyOrderInformationShipTo) Validate(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationShipTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 2); err != nil {
 		return err
 	}
 
@@ -5531,12 +6673,11 @@ func (o *RefundCaptureParamsBodyOrderInformationShipTo) validateAdministrativeAr
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -5544,15 +6685,19 @@ func (o *RefundCaptureParamsBodyOrderInformationShipTo) validateCountry(formats 
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationShipTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information ship to based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5574,7 +6719,8 @@ func (o *RefundCaptureParamsBodyOrderInformationShipTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundCaptureParamsBodyOrderInformationShippingDetails refund capture params body order information shipping details
+/*
+RefundCaptureParamsBodyOrderInformationShippingDetails refund capture params body order information shipping details
 swagger:model RefundCaptureParamsBodyOrderInformationShippingDetails
 */
 type RefundCaptureParamsBodyOrderInformationShippingDetails struct {
@@ -5616,15 +6762,19 @@ func (o *RefundCaptureParamsBodyOrderInformationShippingDetails) Validate(format
 }
 
 func (o *RefundCaptureParamsBodyOrderInformationShippingDetails) validateShipFromPostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipFromPostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", string(o.ShipFromPostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", o.ShipFromPostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body order information shipping details based on context it is used
+func (o *RefundCaptureParamsBodyOrderInformationShippingDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5646,7 +6796,8 @@ func (o *RefundCaptureParamsBodyOrderInformationShippingDetails) UnmarshalBinary
 	return nil
 }
 
-/*RefundCaptureParamsBodyPaymentInformation refund capture params body payment information
+/*
+RefundCaptureParamsBodyPaymentInformation refund capture params body payment information
 swagger:model RefundCaptureParamsBodyPaymentInformation
 */
 type RefundCaptureParamsBodyPaymentInformation struct {
@@ -5684,7 +6835,6 @@ func (o *RefundCaptureParamsBodyPaymentInformation) Validate(formats strfmt.Regi
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformation) validateBank(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bank) { // not required
 		return nil
 	}
@@ -5693,6 +6843,8 @@ func (o *RefundCaptureParamsBodyPaymentInformation) validateBank(formats strfmt.
 		if err := o.Bank.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank")
 			}
 			return err
 		}
@@ -5702,7 +6854,6 @@ func (o *RefundCaptureParamsBodyPaymentInformation) validateBank(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -5711,6 +6862,8 @@ func (o *RefundCaptureParamsBodyPaymentInformation) validateCard(formats strfmt.
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -5720,7 +6873,6 @@ func (o *RefundCaptureParamsBodyPaymentInformation) validateCard(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -5729,6 +6881,93 @@ func (o *RefundCaptureParamsBodyPaymentInformation) validateCustomer(formats str
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body payment information based on the context it is used
+func (o *RefundCaptureParamsBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBank(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyPaymentInformation) contextValidateBank(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Bank != nil {
+
+		if swag.IsZero(o.Bank) { // not required
+			return nil
+		}
+
+		if err := o.Bank.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyPaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -5755,7 +6994,8 @@ func (o *RefundCaptureParamsBodyPaymentInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*RefundCaptureParamsBodyPaymentInformationBank refund capture params body payment information bank
+/*
+RefundCaptureParamsBodyPaymentInformationBank refund capture params body payment information bank
 swagger:model RefundCaptureParamsBodyPaymentInformationBank
 */
 type RefundCaptureParamsBodyPaymentInformationBank struct {
@@ -5790,7 +7030,6 @@ func (o *RefundCaptureParamsBodyPaymentInformationBank) Validate(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBank) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -5799,6 +7038,8 @@ func (o *RefundCaptureParamsBodyPaymentInformationBank) validateAccount(formats 
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
 			}
 			return err
 		}
@@ -5808,13 +7049,47 @@ func (o *RefundCaptureParamsBodyPaymentInformationBank) validateAccount(formats 
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBank) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body payment information bank based on the context it is used
+func (o *RefundCaptureParamsBodyPaymentInformationBank) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyPaymentInformationBank) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -5838,7 +7113,8 @@ func (o *RefundCaptureParamsBodyPaymentInformationBank) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundCaptureParamsBodyPaymentInformationBankAccount refund capture params body payment information bank account
+/*
+RefundCaptureParamsBodyPaymentInformationBankAccount refund capture params body payment information bank account
 swagger:model RefundCaptureParamsBodyPaymentInformationBankAccount
 */
 type RefundCaptureParamsBodyPaymentInformationBankAccount struct {
@@ -5917,12 +7193,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) Validate(formats 
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateCheckImageReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckImageReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", string(o.CheckImageReferenceNumber), 32); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", o.CheckImageReferenceNumber, 32); err != nil {
 		return err
 	}
 
@@ -5930,12 +7205,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateCheckImag
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateCheckNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", string(o.CheckNumber), 8); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", o.CheckNumber, 8); err != nil {
 		return err
 	}
 
@@ -5943,12 +7217,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateCheckNumb
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", string(o.EncoderID), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", o.EncoderID, 3); err != nil {
 		return err
 	}
 
@@ -5956,12 +7229,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateEncoderID
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", string(o.Number), 17); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", o.Number, 17); err != nil {
 		return err
 	}
 
@@ -5969,15 +7241,19 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateNumber(fo
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Type) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", string(o.Type), 1); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", o.Type, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body payment information bank account based on context it is used
+func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5999,7 +7275,8 @@ func (o *RefundCaptureParamsBodyPaymentInformationBankAccount) UnmarshalBinary(b
 	return nil
 }
 
-/*RefundCaptureParamsBodyPaymentInformationCard refund capture params body payment information card
+/*
+RefundCaptureParamsBodyPaymentInformationCard refund capture params body payment information card
 swagger:model RefundCaptureParamsBodyPaymentInformationCard
 */
 type RefundCaptureParamsBodyPaymentInformationCard struct {
@@ -6137,12 +7414,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) Validate(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateAccountEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountEncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", string(o.AccountEncoderID), 3); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", o.AccountEncoderID, 3); err != nil {
 		return err
 	}
 
@@ -6150,12 +7426,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateAccountEncoderID
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -6163,12 +7438,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateExpirationMonth(
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -6176,12 +7450,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateExpirationYear(f
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 5); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 5); err != nil {
 		return err
 	}
 
@@ -6189,12 +7462,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateIssueNumber(form
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
@@ -6202,12 +7474,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateNumber(formats s
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -6215,15 +7486,19 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) validateStartMonth(forma
 }
 
 func (o *RefundCaptureParamsBodyPaymentInformationCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body payment information card based on context it is used
+func (o *RefundCaptureParamsBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6245,7 +7520,8 @@ func (o *RefundCaptureParamsBodyPaymentInformationCard) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundCaptureParamsBodyPaymentInformationCustomer refund capture params body payment information customer
+/*
+RefundCaptureParamsBodyPaymentInformationCustomer refund capture params body payment information customer
 swagger:model RefundCaptureParamsBodyPaymentInformationCustomer
 */
 type RefundCaptureParamsBodyPaymentInformationCustomer struct {
@@ -6268,6 +7544,11 @@ func (o *RefundCaptureParamsBodyPaymentInformationCustomer) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this refund capture params body payment information customer based on context it is used
+func (o *RefundCaptureParamsBodyPaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundCaptureParamsBodyPaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -6286,7 +7567,8 @@ func (o *RefundCaptureParamsBodyPaymentInformationCustomer) UnmarshalBinary(b []
 	return nil
 }
 
-/*RefundCaptureParamsBodyPointOfSaleInformation refund capture params body point of sale information
+/*
+RefundCaptureParamsBodyPointOfSaleInformation refund capture params body point of sale information
 swagger:model RefundCaptureParamsBodyPointOfSaleInformation
 */
 type RefundCaptureParamsBodyPointOfSaleInformation struct {
@@ -6310,7 +7592,6 @@ func (o *RefundCaptureParamsBodyPointOfSaleInformation) Validate(formats strfmt.
 }
 
 func (o *RefundCaptureParamsBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -6319,6 +7600,43 @@ func (o *RefundCaptureParamsBodyPointOfSaleInformation) validateEmv(formats strf
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body point of sale information based on the context it is used
+func (o *RefundCaptureParamsBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -6345,7 +7663,8 @@ func (o *RefundCaptureParamsBodyPointOfSaleInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundCaptureParamsBodyPointOfSaleInformationEmv refund capture params body point of sale information emv
+/*
+RefundCaptureParamsBodyPointOfSaleInformationEmv refund capture params body point of sale information emv
 swagger:model RefundCaptureParamsBodyPointOfSaleInformationEmv
 */
 type RefundCaptureParamsBodyPointOfSaleInformationEmv struct {
@@ -6419,15 +7738,19 @@ func (o *RefundCaptureParamsBodyPointOfSaleInformationEmv) Validate(formats strf
 }
 
 func (o *RefundCaptureParamsBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund capture params body point of sale information emv based on context it is used
+func (o *RefundCaptureParamsBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6449,7 +7772,8 @@ func (o *RefundCaptureParamsBodyPointOfSaleInformationEmv) UnmarshalBinary(b []b
 	return nil
 }
 
-/*RefundCaptureParamsBodyProcessingInformation refund capture params body processing information
+/*
+RefundCaptureParamsBodyProcessingInformation refund capture params body processing information
 swagger:model RefundCaptureParamsBodyProcessingInformation
 */
 type RefundCaptureParamsBodyProcessingInformation struct {
@@ -6550,12 +7874,11 @@ func (o *RefundCaptureParamsBodyProcessingInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validateLinkID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LinkID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"linkId", "body", string(o.LinkID), 26); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"linkId", "body", o.LinkID, 26); err != nil {
 		return err
 	}
 
@@ -6563,12 +7886,11 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validateLinkID(formats st
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
 	}
 
@@ -6576,12 +7898,11 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validatePaymentSolution(f
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validatePurchaseLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", string(o.PurchaseLevel), 1); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", o.PurchaseLevel, 1); err != nil {
 		return err
 	}
 
@@ -6589,12 +7910,11 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validatePurchaseLevel(for
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -6602,7 +7922,6 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validateReconciliationID(
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validateRecurringOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecurringOptions) { // not required
 		return nil
 	}
@@ -6611,6 +7930,8 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validateRecurringOptions(
 		if err := o.RecurringOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundCaptureRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "processingInformation" + "." + "recurringOptions")
 			}
 			return err
 		}
@@ -6620,12 +7941,11 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validateRecurringOptions(
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validateReportGroup(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportGroup) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"reportGroup", "body", string(o.ReportGroup), 25); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"reportGroup", "body", o.ReportGroup, 25); err != nil {
 		return err
 	}
 
@@ -6633,13 +7953,47 @@ func (o *RefundCaptureParamsBodyProcessingInformation) validateReportGroup(forma
 }
 
 func (o *RefundCaptureParamsBodyProcessingInformation) validateVisaCheckoutID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VisaCheckoutID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", string(o.VisaCheckoutID), 48); err != nil {
+	if err := validate.MaxLength("refundCaptureRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", o.VisaCheckoutID, 48); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund capture params body processing information based on the context it is used
+func (o *RefundCaptureParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRecurringOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundCaptureParamsBodyProcessingInformation) contextValidateRecurringOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecurringOptions != nil {
+
+		if swag.IsZero(o.RecurringOptions) { // not required
+			return nil
+		}
+
+		if err := o.RecurringOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundCaptureRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundCaptureRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -6663,7 +8017,8 @@ func (o *RefundCaptureParamsBodyProcessingInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundCaptureParamsBodyProcessingInformationRecurringOptions refund capture params body processing information recurring options
+/*
+RefundCaptureParamsBodyProcessingInformationRecurringOptions refund capture params body processing information recurring options
 swagger:model RefundCaptureParamsBodyProcessingInformationRecurringOptions
 */
 type RefundCaptureParamsBodyProcessingInformationRecurringOptions struct {
@@ -6681,6 +8036,11 @@ type RefundCaptureParamsBodyProcessingInformationRecurringOptions struct {
 
 // Validate validates this refund capture params body processing information recurring options
 func (o *RefundCaptureParamsBodyProcessingInformationRecurringOptions) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund capture params body processing information recurring options based on context it is used
+func (o *RefundCaptureParamsBodyProcessingInformationRecurringOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

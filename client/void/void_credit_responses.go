@@ -6,16 +6,16 @@ package void
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // VoidCreditReader is a Reader for the VoidCredit structure.
@@ -44,9 +44,8 @@ func (o *VoidCreditReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/credits/{id}/voids] voidCredit", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewVoidCreditCreated() *VoidCreditCreated {
 	return &VoidCreditCreated{}
 }
 
-/*VoidCreditCreated handles this case with default header values.
+/*
+VoidCreditCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type VoidCreditCreated struct {
 	Payload *VoidCreditCreatedBody
 }
 
+// IsSuccess returns true when this void credit created response has a 2xx status code
+func (o *VoidCreditCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this void credit created response has a 3xx status code
+func (o *VoidCreditCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void credit created response has a 4xx status code
+func (o *VoidCreditCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void credit created response has a 5xx status code
+func (o *VoidCreditCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void credit created response a status code equal to that given
+func (o *VoidCreditCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the void credit created response
+func (o *VoidCreditCreated) Code() int {
+	return 201
+}
+
 func (o *VoidCreditCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditCreated  %+v", 201, o.Payload)
+}
+
+func (o *VoidCreditCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewVoidCreditBadRequest() *VoidCreditBadRequest {
 	return &VoidCreditBadRequest{}
 }
 
-/*VoidCreditBadRequest handles this case with default header values.
+/*
+VoidCreditBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type VoidCreditBadRequest struct {
 	Payload *VoidCreditBadRequestBody
 }
 
+// IsSuccess returns true when this void credit bad request response has a 2xx status code
+func (o *VoidCreditBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void credit bad request response has a 3xx status code
+func (o *VoidCreditBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void credit bad request response has a 4xx status code
+func (o *VoidCreditBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this void credit bad request response has a 5xx status code
+func (o *VoidCreditBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void credit bad request response a status code equal to that given
+func (o *VoidCreditBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the void credit bad request response
+func (o *VoidCreditBadRequest) Code() int {
+	return 400
+}
+
 func (o *VoidCreditBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *VoidCreditBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewVoidCreditBadGateway() *VoidCreditBadGateway {
 	return &VoidCreditBadGateway{}
 }
 
-/*VoidCreditBadGateway handles this case with default header values.
+/*
+VoidCreditBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type VoidCreditBadGateway struct {
 	Payload *VoidCreditBadGatewayBody
 }
 
+// IsSuccess returns true when this void credit bad gateway response has a 2xx status code
+func (o *VoidCreditBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void credit bad gateway response has a 3xx status code
+func (o *VoidCreditBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void credit bad gateway response has a 4xx status code
+func (o *VoidCreditBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void credit bad gateway response has a 5xx status code
+func (o *VoidCreditBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this void credit bad gateway response a status code equal to that given
+func (o *VoidCreditBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the void credit bad gateway response
+func (o *VoidCreditBadGateway) Code() int {
+	return 502
+}
+
 func (o *VoidCreditBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *VoidCreditBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/credits/{id}/voids][%d] voidCreditBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *VoidCreditBadGateway) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-/*VoidCreditBadGatewayBody ptsV2CreditsVoidsPost502Response
+/*
+VoidCreditBadGatewayBody ptsV2CreditsVoidsPost502Response
 swagger:model VoidCreditBadGatewayBody
 */
 type VoidCreditBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *VoidCreditBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this void credit bad gateway body based on context it is used
+func (o *VoidCreditBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *VoidCreditBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *VoidCreditBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditBadRequestBody ptsV2CreditsVoidsPost400Response
+/*
+VoidCreditBadRequestBody ptsV2CreditsVoidsPost400Response
 swagger:model VoidCreditBadRequestBody
 */
 type VoidCreditBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*VoidCreditBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -255,7 +366,6 @@ func (o *VoidCreditBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -269,6 +379,47 @@ func (o *VoidCreditBadRequestBody) validateDetails(formats strfmt.Registry) erro
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("voidCreditBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidCreditBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void credit bad request body based on the context it is used
+func (o *VoidCreditBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCreditBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("voidCreditBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidCreditBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -297,7 +448,55 @@ func (o *VoidCreditBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditBody void credit body
+/*
+VoidCreditBadRequestBodyDetailsItems0 void credit bad request body details items0
+swagger:model VoidCreditBadRequestBodyDetailsItems0
+*/
+type VoidCreditBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this void credit bad request body details items0
+func (o *VoidCreditBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void credit bad request body details items0 based on context it is used
+func (o *VoidCreditBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *VoidCreditBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *VoidCreditBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res VoidCreditBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+VoidCreditBody void credit body
+// Example: {"clientReferenceInformation":{"code":"test_void"}}
 swagger:model VoidCreditBody
 */
 type VoidCreditBody struct {
@@ -321,7 +520,6 @@ func (o *VoidCreditBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -330,6 +528,43 @@ func (o *VoidCreditBody) validateClientReferenceInformation(formats strfmt.Regis
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void credit body based on the context it is used
+func (o *VoidCreditBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCreditBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -356,7 +591,9 @@ func (o *VoidCreditBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditCreatedBody ptsV2CreditsVoidsPost201Response
+/*
+VoidCreditCreatedBody ptsV2CreditsVoidsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/voids/4963015122056179201545","method":"GET"}},"clientReferenceInformation":{"code":"test_void"},"id":"4963015122056179201545","orderInformation":{"amountDetails":{"currency":"USD"}},"status":"VOIDED","submitTimeUtc":"2017-06-01T071832Z","voidAmountDetails":{"currency":"usd","voidAmount":"102.21"}}
 swagger:model VoidCreditCreatedBody
 */
 type VoidCreditCreatedBody struct {
@@ -415,7 +652,6 @@ func (o *VoidCreditCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -424,6 +660,8 @@ func (o *VoidCreditCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -433,7 +671,6 @@ func (o *VoidCreditCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -442,6 +679,8 @@ func (o *VoidCreditCreatedBody) validateClientReferenceInformation(formats strfm
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -451,12 +690,11 @@ func (o *VoidCreditCreatedBody) validateClientReferenceInformation(formats strfm
 }
 
 func (o *VoidCreditCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("voidCreditCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -464,7 +702,6 @@ func (o *VoidCreditCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditCreatedBody) validateVoidAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VoidAmountDetails) { // not required
 		return nil
 	}
@@ -473,6 +710,93 @@ func (o *VoidCreditCreatedBody) validateVoidAmountDetails(formats strfmt.Registr
 		if err := o.VoidAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "voidAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void credit created body based on the context it is used
+func (o *VoidCreditCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoidAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCreditCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidCreditCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidCreditCreatedBody) contextValidateVoidAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.VoidAmountDetails != nil {
+
+		if swag.IsZero(o.VoidAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.VoidAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "voidAmountDetails")
 			}
 			return err
 		}
@@ -499,7 +823,8 @@ func (o *VoidCreditCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditCreatedBodyClientReferenceInformation void credit created body client reference information
+/*
+VoidCreditCreatedBodyClientReferenceInformation void credit created body client reference information
 swagger:model VoidCreditCreatedBodyClientReferenceInformation
 */
 type VoidCreditCreatedBodyClientReferenceInformation struct {
@@ -554,12 +879,11 @@ func (o *VoidCreditCreatedBodyClientReferenceInformation) Validate(formats strfm
 }
 
 func (o *VoidCreditCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidCreditCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -567,15 +891,19 @@ func (o *VoidCreditCreatedBodyClientReferenceInformation) validateCode(formats s
 }
 
 func (o *VoidCreditCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("voidCreditCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void credit created body client reference information based on context it is used
+func (o *VoidCreditCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -597,7 +925,8 @@ func (o *VoidCreditCreatedBodyClientReferenceInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*VoidCreditCreatedBodyLinks void credit created body links
+/*
+VoidCreditCreatedBodyLinks void credit created body links
 swagger:model VoidCreditCreatedBodyLinks
 */
 type VoidCreditCreatedBodyLinks struct {
@@ -621,7 +950,6 @@ func (o *VoidCreditCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCreditCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -630,6 +958,43 @@ func (o *VoidCreditCreatedBodyLinks) validateSelf(formats strfmt.Registry) error
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void credit created body links based on the context it is used
+func (o *VoidCreditCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCreditCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -656,7 +1021,8 @@ func (o *VoidCreditCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditCreatedBodyLinksSelf void credit created body links self
+/*
+VoidCreditCreatedBodyLinksSelf void credit created body links self
 swagger:model VoidCreditCreatedBodyLinksSelf
 */
 type VoidCreditCreatedBodyLinksSelf struct {
@@ -670,6 +1036,11 @@ type VoidCreditCreatedBodyLinksSelf struct {
 
 // Validate validates this void credit created body links self
 func (o *VoidCreditCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void credit created body links self based on context it is used
+func (o *VoidCreditCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -691,7 +1062,8 @@ func (o *VoidCreditCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCreditCreatedBodyVoidAmountDetails void credit created body void amount details
+/*
+VoidCreditCreatedBodyVoidAmountDetails void credit created body void amount details
 swagger:model VoidCreditCreatedBodyVoidAmountDetails
 */
 type VoidCreditCreatedBodyVoidAmountDetails struct {
@@ -730,15 +1102,19 @@ func (o *VoidCreditCreatedBodyVoidAmountDetails) Validate(formats strfmt.Registr
 }
 
 func (o *VoidCreditCreatedBodyVoidAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditCreated"+"."+"voidAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("voidCreditCreated"+"."+"voidAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void credit created body void amount details based on context it is used
+func (o *VoidCreditCreatedBodyVoidAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -760,7 +1136,8 @@ func (o *VoidCreditCreatedBodyVoidAmountDetails) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*VoidCreditParamsBodyClientReferenceInformation void credit params body client reference information
+/*
+VoidCreditParamsBodyClientReferenceInformation void credit params body client reference information
 swagger:model VoidCreditParamsBodyClientReferenceInformation
 */
 type VoidCreditParamsBodyClientReferenceInformation struct {
@@ -802,12 +1179,11 @@ func (o *VoidCreditParamsBodyClientReferenceInformation) Validate(formats strfmt
 }
 
 func (o *VoidCreditParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -815,7 +1191,6 @@ func (o *VoidCreditParamsBodyClientReferenceInformation) validateCode(formats st
 }
 
 func (o *VoidCreditParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -824,6 +1199,43 @@ func (o *VoidCreditParamsBodyClientReferenceInformation) validatePartner(formats
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void credit params body client reference information based on the context it is used
+func (o *VoidCreditParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCreditParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCreditRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -850,7 +1262,8 @@ func (o *VoidCreditParamsBodyClientReferenceInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*VoidCreditParamsBodyClientReferenceInformationPartner void credit params body client reference information partner
+/*
+VoidCreditParamsBodyClientReferenceInformationPartner void credit params body client reference information partner
 swagger:model VoidCreditParamsBodyClientReferenceInformationPartner
 */
 type VoidCreditParamsBodyClientReferenceInformationPartner struct {
@@ -894,12 +1307,11 @@ func (o *VoidCreditParamsBodyClientReferenceInformationPartner) Validate(formats
 }
 
 func (o *VoidCreditParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -907,15 +1319,19 @@ func (o *VoidCreditParamsBodyClientReferenceInformationPartner) validateDevelope
 }
 
 func (o *VoidCreditParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("voidCreditRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void credit params body client reference information partner based on context it is used
+func (o *VoidCreditParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

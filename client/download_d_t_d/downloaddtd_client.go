@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new download d t d API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetDTDV2(params *GetDTDV2Params, opts ...ClientOption) (*GetDTDV2OK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetDTDV2 useds to download d t ds for reports
 
 Downloads DTDs for reports on no-auth.
 */
-func (a *Client) GetDTDV2(params *GetDTDV2Params) (*GetDTDV2OK, error) {
+func (a *Client) GetDTDV2(params *GetDTDV2Params, opts ...ClientOption) (*GetDTDV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDTDV2Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getDTDV2",
 		Method:             "GET",
 		PathPattern:        "/dtds/{reportDefinitionNameVersion}",
@@ -48,7 +56,12 @@ func (a *Client) GetDTDV2(params *GetDTDV2Params) (*GetDTDV2OK, error) {
 		Reader:             &GetDTDV2Reader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

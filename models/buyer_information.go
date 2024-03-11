@@ -6,16 +6,17 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // BuyerInformation buyer information
+//
 // swagger:model BuyerInformation
 type BuyerInformation struct {
 
@@ -24,10 +25,12 @@ type BuyerInformation struct {
 	// **Important**:
 	// Contact your TeleCheck representative to find out whether this field is required or optional.
 	//
+	// Example: 1234567890123456800
 	// Max Length: 9
 	CompanyTaxID string `json:"companyTaxID,omitempty"`
 
 	// Currency used by the customer. Accepts input in the ISO 4217 standard, stores as ISO 4217 Alpha.
+	// Example: USD
 	// Max Length: 3
 	// Min Length: 3
 	Currency string `json:"currency,omitempty"`
@@ -36,6 +39,7 @@ type BuyerInformation struct {
 	//
 	// Format: `YYYY-MM-DD` or `YYYYMMDD`
 	//
+	// Example: 1960-12-30
 	// Max Length: 10
 	// Min Length: 8
 	DateOBirth string `json:"dateOBirth,omitempty"`
@@ -71,12 +75,11 @@ func (m *BuyerInformation) Validate(formats strfmt.Registry) error {
 }
 
 func (m *BuyerInformation) validateCompanyTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CompanyTaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("companyTaxID", "body", string(m.CompanyTaxID), 9); err != nil {
+	if err := validate.MaxLength("companyTaxID", "body", m.CompanyTaxID, 9); err != nil {
 		return err
 	}
 
@@ -84,16 +87,15 @@ func (m *BuyerInformation) validateCompanyTaxID(formats strfmt.Registry) error {
 }
 
 func (m *BuyerInformation) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MinLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("currency", "body", string(m.Currency), 3); err != nil {
+	if err := validate.MaxLength("currency", "body", m.Currency, 3); err != nil {
 		return err
 	}
 
@@ -101,16 +103,15 @@ func (m *BuyerInformation) validateCurrency(formats strfmt.Registry) error {
 }
 
 func (m *BuyerInformation) validateDateOBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DateOBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("dateOBirth", "body", string(m.DateOBirth), 8); err != nil {
+	if err := validate.MinLength("dateOBirth", "body", m.DateOBirth, 8); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("dateOBirth", "body", string(m.DateOBirth), 10); err != nil {
+	if err := validate.MaxLength("dateOBirth", "body", m.DateOBirth, 10); err != nil {
 		return err
 	}
 
@@ -118,7 +119,6 @@ func (m *BuyerInformation) validateDateOBirth(formats strfmt.Registry) error {
 }
 
 func (m *BuyerInformation) validatePersonalIdentification(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PersonalIdentification) { // not required
 		return nil
 	}
@@ -132,6 +132,47 @@ func (m *BuyerInformation) validatePersonalIdentification(formats strfmt.Registr
 			if err := m.PersonalIdentification[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("personalIdentification" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this buyer information based on the context it is used
+func (m *BuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePersonalIdentification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *BuyerInformation) contextValidatePersonalIdentification(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.PersonalIdentification); i++ {
+
+		if m.PersonalIdentification[i] != nil {
+
+			if swag.IsZero(m.PersonalIdentification[i]) { // not required
+				return nil
+			}
+
+			if err := m.PersonalIdentification[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("personalIdentification" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -161,6 +202,7 @@ func (m *BuyerInformation) UnmarshalBinary(b []byte) error {
 }
 
 // BuyerInformationPersonalIdentificationItems0 buyer information personal identification items0
+//
 // swagger:model BuyerInformationPersonalIdentificationItems0
 type BuyerInformationPersonalIdentificationItems0 struct {
 
@@ -169,6 +211,7 @@ type BuyerInformationPersonalIdentificationItems0 struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: 1234567890
 	ID string `json:"id,omitempty"`
 
 	// issued by
@@ -181,6 +224,7 @@ type BuyerInformationPersonalIdentificationItems0 struct {
 	// Valid values:
 	// - driver license
 	//
+	// Example: driver license
 	Type string `json:"type,omitempty"`
 }
 
@@ -199,7 +243,6 @@ func (m *BuyerInformationPersonalIdentificationItems0) Validate(formats strfmt.R
 }
 
 func (m *BuyerInformationPersonalIdentificationItems0) validateIssuedBy(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IssuedBy) { // not required
 		return nil
 	}
@@ -208,6 +251,43 @@ func (m *BuyerInformationPersonalIdentificationItems0) validateIssuedBy(formats 
 		if err := m.IssuedBy.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this buyer information personal identification items0 based on the context it is used
+func (m *BuyerInformationPersonalIdentificationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateIssuedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *BuyerInformationPersonalIdentificationItems0) contextValidateIssuedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.IssuedBy != nil {
+
+		if swag.IsZero(m.IssuedBy) { // not required
+			return nil
+		}
+
+		if err := m.IssuedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
 			}
 			return err
 		}
@@ -235,6 +315,7 @@ func (m *BuyerInformationPersonalIdentificationItems0) UnmarshalBinary(b []byte)
 }
 
 // BuyerInformationPersonalIdentificationItems0IssuedBy buyer information personal identification items0 issued by
+//
 // swagger:model BuyerInformationPersonalIdentificationItems0IssuedBy
 type BuyerInformationPersonalIdentificationItems0IssuedBy struct {
 
@@ -243,11 +324,17 @@ type BuyerInformationPersonalIdentificationItems0IssuedBy struct {
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: CA
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 }
 
 // Validate validates this buyer information personal identification items0 issued by
 func (m *BuyerInformationPersonalIdentificationItems0IssuedBy) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this buyer information personal identification items0 issued by based on context it is used
+func (m *BuyerInformationPersonalIdentificationItems0IssuedBy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

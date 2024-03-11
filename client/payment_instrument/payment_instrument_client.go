@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new payment instrument API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,16 +25,31 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreatePaymentInstrument(params *CreatePaymentInstrumentParams, opts ...ClientOption) (*CreatePaymentInstrumentCreated, error)
+
+	DeletePaymentInstrument(params *DeletePaymentInstrumentParams, opts ...ClientOption) (*DeletePaymentInstrumentNoContent, error)
+
+	GetPaymentInstrument(params *GetPaymentInstrumentParams, opts ...ClientOption) (*GetPaymentInstrumentOK, error)
+
+	UpdatePaymentInstrument(params *UpdatePaymentInstrumentParams, opts ...ClientOption) (*UpdatePaymentInstrumentOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 CreatePaymentInstrument creates a payment instrument
 */
-func (a *Client) CreatePaymentInstrument(params *CreatePaymentInstrumentParams) (*CreatePaymentInstrumentCreated, error) {
+func (a *Client) CreatePaymentInstrument(params *CreatePaymentInstrumentParams, opts ...ClientOption) (*CreatePaymentInstrumentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreatePaymentInstrumentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createPaymentInstrument",
 		Method:             "POST",
 		PathPattern:        "/tms/v1/paymentinstruments",
@@ -46,7 +60,12 @@ func (a *Client) CreatePaymentInstrument(params *CreatePaymentInstrumentParams) 
 		Reader:             &CreatePaymentInstrumentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -63,13 +82,12 @@ func (a *Client) CreatePaymentInstrument(params *CreatePaymentInstrumentParams) 
 /*
 DeletePaymentInstrument deletes a payment instrument
 */
-func (a *Client) DeletePaymentInstrument(params *DeletePaymentInstrumentParams) (*DeletePaymentInstrumentNoContent, error) {
+func (a *Client) DeletePaymentInstrument(params *DeletePaymentInstrumentParams, opts ...ClientOption) (*DeletePaymentInstrumentNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeletePaymentInstrumentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deletePaymentInstrument",
 		Method:             "DELETE",
 		PathPattern:        "/tms/v1/paymentinstruments/{tokenId}",
@@ -80,7 +98,12 @@ func (a *Client) DeletePaymentInstrument(params *DeletePaymentInstrumentParams) 
 		Reader:             &DeletePaymentInstrumentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -97,13 +120,12 @@ func (a *Client) DeletePaymentInstrument(params *DeletePaymentInstrumentParams) 
 /*
 GetPaymentInstrument retrieves a payment instrument
 */
-func (a *Client) GetPaymentInstrument(params *GetPaymentInstrumentParams) (*GetPaymentInstrumentOK, error) {
+func (a *Client) GetPaymentInstrument(params *GetPaymentInstrumentParams, opts ...ClientOption) (*GetPaymentInstrumentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetPaymentInstrumentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getPaymentInstrument",
 		Method:             "GET",
 		PathPattern:        "/tms/v1/paymentinstruments/{tokenId}",
@@ -114,7 +136,12 @@ func (a *Client) GetPaymentInstrument(params *GetPaymentInstrumentParams) (*GetP
 		Reader:             &GetPaymentInstrumentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -131,13 +158,12 @@ func (a *Client) GetPaymentInstrument(params *GetPaymentInstrumentParams) (*GetP
 /*
 UpdatePaymentInstrument updates a payment instrument
 */
-func (a *Client) UpdatePaymentInstrument(params *UpdatePaymentInstrumentParams) (*UpdatePaymentInstrumentOK, error) {
+func (a *Client) UpdatePaymentInstrument(params *UpdatePaymentInstrumentParams, opts ...ClientOption) (*UpdatePaymentInstrumentOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdatePaymentInstrumentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updatePaymentInstrument",
 		Method:             "PATCH",
 		PathPattern:        "/tms/v1/paymentinstruments/{tokenId}",
@@ -148,7 +174,12 @@ func (a *Client) UpdatePaymentInstrument(params *UpdatePaymentInstrumentParams) 
 		Reader:             &UpdatePaymentInstrumentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

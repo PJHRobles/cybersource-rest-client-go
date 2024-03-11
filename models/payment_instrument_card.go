@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // PaymentInstrumentCard payment instrument card
+//
 // swagger:model PaymentInstrumentCard
 type PaymentInstrumentCard struct {
 
@@ -26,6 +28,7 @@ type PaymentInstrumentCard struct {
 	// Important:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	ExpirationMonth string `json:"expirationMonth,omitempty"`
@@ -41,11 +44,13 @@ type PaymentInstrumentCard struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.'
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	ExpirationYear string `json:"expirationYear,omitempty"`
 
 	// Number of times a Maestro (UK Domestic) card has been issued to the account holder.
+	// Example: 01
 	// Max Length: 2
 	// Min Length: 1
 	IssueNumber string `json:"issueNumber,omitempty"`
@@ -55,6 +60,7 @@ type PaymentInstrumentCard struct {
 	// Format: `MM`.
 	// Possible values: `01` through `12`.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	StartMonth string `json:"startMonth,omitempty"`
@@ -64,6 +70,7 @@ type PaymentInstrumentCard struct {
 	// Format: `YYYY`.
 	// Possible values: `1900` through `2099`.
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	StartYear string `json:"startYear,omitempty"`
@@ -129,6 +136,7 @@ type PaymentInstrumentCard struct {
 	Type *string `json:"type"`
 
 	// Card Use As Field. Supported value of `pinless debit` only. Only for use with Pinless Debit tokens.
+	// Example: pinless debit
 	UseAs string `json:"useAs,omitempty"`
 }
 
@@ -167,16 +175,15 @@ func (m *PaymentInstrumentCard) Validate(formats strfmt.Registry) error {
 }
 
 func (m *PaymentInstrumentCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("expirationMonth", "body", string(m.ExpirationMonth), 2); err != nil {
+	if err := validate.MinLength("expirationMonth", "body", m.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("expirationMonth", "body", string(m.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("expirationMonth", "body", m.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -184,16 +191,15 @@ func (m *PaymentInstrumentCard) validateExpirationMonth(formats strfmt.Registry)
 }
 
 func (m *PaymentInstrumentCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("expirationYear", "body", string(m.ExpirationYear), 4); err != nil {
+	if err := validate.MinLength("expirationYear", "body", m.ExpirationYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("expirationYear", "body", string(m.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("expirationYear", "body", m.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -201,16 +207,15 @@ func (m *PaymentInstrumentCard) validateExpirationYear(formats strfmt.Registry) 
 }
 
 func (m *PaymentInstrumentCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("issueNumber", "body", string(m.IssueNumber), 1); err != nil {
+	if err := validate.MinLength("issueNumber", "body", m.IssueNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("issueNumber", "body", string(m.IssueNumber), 2); err != nil {
+	if err := validate.MaxLength("issueNumber", "body", m.IssueNumber, 2); err != nil {
 		return err
 	}
 
@@ -218,16 +223,15 @@ func (m *PaymentInstrumentCard) validateIssueNumber(formats strfmt.Registry) err
 }
 
 func (m *PaymentInstrumentCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("startMonth", "body", string(m.StartMonth), 2); err != nil {
+	if err := validate.MinLength("startMonth", "body", m.StartMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("startMonth", "body", string(m.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("startMonth", "body", m.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -235,16 +239,15 @@ func (m *PaymentInstrumentCard) validateStartMonth(formats strfmt.Registry) erro
 }
 
 func (m *PaymentInstrumentCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("startYear", "body", string(m.StartYear), 4); err != nil {
+	if err := validate.MinLength("startYear", "body", m.StartYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("startYear", "body", string(m.StartYear), 4); err != nil {
+	if err := validate.MaxLength("startYear", "body", m.StartYear, 4); err != nil {
 		return err
 	}
 
@@ -257,6 +260,11 @@ func (m *PaymentInstrumentCard) validateType(formats strfmt.Registry) error {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this payment instrument card based on context it is used
+func (m *PaymentInstrumentCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

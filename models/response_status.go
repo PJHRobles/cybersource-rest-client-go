@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ResponseStatus response status
+//
 // swagger:model ResponseStatus
 type ResponseStatus struct {
 
@@ -49,7 +50,6 @@ func (m *ResponseStatus) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ResponseStatus) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Details) { // not required
 		return nil
 	}
@@ -63,6 +63,47 @@ func (m *ResponseStatus) validateDetails(formats strfmt.Registry) error {
 			if err := m.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this response status based on the context it is used
+func (m *ResponseStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResponseStatus) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Details); i++ {
+
+		if m.Details[i] != nil {
+
+			if swag.IsZero(m.Details[i]) { // not required
+				return nil
+			}
+
+			if err := m.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -92,6 +133,7 @@ func (m *ResponseStatus) UnmarshalBinary(b []byte) error {
 }
 
 // ResponseStatusDetailsItems0 response status details items0
+//
 // swagger:model ResponseStatusDetailsItems0
 type ResponseStatusDetailsItems0 struct {
 
@@ -104,6 +146,11 @@ type ResponseStatusDetailsItems0 struct {
 
 // Validate validates this response status details items0
 func (m *ResponseStatusDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this response status details items0 based on context it is used
+func (m *ResponseStatusDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

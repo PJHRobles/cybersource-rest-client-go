@@ -6,14 +6,14 @@ package payment_instrument
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // DeletePaymentInstrumentReader is a Reader for the DeletePaymentInstrument structure.
@@ -60,9 +60,8 @@ func (o *DeletePaymentInstrumentReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /tms/v1/paymentinstruments/{tokenId}] deletePaymentInstrument", response, response.Code())
 	}
 }
 
@@ -71,24 +70,64 @@ func NewDeletePaymentInstrumentNoContent() *DeletePaymentInstrumentNoContent {
 	return &DeletePaymentInstrumentNoContent{}
 }
 
-/*DeletePaymentInstrumentNoContent handles this case with default header values.
+/*
+DeletePaymentInstrumentNoContent describes a response with status code 204, with default header values.
 
 An existing Payment Instrument associated with the supplied `tokenId` has been deleted.
 */
 type DeletePaymentInstrumentNoContent struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
+}
+
+// IsSuccess returns true when this delete payment instrument no content response has a 2xx status code
+func (o *DeletePaymentInstrumentNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete payment instrument no content response has a 3xx status code
+func (o *DeletePaymentInstrumentNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument no content response has a 4xx status code
+func (o *DeletePaymentInstrumentNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete payment instrument no content response has a 5xx status code
+func (o *DeletePaymentInstrumentNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete payment instrument no content response a status code equal to that given
+func (o *DeletePaymentInstrumentNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete payment instrument no content response
+func (o *DeletePaymentInstrumentNoContent) Code() int {
+	return 204
 }
 
 func (o *DeletePaymentInstrumentNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentNoContent ", 204)
 }
 
+func (o *DeletePaymentInstrumentNoContent) String() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentNoContent ", 204)
+}
+
 func (o *DeletePaymentInstrumentNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	return nil
 }
@@ -98,19 +137,55 @@ func NewDeletePaymentInstrumentForbidden() *DeletePaymentInstrumentForbidden {
 	return &DeletePaymentInstrumentForbidden{}
 }
 
-/*DeletePaymentInstrumentForbidden handles this case with default header values.
+/*
+DeletePaymentInstrumentForbidden describes a response with status code 403, with default header values.
 
 Forbidden. The profile might not have permission to perform the token operation.
 */
 type DeletePaymentInstrumentForbidden struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeletePaymentInstrumentForbiddenBodyItems0
 }
 
+// IsSuccess returns true when this delete payment instrument forbidden response has a 2xx status code
+func (o *DeletePaymentInstrumentForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete payment instrument forbidden response has a 3xx status code
+func (o *DeletePaymentInstrumentForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument forbidden response has a 4xx status code
+func (o *DeletePaymentInstrumentForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete payment instrument forbidden response has a 5xx status code
+func (o *DeletePaymentInstrumentForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete payment instrument forbidden response a status code equal to that given
+func (o *DeletePaymentInstrumentForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete payment instrument forbidden response
+func (o *DeletePaymentInstrumentForbidden) Code() int {
+	return 403
+}
+
 func (o *DeletePaymentInstrumentForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeletePaymentInstrumentForbidden) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentForbidden  %+v", 403, o.Payload)
 }
 
@@ -120,8 +195,12 @@ func (o *DeletePaymentInstrumentForbidden) GetPayload() []*DeletePaymentInstrume
 
 func (o *DeletePaymentInstrumentForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -136,19 +215,55 @@ func NewDeletePaymentInstrumentNotFound() *DeletePaymentInstrumentNotFound {
 	return &DeletePaymentInstrumentNotFound{}
 }
 
-/*DeletePaymentInstrumentNotFound handles this case with default header values.
+/*
+DeletePaymentInstrumentNotFound describes a response with status code 404, with default header values.
 
 Token Not Found. The `tokenid` may not exist or was entered incorrectly.
 */
 type DeletePaymentInstrumentNotFound struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeletePaymentInstrumentNotFoundBodyItems0
 }
 
+// IsSuccess returns true when this delete payment instrument not found response has a 2xx status code
+func (o *DeletePaymentInstrumentNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete payment instrument not found response has a 3xx status code
+func (o *DeletePaymentInstrumentNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument not found response has a 4xx status code
+func (o *DeletePaymentInstrumentNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete payment instrument not found response has a 5xx status code
+func (o *DeletePaymentInstrumentNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete payment instrument not found response a status code equal to that given
+func (o *DeletePaymentInstrumentNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete payment instrument not found response
+func (o *DeletePaymentInstrumentNotFound) Code() int {
+	return 404
+}
+
 func (o *DeletePaymentInstrumentNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeletePaymentInstrumentNotFound) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentNotFound  %+v", 404, o.Payload)
 }
 
@@ -158,8 +273,12 @@ func (o *DeletePaymentInstrumentNotFound) GetPayload() []*DeletePaymentInstrumen
 
 func (o *DeletePaymentInstrumentNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -174,19 +293,55 @@ func NewDeletePaymentInstrumentGone() *DeletePaymentInstrumentGone {
 	return &DeletePaymentInstrumentGone{}
 }
 
-/*DeletePaymentInstrumentGone handles this case with default header values.
+/*
+DeletePaymentInstrumentGone describes a response with status code 410, with default header values.
 
 Token Not Available. The token has been deleted.
 */
 type DeletePaymentInstrumentGone struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeletePaymentInstrumentGoneBodyItems0
 }
 
+// IsSuccess returns true when this delete payment instrument gone response has a 2xx status code
+func (o *DeletePaymentInstrumentGone) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete payment instrument gone response has a 3xx status code
+func (o *DeletePaymentInstrumentGone) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument gone response has a 4xx status code
+func (o *DeletePaymentInstrumentGone) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete payment instrument gone response has a 5xx status code
+func (o *DeletePaymentInstrumentGone) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete payment instrument gone response a status code equal to that given
+func (o *DeletePaymentInstrumentGone) IsCode(code int) bool {
+	return code == 410
+}
+
+// Code gets the status code for the delete payment instrument gone response
+func (o *DeletePaymentInstrumentGone) Code() int {
+	return 410
+}
+
 func (o *DeletePaymentInstrumentGone) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentGone  %+v", 410, o.Payload)
+}
+
+func (o *DeletePaymentInstrumentGone) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentGone  %+v", 410, o.Payload)
 }
 
@@ -196,8 +351,12 @@ func (o *DeletePaymentInstrumentGone) GetPayload() []*DeletePaymentInstrumentGon
 
 func (o *DeletePaymentInstrumentGone) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -212,19 +371,55 @@ func NewDeletePaymentInstrumentFailedDependency() *DeletePaymentInstrumentFailed
 	return &DeletePaymentInstrumentFailedDependency{}
 }
 
-/*DeletePaymentInstrumentFailedDependency handles this case with default header values.
+/*
+DeletePaymentInstrumentFailedDependency describes a response with status code 424, with default header values.
 
 Failed Dependency: e.g. The profile represented by the profile-id may not exist or the profile-id was entered incorrectly.
 */
 type DeletePaymentInstrumentFailedDependency struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeletePaymentInstrumentFailedDependencyBodyItems0
 }
 
+// IsSuccess returns true when this delete payment instrument failed dependency response has a 2xx status code
+func (o *DeletePaymentInstrumentFailedDependency) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete payment instrument failed dependency response has a 3xx status code
+func (o *DeletePaymentInstrumentFailedDependency) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument failed dependency response has a 4xx status code
+func (o *DeletePaymentInstrumentFailedDependency) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete payment instrument failed dependency response has a 5xx status code
+func (o *DeletePaymentInstrumentFailedDependency) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete payment instrument failed dependency response a status code equal to that given
+func (o *DeletePaymentInstrumentFailedDependency) IsCode(code int) bool {
+	return code == 424
+}
+
+// Code gets the status code for the delete payment instrument failed dependency response
+func (o *DeletePaymentInstrumentFailedDependency) Code() int {
+	return 424
+}
+
 func (o *DeletePaymentInstrumentFailedDependency) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentFailedDependency  %+v", 424, o.Payload)
+}
+
+func (o *DeletePaymentInstrumentFailedDependency) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentFailedDependency  %+v", 424, o.Payload)
 }
 
@@ -234,8 +429,12 @@ func (o *DeletePaymentInstrumentFailedDependency) GetPayload() []*DeletePaymentI
 
 func (o *DeletePaymentInstrumentFailedDependency) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -250,19 +449,55 @@ func NewDeletePaymentInstrumentInternalServerError() *DeletePaymentInstrumentInt
 	return &DeletePaymentInstrumentInternalServerError{}
 }
 
-/*DeletePaymentInstrumentInternalServerError handles this case with default header values.
+/*
+DeletePaymentInstrumentInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected error.
 */
 type DeletePaymentInstrumentInternalServerError struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeletePaymentInstrumentInternalServerErrorBodyItems0
 }
 
+// IsSuccess returns true when this delete payment instrument internal server error response has a 2xx status code
+func (o *DeletePaymentInstrumentInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete payment instrument internal server error response has a 3xx status code
+func (o *DeletePaymentInstrumentInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete payment instrument internal server error response has a 4xx status code
+func (o *DeletePaymentInstrumentInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete payment instrument internal server error response has a 5xx status code
+func (o *DeletePaymentInstrumentInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete payment instrument internal server error response a status code equal to that given
+func (o *DeletePaymentInstrumentInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete payment instrument internal server error response
+func (o *DeletePaymentInstrumentInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeletePaymentInstrumentInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeletePaymentInstrumentInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/paymentinstruments/{tokenId}][%d] deletePaymentInstrumentInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -272,8 +507,12 @@ func (o *DeletePaymentInstrumentInternalServerError) GetPayload() []*DeletePayme
 
 func (o *DeletePaymentInstrumentInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -283,7 +522,8 @@ func (o *DeletePaymentInstrumentInternalServerError) readResponse(response runti
 	return nil
 }
 
-/*DeletePaymentInstrumentFailedDependencyBodyItems0 delete payment instrument failed dependency body items0
+/*
+DeletePaymentInstrumentFailedDependencyBodyItems0 delete payment instrument failed dependency body items0
 swagger:model DeletePaymentInstrumentFailedDependencyBodyItems0
 */
 type DeletePaymentInstrumentFailedDependencyBodyItems0 struct {
@@ -313,7 +553,6 @@ func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) Validate(formats str
 }
 
 func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -322,6 +561,43 @@ func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) validateDetails(form
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete payment instrument failed dependency body items0 based on the context it is used
+func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -348,7 +624,8 @@ func (o *DeletePaymentInstrumentFailedDependencyBodyItems0) UnmarshalBinary(b []
 	return nil
 }
 
-/*DeletePaymentInstrumentFailedDependencyBodyItems0Details delete payment instrument failed dependency body items0 details
+/*
+DeletePaymentInstrumentFailedDependencyBodyItems0Details delete payment instrument failed dependency body items0 details
 swagger:model DeletePaymentInstrumentFailedDependencyBodyItems0Details
 */
 type DeletePaymentInstrumentFailedDependencyBodyItems0Details struct {
@@ -362,6 +639,11 @@ type DeletePaymentInstrumentFailedDependencyBodyItems0Details struct {
 
 // Validate validates this delete payment instrument failed dependency body items0 details
 func (o *DeletePaymentInstrumentFailedDependencyBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete payment instrument failed dependency body items0 details based on context it is used
+func (o *DeletePaymentInstrumentFailedDependencyBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -383,7 +665,8 @@ func (o *DeletePaymentInstrumentFailedDependencyBodyItems0Details) UnmarshalBina
 	return nil
 }
 
-/*DeletePaymentInstrumentForbiddenBodyItems0 delete payment instrument forbidden body items0
+/*
+DeletePaymentInstrumentForbiddenBodyItems0 delete payment instrument forbidden body items0
 swagger:model DeletePaymentInstrumentForbiddenBodyItems0
 */
 type DeletePaymentInstrumentForbiddenBodyItems0 struct {
@@ -413,7 +696,6 @@ func (o *DeletePaymentInstrumentForbiddenBodyItems0) Validate(formats strfmt.Reg
 }
 
 func (o *DeletePaymentInstrumentForbiddenBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -422,6 +704,43 @@ func (o *DeletePaymentInstrumentForbiddenBodyItems0) validateDetails(formats str
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete payment instrument forbidden body items0 based on the context it is used
+func (o *DeletePaymentInstrumentForbiddenBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeletePaymentInstrumentForbiddenBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -448,7 +767,8 @@ func (o *DeletePaymentInstrumentForbiddenBodyItems0) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*DeletePaymentInstrumentForbiddenBodyItems0Details delete payment instrument forbidden body items0 details
+/*
+DeletePaymentInstrumentForbiddenBodyItems0Details delete payment instrument forbidden body items0 details
 swagger:model DeletePaymentInstrumentForbiddenBodyItems0Details
 */
 type DeletePaymentInstrumentForbiddenBodyItems0Details struct {
@@ -462,6 +782,11 @@ type DeletePaymentInstrumentForbiddenBodyItems0Details struct {
 
 // Validate validates this delete payment instrument forbidden body items0 details
 func (o *DeletePaymentInstrumentForbiddenBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete payment instrument forbidden body items0 details based on context it is used
+func (o *DeletePaymentInstrumentForbiddenBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -483,7 +808,8 @@ func (o *DeletePaymentInstrumentForbiddenBodyItems0Details) UnmarshalBinary(b []
 	return nil
 }
 
-/*DeletePaymentInstrumentGoneBodyItems0 delete payment instrument gone body items0
+/*
+DeletePaymentInstrumentGoneBodyItems0 delete payment instrument gone body items0
 swagger:model DeletePaymentInstrumentGoneBodyItems0
 */
 type DeletePaymentInstrumentGoneBodyItems0 struct {
@@ -513,7 +839,6 @@ func (o *DeletePaymentInstrumentGoneBodyItems0) Validate(formats strfmt.Registry
 }
 
 func (o *DeletePaymentInstrumentGoneBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -522,6 +847,43 @@ func (o *DeletePaymentInstrumentGoneBodyItems0) validateDetails(formats strfmt.R
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete payment instrument gone body items0 based on the context it is used
+func (o *DeletePaymentInstrumentGoneBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeletePaymentInstrumentGoneBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -548,7 +910,8 @@ func (o *DeletePaymentInstrumentGoneBodyItems0) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*DeletePaymentInstrumentGoneBodyItems0Details delete payment instrument gone body items0 details
+/*
+DeletePaymentInstrumentGoneBodyItems0Details delete payment instrument gone body items0 details
 swagger:model DeletePaymentInstrumentGoneBodyItems0Details
 */
 type DeletePaymentInstrumentGoneBodyItems0Details struct {
@@ -562,6 +925,11 @@ type DeletePaymentInstrumentGoneBodyItems0Details struct {
 
 // Validate validates this delete payment instrument gone body items0 details
 func (o *DeletePaymentInstrumentGoneBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete payment instrument gone body items0 details based on context it is used
+func (o *DeletePaymentInstrumentGoneBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -583,7 +951,8 @@ func (o *DeletePaymentInstrumentGoneBodyItems0Details) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*DeletePaymentInstrumentInternalServerErrorBodyItems0 delete payment instrument internal server error body items0
+/*
+DeletePaymentInstrumentInternalServerErrorBodyItems0 delete payment instrument internal server error body items0
 swagger:model DeletePaymentInstrumentInternalServerErrorBodyItems0
 */
 type DeletePaymentInstrumentInternalServerErrorBodyItems0 struct {
@@ -613,7 +982,6 @@ func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) Validate(formats 
 }
 
 func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -622,6 +990,43 @@ func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) validateDetails(f
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete payment instrument internal server error body items0 based on the context it is used
+func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -648,7 +1053,8 @@ func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0) UnmarshalBinary(b
 	return nil
 }
 
-/*DeletePaymentInstrumentInternalServerErrorBodyItems0Details delete payment instrument internal server error body items0 details
+/*
+DeletePaymentInstrumentInternalServerErrorBodyItems0Details delete payment instrument internal server error body items0 details
 swagger:model DeletePaymentInstrumentInternalServerErrorBodyItems0Details
 */
 type DeletePaymentInstrumentInternalServerErrorBodyItems0Details struct {
@@ -662,6 +1068,11 @@ type DeletePaymentInstrumentInternalServerErrorBodyItems0Details struct {
 
 // Validate validates this delete payment instrument internal server error body items0 details
 func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete payment instrument internal server error body items0 details based on context it is used
+func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -683,7 +1094,8 @@ func (o *DeletePaymentInstrumentInternalServerErrorBodyItems0Details) UnmarshalB
 	return nil
 }
 
-/*DeletePaymentInstrumentNotFoundBodyItems0 delete payment instrument not found body items0
+/*
+DeletePaymentInstrumentNotFoundBodyItems0 delete payment instrument not found body items0
 swagger:model DeletePaymentInstrumentNotFoundBodyItems0
 */
 type DeletePaymentInstrumentNotFoundBodyItems0 struct {
@@ -713,7 +1125,6 @@ func (o *DeletePaymentInstrumentNotFoundBodyItems0) Validate(formats strfmt.Regi
 }
 
 func (o *DeletePaymentInstrumentNotFoundBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -722,6 +1133,43 @@ func (o *DeletePaymentInstrumentNotFoundBodyItems0) validateDetails(formats strf
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete payment instrument not found body items0 based on the context it is used
+func (o *DeletePaymentInstrumentNotFoundBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeletePaymentInstrumentNotFoundBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -748,7 +1196,8 @@ func (o *DeletePaymentInstrumentNotFoundBodyItems0) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*DeletePaymentInstrumentNotFoundBodyItems0Details delete payment instrument not found body items0 details
+/*
+DeletePaymentInstrumentNotFoundBodyItems0Details delete payment instrument not found body items0 details
 swagger:model DeletePaymentInstrumentNotFoundBodyItems0Details
 */
 type DeletePaymentInstrumentNotFoundBodyItems0Details struct {
@@ -762,6 +1211,11 @@ type DeletePaymentInstrumentNotFoundBodyItems0Details struct {
 
 // Validate validates this delete payment instrument not found body items0 details
 func (o *DeletePaymentInstrumentNotFoundBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete payment instrument not found body items0 details based on context it is used
+func (o *DeletePaymentInstrumentNotFoundBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

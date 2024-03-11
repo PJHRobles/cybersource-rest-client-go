@@ -1,2 +1,3 @@
 .DS_Store
 ./cybersource-rest-client-go
+vendor/

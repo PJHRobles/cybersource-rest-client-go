@@ -6,16 +6,16 @@ package decision_manager
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreateDecisionManagerCaseReader is a Reader for the CreateDecisionManagerCase structure.
@@ -44,9 +44,8 @@ func (o *CreateDecisionManagerCaseReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /risk/v1/decisions] createDecisionManagerCase", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewCreateDecisionManagerCaseCreated() *CreateDecisionManagerCaseCreated {
 	return &CreateDecisionManagerCaseCreated{}
 }
 
-/*CreateDecisionManagerCaseCreated handles this case with default header values.
+/*
+CreateDecisionManagerCaseCreated describes a response with status code 201, with default header values.
 
 Successful response
 */
@@ -63,7 +63,41 @@ type CreateDecisionManagerCaseCreated struct {
 	Payload *CreateDecisionManagerCaseCreatedBody
 }
 
+// IsSuccess returns true when this create decision manager case created response has a 2xx status code
+func (o *CreateDecisionManagerCaseCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create decision manager case created response has a 3xx status code
+func (o *CreateDecisionManagerCaseCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create decision manager case created response has a 4xx status code
+func (o *CreateDecisionManagerCaseCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create decision manager case created response has a 5xx status code
+func (o *CreateDecisionManagerCaseCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create decision manager case created response a status code equal to that given
+func (o *CreateDecisionManagerCaseCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create decision manager case created response
+func (o *CreateDecisionManagerCaseCreated) Code() int {
+	return 201
+}
+
 func (o *CreateDecisionManagerCaseCreated) Error() string {
+	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreateDecisionManagerCaseCreated) String() string {
 	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewCreateDecisionManagerCaseBadRequest() *CreateDecisionManagerCaseBadReque
 	return &CreateDecisionManagerCaseBadRequest{}
 }
 
-/*CreateDecisionManagerCaseBadRequest handles this case with default header values.
+/*
+CreateDecisionManagerCaseBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
@@ -96,7 +131,41 @@ type CreateDecisionManagerCaseBadRequest struct {
 	Payload *CreateDecisionManagerCaseBadRequestBody
 }
 
+// IsSuccess returns true when this create decision manager case bad request response has a 2xx status code
+func (o *CreateDecisionManagerCaseBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create decision manager case bad request response has a 3xx status code
+func (o *CreateDecisionManagerCaseBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create decision manager case bad request response has a 4xx status code
+func (o *CreateDecisionManagerCaseBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create decision manager case bad request response has a 5xx status code
+func (o *CreateDecisionManagerCaseBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create decision manager case bad request response a status code equal to that given
+func (o *CreateDecisionManagerCaseBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create decision manager case bad request response
+func (o *CreateDecisionManagerCaseBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateDecisionManagerCaseBadRequest) Error() string {
+	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateDecisionManagerCaseBadRequest) String() string {
 	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewCreateDecisionManagerCaseBadGateway() *CreateDecisionManagerCaseBadGatew
 	return &CreateDecisionManagerCaseBadGateway{}
 }
 
-/*CreateDecisionManagerCaseBadGateway handles this case with default header values.
+/*
+CreateDecisionManagerCaseBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type CreateDecisionManagerCaseBadGateway struct {
 	Payload *CreateDecisionManagerCaseBadGatewayBody
 }
 
+// IsSuccess returns true when this create decision manager case bad gateway response has a 2xx status code
+func (o *CreateDecisionManagerCaseBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create decision manager case bad gateway response has a 3xx status code
+func (o *CreateDecisionManagerCaseBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create decision manager case bad gateway response has a 4xx status code
+func (o *CreateDecisionManagerCaseBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create decision manager case bad gateway response has a 5xx status code
+func (o *CreateDecisionManagerCaseBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create decision manager case bad gateway response a status code equal to that given
+func (o *CreateDecisionManagerCaseBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the create decision manager case bad gateway response
+func (o *CreateDecisionManagerCaseBadGateway) Code() int {
+	return 502
+}
+
 func (o *CreateDecisionManagerCaseBadGateway) Error() string {
+	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *CreateDecisionManagerCaseBadGateway) String() string {
 	return fmt.Sprintf("[POST /risk/v1/decisions][%d] createDecisionManagerCaseBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *CreateDecisionManagerCaseBadGateway) readResponse(response runtime.Clie
 	return nil
 }
 
-/*CreateDecisionManagerCaseBadGatewayBody riskV1DecisionsPost502Response
+/*
+CreateDecisionManagerCaseBadGatewayBody riskV1DecisionsPost502Response
 swagger:model CreateDecisionManagerCaseBadGatewayBody
 */
 type CreateDecisionManagerCaseBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *CreateDecisionManagerCaseBadGatewayBody) Validate(formats strfmt.Regist
 	return nil
 }
 
+// ContextValidate validates this create decision manager case bad gateway body based on context it is used
+func (o *CreateDecisionManagerCaseBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateDecisionManagerCaseBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *CreateDecisionManagerCaseBadGatewayBody) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreateDecisionManagerCaseBadRequestBody riskV1DecisionsPost400Response
+/*
+CreateDecisionManagerCaseBadRequestBody riskV1DecisionsPost400Response
 swagger:model CreateDecisionManagerCaseBadRequestBody
 */
 type CreateDecisionManagerCaseBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*CreateDecisionManagerCaseBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -255,7 +366,6 @@ func (o *CreateDecisionManagerCaseBadRequestBody) Validate(formats strfmt.Regist
 }
 
 func (o *CreateDecisionManagerCaseBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -269,6 +379,47 @@ func (o *CreateDecisionManagerCaseBadRequestBody) validateDetails(formats strfmt
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case bad request body based on the context it is used
+func (o *CreateDecisionManagerCaseBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -297,7 +448,54 @@ func (o *CreateDecisionManagerCaseBadRequestBody) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreateDecisionManagerCaseBody create decision manager case body
+/*
+CreateDecisionManagerCaseBadRequestBodyDetailsItems0 create decision manager case bad request body details items0
+swagger:model CreateDecisionManagerCaseBadRequestBodyDetailsItems0
+*/
+type CreateDecisionManagerCaseBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this create decision manager case bad request body details items0
+func (o *CreateDecisionManagerCaseBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create decision manager case bad request body details items0 based on context it is used
+func (o *CreateDecisionManagerCaseBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateDecisionManagerCaseBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateDecisionManagerCaseBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res CreateDecisionManagerCaseBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateDecisionManagerCaseBody create decision manager case body
 swagger:model CreateDecisionManagerCaseBody
 */
 type CreateDecisionManagerCaseBody struct {
@@ -316,7 +514,7 @@ type CreateDecisionManagerCaseBody struct {
 	DeviceInformation *CreateDecisionManagerCaseParamsBodyDeviceInformation `json:"deviceInformation,omitempty"`
 
 	// merchant defined information
-	MerchantDefinedInformation []*MerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
+	MerchantDefinedInformation []*CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
 
 	// order information
 	// Required: true
@@ -386,7 +584,6 @@ func (o *CreateDecisionManagerCaseBody) Validate(formats strfmt.Registry) error 
 }
 
 func (o *CreateDecisionManagerCaseBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -395,6 +592,8 @@ func (o *CreateDecisionManagerCaseBody) validateBuyerInformation(formats strfmt.
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -404,7 +603,6 @@ func (o *CreateDecisionManagerCaseBody) validateBuyerInformation(formats strfmt.
 }
 
 func (o *CreateDecisionManagerCaseBody) validateCardVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardVerification) { // not required
 		return nil
 	}
@@ -413,6 +611,8 @@ func (o *CreateDecisionManagerCaseBody) validateCardVerification(formats strfmt.
 		if err := o.CardVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "cardVerification")
 			}
 			return err
 		}
@@ -431,6 +631,8 @@ func (o *CreateDecisionManagerCaseBody) validateClientReferenceInformation(forma
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -440,7 +642,6 @@ func (o *CreateDecisionManagerCaseBody) validateClientReferenceInformation(forma
 }
 
 func (o *CreateDecisionManagerCaseBody) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -449,6 +650,8 @@ func (o *CreateDecisionManagerCaseBody) validateDeviceInformation(formats strfmt
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "deviceInformation")
 			}
 			return err
 		}
@@ -458,7 +661,6 @@ func (o *CreateDecisionManagerCaseBody) validateDeviceInformation(formats strfmt
 }
 
 func (o *CreateDecisionManagerCaseBody) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -472,6 +674,8 @@ func (o *CreateDecisionManagerCaseBody) validateMerchantDefinedInformation(forma
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -492,6 +696,8 @@ func (o *CreateDecisionManagerCaseBody) validateOrderInformation(formats strfmt.
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -501,7 +707,6 @@ func (o *CreateDecisionManagerCaseBody) validateOrderInformation(formats strfmt.
 }
 
 func (o *CreateDecisionManagerCaseBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -510,6 +715,8 @@ func (o *CreateDecisionManagerCaseBody) validatePaymentInformation(formats strfm
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -519,7 +726,6 @@ func (o *CreateDecisionManagerCaseBody) validatePaymentInformation(formats strfm
 }
 
 func (o *CreateDecisionManagerCaseBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -528,6 +734,8 @@ func (o *CreateDecisionManagerCaseBody) validateProcessorInformation(formats str
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -537,7 +745,6 @@ func (o *CreateDecisionManagerCaseBody) validateProcessorInformation(formats str
 }
 
 func (o *CreateDecisionManagerCaseBody) validateRiskInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RiskInformation) { // not required
 		return nil
 	}
@@ -546,6 +753,8 @@ func (o *CreateDecisionManagerCaseBody) validateRiskInformation(formats strfmt.R
 		if err := o.RiskInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation")
 			}
 			return err
 		}
@@ -555,7 +764,6 @@ func (o *CreateDecisionManagerCaseBody) validateRiskInformation(formats strfmt.R
 }
 
 func (o *CreateDecisionManagerCaseBody) validateTravelInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TravelInformation) { // not required
 		return nil
 	}
@@ -564,6 +772,264 @@ func (o *CreateDecisionManagerCaseBody) validateTravelInformation(formats strfmt
 		if err := o.TravelInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case body based on the context it is used
+func (o *CreateDecisionManagerCaseBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCardVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRiskInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTravelInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateCardVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.CardVerification != nil {
+
+		if swag.IsZero(o.CardVerification) { // not required
+			return nil
+		}
+
+		if err := o.CardVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "cardVerification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateRiskInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RiskInformation != nil {
+
+		if swag.IsZero(o.RiskInformation) { // not required
+			return nil
+		}
+
+		if err := o.RiskInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseBody) contextValidateTravelInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.TravelInformation != nil {
+
+		if swag.IsZero(o.TravelInformation) { // not required
+			return nil
+		}
+
+		if err := o.TravelInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation")
 			}
 			return err
 		}
@@ -590,7 +1056,8 @@ func (o *CreateDecisionManagerCaseBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBody riskV1DecisionsPost201Response
+/*
+CreateDecisionManagerCaseCreatedBody riskV1DecisionsPost201Response
 swagger:model CreateDecisionManagerCaseCreatedBody
 */
 type CreateDecisionManagerCaseCreatedBody struct {
@@ -661,7 +1128,6 @@ func (o *CreateDecisionManagerCaseCreatedBody) Validate(formats strfmt.Registry)
 }
 
 func (o *CreateDecisionManagerCaseCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -670,6 +1136,8 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateLinks(formats strfmt.Regi
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -679,7 +1147,6 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateLinks(formats strfmt.Regi
 }
 
 func (o *CreateDecisionManagerCaseCreatedBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -688,6 +1155,8 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateErrorInformation(formats 
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -697,12 +1166,11 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateErrorInformation(formats 
 }
 
 func (o *CreateDecisionManagerCaseCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -710,7 +1178,6 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateID(formats strfmt.Registr
 }
 
 func (o *CreateDecisionManagerCaseCreatedBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -719,6 +1186,8 @@ func (o *CreateDecisionManagerCaseCreatedBody) validatePaymentInformation(format
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -728,7 +1197,6 @@ func (o *CreateDecisionManagerCaseCreatedBody) validatePaymentInformation(format
 }
 
 func (o *CreateDecisionManagerCaseCreatedBody) validateRiskInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RiskInformation) { // not required
 		return nil
 	}
@@ -737,6 +1205,118 @@ func (o *CreateDecisionManagerCaseCreatedBody) validateRiskInformation(formats s
 		if err := o.RiskInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRiskInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBody) contextValidateRiskInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RiskInformation != nil {
+
+		if swag.IsZero(o.RiskInformation) { // not required
+			return nil
+		}
+
+		if err := o.RiskInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation")
 			}
 			return err
 		}
@@ -763,7 +1343,8 @@ func (o *CreateDecisionManagerCaseCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyErrorInformation create decision manager case created body error information
+/*
+CreateDecisionManagerCaseCreatedBodyErrorInformation create decision manager case created body error information
 swagger:model CreateDecisionManagerCaseCreatedBodyErrorInformation
 */
 type CreateDecisionManagerCaseCreatedBodyErrorInformation struct {
@@ -818,7 +1399,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) Validate(formats 
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -832,6 +1412,47 @@ func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) validateDetails(f
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body error information based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -860,7 +1481,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyErrorInformation) UnmarshalBinary(b
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0 create decision manager case created body error information details items0
+/*
+CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0 create decision manager case created body error information details items0
 swagger:model CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0
 */
 type CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0 struct {
@@ -882,6 +1504,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0) Vali
 	return nil
 }
 
+// ContextValidate validates this create decision manager case created body error information details items0 based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -900,7 +1527,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyErrorInformationDetailsItems0) Unma
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyLinks create decision manager case created body links
+/*
+CreateDecisionManagerCaseCreatedBodyLinks create decision manager case created body links
 swagger:model CreateDecisionManagerCaseCreatedBodyLinks
 */
 type CreateDecisionManagerCaseCreatedBodyLinks struct {
@@ -938,7 +1566,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) Validate(formats strfmt.Regi
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateCapture(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Capture) { // not required
 		return nil
 	}
@@ -947,6 +1574,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateCapture(formats strf
 		if err := o.Capture.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "capture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "capture")
 			}
 			return err
 		}
@@ -956,7 +1585,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateCapture(formats strf
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateReversal(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Reversal) { // not required
 		return nil
 	}
@@ -965,6 +1593,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateReversal(formats str
 		if err := o.Reversal.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "reversal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "reversal")
 			}
 			return err
 		}
@@ -974,7 +1604,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateReversal(formats str
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -983,6 +1612,93 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) validateSelf(formats strfmt.
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body links based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCapture(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateReversal(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyLinks) contextValidateCapture(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Capture != nil {
+
+		if swag.IsZero(o.Capture) { // not required
+			return nil
+		}
+
+		if err := o.Capture.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "capture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "capture")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyLinks) contextValidateReversal(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Reversal != nil {
+
+		if swag.IsZero(o.Reversal) { // not required
+			return nil
+		}
+
+		if err := o.Reversal.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "reversal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "reversal")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -1009,7 +1725,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinks) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyLinksCapture create decision manager case created body links capture
+/*
+CreateDecisionManagerCaseCreatedBodyLinksCapture create decision manager case created body links capture
 swagger:model CreateDecisionManagerCaseCreatedBodyLinksCapture
 */
 type CreateDecisionManagerCaseCreatedBodyLinksCapture struct {
@@ -1023,6 +1740,11 @@ type CreateDecisionManagerCaseCreatedBodyLinksCapture struct {
 
 // Validate validates this create decision manager case created body links capture
 func (o *CreateDecisionManagerCaseCreatedBodyLinksCapture) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body links capture based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyLinksCapture) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1044,7 +1766,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinksCapture) UnmarshalBinary(b []b
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyLinksReversal create decision manager case created body links reversal
+/*
+CreateDecisionManagerCaseCreatedBodyLinksReversal create decision manager case created body links reversal
 swagger:model CreateDecisionManagerCaseCreatedBodyLinksReversal
 */
 type CreateDecisionManagerCaseCreatedBodyLinksReversal struct {
@@ -1058,6 +1781,11 @@ type CreateDecisionManagerCaseCreatedBodyLinksReversal struct {
 
 // Validate validates this create decision manager case created body links reversal
 func (o *CreateDecisionManagerCaseCreatedBodyLinksReversal) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body links reversal based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyLinksReversal) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1079,7 +1807,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinksReversal) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyLinksSelf create decision manager case created body links self
+/*
+CreateDecisionManagerCaseCreatedBodyLinksSelf create decision manager case created body links self
 swagger:model CreateDecisionManagerCaseCreatedBodyLinksSelf
 */
 type CreateDecisionManagerCaseCreatedBodyLinksSelf struct {
@@ -1093,6 +1822,11 @@ type CreateDecisionManagerCaseCreatedBodyLinksSelf struct {
 
 // Validate validates this create decision manager case created body links self
 func (o *CreateDecisionManagerCaseCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body links self based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1114,7 +1848,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyLinksSelf) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyPaymentInformation Contains response information about the payment.
+/*
+CreateDecisionManagerCaseCreatedBodyPaymentInformation Contains response information about the payment.
 swagger:model CreateDecisionManagerCaseCreatedBodyPaymentInformation
 */
 type CreateDecisionManagerCaseCreatedBodyPaymentInformation struct {
@@ -1199,12 +1934,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) Validate(format
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateAccountType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"accountType", "body", string(o.AccountType), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"accountType", "body", o.AccountType, 255); err != nil {
 		return err
 	}
 
@@ -1212,12 +1946,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateAccount
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateBin(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bin) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"bin", "body", string(o.Bin), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"bin", "body", o.Bin, 255); err != nil {
 		return err
 	}
 
@@ -1225,12 +1958,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateBin(for
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateBinCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BinCountry) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"binCountry", "body", string(o.BinCountry), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"binCountry", "body", o.BinCountry, 255); err != nil {
 		return err
 	}
 
@@ -1238,12 +1970,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateBinCoun
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateIssuer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Issuer) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"issuer", "body", string(o.Issuer), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"issuer", "body", o.Issuer, 255); err != nil {
 		return err
 	}
 
@@ -1251,15 +1982,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateIssuer(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) validateScheme(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Scheme) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"scheme", "body", string(o.Scheme), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"paymentInformation"+"."+"scheme", "body", o.Scheme, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body payment information based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1281,7 +2016,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyPaymentInformation) UnmarshalBinary
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformation Contains the result of risk assessment.
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformation Contains the result of risk assessment.
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformation
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformation struct {
@@ -1290,7 +2026,6 @@ type CreateDecisionManagerCaseCreatedBodyRiskInformation struct {
 	//
 	// For all possible values, see the `decision_case_priority` field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** > **Documentation** > **Guides** > _Decision Manager Using the SCMP API Developer Guide_ (PDF link).
 	//
-	// Max Length: 1
 	CasePriority int64 `json:"casePriority,omitempty"`
 
 	// info codes
@@ -1329,10 +2064,6 @@ type CreateDecisionManagerCaseCreatedBodyRiskInformation struct {
 // Validate validates this create decision manager case created body risk information
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := o.validateCasePriority(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := o.validateInfoCodes(formats); err != nil {
 		res = append(res, err)
@@ -1376,21 +2107,7 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) Validate(formats s
 	return nil
 }
 
-func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateCasePriority(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.CasePriority) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"casePriority", "body", string(o.CasePriority), 1); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateInfoCodes(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InfoCodes) { // not required
 		return nil
 	}
@@ -1399,6 +2116,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateInfoCodes(
 		if err := o.InfoCodes.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "infoCodes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "infoCodes")
 			}
 			return err
 		}
@@ -1408,7 +2127,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateInfoCodes(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
@@ -1417,6 +2135,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateIPAddress(
 		if err := o.IPAddress.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "ipAddress")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "ipAddress")
 			}
 			return err
 		}
@@ -1426,12 +2146,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateIPAddress(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateLocalTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LocalTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"localTime", "body", string(o.LocalTime), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"localTime", "body", o.LocalTime, 255); err != nil {
 		return err
 	}
 
@@ -1439,7 +2158,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateLocalTime(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProfile(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Profile) { // not required
 		return nil
 	}
@@ -1448,6 +2166,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProfile(fo
 		if err := o.Profile.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "profile")
 			}
 			return err
 		}
@@ -1457,7 +2177,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProfile(fo
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProviders(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Providers) { // not required
 		return nil
 	}
@@ -1466,6 +2185,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProviders(
 		if err := o.Providers.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers")
 			}
 			return err
 		}
@@ -1475,7 +2196,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateProviders(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateRules(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rules) { // not required
 		return nil
 	}
@@ -1489,6 +2209,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateRules(form
 			if err := o.Rules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1500,7 +2222,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateRules(form
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateScore(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Score) { // not required
 		return nil
 	}
@@ -1509,6 +2230,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateScore(form
 		if err := o.Score.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "score")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "score")
 			}
 			return err
 		}
@@ -1518,7 +2241,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateScore(form
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateTravel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Travel) { // not required
 		return nil
 	}
@@ -1527,6 +2249,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateTravel(for
 		if err := o.Travel.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel")
 			}
 			return err
 		}
@@ -1536,7 +2260,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateTravel(for
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateVelocity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Velocity) { // not required
 		return nil
 	}
@@ -1545,6 +2268,222 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) validateVelocity(f
 		if err := o.Velocity.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body risk information based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInfoCodes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateIPAddress(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProfile(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProviders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateScore(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTravel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVelocity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateInfoCodes(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InfoCodes != nil {
+
+		if swag.IsZero(o.InfoCodes) { // not required
+			return nil
+		}
+
+		if err := o.InfoCodes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "infoCodes")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "infoCodes")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateIPAddress(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IPAddress != nil {
+
+		if swag.IsZero(o.IPAddress) { // not required
+			return nil
+		}
+
+		if err := o.IPAddress.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "ipAddress")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "ipAddress")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateProfile(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Profile != nil {
+
+		if swag.IsZero(o.Profile) { // not required
+			return nil
+		}
+
+		if err := o.Profile.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "profile")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateProviders(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Providers != nil {
+
+		if swag.IsZero(o.Providers) { // not required
+			return nil
+		}
+
+		if err := o.Providers.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateRules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Rules); i++ {
+
+		if o.Rules[i] != nil {
+
+			if swag.IsZero(o.Rules[i]) { // not required
+				return nil
+			}
+
+			if err := o.Rules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateScore(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Score != nil {
+
+		if swag.IsZero(o.Score) { // not required
+			return nil
+		}
+
+		if err := o.Score.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "score")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "score")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateTravel(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Travel != nil {
+
+		if swag.IsZero(o.Travel) { // not required
+			return nil
+		}
+
+		if err := o.Travel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) contextValidateVelocity(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Velocity != nil {
+
+		if swag.IsZero(o.Velocity) { // not required
+			return nil
+		}
+
+		if err := o.Velocity.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity")
 			}
 			return err
 		}
@@ -1571,7 +2510,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformation) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress Contains detailed response information about the customer's IP address.
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress Contains detailed response information about the customer's IP address.
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress struct {
@@ -1643,12 +2583,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) Validate(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"administrativeArea", "body", o.AdministrativeArea, 255); err != nil {
 		return err
 	}
 
@@ -1656,12 +2595,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateA
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateAnonymizerStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AnonymizerStatus) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"anonymizerStatus", "body", string(o.AnonymizerStatus), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"anonymizerStatus", "body", o.AnonymizerStatus, 255); err != nil {
 		return err
 	}
 
@@ -1669,12 +2607,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateA
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"country", "body", string(o.Country), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"country", "body", o.Country, 255); err != nil {
 		return err
 	}
 
@@ -1682,12 +2619,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateC
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"locality", "body", string(o.Locality), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"locality", "body", o.Locality, 255); err != nil {
 		return err
 	}
 
@@ -1695,15 +2631,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateL
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) validateRoutingMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"routingMethod", "body", string(o.RoutingMethod), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"ipAddress"+"."+"routingMethod", "body", o.RoutingMethod, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information IP address based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1725,7 +2665,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationIPAddress) Unmarshal
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes create decision manager case created body risk information info codes
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes create decision manager case created body risk information info codes
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes struct {
@@ -1787,6 +2728,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes) Validate(
 	return nil
 }
 
+// ContextValidate validates this create decision manager case created body risk information info codes based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1805,7 +2751,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationInfoCodes) Unmarshal
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationProfile create decision manager case created body risk information profile
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationProfile create decision manager case created body risk information profile
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationProfile
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationProfile struct {
@@ -1854,12 +2801,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) Validate(fo
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) validateDesinationQueue(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DesinationQueue) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"desinationQueue", "body", string(o.DesinationQueue), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"desinationQueue", "body", o.DesinationQueue, 255); err != nil {
 		return err
 	}
 
@@ -1867,12 +2813,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) validateDes
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
@@ -1880,15 +2825,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) validateNam
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) validateSelectorRule(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SelectorRule) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"selectorRule", "body", string(o.SelectorRule), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"profile"+"."+"selectorRule", "body", o.SelectorRule, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information profile based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1910,7 +2859,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProfile) UnmarshalBi
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationProviders create decision manager case created body risk information providers
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationProviders create decision manager case created body risk information providers
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationProviders
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationProviders struct {
@@ -1934,7 +2884,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) Validate(
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) validateProviderName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProviderName) { // not required
 		return nil
 	}
@@ -1948,6 +2897,47 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) validateP
 			if err := o.ProviderName[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers" + "." + "providerName" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers" + "." + "providerName" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body risk information providers based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateProviderName(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) contextValidateProviderName(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.ProviderName); i++ {
+
+		if o.ProviderName[i] != nil {
+
+			if swag.IsZero(o.ProviderName[i]) { // not required
+				return nil
+			}
+
+			if err := o.ProviderName[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers" + "." + "providerName" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "providers" + "." + "providerName" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1976,7 +2966,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProviders) Unmarshal
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNameItems0 Name of the 3rd party provider, for example, Emailage.
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNameItems0 Name of the 3rd party provider, for example, Emailage.
 //
 // For all possible values, see the `decision_provider_#_name` field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** > **Documentation** > **Guides** > _Decision Manager Using the SCMP API Developer Guide_ (PDF link).
 //
@@ -1993,6 +2984,11 @@ type CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNameIte
 
 // Validate validates this create decision manager case created body risk information providers provider name items0
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNameItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information providers provider name items0 based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNameItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2014,7 +3010,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationProvidersProviderNam
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0 create decision manager case created body risk information rules items0
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0 create decision manager case created body risk information rules items0
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0 struct {
@@ -2053,12 +3050,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) Validat
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) validateDecision(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Decision) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("decision", "body", string(o.Decision), 255); err != nil {
+	if err := validate.MaxLength("decision", "body", o.Decision, 255); err != nil {
 		return err
 	}
 
@@ -2066,15 +3062,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) validat
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("name", "body", string(o.Name), 255); err != nil {
+	if err := validate.MaxLength("name", "body", o.Name, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information rules items0 based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2096,7 +3096,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationRulesItems0) Unmarsh
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationScore create decision manager case created body risk information score
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationScore create decision manager case created body risk information score
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationScore
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationScore struct {
@@ -2139,12 +3140,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) Validate(form
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) validateModelUsed(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ModelUsed) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"score"+"."+"modelUsed", "body", string(o.ModelUsed), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"score"+"."+"modelUsed", "body", o.ModelUsed, 255); err != nil {
 		return err
 	}
 
@@ -2152,15 +3152,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) validateModel
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) validateResult(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Result) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"score"+"."+"result", "body", string(o.Result), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"score"+"."+"result", "body", o.Result, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information score based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2182,7 +3186,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationScore) UnmarshalBina
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationTravel create decision manager case created body risk information travel
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationTravel create decision manager case created body risk information travel
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationTravel
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationTravel struct {
@@ -2227,7 +3232,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) Validate(for
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateActualFinalDestination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ActualFinalDestination) { // not required
 		return nil
 	}
@@ -2236,6 +3240,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateActu
 		if err := o.ActualFinalDestination.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "actualFinalDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "actualFinalDestination")
 			}
 			return err
 		}
@@ -2245,7 +3251,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateActu
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirstDeparture(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstDeparture) { // not required
 		return nil
 	}
@@ -2254,6 +3259,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirs
 		if err := o.FirstDeparture.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDeparture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDeparture")
 			}
 			return err
 		}
@@ -2263,7 +3270,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirs
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirstDestination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstDestination) { // not required
 		return nil
 	}
@@ -2272,6 +3278,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirs
 		if err := o.FirstDestination.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDestination")
 			}
 			return err
 		}
@@ -2281,7 +3289,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateFirs
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateLastDestination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastDestination) { // not required
 		return nil
 	}
@@ -2290,6 +3297,118 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) validateLast
 		if err := o.LastDestination.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "lastDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "lastDestination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body risk information travel based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateActualFinalDestination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateFirstDeparture(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateFirstDestination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLastDestination(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) contextValidateActualFinalDestination(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ActualFinalDestination != nil {
+
+		if swag.IsZero(o.ActualFinalDestination) { // not required
+			return nil
+		}
+
+		if err := o.ActualFinalDestination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "actualFinalDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "actualFinalDestination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) contextValidateFirstDeparture(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FirstDeparture != nil {
+
+		if swag.IsZero(o.FirstDeparture) { // not required
+			return nil
+		}
+
+		if err := o.FirstDeparture.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDeparture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDeparture")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) contextValidateFirstDestination(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FirstDestination != nil {
+
+		if swag.IsZero(o.FirstDestination) { // not required
+			return nil
+		}
+
+		if err := o.FirstDestination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "firstDestination")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) contextValidateLastDestination(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.LastDestination != nil {
+
+		if swag.IsZero(o.LastDestination) { // not required
+			return nil
+		}
+
+		if err := o.LastDestination.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "lastDestination")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "travel" + "." + "lastDestination")
 			}
 			return err
 		}
@@ -2316,7 +3435,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravel) UnmarshalBin
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination create decision manager case created body risk information travel actual final destination
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination create decision manager case created body risk information travel actual final destination
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination struct {
@@ -2365,12 +3485,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDes
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"country", "body", string(o.Country), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"country", "body", o.Country, 90); err != nil {
 		return err
 	}
 
@@ -2378,12 +3497,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDes
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination) validateLatitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Latitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"latitude", "body", string(o.Latitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"latitude", "body", o.Latitude, 10); err != nil {
 		return err
 	}
 
@@ -2391,12 +3509,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDes
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"locality", "body", string(o.Locality), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"locality", "body", o.Locality, 90); err != nil {
 		return err
 	}
 
@@ -2404,15 +3521,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDes
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination) validateLongitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Longitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"longitude", "body", string(o.Longitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"actualFinalDestination"+"."+"longitude", "body", o.Longitude, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information travel actual final destination based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDestination) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2434,7 +3555,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelActualFinalDes
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture create decision manager case created body risk information travel first departure
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture create decision manager case created body risk information travel first departure
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture struct {
@@ -2483,12 +3605,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"country", "body", string(o.Country), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"country", "body", o.Country, 90); err != nil {
 		return err
 	}
 
@@ -2496,12 +3617,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture) validateLatitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Latitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"latitude", "body", string(o.Latitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"latitude", "body", o.Latitude, 10); err != nil {
 		return err
 	}
 
@@ -2509,12 +3629,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"locality", "body", string(o.Locality), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"locality", "body", o.Locality, 90); err != nil {
 		return err
 	}
 
@@ -2522,15 +3641,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture) validateLongitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Longitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"longitude", "body", string(o.Longitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDeparture"+"."+"longitude", "body", o.Longitude, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information travel first departure based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2552,7 +3675,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDeparture
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination create decision manager case created body risk information travel first destination
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination create decision manager case created body risk information travel first destination
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination struct {
@@ -2601,12 +3725,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestinati
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"country", "body", string(o.Country), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"country", "body", o.Country, 90); err != nil {
 		return err
 	}
 
@@ -2614,12 +3737,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestinati
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination) validateLatitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Latitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"latitude", "body", string(o.Latitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"latitude", "body", o.Latitude, 10); err != nil {
 		return err
 	}
 
@@ -2627,12 +3749,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestinati
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"locality", "body", string(o.Locality), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"locality", "body", o.Locality, 90); err != nil {
 		return err
 	}
 
@@ -2640,15 +3761,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestinati
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination) validateLongitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Longitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"longitude", "body", string(o.Longitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"firstDestination"+"."+"longitude", "body", o.Longitude, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information travel first destination based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestination) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2670,7 +3795,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelFirstDestinati
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination create decision manager case created body risk information travel last destination
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination create decision manager case created body risk information travel last destination
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination struct {
@@ -2719,12 +3845,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestinatio
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"country", "body", string(o.Country), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"country", "body", o.Country, 90); err != nil {
 		return err
 	}
 
@@ -2732,12 +3857,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestinatio
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination) validateLatitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Latitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"latitude", "body", string(o.Latitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"latitude", "body", o.Latitude, 10); err != nil {
 		return err
 	}
 
@@ -2745,12 +3869,11 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestinatio
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"locality", "body", string(o.Locality), 90); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"locality", "body", o.Locality, 90); err != nil {
 		return err
 	}
 
@@ -2758,15 +3881,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestinatio
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination) validateLongitude(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Longitude) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"longitude", "body", string(o.Longitude), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"travel"+"."+"lastDestination"+"."+"longitude", "body", o.Longitude, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information travel last destination based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestination) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2788,7 +3915,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationTravelLastDestinatio
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity create decision manager case created body risk information velocity
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity create decision manager case created body risk information velocity
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity struct {
@@ -2822,14 +3950,13 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) Validate(f
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) validateAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address) { // not required
 		return nil
 	}
 
 	for i := 0; i < len(o.Address); i++ {
 
-		if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"velocity"+"."+"address"+"."+strconv.Itoa(i), "body", string(o.Address[i]), 255); err != nil {
+		if err := validate.MaxLength("createDecisionManagerCaseCreated"+"."+"riskInformation"+"."+"velocity"+"."+"address"+"."+strconv.Itoa(i), "body", o.Address[i], 255); err != nil {
 			return err
 		}
 
@@ -2839,7 +3966,6 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) validateAd
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) validateMorphing(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Morphing) { // not required
 		return nil
 	}
@@ -2853,6 +3979,47 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) validateMo
 			if err := o.Morphing[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity" + "." + "morphing" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity" + "." + "morphing" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case created body risk information velocity based on the context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMorphing(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) contextValidateMorphing(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Morphing); i++ {
+
+		if o.Morphing[i] != nil {
+
+			if swag.IsZero(o.Morphing[i]) { // not required
+				return nil
+			}
+
+			if err := o.Morphing[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity" + "." + "morphing" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseCreated" + "." + "riskInformation" + "." + "velocity" + "." + "morphing" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -2881,7 +4048,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocity) UnmarshalB
 	return nil
 }
 
-/*CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0 create decision manager case created body risk information velocity morphing items0
+/*
+CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0 create decision manager case created body risk information velocity morphing items0
 swagger:model CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0
 */
 type CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0 struct {
@@ -2892,7 +4060,6 @@ type CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0 s
 	//
 	// For all possible values, see the `decision_velocity_morphing_#_count` field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** > **Documentation** > **Guides** > _Decision Manager Using the SCMP API Developer Guide_ (PDF link).
 	//
-	// Max Length: 5
 	Count int64 `json:"count,omitempty"`
 
 	// Field name of the morphing element. specified by the setting that you chose in the
@@ -2915,10 +4082,6 @@ type CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0 s
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := o.validateCount(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := o.validateFieldName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -2933,26 +4096,12 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItem
 	return nil
 }
 
-func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0) validateCount(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Count) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("count", "body", string(o.Count), 5); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0) validateFieldName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FieldName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("fieldName", "body", string(o.FieldName), 255); err != nil {
+	if err := validate.MaxLength("fieldName", "body", o.FieldName, 255); err != nil {
 		return err
 	}
 
@@ -2960,15 +4109,19 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItem
 }
 
 func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0) validateInformationCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InformationCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("informationCode", "body", string(o.InformationCode), 255); err != nil {
+	if err := validate.MaxLength("informationCode", "body", o.InformationCode, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case created body risk information velocity morphing items0 based on context it is used
+func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2990,7 +4143,8 @@ func (o *CreateDecisionManagerCaseCreatedBodyRiskInformationVelocityMorphingItem
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyBuyerInformation Contains information about the buyer.
+/*
+CreateDecisionManagerCaseParamsBodyBuyerInformation Contains information about the buyer.
 swagger:model CreateDecisionManagerCaseParamsBodyBuyerInformation
 */
 type CreateDecisionManagerCaseParamsBodyBuyerInformation struct {
@@ -3048,12 +4202,11 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) Validate(formats s
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validateDateOfBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOfBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
@@ -3061,12 +4214,11 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validateDateOfBirt
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validateHashedPassword(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HashedPassword) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"hashedPassword", "body", string(o.HashedPassword), 100); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"hashedPassword", "body", o.HashedPassword, 100); err != nil {
 		return err
 	}
 
@@ -3074,7 +4226,6 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validateHashedPass
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validatePersonalIdentification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PersonalIdentification) { // not required
 		return nil
 	}
@@ -3088,6 +4239,8 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validatePersonalId
 			if err := o.PersonalIdentification[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3099,13 +4252,51 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validatePersonalId
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) validateUsername(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Username) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"username", "body", string(o.Username), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"buyerInformation"+"."+"username", "body", o.Username, 255); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body buyer information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePersonalIdentification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) contextValidatePersonalIdentification(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.PersonalIdentification); i++ {
+
+		if o.PersonalIdentification[i] != nil {
+
+			if swag.IsZero(o.PersonalIdentification[i]) { // not required
+				return nil
+			}
+
+			if err := o.PersonalIdentification[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -3129,7 +4320,8 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformation) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0 create decision manager case params body buyer information personal identification items0
+/*
+CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0 create decision manager case params body buyer information personal identification items0
 swagger:model CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0
 */
 type CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0 struct {
@@ -3212,15 +4404,19 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificati
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body buyer information personal identification items0 based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3242,7 +4438,8 @@ func (o *CreateDecisionManagerCaseParamsBodyBuyerInformationPersonalIdentificati
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyCardVerification create decision manager case params body card verification
+/*
+CreateDecisionManagerCaseParamsBodyCardVerification create decision manager case params body card verification
 swagger:model CreateDecisionManagerCaseParamsBodyCardVerification
 */
 type CreateDecisionManagerCaseParamsBodyCardVerification struct {
@@ -3270,15 +4467,19 @@ func (o *CreateDecisionManagerCaseParamsBodyCardVerification) Validate(formats s
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyCardVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"cardVerification"+"."+"resultCode", "body", string(o.ResultCode), 1); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"cardVerification"+"."+"resultCode", "body", o.ResultCode, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body card verification based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyCardVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3300,7 +4501,8 @@ func (o *CreateDecisionManagerCaseParamsBodyCardVerification) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyClientReferenceInformation create decision manager case params body client reference information
+/*
+CreateDecisionManagerCaseParamsBodyClientReferenceInformation create decision manager case params body client reference information
 swagger:model CreateDecisionManagerCaseParamsBodyClientReferenceInformation
 */
 type CreateDecisionManagerCaseParamsBodyClientReferenceInformation struct {
@@ -3340,12 +4542,11 @@ func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) Validate
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -3353,15 +4554,19 @@ func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) validate
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) validateComments(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Comments) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"clientReferenceInformation"+"."+"comments", "body", string(o.Comments), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"clientReferenceInformation"+"."+"comments", "body", o.Comments, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body client reference information based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3383,7 +4588,8 @@ func (o *CreateDecisionManagerCaseParamsBodyClientReferenceInformation) Unmarsha
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyDeviceInformation create decision manager case params body device information
+/*
+CreateDecisionManagerCaseParamsBodyDeviceInformation create decision manager case params body device information
 swagger:model CreateDecisionManagerCaseParamsBodyDeviceInformation
 */
 type CreateDecisionManagerCaseParamsBodyDeviceInformation struct {
@@ -3454,12 +4660,11 @@ func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) Validate(formats 
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) validateHostName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HostName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"hostName", "body", string(o.HostName), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"hostName", "body", o.HostName, 60); err != nil {
 		return err
 	}
 
@@ -3467,12 +4672,11 @@ func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) validateHostName(
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
@@ -3480,15 +4684,19 @@ func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) validateIPAddress
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) validateUserAgent(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UserAgent) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"userAgent", "body", string(o.UserAgent), 40); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"deviceInformation"+"."+"userAgent", "body", o.UserAgent, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body device information based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3510,7 +4718,110 @@ func (o *CreateDecisionManagerCaseParamsBodyDeviceInformation) UnmarshalBinary(b
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformation Contains detailed order-level information.
+/*
+CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0 Contains merchant-defined key-value pairs.
+swagger:model CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0
+*/
+type CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0 struct {
+
+	// Fields that you can use to store information. The value
+	// appears in the Case Management Details window in the
+	// Business Center. The first four fields are the same fields
+	// that are used by the Secure Data services. See request
+	// code examples.
+	// **Warning** Merchant-defined data fields are not intended
+	// to and must not be used to capture personally identifying
+	// information. Accordingly, merchants are prohibited from
+	// capturing, obtaining, and/or transmitting any personally
+	// identifying information in or via the merchant-defined data
+	// fields. Personally identifying information includes, but is
+	// not limited to, address, credit card number, social security
+	// number, driver's license number, state-issued
+	// identification number, passport number, and card
+	// verification numbers (CVV, CVC2, CVV2, CID, CVN). In
+	// the event CyberSource discovers that a merchant is
+	// capturing and/or transmitting personally identifying
+	// information via the merchant-defined data fields, whether
+	// or not intentionally, CyberSource will immediately
+	// suspend the merchant's account, which will result in a
+	// rejection of any and all transaction requests submitted by
+	// the merchant after the point of suspension.
+	//
+	// Max Length: 255
+	Key string `json:"key,omitempty"`
+
+	// String value for the key
+	// Max Length: 255
+	Value string `json:"value,omitempty"`
+}
+
+// Validate validates this create decision manager case params body merchant defined information items0
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
+	if swag.IsZero(o.Key) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("key", "body", o.Key, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
+	if swag.IsZero(o.Value) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body merchant defined information items0 based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
+	var res CreateDecisionManagerCaseParamsBodyMerchantDefinedInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformation Contains detailed order-level information.
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformation
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformation struct {
@@ -3569,7 +4880,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) Validate(formats s
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -3578,6 +4888,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateAmountDeta
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -3587,7 +4899,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateAmountDeta
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -3596,6 +4907,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateBillTo(for
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -3605,7 +4918,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateBillTo(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -3619,6 +4931,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateLineItems(
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3630,7 +4944,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateLineItems(
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -3639,6 +4952,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateShipTo(for
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -3648,7 +4963,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateShipTo(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateShippingDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingDetails) { // not required
 		return nil
 	}
@@ -3657,6 +4971,147 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) validateShippingDe
 		if err := o.ShippingDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body order information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShippingDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) contextValidateShippingDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShippingDetails != nil {
+
+		if swag.IsZero(o.ShippingDetails) { // not required
+			return nil
+		}
+
+		if err := o.ShippingDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "orderInformation" + "." + "shippingDetails")
 			}
 			return err
 		}
@@ -3683,7 +5138,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformation) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails Contains `currency` and `totalAmount` for this order.
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails Contains `currency` and `totalAmount` for this order.
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails struct {
@@ -3752,7 +5208,7 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails) valid
 		return err
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(*o.Currency), 3); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", *o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -3760,15 +5216,19 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails) valid
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body order information amount details based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3790,7 +5250,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationAmountDetails) Unmar
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationBillTo create decision manager case params body order information bill to
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationBillTo create decision manager case params body order information bill to
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationBillTo
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationBillTo struct {
@@ -4036,12 +5497,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) Validate(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -4049,12 +5509,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAddr
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -4062,12 +5521,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAddr
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -4075,12 +5533,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateAdmi
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -4088,12 +5545,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateCoun
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -4101,12 +5557,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateEmai
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -4114,12 +5569,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateFirs
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -4127,12 +5581,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateLast
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -4140,12 +5593,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validateLoca
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -4153,15 +5605,19 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validatePhon
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body order information bill to based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4183,7 +5639,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationBillTo) UnmarshalBin
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0 create decision manager case params body order information line items items0
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0 create decision manager case params body order information line items items0
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0 struct {
@@ -4322,12 +5779,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) Val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateDistributorProductSku(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DistributorProductSku) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("distributorProductSku", "body", string(o.DistributorProductSku), 15); err != nil {
+	if err := validate.MaxLength("distributorProductSku", "body", o.DistributorProductSku, 15); err != nil {
 		return err
 	}
 
@@ -4335,7 +5791,6 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validatePassenger(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Passenger) { // not required
 		return nil
 	}
@@ -4344,6 +5799,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 		if err := o.Passenger.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("passenger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("passenger")
 			}
 			return err
 		}
@@ -4353,12 +5810,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateProductCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productCode", "body", string(o.ProductCode), 255); err != nil {
+	if err := validate.MaxLength("productCode", "body", o.ProductCode, 255); err != nil {
 		return err
 	}
 
@@ -4366,12 +5822,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productName", "body", string(o.ProductName), 255); err != nil {
+	if err := validate.MaxLength("productName", "body", o.ProductName, 255); err != nil {
 		return err
 	}
 
@@ -4379,12 +5834,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateProductRisk(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductRisk) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productRisk", "body", string(o.ProductRisk), 6); err != nil {
+	if err := validate.MaxLength("productRisk", "body", o.ProductRisk, 6); err != nil {
 		return err
 	}
 
@@ -4392,12 +5846,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateProductSKU(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductSKU) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productSKU", "body", string(o.ProductSKU), 255); err != nil {
+	if err := validate.MaxLength("productSKU", "body", o.ProductSKU, 255); err != nil {
 		return err
 	}
 
@@ -4405,16 +5858,15 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.Minimum("quantity", "body", float64(o.Quantity), 1, false); err != nil {
+	if err := validate.Minimum("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.Maximum("quantity", "body", float64(o.Quantity), 9.999999999e+09, false); err != nil {
+	if err := validate.Maximum("quantity", "body", o.Quantity, 9.999999999e+09, false); err != nil {
 		return err
 	}
 
@@ -4422,13 +5874,47 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body order information line items items0 based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePassenger(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) contextValidatePassenger(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Passenger != nil {
+
+		if swag.IsZero(o.Passenger) { // not required
+			return nil
+		}
+
+		if err := o.Passenger.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("passenger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("passenger")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4452,7 +5938,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0) Unm
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger Contains travel-related passenger details.
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger Contains travel-related passenger details.
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger struct {
@@ -4547,12 +6034,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -4560,12 +6046,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -4573,12 +6058,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"id", "body", string(o.ID), 40); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"id", "body", o.ID, 40); err != nil {
 		return err
 	}
 
@@ -4586,12 +6070,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -4599,12 +6082,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateNationality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Nationality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"nationality", "body", string(o.Nationality), 2); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"nationality", "body", o.Nationality, 2); err != nil {
 		return err
 	}
 
@@ -4612,12 +6094,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validatePhone(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Phone) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"phone", "body", string(o.Phone), 15); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"phone", "body", o.Phone, 15); err != nil {
 		return err
 	}
 
@@ -4625,12 +6106,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Status) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"status", "body", string(o.Status), 32); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"status", "body", o.Status, 32); err != nil {
 		return err
 	}
 
@@ -4638,15 +6118,19 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Type) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("passenger"+"."+"type", "body", string(o.Type), 32); err != nil {
+	if err := validate.MaxLength("passenger"+"."+"type", "body", o.Type, 32); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body order information line items items0 passenger based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passenger) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4668,7 +6152,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationLineItemsItems0Passe
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationShipTo Contains recipient shipping information.
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationShipTo Contains recipient shipping information.
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationShipTo
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationShipTo struct {
@@ -4786,12 +6271,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) Validate(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -4799,12 +6283,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAddr
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -4812,12 +6295,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAddr
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 2); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 2); err != nil {
 		return err
 	}
 
@@ -4825,12 +6307,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateAdmi
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -4838,12 +6319,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateCoun
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -4851,12 +6331,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateFirs
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -4864,12 +6343,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateLast
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -4877,12 +6355,11 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validateLoca
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -4890,15 +6367,19 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validatePhon
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body order information ship to based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4920,7 +6401,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShipTo) UnmarshalBin
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails Contains shipping information not related to address.
+/*
+CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails Contains shipping information not related to address.
 swagger:model CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails
 */
 type CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails struct {
@@ -4963,15 +6445,19 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails) Val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails) validateShippingMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", string(o.ShippingMethod), 10); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", o.ShippingMethod, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body order information shipping details based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4993,7 +6479,8 @@ func (o *CreateDecisionManagerCaseParamsBodyOrderInformationShippingDetails) Unm
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyPaymentInformation Contains the payment data for this transaction.
+/*
+CreateDecisionManagerCaseParamsBodyPaymentInformation Contains the payment data for this transaction.
 swagger:model CreateDecisionManagerCaseParamsBodyPaymentInformation
 */
 type CreateDecisionManagerCaseParamsBodyPaymentInformation struct {
@@ -5024,7 +6511,6 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) Validate(formats
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -5033,6 +6519,8 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) validateCard(for
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -5042,7 +6530,6 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) validateCard(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) validateTokenizedCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TokenizedCard) { // not required
 		return nil
 	}
@@ -5051,6 +6538,68 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) validateTokenize
 		if err := o.TokenizedCard.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body payment information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTokenizedCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) contextValidateTokenizedCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.TokenizedCard != nil {
+
+		if swag.IsZero(o.TokenizedCard) { // not required
+			return nil
+		}
+
+		if err := o.TokenizedCard.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
 			}
 			return err
 		}
@@ -5077,7 +6626,8 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformation) UnmarshalBinary(
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyPaymentInformationCard Use this for a non-tokenized payment card.
+/*
+CreateDecisionManagerCaseParamsBodyPaymentInformationCard Use this for a non-tokenized payment card.
 swagger:model CreateDecisionManagerCaseParamsBodyPaymentInformationCard
 */
 type CreateDecisionManagerCaseParamsBodyPaymentInformationCard struct {
@@ -5182,12 +6732,11 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) Validate(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateBin(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bin) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"bin", "body", string(o.Bin), 6); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"bin", "body", o.Bin, 6); err != nil {
 		return err
 	}
 
@@ -5195,12 +6744,11 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateBin(
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -5208,12 +6756,11 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateExpi
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -5221,15 +6768,19 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateExpi
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body payment information card based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5251,7 +6802,8 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationCard) UnmarshalBin
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard Use this object to submit a payment network token instead of card-based values.
+/*
+CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard Use this object to submit a payment network token instead of card-based values.
 swagger:model CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard
 */
 type CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard struct {
@@ -5356,12 +6908,11 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) Val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -5369,12 +6920,11 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -5382,15 +6932,19 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) val
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body payment information tokenized card based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5412,7 +6966,8 @@ func (o *CreateDecisionManagerCaseParamsBodyPaymentInformationTokenizedCard) Unm
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyProcessorInformation Contains information related to the payment processor.
+/*
+CreateDecisionManagerCaseParamsBodyProcessorInformation Contains information related to the payment processor.
 swagger:model CreateDecisionManagerCaseParamsBodyProcessorInformation
 */
 type CreateDecisionManagerCaseParamsBodyProcessorInformation struct {
@@ -5436,7 +6991,6 @@ func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) Validate(forma
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) validateAvs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Avs) { // not required
 		return nil
 	}
@@ -5445,6 +6999,43 @@ func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) validateAvs(fo
 		if err := o.Avs.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation" + "." + "avs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body processor information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAvs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) contextValidateAvs(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Avs != nil {
+
+		if swag.IsZero(o.Avs) { // not required
+			return nil
+		}
+
+		if err := o.Avs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "processorInformation" + "." + "avs")
 			}
 			return err
 		}
@@ -5471,7 +7062,8 @@ func (o *CreateDecisionManagerCaseParamsBodyProcessorInformation) UnmarshalBinar
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyProcessorInformationAvs Address Verification Service
+/*
+CreateDecisionManagerCaseParamsBodyProcessorInformationAvs Address Verification Service
 swagger:model CreateDecisionManagerCaseParamsBodyProcessorInformationAvs
 */
 type CreateDecisionManagerCaseParamsBodyProcessorInformationAvs struct {
@@ -5496,15 +7088,19 @@ func (o *CreateDecisionManagerCaseParamsBodyProcessorInformationAvs) Validate(fo
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyProcessorInformationAvs) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", string(o.Code), 3); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", o.Code, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body processor information avs based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyProcessorInformationAvs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5526,7 +7122,8 @@ func (o *CreateDecisionManagerCaseParamsBodyProcessorInformationAvs) UnmarshalBi
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyRiskInformation create decision manager case params body risk information
+/*
+CreateDecisionManagerCaseParamsBodyRiskInformation create decision manager case params body risk information
 swagger:model CreateDecisionManagerCaseParamsBodyRiskInformation
 */
 type CreateDecisionManagerCaseParamsBodyRiskInformation struct {
@@ -5563,12 +7160,11 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) Validate(formats st
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) validateEventType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EventType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"riskInformation"+"."+"eventType", "body", string(o.EventType), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"riskInformation"+"."+"eventType", "body", o.EventType, 255); err != nil {
 		return err
 	}
 
@@ -5576,7 +7172,6 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) validateEventType(f
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) validateProfile(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Profile) { // not required
 		return nil
 	}
@@ -5585,6 +7180,43 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) validateProfile(for
 		if err := o.Profile.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation" + "." + "profile")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body risk information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateProfile(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) contextValidateProfile(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Profile != nil {
+
+		if swag.IsZero(o.Profile) { // not required
+			return nil
+		}
+
+		if err := o.Profile.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "riskInformation" + "." + "profile")
 			}
 			return err
 		}
@@ -5611,7 +7243,8 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyRiskInformationProfile Identifies a risk profile.
+/*
+CreateDecisionManagerCaseParamsBodyRiskInformationProfile Identifies a risk profile.
 swagger:model CreateDecisionManagerCaseParamsBodyRiskInformationProfile
 */
 type CreateDecisionManagerCaseParamsBodyRiskInformationProfile struct {
@@ -5641,15 +7274,19 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformationProfile) Validate(for
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyRiskInformationProfile) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"riskInformation"+"."+"profile"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"riskInformation"+"."+"profile"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body risk information profile based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyRiskInformationProfile) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5671,7 +7308,8 @@ func (o *CreateDecisionManagerCaseParamsBodyRiskInformationProfile) UnmarshalBin
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyTravelInformation create decision manager case params body travel information
+/*
+CreateDecisionManagerCaseParamsBodyTravelInformation create decision manager case params body travel information
 swagger:model CreateDecisionManagerCaseParamsBodyTravelInformation
 */
 type CreateDecisionManagerCaseParamsBodyTravelInformation struct {
@@ -5751,12 +7389,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) Validate(formats 
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateActualFinalDestination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ActualFinalDestination) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"actualFinalDestination", "body", string(o.ActualFinalDestination), 3); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"actualFinalDestination", "body", o.ActualFinalDestination, 3); err != nil {
 		return err
 	}
 
@@ -5764,12 +7401,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateActualFin
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateCompleteRoute(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CompleteRoute) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"completeRoute", "body", string(o.CompleteRoute), 255); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"completeRoute", "body", o.CompleteRoute, 255); err != nil {
 		return err
 	}
 
@@ -5777,12 +7413,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateCompleteR
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateDepartureTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DepartureTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"departureTime", "body", string(o.DepartureTime), 25); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"departureTime", "body", o.DepartureTime, 25); err != nil {
 		return err
 	}
 
@@ -5790,12 +7425,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateDeparture
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateJourneyType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.JourneyType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"journeyType", "body", string(o.JourneyType), 32); err != nil {
+	if err := validate.MaxLength("createDecisionManagerCaseRequest"+"."+"travelInformation"+"."+"journeyType", "body", o.JourneyType, 32); err != nil {
 		return err
 	}
 
@@ -5803,7 +7437,6 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateJourneyTy
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateLegs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Legs) { // not required
 		return nil
 	}
@@ -5817,6 +7450,47 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) validateLegs(form
 			if err := o.Legs[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation" + "." + "legs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation" + "." + "legs" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create decision manager case params body travel information based on the context it is used
+func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLegs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) contextValidateLegs(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Legs); i++ {
+
+		if o.Legs[i] != nil {
+
+			if swag.IsZero(o.Legs[i]) { // not required
+				return nil
+			}
+
+			if err := o.Legs[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation" + "." + "legs" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createDecisionManagerCaseRequest" + "." + "travelInformation" + "." + "legs" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -5845,7 +7519,8 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformation) UnmarshalBinary(b
 	return nil
 }
 
-/*CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0 create decision manager case params body travel information legs items0
+/*
+CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0 create decision manager case params body travel information legs items0
 swagger:model CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0
 */
 type CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0 struct {
@@ -5934,12 +7609,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) Validat
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) validateDepartureDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DepartureDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("departureDateTime", "body", string(o.DepartureDateTime), 25); err != nil {
+	if err := validate.MaxLength("departureDateTime", "body", o.DepartureDateTime, 25); err != nil {
 		return err
 	}
 
@@ -5947,12 +7621,11 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) validat
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) validateDestination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Destination) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("destination", "body", string(o.Destination), 3); err != nil {
+	if err := validate.MaxLength("destination", "body", o.Destination, 3); err != nil {
 		return err
 	}
 
@@ -5960,15 +7633,19 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) validat
 }
 
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) validateOrigination(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Origination) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("origination", "body", string(o.Origination), 3); err != nil {
+	if err := validate.MaxLength("origination", "body", o.Origination, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create decision manager case params body travel information legs items0 based on context it is used
+func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5983,144 +7660,6 @@ func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) Marshal
 // UnmarshalBinary interface implementation
 func (o *CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0) UnmarshalBinary(b []byte) error {
 	var res CreateDecisionManagerCaseParamsBodyTravelInformationLegsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*MerchantDefinedInformationItems0 Contains merchant-defined key-value pairs.
-swagger:model MerchantDefinedInformationItems0
-*/
-type MerchantDefinedInformationItems0 struct {
-
-	// Fields that you can use to store information. The value
-	// appears in the Case Management Details window in the
-	// Business Center. The first four fields are the same fields
-	// that are used by the Secure Data services. See request
-	// code examples.
-	// **Warning** Merchant-defined data fields are not intended
-	// to and must not be used to capture personally identifying
-	// information. Accordingly, merchants are prohibited from
-	// capturing, obtaining, and/or transmitting any personally
-	// identifying information in or via the merchant-defined data
-	// fields. Personally identifying information includes, but is
-	// not limited to, address, credit card number, social security
-	// number, driver's license number, state-issued
-	// identification number, passport number, and card
-	// verification numbers (CVV, CVC2, CVV2, CID, CVN). In
-	// the event CyberSource discovers that a merchant is
-	// capturing and/or transmitting personally identifying
-	// information via the merchant-defined data fields, whether
-	// or not intentionally, CyberSource will immediately
-	// suspend the merchant's account, which will result in a
-	// rejection of any and all transaction requests submitted by
-	// the merchant after the point of suspension.
-	//
-	// Max Length: 255
-	Key string `json:"key,omitempty"`
-
-	// String value for the key
-	// Max Length: 255
-	Value string `json:"value,omitempty"`
-}
-
-// Validate validates this merchant defined information items0
-func (o *MerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateKey(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateValue(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Key) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("key", "body", string(o.Key), 255); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Value) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("value", "body", string(o.Value), 255); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
-	var res MerchantDefinedInformationItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

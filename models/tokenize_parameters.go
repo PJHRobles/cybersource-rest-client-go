@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // TokenizeParameters tokenize parameters
+//
 // swagger:model TokenizeParameters
 type TokenizeParameters struct {
 
@@ -44,7 +46,6 @@ func (m *TokenizeParameters) Validate(formats strfmt.Registry) error {
 }
 
 func (m *TokenizeParameters) validateCardInfo(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CardInfo) { // not required
 		return nil
 	}
@@ -53,6 +54,8 @@ func (m *TokenizeParameters) validateCardInfo(formats strfmt.Registry) error {
 		if err := m.CardInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cardInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cardInfo")
 			}
 			return err
 		}
@@ -65,6 +68,41 @@ func (m *TokenizeParameters) validateKeyID(formats strfmt.Registry) error {
 
 	if err := validate.Required("keyId", "body", m.KeyID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this tokenize parameters based on the context it is used
+func (m *TokenizeParameters) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCardInfo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *TokenizeParameters) contextValidateCardInfo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CardInfo != nil {
+
+		if swag.IsZero(m.CardInfo) { // not required
+			return nil
+		}
+
+		if err := m.CardInfo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cardInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cardInfo")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -89,6 +127,7 @@ func (m *TokenizeParameters) UnmarshalBinary(b []byte) error {
 }
 
 // TokenizeParametersCardInfo tokenize parameters card info
+//
 // swagger:model TokenizeParametersCardInfo
 type TokenizeParametersCardInfo struct {
 
@@ -140,6 +179,11 @@ func (m *TokenizeParametersCardInfo) validateCardType(formats strfmt.Registry) e
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this tokenize parameters card info based on context it is used
+func (m *TokenizeParametersCardInfo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

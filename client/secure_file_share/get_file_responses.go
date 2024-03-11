@@ -6,16 +6,16 @@ package secure_file_share
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetFileReader is a Reader for the GetFile structure.
@@ -44,9 +44,8 @@ func (o *GetFileReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sfs/v1/files/{fileId}] getFile", response, response.Code())
 	}
 }
 
@@ -55,14 +54,49 @@ func NewGetFileOK() *GetFileOK {
 	return &GetFileOK{}
 }
 
-/*GetFileOK handles this case with default header values.
+/*
+GetFileOK describes a response with status code 200, with default header values.
 
 OK
 */
 type GetFileOK struct {
 }
 
+// IsSuccess returns true when this get file o k response has a 2xx status code
+func (o *GetFileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get file o k response has a 3xx status code
+func (o *GetFileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get file o k response has a 4xx status code
+func (o *GetFileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get file o k response has a 5xx status code
+func (o *GetFileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get file o k response a status code equal to that given
+func (o *GetFileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get file o k response
+func (o *GetFileOK) Code() int {
+	return 200
+}
+
 func (o *GetFileOK) Error() string {
+	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileOK ", 200)
+}
+
+func (o *GetFileOK) String() string {
 	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileOK ", 200)
 }
 
@@ -76,7 +110,8 @@ func NewGetFileBadRequest() *GetFileBadRequest {
 	return &GetFileBadRequest{}
 }
 
-/*GetFileBadRequest handles this case with default header values.
+/*
+GetFileBadRequest describes a response with status code 400, with default header values.
 
 Invalid Request
 */
@@ -84,7 +119,41 @@ type GetFileBadRequest struct {
 	Payload *GetFileBadRequestBody
 }
 
+// IsSuccess returns true when this get file bad request response has a 2xx status code
+func (o *GetFileBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get file bad request response has a 3xx status code
+func (o *GetFileBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get file bad request response has a 4xx status code
+func (o *GetFileBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get file bad request response has a 5xx status code
+func (o *GetFileBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get file bad request response a status code equal to that given
+func (o *GetFileBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get file bad request response
+func (o *GetFileBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetFileBadRequest) Error() string {
+	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetFileBadRequest) String() string {
 	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileBadRequest  %+v", 400, o.Payload)
 }
 
@@ -109,14 +178,49 @@ func NewGetFileNotFound() *GetFileNotFound {
 	return &GetFileNotFound{}
 }
 
-/*GetFileNotFound handles this case with default header values.
+/*
+GetFileNotFound describes a response with status code 404, with default header values.
 
 No Reports Found
 */
 type GetFileNotFound struct {
 }
 
+// IsSuccess returns true when this get file not found response has a 2xx status code
+func (o *GetFileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get file not found response has a 3xx status code
+func (o *GetFileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get file not found response has a 4xx status code
+func (o *GetFileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get file not found response has a 5xx status code
+func (o *GetFileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get file not found response a status code equal to that given
+func (o *GetFileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get file not found response
+func (o *GetFileNotFound) Code() int {
+	return 404
+}
+
 func (o *GetFileNotFound) Error() string {
+	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileNotFound ", 404)
+}
+
+func (o *GetFileNotFound) String() string {
 	return fmt.Sprintf("[GET /sfs/v1/files/{fileId}][%d] getFileNotFound ", 404)
 }
 
@@ -125,45 +229,8 @@ func (o *GetFileNotFound) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-/*FieldsItems0 Provide validation failed input field details
-swagger:model FieldsItems0
-*/
-type FieldsItems0 struct {
-
-	// Localized Key Name
-	LocalizationKey string `json:"localizationKey,omitempty"`
-
-	// Error description about validation failed field
-	Message string `json:"message,omitempty"`
-
-	// Path of the failed property
-	Path string `json:"path,omitempty"`
-}
-
-// Validate validates this fields items0
-func (o *FieldsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *FieldsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *FieldsItems0) UnmarshalBinary(b []byte) error {
-	var res FieldsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*GetFileBadRequestBody Error Bean
+/*
+GetFileBadRequestBody Error Bean
 swagger:model GetFileBadRequestBody
 */
 type GetFileBadRequestBody struct {
@@ -179,7 +246,7 @@ type GetFileBadRequestBody struct {
 	Detail string `json:"detail,omitempty"`
 
 	// Error fields List
-	Fields []*FieldsItems0 `json:"fields"`
+	Fields []*GetFileBadRequestBodyFieldsItems0 `json:"fields"`
 
 	// Localization Key Name
 	LocalizationKey string `json:"localizationKey,omitempty"`
@@ -221,7 +288,6 @@ func (o *GetFileBadRequestBody) validateCode(formats strfmt.Registry) error {
 }
 
 func (o *GetFileBadRequestBody) validateFields(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Fields) { // not required
 		return nil
 	}
@@ -235,6 +301,8 @@ func (o *GetFileBadRequestBody) validateFields(formats strfmt.Registry) error {
 			if err := o.Fields[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getFileBadRequest" + "." + "fields" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getFileBadRequest" + "." + "fields" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -254,6 +322,45 @@ func (o *GetFileBadRequestBody) validateMessage(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validate this get file bad request body based on the context it is used
+func (o *GetFileBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateFields(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetFileBadRequestBody) contextValidateFields(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Fields); i++ {
+
+		if o.Fields[i] != nil {
+
+			if swag.IsZero(o.Fields[i]) { // not required
+				return nil
+			}
+
+			if err := o.Fields[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getFileBadRequest" + "." + "fields" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getFileBadRequest" + "." + "fields" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetFileBadRequestBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -265,6 +372,50 @@ func (o *GetFileBadRequestBody) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (o *GetFileBadRequestBody) UnmarshalBinary(b []byte) error {
 	var res GetFileBadRequestBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetFileBadRequestBodyFieldsItems0 Provide validation failed input field details
+swagger:model GetFileBadRequestBodyFieldsItems0
+*/
+type GetFileBadRequestBodyFieldsItems0 struct {
+
+	// Localized Key Name
+	LocalizationKey string `json:"localizationKey,omitempty"`
+
+	// Error description about validation failed field
+	Message string `json:"message,omitempty"`
+
+	// Path of the failed property
+	Path string `json:"path,omitempty"`
+}
+
+// Validate validates this get file bad request body fields items0
+func (o *GetFileBadRequestBodyFieldsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get file bad request body fields items0 based on context it is used
+func (o *GetFileBadRequestBodyFieldsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetFileBadRequestBodyFieldsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetFileBadRequestBodyFieldsItems0) UnmarshalBinary(b []byte) error {
+	var res GetFileBadRequestBodyFieldsItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

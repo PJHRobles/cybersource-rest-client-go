@@ -6,18 +6,21 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // MerchantInitiatedTransaction merchant initiated transaction
+//
 // swagger:model MerchantInitiatedTransaction
 type MerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -37,15 +40,19 @@ func (m *MerchantInitiatedTransaction) Validate(formats strfmt.Registry) error {
 }
 
 func (m *MerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("previousTransactionId", "body", string(m.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("previousTransactionId", "body", m.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this merchant initiated transaction based on context it is used
+func (m *MerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,16 +6,16 @@ package report_definitions
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetResourceInfoByReportDefinitionReader is a Reader for the GetResourceInfoByReportDefinition structure.
@@ -44,9 +44,8 @@ func (o *GetResourceInfoByReportDefinitionReader) ReadResponse(response runtime.
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /reporting/v3/report-definitions/{reportDefinitionName}] getResourceInfoByReportDefinition", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewGetResourceInfoByReportDefinitionOK() *GetResourceInfoByReportDefinition
 	return &GetResourceInfoByReportDefinitionOK{}
 }
 
-/*GetResourceInfoByReportDefinitionOK handles this case with default header values.
+/*
+GetResourceInfoByReportDefinitionOK describes a response with status code 200, with default header values.
 
 Ok
 */
@@ -63,7 +63,41 @@ type GetResourceInfoByReportDefinitionOK struct {
 	Payload *GetResourceInfoByReportDefinitionOKBody
 }
 
+// IsSuccess returns true when this get resource info by report definition o k response has a 2xx status code
+func (o *GetResourceInfoByReportDefinitionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get resource info by report definition o k response has a 3xx status code
+func (o *GetResourceInfoByReportDefinitionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resource info by report definition o k response has a 4xx status code
+func (o *GetResourceInfoByReportDefinitionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get resource info by report definition o k response has a 5xx status code
+func (o *GetResourceInfoByReportDefinitionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resource info by report definition o k response a status code equal to that given
+func (o *GetResourceInfoByReportDefinitionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get resource info by report definition o k response
+func (o *GetResourceInfoByReportDefinitionOK) Code() int {
+	return 200
+}
+
 func (o *GetResourceInfoByReportDefinitionOK) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionOK  %+v", 200, o.Payload)
+}
+
+func (o *GetResourceInfoByReportDefinitionOK) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionOK  %+v", 200, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewGetResourceInfoByReportDefinitionBadRequest() *GetResourceInfoByReportDe
 	return &GetResourceInfoByReportDefinitionBadRequest{}
 }
 
-/*GetResourceInfoByReportDefinitionBadRequest handles this case with default header values.
+/*
+GetResourceInfoByReportDefinitionBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
@@ -96,7 +131,41 @@ type GetResourceInfoByReportDefinitionBadRequest struct {
 	Payload *GetResourceInfoByReportDefinitionBadRequestBody
 }
 
+// IsSuccess returns true when this get resource info by report definition bad request response has a 2xx status code
+func (o *GetResourceInfoByReportDefinitionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get resource info by report definition bad request response has a 3xx status code
+func (o *GetResourceInfoByReportDefinitionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resource info by report definition bad request response has a 4xx status code
+func (o *GetResourceInfoByReportDefinitionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get resource info by report definition bad request response has a 5xx status code
+func (o *GetResourceInfoByReportDefinitionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resource info by report definition bad request response a status code equal to that given
+func (o *GetResourceInfoByReportDefinitionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get resource info by report definition bad request response
+func (o *GetResourceInfoByReportDefinitionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetResourceInfoByReportDefinitionBadRequest) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetResourceInfoByReportDefinitionBadRequest) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,14 +190,49 @@ func NewGetResourceInfoByReportDefinitionNotFound() *GetResourceInfoByReportDefi
 	return &GetResourceInfoByReportDefinitionNotFound{}
 }
 
-/*GetResourceInfoByReportDefinitionNotFound handles this case with default header values.
+/*
+GetResourceInfoByReportDefinitionNotFound describes a response with status code 404, with default header values.
 
 Report not found
 */
 type GetResourceInfoByReportDefinitionNotFound struct {
 }
 
+// IsSuccess returns true when this get resource info by report definition not found response has a 2xx status code
+func (o *GetResourceInfoByReportDefinitionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get resource info by report definition not found response has a 3xx status code
+func (o *GetResourceInfoByReportDefinitionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resource info by report definition not found response has a 4xx status code
+func (o *GetResourceInfoByReportDefinitionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get resource info by report definition not found response has a 5xx status code
+func (o *GetResourceInfoByReportDefinitionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resource info by report definition not found response a status code equal to that given
+func (o *GetResourceInfoByReportDefinitionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get resource info by report definition not found response
+func (o *GetResourceInfoByReportDefinitionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetResourceInfoByReportDefinitionNotFound) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionNotFound ", 404)
+}
+
+func (o *GetResourceInfoByReportDefinitionNotFound) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-definitions/{reportDefinitionName}][%d] getResourceInfoByReportDefinitionNotFound ", 404)
 }
 
@@ -137,95 +241,8 @@ func (o *GetResourceInfoByReportDefinitionNotFound) readResponse(response runtim
 	return nil
 }
 
-/*AttributesItems0 attributes items0
-swagger:model AttributesItems0
-*/
-type AttributesItems0 struct {
-
-	// default
-	Default bool `json:"default,omitempty"`
-
-	// description
-	Description string `json:"description,omitempty"`
-
-	// Attribute Filter Type.
-	FilterType string `json:"filterType,omitempty"`
-
-	// id
-	ID string `json:"id,omitempty"`
-
-	// name
-	Name string `json:"name,omitempty"`
-
-	// required
-	Required bool `json:"required,omitempty"`
-
-	// Valid values for the filter.
-	SupportedType string `json:"supportedType,omitempty"`
-}
-
-// Validate validates this attributes items0
-func (o *AttributesItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *AttributesItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *AttributesItems0) UnmarshalBinary(b []byte) error {
-	var res AttributesItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 Provides failed validation input field detail
-//
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// Field in request that caused an error
-	//
-	Field string `json:"field,omitempty"`
-
-	// Documented reason code
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*GetResourceInfoByReportDefinitionBadRequestBody reportingV3ReportDefinitionsNameGet400Response
+/*
+GetResourceInfoByReportDefinitionBadRequestBody reportingV3ReportDefinitionsNameGet400Response
 //
 // HTTP status code for client application
 swagger:model GetResourceInfoByReportDefinitionBadRequestBody
@@ -235,20 +252,23 @@ type GetResourceInfoByReportDefinitionBadRequestBody struct {
 	// Error field list
 	//
 	// Required: true
-	Details []*DetailsItems0 `json:"details"`
+	Details []*GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0 `json:"details"`
 
 	// Short descriptive message to the user.
 	//
+	// Example: One or more fields contains invalid data
 	// Required: true
 	Message *string `json:"message"`
 
 	// Documented reason code
 	//
+	// Example: INVALID_DATA
 	// Required: true
 	Reason *string `json:"reason"`
 
 	// Time of request in UTC.
 	//
+	// Example: 2016-08-11T22:47:57Z
 	// Required: true
 	// Format: date-time
 	SubmitTimeUtc *strfmt.DateTime `json:"submitTimeUtc"`
@@ -295,6 +315,8 @@ func (o *GetResourceInfoByReportDefinitionBadRequestBody) validateDetails(format
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getResourceInfoByReportDefinitionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getResourceInfoByReportDefinitionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -336,6 +358,45 @@ func (o *GetResourceInfoByReportDefinitionBadRequestBody) validateSubmitTimeUtc(
 	return nil
 }
 
+// ContextValidate validate this get resource info by report definition bad request body based on the context it is used
+func (o *GetResourceInfoByReportDefinitionBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetResourceInfoByReportDefinitionBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getResourceInfoByReportDefinitionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getResourceInfoByReportDefinitionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetResourceInfoByReportDefinitionBadRequestBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -354,13 +415,58 @@ func (o *GetResourceInfoByReportDefinitionBadRequestBody) UnmarshalBinary(b []by
 	return nil
 }
 
-/*GetResourceInfoByReportDefinitionOKBody reportingV3ReportDefinitionsNameGet200Response
+/*
+GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0 Provides failed validation input field detail
+//
+swagger:model GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0
+*/
+type GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0 struct {
+
+	// Field in request that caused an error
+	//
+	Field string `json:"field,omitempty"`
+
+	// Documented reason code
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this get resource info by report definition bad request body details items0
+func (o *GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get resource info by report definition bad request body details items0 based on context it is used
+func (o *GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res GetResourceInfoByReportDefinitionBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetResourceInfoByReportDefinitionOKBody reportingV3ReportDefinitionsNameGet200Response
 swagger:model GetResourceInfoByReportDefinitionOKBody
 */
 type GetResourceInfoByReportDefinitionOKBody struct {
 
 	// attributes
-	Attributes []*AttributesItems0 `json:"attributes"`
+	Attributes []*GetResourceInfoByReportDefinitionOKBodyAttributesItems0 `json:"attributes"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -398,7 +504,6 @@ func (o *GetResourceInfoByReportDefinitionOKBody) Validate(formats strfmt.Regist
 }
 
 func (o *GetResourceInfoByReportDefinitionOKBody) validateAttributes(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Attributes) { // not required
 		return nil
 	}
@@ -412,6 +517,8 @@ func (o *GetResourceInfoByReportDefinitionOKBody) validateAttributes(formats str
 			if err := o.Attributes[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getResourceInfoByReportDefinitionOK" + "." + "attributes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getResourceInfoByReportDefinitionOK" + "." + "attributes" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -423,13 +530,51 @@ func (o *GetResourceInfoByReportDefinitionOKBody) validateAttributes(formats str
 }
 
 func (o *GetResourceInfoByReportDefinitionOKBody) validateSupportedFormats(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SupportedFormats) { // not required
 		return nil
 	}
 
 	if err := validate.UniqueItems("getResourceInfoByReportDefinitionOK"+"."+"supportedFormats", "body", o.SupportedFormats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get resource info by report definition o k body based on the context it is used
+func (o *GetResourceInfoByReportDefinitionOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAttributes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetResourceInfoByReportDefinitionOKBody) contextValidateAttributes(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Attributes); i++ {
+
+		if o.Attributes[i] != nil {
+
+			if swag.IsZero(o.Attributes[i]) { // not required
+				return nil
+			}
+
+			if err := o.Attributes[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getResourceInfoByReportDefinitionOK" + "." + "attributes" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getResourceInfoByReportDefinitionOK" + "." + "attributes" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -446,6 +591,64 @@ func (o *GetResourceInfoByReportDefinitionOKBody) MarshalBinary() ([]byte, error
 // UnmarshalBinary interface implementation
 func (o *GetResourceInfoByReportDefinitionOKBody) UnmarshalBinary(b []byte) error {
 	var res GetResourceInfoByReportDefinitionOKBody
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetResourceInfoByReportDefinitionOKBodyAttributesItems0 get resource info by report definition o k body attributes items0
+swagger:model GetResourceInfoByReportDefinitionOKBodyAttributesItems0
+*/
+type GetResourceInfoByReportDefinitionOKBodyAttributesItems0 struct {
+
+	// default
+	Default bool `json:"default,omitempty"`
+
+	// description
+	Description string `json:"description,omitempty"`
+
+	// Attribute Filter Type.
+	// Example: MULTI
+	FilterType string `json:"filterType,omitempty"`
+
+	// id
+	ID string `json:"id,omitempty"`
+
+	// name
+	Name string `json:"name,omitempty"`
+
+	// required
+	Required bool `json:"required,omitempty"`
+
+	// Valid values for the filter.
+	// Example: ["ics_score","ics_ap_auth","ics_ap_auth_reversal","ics_ap_billing_agreement","ics_ap_cancel","ics_ap_capture","ics_ap_initiate","ics_ap_options","ics_ap_order","ics_ap_refund","ics_ap_sale","ics_ap_sessions","ics_ap_check_status","ics_auto_auth_reversal","ics_bank_transfer","ics_bank_transfer_real_time","ics_bank_transfer_refund","ics_bin_lookup","ics_boleto_payment","ics_cm_action","ics_china_payment","ics_china_refund","ics_auth","ics_auto_full_auth_reversal","ics_auth_refresh","ics_auth_reversal","ics_credit","ics_bill","ics_risk_update","ics_dcc","ics_dcc_update","ics_decision","ics_dm_event","ics_direct_debit","ics_direct_debit_mandate","ics_direct_debit_refund","ics_direct_debit_validate","ics_ecp_authenticate","ics_ecp_credit","ics_ecp_debit","ics_get_masterpass_data","ics_get_visa_checkout_data","ics_create_isv","ics_get_isv_history","ics_add_value_to_isv","ics_get_isv_info","ics_modify_isv","ics_get_isv_profiles","ics_redeem_isv","ics_ifs_setup","ics_ifs_update","ics_ipgeo","ics_oct","ics_pa_enroll","ics_pa_validate","paypal_mip_agreement_ipn","ics_paypal_button_create","ics_paypal_credit","ics_paypal_authorization","ics_paypal_create_agreement","ics_paypal_update_agreement","ics_paypal_ec_order_setup","ics_paypal_auth_reversal","ics_paypal_ec_do_payment","ics_paypal_do_ref_transaction","ics_paypal_refund","ics_paypal_do_capture","paypal_ipn","ics_paypal_preapproved_payment","ics_pinless_debit","ics_pinless_debit_validate","ics_pinless_debit_reversal","ics_export","ics_service_fee_auth","ics_service_fee_auth_reversal","ics_service_fee_bill","ics_service_fee_credit","ics_service_fee_ecp_credit","ics_service_fee_ecp_debit","ics_pay_subscription_create","ics_pay_subscription_create_dup","ics_pay_subscription_delete","ics_pay_subscription_update","ics_dav","ics_download","ics_tax","ics_timeout_auth_reversal","ics_timeout_oct_reversal","ics_void","ics_pin_debit_purchase","ics_pin_debit_credit","ics_pin_debit_reversal","ics_timeout_pin_debit_reversal","ics_gift_card_activation","ics_gift_card_balance_inquiry","ics_gift_card_redemption","ics_gift_card_refund","ics_gift_card_reload","ics_gift_card_void","ics_gift_card_reversal"]
+	SupportedType string `json:"supportedType,omitempty"`
+}
+
+// Validate validates this get resource info by report definition o k body attributes items0
+func (o *GetResourceInfoByReportDefinitionOKBodyAttributesItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get resource info by report definition o k body attributes items0 based on context it is used
+func (o *GetResourceInfoByReportDefinitionOKBodyAttributesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetResourceInfoByReportDefinitionOKBodyAttributesItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetResourceInfoByReportDefinitionOKBodyAttributesItems0) UnmarshalBinary(b []byte) error {
+	var res GetResourceInfoByReportDefinitionOKBodyAttributesItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

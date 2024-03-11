@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new void API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,33 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	VoidCapture(params *VoidCaptureParams, opts ...ClientOption) (*VoidCaptureCreated, error)
+
+	VoidCredit(params *VoidCreditParams, opts ...ClientOption) (*VoidCreditCreated, error)
+
+	VoidPayment(params *VoidPaymentParams, opts ...ClientOption) (*VoidPaymentCreated, error)
+
+	VoidRefund(params *VoidRefundParams, opts ...ClientOption) (*VoidRefundCreated, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 VoidCapture voids a capture
 
 Include the capture ID in the POST request to cancel the capture.
 */
-func (a *Client) VoidCapture(params *VoidCaptureParams) (*VoidCaptureCreated, error) {
+func (a *Client) VoidCapture(params *VoidCaptureParams, opts ...ClientOption) (*VoidCaptureCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVoidCaptureParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "voidCapture",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/captures/{id}/voids",
@@ -48,7 +62,12 @@ func (a *Client) VoidCapture(params *VoidCaptureParams) (*VoidCaptureCreated, er
 		Reader:             &VoidCaptureReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -67,13 +86,12 @@ VoidCredit voids a credit
 
 Include the credit ID in the POST request to cancel the credit.
 */
-func (a *Client) VoidCredit(params *VoidCreditParams) (*VoidCreditCreated, error) {
+func (a *Client) VoidCredit(params *VoidCreditParams, opts ...ClientOption) (*VoidCreditCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVoidCreditParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "voidCredit",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/credits/{id}/voids",
@@ -84,7 +102,12 @@ func (a *Client) VoidCredit(params *VoidCreditParams) (*VoidCreditCreated, error
 		Reader:             &VoidCreditReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -103,13 +126,12 @@ VoidPayment voids a payment
 
 Include the payment ID in the POST request to cancel the payment.
 */
-func (a *Client) VoidPayment(params *VoidPaymentParams) (*VoidPaymentCreated, error) {
+func (a *Client) VoidPayment(params *VoidPaymentParams, opts ...ClientOption) (*VoidPaymentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVoidPaymentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "voidPayment",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/payments/{id}/voids",
@@ -120,7 +142,12 @@ func (a *Client) VoidPayment(params *VoidPaymentParams) (*VoidPaymentCreated, er
 		Reader:             &VoidPaymentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -139,13 +166,12 @@ VoidRefund voids a refund
 
 Include the refund ID in the POST request to cancel the refund.
 */
-func (a *Client) VoidRefund(params *VoidRefundParams) (*VoidRefundCreated, error) {
+func (a *Client) VoidRefund(params *VoidRefundParams, opts ...ClientOption) (*VoidRefundCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewVoidRefundParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "voidRefund",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/refunds/{id}/voids",
@@ -156,7 +182,12 @@ func (a *Client) VoidRefund(params *VoidRefundParams) (*VoidRefundCreated, error
 		Reader:             &VoidRefundReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

@@ -6,16 +6,16 @@ package payments
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreatePaymentReader is a Reader for the CreatePayment structure.
@@ -44,9 +44,8 @@ func (o *CreatePaymentReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/payments/] createPayment", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewCreatePaymentCreated() *CreatePaymentCreated {
 	return &CreatePaymentCreated{}
 }
 
-/*CreatePaymentCreated handles this case with default header values.
+/*
+CreatePaymentCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type CreatePaymentCreated struct {
 	Payload *CreatePaymentCreatedBody
 }
 
+// IsSuccess returns true when this create payment created response has a 2xx status code
+func (o *CreatePaymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment created response has a 3xx status code
+func (o *CreatePaymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment created response has a 4xx status code
+func (o *CreatePaymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment created response has a 5xx status code
+func (o *CreatePaymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment created response a status code equal to that given
+func (o *CreatePaymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment created response
+func (o *CreatePaymentCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreatePaymentCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewCreatePaymentBadRequest() *CreatePaymentBadRequest {
 	return &CreatePaymentBadRequest{}
 }
 
-/*CreatePaymentBadRequest handles this case with default header values.
+/*
+CreatePaymentBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type CreatePaymentBadRequest struct {
 	Payload *CreatePaymentBadRequestBody
 }
 
+// IsSuccess returns true when this create payment bad request response has a 2xx status code
+func (o *CreatePaymentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment bad request response has a 3xx status code
+func (o *CreatePaymentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment bad request response has a 4xx status code
+func (o *CreatePaymentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment bad request response has a 5xx status code
+func (o *CreatePaymentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment bad request response a status code equal to that given
+func (o *CreatePaymentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment bad request response
+func (o *CreatePaymentBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreatePaymentBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreatePaymentBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewCreatePaymentBadGateway() *CreatePaymentBadGateway {
 	return &CreatePaymentBadGateway{}
 }
 
-/*CreatePaymentBadGateway handles this case with default header values.
+/*
+CreatePaymentBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type CreatePaymentBadGateway struct {
 	Payload *CreatePaymentBadGatewayBody
 }
 
+// IsSuccess returns true when this create payment bad gateway response has a 2xx status code
+func (o *CreatePaymentBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment bad gateway response has a 3xx status code
+func (o *CreatePaymentBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment bad gateway response has a 4xx status code
+func (o *CreatePaymentBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment bad gateway response has a 5xx status code
+func (o *CreatePaymentBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create payment bad gateway response a status code equal to that given
+func (o *CreatePaymentBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the create payment bad gateway response
+func (o *CreatePaymentBadGateway) Code() int {
+	return 502
+}
+
 func (o *CreatePaymentBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *CreatePaymentBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/][%d] createPaymentBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *CreatePaymentBadGateway) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*CreatePaymentBadGatewayBody ptsV2PaymentsPost502Response
+/*
+CreatePaymentBadGatewayBody ptsV2PaymentsPost502Response
 swagger:model CreatePaymentBadGatewayBody
 */
 type CreatePaymentBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *CreatePaymentBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this create payment bad gateway body based on context it is used
+func (o *CreatePaymentBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *CreatePaymentBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentBadRequestBody ptsV2PaymentsPost400Response
+/*
+CreatePaymentBadRequestBody ptsV2PaymentsPost400Response
 swagger:model CreatePaymentBadRequestBody
 */
 type CreatePaymentBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*CreatePaymentBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -261,7 +372,6 @@ func (o *CreatePaymentBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreatePaymentBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -275,6 +385,47 @@ func (o *CreatePaymentBadRequestBody) validateDetails(formats strfmt.Registry) e
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment bad request body based on the context it is used
+func (o *CreatePaymentBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -303,7 +454,55 @@ func (o *CreatePaymentBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentBody create payment body
+/*
+CreatePaymentBadRequestBodyDetailsItems0 create payment bad request body details items0
+swagger:model CreatePaymentBadRequestBodyDetailsItems0
+*/
+type CreatePaymentBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this create payment bad request body details items0
+func (o *CreatePaymentBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment bad request body details items0 based on context it is used
+func (o *CreatePaymentBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreatePaymentBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreatePaymentBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res CreatePaymentBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreatePaymentBody create payment body
+// Example: {"aggregatorInformation":{"aggregatorId":"123456789","name":"V-Internatio","subMerchant":{"address1":"900 Metro Center","administrativeArea":"CA","cardAcceptorId":"1234567890","country":"US","email":"test@cybs.com","locality":"Foster City","name":"Visa Inc","phoneNumber":"650-432-0000","postalCode":"94404-2775","region":"PEN"}},"clientReferenceInformation":{"code":"TC50171_3"},"orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"102.21"},"billTo":{"address1":"201 S. Division St.","address2":"Address 2","administrativeArea":"MI","buildingNumber":"123","country":"US","district":"MI","email":"test@cybs.com","firstName":"RTS","lastName":"VDP","locality":"Ann Arbor","phoneNumber":"999999999","postalCode":"48104-2201"}},"paymentInformation":{"card":{"expirationMonth":"12","expirationYear":"2031","number":"5555555555554444","securityCode":"123","type":"002"}},"processingInformation":{"commerceIndicator":"internet"}}
 swagger:model CreatePaymentBody
 */
 type CreatePaymentBody struct {
@@ -331,7 +530,7 @@ type CreatePaymentBody struct {
 
 	// The object containing the custom data that the merchant defines.
 	//
-	MerchantDefinedInformation []*MerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
+	MerchantDefinedInformation []*CreatePaymentParamsBodyMerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
 
 	// merchant information
 	MerchantInformation *CreatePaymentParamsBodyMerchantInformation `json:"merchantInformation,omitempty"`
@@ -419,7 +618,6 @@ func (o *CreatePaymentBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreatePaymentBody) validateAggregatorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorInformation) { // not required
 		return nil
 	}
@@ -428,6 +626,8 @@ func (o *CreatePaymentBody) validateAggregatorInformation(formats strfmt.Registr
 		if err := o.AggregatorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "aggregatorInformation")
 			}
 			return err
 		}
@@ -437,7 +637,6 @@ func (o *CreatePaymentBody) validateAggregatorInformation(formats strfmt.Registr
 }
 
 func (o *CreatePaymentBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -446,6 +645,8 @@ func (o *CreatePaymentBody) validateBuyerInformation(formats strfmt.Registry) er
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -455,7 +656,6 @@ func (o *CreatePaymentBody) validateBuyerInformation(formats strfmt.Registry) er
 }
 
 func (o *CreatePaymentBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -464,6 +664,8 @@ func (o *CreatePaymentBody) validateClientReferenceInformation(formats strfmt.Re
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -473,7 +675,6 @@ func (o *CreatePaymentBody) validateClientReferenceInformation(formats strfmt.Re
 }
 
 func (o *CreatePaymentBody) validateConsumerAuthenticationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
 		return nil
 	}
@@ -482,6 +683,8 @@ func (o *CreatePaymentBody) validateConsumerAuthenticationInformation(formats st
 		if err := o.ConsumerAuthenticationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "consumerAuthenticationInformation")
 			}
 			return err
 		}
@@ -491,7 +694,6 @@ func (o *CreatePaymentBody) validateConsumerAuthenticationInformation(formats st
 }
 
 func (o *CreatePaymentBody) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -500,6 +702,8 @@ func (o *CreatePaymentBody) validateDeviceInformation(formats strfmt.Registry) e
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "deviceInformation")
 			}
 			return err
 		}
@@ -509,7 +713,6 @@ func (o *CreatePaymentBody) validateDeviceInformation(formats strfmt.Registry) e
 }
 
 func (o *CreatePaymentBody) validateInstallmentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InstallmentInformation) { // not required
 		return nil
 	}
@@ -518,6 +721,8 @@ func (o *CreatePaymentBody) validateInstallmentInformation(formats strfmt.Regist
 		if err := o.InstallmentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "installmentInformation")
 			}
 			return err
 		}
@@ -527,7 +732,6 @@ func (o *CreatePaymentBody) validateInstallmentInformation(formats strfmt.Regist
 }
 
 func (o *CreatePaymentBody) validateIssuerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssuerInformation) { // not required
 		return nil
 	}
@@ -536,6 +740,8 @@ func (o *CreatePaymentBody) validateIssuerInformation(formats strfmt.Registry) e
 		if err := o.IssuerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "issuerInformation")
 			}
 			return err
 		}
@@ -545,7 +751,6 @@ func (o *CreatePaymentBody) validateIssuerInformation(formats strfmt.Registry) e
 }
 
 func (o *CreatePaymentBody) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -559,6 +764,8 @@ func (o *CreatePaymentBody) validateMerchantDefinedInformation(formats strfmt.Re
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -570,7 +777,6 @@ func (o *CreatePaymentBody) validateMerchantDefinedInformation(formats strfmt.Re
 }
 
 func (o *CreatePaymentBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -579,6 +785,8 @@ func (o *CreatePaymentBody) validateMerchantInformation(formats strfmt.Registry)
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -588,7 +796,6 @@ func (o *CreatePaymentBody) validateMerchantInformation(formats strfmt.Registry)
 }
 
 func (o *CreatePaymentBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -597,6 +804,8 @@ func (o *CreatePaymentBody) validateOrderInformation(formats strfmt.Registry) er
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -606,7 +815,6 @@ func (o *CreatePaymentBody) validateOrderInformation(formats strfmt.Registry) er
 }
 
 func (o *CreatePaymentBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -615,6 +823,8 @@ func (o *CreatePaymentBody) validatePaymentInformation(formats strfmt.Registry) 
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -624,7 +834,6 @@ func (o *CreatePaymentBody) validatePaymentInformation(formats strfmt.Registry) 
 }
 
 func (o *CreatePaymentBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -633,6 +842,8 @@ func (o *CreatePaymentBody) validatePointOfSaleInformation(formats strfmt.Regist
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -642,7 +853,6 @@ func (o *CreatePaymentBody) validatePointOfSaleInformation(formats strfmt.Regist
 }
 
 func (o *CreatePaymentBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -651,6 +861,8 @@ func (o *CreatePaymentBody) validateProcessingInformation(formats strfmt.Registr
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -660,7 +872,6 @@ func (o *CreatePaymentBody) validateProcessingInformation(formats strfmt.Registr
 }
 
 func (o *CreatePaymentBody) validateRecipientInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecipientInformation) { // not required
 		return nil
 	}
@@ -669,6 +880,372 @@ func (o *CreatePaymentBody) validateRecipientInformation(formats strfmt.Registry
 		if err := o.RecipientInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "recipientInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment body based on the context it is used
+func (o *CreatePaymentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAggregatorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateConsumerAuthenticationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInstallmentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateIssuerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRecipientInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateAggregatorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AggregatorInformation != nil {
+
+		if swag.IsZero(o.AggregatorInformation) { // not required
+			return nil
+		}
+
+		if err := o.AggregatorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "aggregatorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateConsumerAuthenticationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ConsumerAuthenticationInformation != nil {
+
+		if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
+			return nil
+		}
+
+		if err := o.ConsumerAuthenticationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "consumerAuthenticationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateInstallmentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InstallmentInformation != nil {
+
+		if swag.IsZero(o.InstallmentInformation) { // not required
+			return nil
+		}
+
+		if err := o.InstallmentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "installmentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateIssuerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IssuerInformation != nil {
+
+		if swag.IsZero(o.IssuerInformation) { // not required
+			return nil
+		}
+
+		if err := o.IssuerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "issuerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentBody) contextValidateRecipientInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecipientInformation != nil {
+
+		if swag.IsZero(o.RecipientInformation) { // not required
+			return nil
+		}
+
+		if err := o.RecipientInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "recipientInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "recipientInformation")
 			}
 			return err
 		}
@@ -695,7 +1272,9 @@ func (o *CreatePaymentBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentCreatedBody ptsV2PaymentsPost201Response
+/*
+CreatePaymentCreatedBody ptsV2PaymentsPost201Response
+// Example: {"_links":{"authReversal":{"href":"/pts/v2/payments/4963015972176007901546/reversals","method":"POST"},"capture":{"href":"/pts/v2/payments/4963015972176007901546/captures","method":"POST"},"refund":{"href":"/pts/v2/payments/4963015972176007901546/refunds","method":"POST"},"self":{"href":"/pts/v2/payments/4963015972176007901546","method":"GET"},"void":{"href":"/pts/v2/payments/4963015972176007901546/voids","method":"POST"}},"clientReferenceInformation":{"code":"TC50171_3"},"id":"4963015972176007901546","orderInformation":{"amountDetails":{"authorizedAmount":"102.21","currency":"USD"}},"processorInformation":{"approvalCode":"888888","avs":{"code":"X","codeRaw":"I1"},"cardVerification":{"resultCode":""},"responseCode":"100"},"reconciliationId":"39570726X3E1LBQR","status":"200","statusInformation":{"message":"Successful transaction.","reason":"SUCCESS"},"submitTimeUtc":"2017-06-01T071957Z"}
 swagger:model CreatePaymentCreatedBody
 */
 type CreatePaymentCreatedBody struct {
@@ -816,7 +1395,6 @@ func (o *CreatePaymentCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -825,6 +1403,8 @@ func (o *CreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) error 
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -834,7 +1414,6 @@ func (o *CreatePaymentCreatedBody) validateLinks(formats strfmt.Registry) error 
 }
 
 func (o *CreatePaymentCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -843,6 +1422,8 @@ func (o *CreatePaymentCreatedBody) validateClientReferenceInformation(formats st
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -852,7 +1433,6 @@ func (o *CreatePaymentCreatedBody) validateClientReferenceInformation(formats st
 }
 
 func (o *CreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -861,6 +1441,8 @@ func (o *CreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Regis
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -870,12 +1452,11 @@ func (o *CreatePaymentCreatedBody) validateErrorInformation(formats strfmt.Regis
 }
 
 func (o *CreatePaymentCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -883,7 +1464,6 @@ func (o *CreatePaymentCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *CreatePaymentCreatedBody) validateInstallmentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InstallmentInformation) { // not required
 		return nil
 	}
@@ -892,6 +1472,8 @@ func (o *CreatePaymentCreatedBody) validateInstallmentInformation(formats strfmt
 		if err := o.InstallmentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "installmentInformation")
 			}
 			return err
 		}
@@ -901,7 +1483,6 @@ func (o *CreatePaymentCreatedBody) validateInstallmentInformation(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBody) validateIssuerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssuerInformation) { // not required
 		return nil
 	}
@@ -910,6 +1491,8 @@ func (o *CreatePaymentCreatedBody) validateIssuerInformation(formats strfmt.Regi
 		if err := o.IssuerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "issuerInformation")
 			}
 			return err
 		}
@@ -919,7 +1502,6 @@ func (o *CreatePaymentCreatedBody) validateIssuerInformation(formats strfmt.Regi
 }
 
 func (o *CreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -928,6 +1510,8 @@ func (o *CreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Regis
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -937,7 +1521,6 @@ func (o *CreatePaymentCreatedBody) validateOrderInformation(formats strfmt.Regis
 }
 
 func (o *CreatePaymentCreatedBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -946,6 +1529,8 @@ func (o *CreatePaymentCreatedBody) validatePaymentInformation(formats strfmt.Reg
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -955,7 +1540,6 @@ func (o *CreatePaymentCreatedBody) validatePaymentInformation(formats strfmt.Reg
 }
 
 func (o *CreatePaymentCreatedBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -964,6 +1548,8 @@ func (o *CreatePaymentCreatedBody) validatePointOfSaleInformation(formats strfmt
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -973,7 +1559,6 @@ func (o *CreatePaymentCreatedBody) validatePointOfSaleInformation(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -982,6 +1567,8 @@ func (o *CreatePaymentCreatedBody) validateProcessingInformation(formats strfmt.
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -991,7 +1578,6 @@ func (o *CreatePaymentCreatedBody) validateProcessingInformation(formats strfmt.
 }
 
 func (o *CreatePaymentCreatedBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -1000,6 +1586,8 @@ func (o *CreatePaymentCreatedBody) validateProcessorInformation(formats strfmt.R
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -1009,13 +1597,272 @@ func (o *CreatePaymentCreatedBody) validateProcessorInformation(formats strfmt.R
 }
 
 func (o *CreatePaymentCreatedBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body based on the context it is used
+func (o *CreatePaymentCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInstallmentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateIssuerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateInstallmentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InstallmentInformation != nil {
+
+		if swag.IsZero(o.InstallmentInformation) { // not required
+			return nil
+		}
+
+		if err := o.InstallmentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "installmentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateIssuerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IssuerInformation != nil {
+
+		if swag.IsZero(o.IssuerInformation) { // not required
+			return nil
+		}
+
+		if err := o.IssuerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "issuerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1039,7 +1886,8 @@ func (o *CreatePaymentCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentCreatedBodyClientReferenceInformation create payment created body client reference information
+/*
+CreatePaymentCreatedBodyClientReferenceInformation create payment created body client reference information
 swagger:model CreatePaymentCreatedBodyClientReferenceInformation
 */
 type CreatePaymentCreatedBodyClientReferenceInformation struct {
@@ -1094,12 +1942,11 @@ func (o *CreatePaymentCreatedBodyClientReferenceInformation) Validate(formats st
 }
 
 func (o *CreatePaymentCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -1107,15 +1954,19 @@ func (o *CreatePaymentCreatedBodyClientReferenceInformation) validateCode(format
 }
 
 func (o *CreatePaymentCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body client reference information based on context it is used
+func (o *CreatePaymentCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1137,7 +1988,8 @@ func (o *CreatePaymentCreatedBodyClientReferenceInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreatePaymentCreatedBodyErrorInformation create payment created body error information
+/*
+CreatePaymentCreatedBodyErrorInformation create payment created body error information
 swagger:model CreatePaymentCreatedBodyErrorInformation
 */
 type CreatePaymentCreatedBodyErrorInformation struct {
@@ -1192,7 +2044,6 @@ func (o *CreatePaymentCreatedBodyErrorInformation) Validate(formats strfmt.Regis
 }
 
 func (o *CreatePaymentCreatedBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1206,6 +2057,47 @@ func (o *CreatePaymentCreatedBodyErrorInformation) validateDetails(formats strfm
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body error information based on the context it is used
+func (o *CreatePaymentCreatedBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentCreated" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1234,7 +2126,8 @@ func (o *CreatePaymentCreatedBodyErrorInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreatePaymentCreatedBodyErrorInformationDetailsItems0 create payment created body error information details items0
+/*
+CreatePaymentCreatedBodyErrorInformationDetailsItems0 create payment created body error information details items0
 swagger:model CreatePaymentCreatedBodyErrorInformationDetailsItems0
 */
 type CreatePaymentCreatedBodyErrorInformationDetailsItems0 struct {
@@ -1256,6 +2149,11 @@ func (o *CreatePaymentCreatedBodyErrorInformationDetailsItems0) Validate(formats
 	return nil
 }
 
+// ContextValidate validates this create payment created body error information details items0 based on context it is used
+func (o *CreatePaymentCreatedBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentCreatedBodyErrorInformationDetailsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1274,7 +2172,8 @@ func (o *CreatePaymentCreatedBodyErrorInformationDetailsItems0) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentCreatedBodyInstallmentInformation create payment created body installment information
+/*
+CreatePaymentCreatedBodyInstallmentInformation create payment created body installment information
 swagger:model CreatePaymentCreatedBodyInstallmentInformation
 */
 type CreatePaymentCreatedBodyInstallmentInformation struct {
@@ -1638,12 +2537,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) Validate(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAdditionalCosts(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdditionalCosts) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"additionalCosts", "body", string(o.AdditionalCosts), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"additionalCosts", "body", o.AdditionalCosts, 12); err != nil {
 		return err
 	}
 
@@ -1651,12 +2549,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAdditionalCosts
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAdditionalCostsPercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdditionalCostsPercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"additionalCostsPercentage", "body", string(o.AdditionalCostsPercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"additionalCostsPercentage", "body", o.AdditionalCostsPercentage, 4); err != nil {
 		return err
 	}
 
@@ -1664,12 +2561,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAdditionalCosts
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAmountFunded(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountFunded) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"amountFunded", "body", string(o.AmountFunded), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"amountFunded", "body", o.AmountFunded, 12); err != nil {
 		return err
 	}
 
@@ -1677,12 +2573,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAmountFunded(fo
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAmountRequestedPercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountRequestedPercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"amountRequestedPercentage", "body", string(o.AmountRequestedPercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"amountRequestedPercentage", "body", o.AmountRequestedPercentage, 4); err != nil {
 		return err
 	}
 
@@ -1690,12 +2585,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAmountRequested
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAnnualFinancingCost(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AnnualFinancingCost) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"annualFinancingCost", "body", string(o.AnnualFinancingCost), 7); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"annualFinancingCost", "body", o.AnnualFinancingCost, 7); err != nil {
 		return err
 	}
 
@@ -1703,12 +2597,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAnnualFinancing
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAnnualInterestRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AnnualInterestRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"annualInterestRate", "body", string(o.AnnualInterestRate), 7); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"annualInterestRate", "body", o.AnnualInterestRate, 7); err != nil {
 		return err
 	}
 
@@ -1716,12 +2609,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateAnnualInterestR
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateExpenses(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Expenses) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"expenses", "body", string(o.Expenses), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"expenses", "body", o.Expenses, 12); err != nil {
 		return err
 	}
 
@@ -1729,12 +2621,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateExpenses(format
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateExpensesPercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpensesPercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"expensesPercentage", "body", string(o.ExpensesPercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"expensesPercentage", "body", o.ExpensesPercentage, 4); err != nil {
 		return err
 	}
 
@@ -1742,12 +2633,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateExpensesPercent
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateFees(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Fees) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"fees", "body", string(o.Fees), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"fees", "body", o.Fees, 12); err != nil {
 		return err
 	}
 
@@ -1755,12 +2645,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateFees(formats st
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateFeesPercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FeesPercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"feesPercentage", "body", string(o.FeesPercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"feesPercentage", "body", o.FeesPercentage, 4); err != nil {
 		return err
 	}
 
@@ -1768,12 +2657,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateFeesPercentage(
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateInsurance(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Insurance) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"insurance", "body", string(o.Insurance), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"insurance", "body", o.Insurance, 12); err != nil {
 		return err
 	}
 
@@ -1781,12 +2669,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateInsurance(forma
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateInsurancePercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InsurancePercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"insurancePercentage", "body", string(o.InsurancePercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"insurancePercentage", "body", o.InsurancePercentage, 4); err != nil {
 		return err
 	}
 
@@ -1794,12 +2681,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateInsurancePercen
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateMonthlyInterestRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MonthlyInterestRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"monthlyInterestRate", "body", string(o.MonthlyInterestRate), 7); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"monthlyInterestRate", "body", o.MonthlyInterestRate, 7); err != nil {
 		return err
 	}
 
@@ -1807,12 +2693,11 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateMonthlyInterest
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateTaxes(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Taxes) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"taxes", "body", string(o.Taxes), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"taxes", "body", o.Taxes, 12); err != nil {
 		return err
 	}
 
@@ -1820,15 +2705,19 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) validateTaxes(formats s
 }
 
 func (o *CreatePaymentCreatedBodyInstallmentInformation) validateTaxesPercentage(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxesPercentage) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"taxesPercentage", "body", string(o.TaxesPercentage), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"installmentInformation"+"."+"taxesPercentage", "body", o.TaxesPercentage, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body installment information based on context it is used
+func (o *CreatePaymentCreatedBodyInstallmentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1850,7 +2739,8 @@ func (o *CreatePaymentCreatedBodyInstallmentInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreatePaymentCreatedBodyIssuerInformation create payment created body issuer information
+/*
+CreatePaymentCreatedBodyIssuerInformation create payment created body issuer information
 swagger:model CreatePaymentCreatedBodyIssuerInformation
 */
 type CreatePaymentCreatedBodyIssuerInformation struct {
@@ -1910,12 +2800,11 @@ func (o *CreatePaymentCreatedBodyIssuerInformation) Validate(formats strfmt.Regi
 }
 
 func (o *CreatePaymentCreatedBodyIssuerInformation) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -1923,12 +2812,11 @@ func (o *CreatePaymentCreatedBodyIssuerInformation) validateCountry(formats strf
 }
 
 func (o *CreatePaymentCreatedBodyIssuerInformation) validateDiscretionaryData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscretionaryData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"discretionaryData", "body", string(o.DiscretionaryData), 255); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"discretionaryData", "body", o.DiscretionaryData, 255); err != nil {
 		return err
 	}
 
@@ -1936,15 +2824,19 @@ func (o *CreatePaymentCreatedBodyIssuerInformation) validateDiscretionaryData(fo
 }
 
 func (o *CreatePaymentCreatedBodyIssuerInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"responseCode", "body", string(o.ResponseCode), 6); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"issuerInformation"+"."+"responseCode", "body", o.ResponseCode, 6); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body issuer information based on context it is used
+func (o *CreatePaymentCreatedBodyIssuerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1966,7 +2858,8 @@ func (o *CreatePaymentCreatedBodyIssuerInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreatePaymentCreatedBodyLinks create payment created body links
+/*
+CreatePaymentCreatedBodyLinks create payment created body links
 swagger:model CreatePaymentCreatedBodyLinks
 */
 type CreatePaymentCreatedBodyLinks struct {
@@ -2004,7 +2897,6 @@ func (o *CreatePaymentCreatedBodyLinks) Validate(formats strfmt.Registry) error 
 }
 
 func (o *CreatePaymentCreatedBodyLinks) validateCapture(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Capture) { // not required
 		return nil
 	}
@@ -2013,6 +2905,8 @@ func (o *CreatePaymentCreatedBodyLinks) validateCapture(formats strfmt.Registry)
 		if err := o.Capture.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "capture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "capture")
 			}
 			return err
 		}
@@ -2022,7 +2916,6 @@ func (o *CreatePaymentCreatedBodyLinks) validateCapture(formats strfmt.Registry)
 }
 
 func (o *CreatePaymentCreatedBodyLinks) validateReversal(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Reversal) { // not required
 		return nil
 	}
@@ -2031,6 +2924,8 @@ func (o *CreatePaymentCreatedBodyLinks) validateReversal(formats strfmt.Registry
 		if err := o.Reversal.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "reversal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "reversal")
 			}
 			return err
 		}
@@ -2040,7 +2935,6 @@ func (o *CreatePaymentCreatedBodyLinks) validateReversal(formats strfmt.Registry
 }
 
 func (o *CreatePaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -2049,6 +2943,93 @@ func (o *CreatePaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) er
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body links based on the context it is used
+func (o *CreatePaymentCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateCapture(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateReversal(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyLinks) contextValidateCapture(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Capture != nil {
+
+		if swag.IsZero(o.Capture) { // not required
+			return nil
+		}
+
+		if err := o.Capture.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "capture")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "capture")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyLinks) contextValidateReversal(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Reversal != nil {
+
+		if swag.IsZero(o.Reversal) { // not required
+			return nil
+		}
+
+		if err := o.Reversal.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "reversal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "reversal")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -2075,7 +3056,8 @@ func (o *CreatePaymentCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentCreatedBodyLinksCapture create payment created body links capture
+/*
+CreatePaymentCreatedBodyLinksCapture create payment created body links capture
 swagger:model CreatePaymentCreatedBodyLinksCapture
 */
 type CreatePaymentCreatedBodyLinksCapture struct {
@@ -2089,6 +3071,11 @@ type CreatePaymentCreatedBodyLinksCapture struct {
 
 // Validate validates this create payment created body links capture
 func (o *CreatePaymentCreatedBodyLinksCapture) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment created body links capture based on context it is used
+func (o *CreatePaymentCreatedBodyLinksCapture) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2110,7 +3097,8 @@ func (o *CreatePaymentCreatedBodyLinksCapture) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentCreatedBodyLinksReversal create payment created body links reversal
+/*
+CreatePaymentCreatedBodyLinksReversal create payment created body links reversal
 swagger:model CreatePaymentCreatedBodyLinksReversal
 */
 type CreatePaymentCreatedBodyLinksReversal struct {
@@ -2124,6 +3112,11 @@ type CreatePaymentCreatedBodyLinksReversal struct {
 
 // Validate validates this create payment created body links reversal
 func (o *CreatePaymentCreatedBodyLinksReversal) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment created body links reversal based on context it is used
+func (o *CreatePaymentCreatedBodyLinksReversal) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2145,7 +3138,8 @@ func (o *CreatePaymentCreatedBodyLinksReversal) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*CreatePaymentCreatedBodyLinksSelf create payment created body links self
+/*
+CreatePaymentCreatedBodyLinksSelf create payment created body links self
 swagger:model CreatePaymentCreatedBodyLinksSelf
 */
 type CreatePaymentCreatedBodyLinksSelf struct {
@@ -2159,6 +3153,11 @@ type CreatePaymentCreatedBodyLinksSelf struct {
 
 // Validate validates this create payment created body links self
 func (o *CreatePaymentCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment created body links self based on context it is used
+func (o *CreatePaymentCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2180,7 +3179,8 @@ func (o *CreatePaymentCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentCreatedBodyOrderInformation create payment created body order information
+/*
+CreatePaymentCreatedBodyOrderInformation create payment created body order information
 swagger:model CreatePaymentCreatedBodyOrderInformation
 */
 type CreatePaymentCreatedBodyOrderInformation struct {
@@ -2211,7 +3211,6 @@ func (o *CreatePaymentCreatedBodyOrderInformation) Validate(formats strfmt.Regis
 }
 
 func (o *CreatePaymentCreatedBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -2220,6 +3219,8 @@ func (o *CreatePaymentCreatedBodyOrderInformation) validateAmountDetails(formats
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -2229,7 +3230,6 @@ func (o *CreatePaymentCreatedBodyOrderInformation) validateAmountDetails(formats
 }
 
 func (o *CreatePaymentCreatedBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -2238,6 +3238,68 @@ func (o *CreatePaymentCreatedBodyOrderInformation) validateInvoiceDetails(format
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body order information based on the context it is used
+func (o *CreatePaymentCreatedBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -2264,7 +3326,8 @@ func (o *CreatePaymentCreatedBodyOrderInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreatePaymentCreatedBodyOrderInformationAmountDetails create payment created body order information amount details
+/*
+CreatePaymentCreatedBodyOrderInformationAmountDetails create payment created body order information amount details
 swagger:model CreatePaymentCreatedBodyOrderInformationAmountDetails
 */
 type CreatePaymentCreatedBodyOrderInformationAmountDetails struct {
@@ -2317,12 +3380,11 @@ func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) Validate(formats
 }
 
 func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) validateAuthorizedAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizedAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"authorizedAmount", "body", string(o.AuthorizedAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"authorizedAmount", "body", o.AuthorizedAmount, 15); err != nil {
 		return err
 	}
 
@@ -2330,12 +3392,11 @@ func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) validateAuthoriz
 }
 
 func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -2343,15 +3404,19 @@ func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) validateCurrency
 }
 
 func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body order information amount details based on context it is used
+func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2373,7 +3438,8 @@ func (o *CreatePaymentCreatedBodyOrderInformationAmountDetails) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentCreatedBodyOrderInformationInvoiceDetails create payment created body order information invoice details
+/*
+CreatePaymentCreatedBodyOrderInformationInvoiceDetails create payment created body order information invoice details
 swagger:model CreatePaymentCreatedBodyOrderInformationInvoiceDetails
 */
 type CreatePaymentCreatedBodyOrderInformationInvoiceDetails struct {
@@ -2398,6 +3464,11 @@ func (o *CreatePaymentCreatedBodyOrderInformationInvoiceDetails) Validate(format
 	return nil
 }
 
+// ContextValidate validates this create payment created body order information invoice details based on context it is used
+func (o *CreatePaymentCreatedBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentCreatedBodyOrderInformationInvoiceDetails) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -2416,7 +3487,8 @@ func (o *CreatePaymentCreatedBodyOrderInformationInvoiceDetails) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformation create payment created body payment information
+/*
+CreatePaymentCreatedBodyPaymentInformation create payment created body payment information
 swagger:model CreatePaymentCreatedBodyPaymentInformation
 */
 type CreatePaymentCreatedBodyPaymentInformation struct {
@@ -2461,7 +3533,6 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) Validate(formats strfmt.Reg
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformation) validateAccountFeatures(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountFeatures) { // not required
 		return nil
 	}
@@ -2470,6 +3541,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateAccountFeatures(for
 		if err := o.AccountFeatures.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "accountFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "accountFeatures")
 			}
 			return err
 		}
@@ -2479,7 +3552,6 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateAccountFeatures(for
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformation) validateBank(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bank) { // not required
 		return nil
 	}
@@ -2488,6 +3560,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateBank(formats strfmt
 		if err := o.Bank.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank")
 			}
 			return err
 		}
@@ -2497,7 +3571,6 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateBank(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -2506,6 +3579,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateCard(formats strfmt
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -2515,7 +3590,6 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateCard(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformation) validateTokenizedCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TokenizedCard) { // not required
 		return nil
 	}
@@ -2524,6 +3598,118 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) validateTokenizedCard(forma
 		if err := o.TokenizedCard.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "tokenizedCard")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body payment information based on the context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccountFeatures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBank(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTokenizedCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPaymentInformation) contextValidateAccountFeatures(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AccountFeatures != nil {
+
+		if swag.IsZero(o.AccountFeatures) { // not required
+			return nil
+		}
+
+		if err := o.AccountFeatures.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "accountFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "accountFeatures")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPaymentInformation) contextValidateBank(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Bank != nil {
+
+		if swag.IsZero(o.Bank) { // not required
+			return nil
+		}
+
+		if err := o.Bank.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPaymentInformation) contextValidateTokenizedCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.TokenizedCard != nil {
+
+		if swag.IsZero(o.TokenizedCard) { // not required
+			return nil
+		}
+
+		if err := o.TokenizedCard.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "tokenizedCard")
 			}
 			return err
 		}
@@ -2550,7 +3736,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformationAccountFeatures create payment created body payment information account features
+/*
+CreatePaymentCreatedBodyPaymentInformationAccountFeatures create payment created body payment information account features
 swagger:model CreatePaymentCreatedBodyPaymentInformationAccountFeatures
 */
 type CreatePaymentCreatedBodyPaymentInformationAccountFeatures struct {
@@ -2873,12 +4060,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) Validate(for
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAccountStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountStatus) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"accountStatus", "body", string(o.AccountStatus), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"accountStatus", "body", o.AccountStatus, 1); err != nil {
 		return err
 	}
 
@@ -2886,12 +4072,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAcco
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAccountType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"accountType", "body", string(o.AccountType), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"accountType", "body", o.AccountType, 2); err != nil {
 		return err
 	}
 
@@ -2899,12 +4084,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAcco
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAffluenceIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AffluenceIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"affluenceIndicator", "body", string(o.AffluenceIndicator), 13); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"affluenceIndicator", "body", o.AffluenceIndicator, 13); err != nil {
 		return err
 	}
 
@@ -2912,12 +4096,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateAffl
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBalanceAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BalanceAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmount", "body", string(o.BalanceAmount), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmount", "body", o.BalanceAmount, 12); err != nil {
 		return err
 	}
 
@@ -2925,12 +4108,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBala
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBalanceAmountType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BalanceAmountType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmountType", "body", string(o.BalanceAmountType), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmountType", "body", o.BalanceAmountType, 2); err != nil {
 		return err
 	}
 
@@ -2938,12 +4120,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBala
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBalanceSign(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BalanceSign) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceSign", "body", string(o.BalanceSign), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceSign", "body", o.BalanceSign, 1); err != nil {
 		return err
 	}
 
@@ -2951,12 +4132,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateBala
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateCategory(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Category) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"category", "body", string(o.Category), 7); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"category", "body", o.Category, 7); err != nil {
 		return err
 	}
 
@@ -2964,12 +4144,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateCate
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateCommercial(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Commercial) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"commercial", "body", string(o.Commercial), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"commercial", "body", o.Commercial, 1); err != nil {
 		return err
 	}
 
@@ -2977,12 +4156,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateComm
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"currency", "body", string(o.Currency), 5); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"currency", "body", o.Currency, 5); err != nil {
 		return err
 	}
 
@@ -2990,12 +4168,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateCurr
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateGroup(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Group) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"group", "body", string(o.Group), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"group", "body", o.Group, 1); err != nil {
 		return err
 	}
 
@@ -3003,12 +4180,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateGrou
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateHealthCare(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HealthCare) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"healthCare", "body", string(o.HealthCare), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"healthCare", "body", o.HealthCare, 1); err != nil {
 		return err
 	}
 
@@ -3016,12 +4192,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateHeal
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateLevel3Eligible(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Level3Eligible) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"level3Eligible", "body", string(o.Level3Eligible), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"level3Eligible", "body", o.Level3Eligible, 1); err != nil {
 		return err
 	}
 
@@ -3029,12 +4204,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateLeve
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePayroll(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Payroll) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"payroll", "body", string(o.Payroll), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"payroll", "body", o.Payroll, 1); err != nil {
 		return err
 	}
 
@@ -3042,12 +4216,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePayr
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePinlessDebit(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PinlessDebit) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"pinlessDebit", "body", string(o.PinlessDebit), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"pinlessDebit", "body", o.PinlessDebit, 1); err != nil {
 		return err
 	}
 
@@ -3055,12 +4228,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePinl
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePrepaid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Prepaid) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"prepaid", "body", string(o.Prepaid), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"prepaid", "body", o.Prepaid, 1); err != nil {
 		return err
 	}
 
@@ -3068,12 +4240,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validatePrep
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateRegulated(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Regulated) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"regulated", "body", string(o.Regulated), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"regulated", "body", o.Regulated, 1); err != nil {
 		return err
 	}
 
@@ -3081,15 +4252,19 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateRegu
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) validateSignatureDebit(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SignatureDebit) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"signatureDebit", "body", string(o.SignatureDebit), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"signatureDebit", "body", o.SignatureDebit, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body payment information account features based on context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3111,7 +4286,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationAccountFeatures) UnmarshalBin
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformationBank create payment created body payment information bank
+/*
+CreatePaymentCreatedBodyPaymentInformationBank create payment created body payment information bank
 swagger:model CreatePaymentCreatedBodyPaymentInformationBank
 */
 type CreatePaymentCreatedBodyPaymentInformationBank struct {
@@ -3146,7 +4322,6 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBank) Validate(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationBank) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -3155,6 +4330,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBank) validateAccount(formats
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank" + "." + "account")
 			}
 			return err
 		}
@@ -3164,13 +4341,47 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBank) validateAccount(formats
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationBank) validateCorrectedRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CorrectedRoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"bank"+"."+"correctedRoutingNumber", "body", string(o.CorrectedRoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"bank"+"."+"correctedRoutingNumber", "body", o.CorrectedRoutingNumber, 9); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body payment information bank based on the context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformationBank) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPaymentInformationBank) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -3194,7 +4405,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBank) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformationBankAccount create payment created body payment information bank account
+/*
+CreatePaymentCreatedBodyPaymentInformationBankAccount create payment created body payment information bank account
 swagger:model CreatePaymentCreatedBodyPaymentInformationBankAccount
 */
 type CreatePaymentCreatedBodyPaymentInformationBankAccount struct {
@@ -3222,15 +4434,19 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBankAccount) Validate(formats
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationBankAccount) validateCorrectedAccountNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CorrectedAccountNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"correctedAccountNumber", "body", string(o.CorrectedAccountNumber), 17); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"correctedAccountNumber", "body", o.CorrectedAccountNumber, 17); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body payment information bank account based on context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformationBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3252,7 +4468,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationBankAccount) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformationCard create payment created body payment information card
+/*
+CreatePaymentCreatedBodyPaymentInformationCard create payment created body payment information card
 swagger:model CreatePaymentCreatedBodyPaymentInformationCard
 */
 type CreatePaymentCreatedBodyPaymentInformationCard struct {
@@ -3276,6 +4493,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationCard) Validate(formats strfmt
 	return nil
 }
 
+// ContextValidate validates this create payment created body payment information card based on context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentCreatedBodyPaymentInformationCard) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -3294,7 +4516,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationCard) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPaymentInformationTokenizedCard create payment created body payment information tokenized card
+/*
+CreatePaymentCreatedBodyPaymentInformationTokenizedCard create payment created body payment information tokenized card
 swagger:model CreatePaymentCreatedBodyPaymentInformationTokenizedCard
 */
 type CreatePaymentCreatedBodyPaymentInformationTokenizedCard struct {
@@ -3439,12 +4662,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) Validate(forma
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateAssuranceLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AssuranceLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"assuranceLevel", "body", string(o.AssuranceLevel), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"assuranceLevel", "body", o.AssuranceLevel, 2); err != nil {
 		return err
 	}
 
@@ -3452,12 +4674,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateAssura
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -3465,12 +4686,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateExpira
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -3478,12 +4698,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateExpira
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validatePrefix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Prefix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"prefix", "body", string(o.Prefix), 6); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"prefix", "body", o.Prefix, 6); err != nil {
 		return err
 	}
 
@@ -3491,12 +4710,11 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validatePrefix
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateRequestorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RequestorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"requestorId", "body", string(o.RequestorID), 11); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"requestorId", "body", o.RequestorID, 11); err != nil {
 		return err
 	}
 
@@ -3504,15 +4722,19 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateReques
 }
 
 func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) validateSuffix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Suffix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"suffix", "body", string(o.Suffix), 4); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"suffix", "body", o.Suffix, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body payment information tokenized card based on context it is used
+func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3534,7 +4756,8 @@ func (o *CreatePaymentCreatedBodyPaymentInformationTokenizedCard) UnmarshalBinar
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPointOfSaleInformation create payment created body point of sale information
+/*
+CreatePaymentCreatedBodyPointOfSaleInformation create payment created body point of sale information
 swagger:model CreatePaymentCreatedBodyPointOfSaleInformation
 */
 type CreatePaymentCreatedBodyPointOfSaleInformation struct {
@@ -3578,12 +4801,11 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformation) Validate(formats strfmt
 }
 
 func (o *CreatePaymentCreatedBodyPointOfSaleInformation) validateAmexCapnData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexCapnData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"amexCapnData", "body", string(o.AmexCapnData), 12); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"amexCapnData", "body", o.AmexCapnData, 12); err != nil {
 		return err
 	}
 
@@ -3591,7 +4813,6 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformation) validateAmexCapnData(fo
 }
 
 func (o *CreatePaymentCreatedBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -3600,6 +4821,43 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformation) validateEmv(formats str
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body point of sale information based on the context it is used
+func (o *CreatePaymentCreatedBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -3626,7 +4884,8 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreatePaymentCreatedBodyPointOfSaleInformationEmv create payment created body point of sale information emv
+/*
+CreatePaymentCreatedBodyPointOfSaleInformationEmv create payment created body point of sale information emv
 swagger:model CreatePaymentCreatedBodyPointOfSaleInformationEmv
 */
 type CreatePaymentCreatedBodyPointOfSaleInformationEmv struct {
@@ -3728,12 +4987,11 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) Validate(formats str
 }
 
 func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) validateChipValidationResult(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ChipValidationResult) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"chipValidationResult", "body", string(o.ChipValidationResult), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"chipValidationResult", "body", o.ChipValidationResult, 1); err != nil {
 		return err
 	}
 
@@ -3741,12 +4999,11 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) validateChipValidati
 }
 
 func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) validateChipValidationType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ChipValidationType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"chipValidationType", "body", string(o.ChipValidationType), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"chipValidationType", "body", o.ChipValidationType, 2); err != nil {
 		return err
 	}
 
@@ -3754,15 +5011,19 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) validateChipValidati
 }
 
 func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body point of sale information emv based on context it is used
+func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3784,7 +5045,8 @@ func (o *CreatePaymentCreatedBodyPointOfSaleInformationEmv) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessingInformation create payment created body processing information
+/*
+CreatePaymentCreatedBodyProcessingInformation create payment created body processing information
 swagger:model CreatePaymentCreatedBodyProcessingInformation
 */
 type CreatePaymentCreatedBodyProcessingInformation struct {
@@ -3808,7 +5070,6 @@ func (o *CreatePaymentCreatedBodyProcessingInformation) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentCreatedBodyProcessingInformation) validateBankTransferOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankTransferOptions) { // not required
 		return nil
 	}
@@ -3817,6 +5078,43 @@ func (o *CreatePaymentCreatedBodyProcessingInformation) validateBankTransferOpti
 		if err := o.BankTransferOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body processing information based on the context it is used
+func (o *CreatePaymentCreatedBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBankTransferOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessingInformation) contextValidateBankTransferOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankTransferOptions != nil {
+
+		if swag.IsZero(o.BankTransferOptions) { // not required
+			return nil
+		}
+
+		if err := o.BankTransferOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
 			}
 			return err
 		}
@@ -3843,7 +5141,8 @@ func (o *CreatePaymentCreatedBodyProcessingInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessingInformationBankTransferOptions create payment created body processing information bank transfer options
+/*
+CreatePaymentCreatedBodyProcessingInformationBankTransferOptions create payment created body processing information bank transfer options
 swagger:model CreatePaymentCreatedBodyProcessingInformationBankTransferOptions
 */
 type CreatePaymentCreatedBodyProcessingInformationBankTransferOptions struct {
@@ -3892,12 +5191,11 @@ func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) Valid
 }
 
 func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) validateFraudScreeningLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FraudScreeningLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"fraudScreeningLevel", "body", string(o.FraudScreeningLevel), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"fraudScreeningLevel", "body", o.FraudScreeningLevel, 1); err != nil {
 		return err
 	}
 
@@ -3905,15 +5203,19 @@ func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) valid
 }
 
 func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) validateSettlementMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"settlementMethod", "body", string(o.SettlementMethod), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"settlementMethod", "body", o.SettlementMethod, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processing information bank transfer options based on context it is used
+func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3935,7 +5237,8 @@ func (o *CreatePaymentCreatedBodyProcessingInformationBankTransferOptions) Unmar
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformation create payment created body processor information
+/*
+CreatePaymentCreatedBodyProcessorInformation create payment created body processor information
 swagger:model CreatePaymentCreatedBodyProcessorInformation
 */
 type CreatePaymentCreatedBodyProcessorInformation struct {
@@ -4322,7 +5625,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) Validate(formats strfmt.R
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateAchVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AchVerification) { // not required
 		return nil
 	}
@@ -4331,6 +5633,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAchVerification(f
 		if err := o.AchVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
 			}
 			return err
 		}
@@ -4340,12 +5644,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAchVerification(f
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateAmexVerbalAuthReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexVerbalAuthReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"amexVerbalAuthReferenceNumber", "body", string(o.AmexVerbalAuthReferenceNumber), 6); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"amexVerbalAuthReferenceNumber", "body", o.AmexVerbalAuthReferenceNumber, 6); err != nil {
 		return err
 	}
 
@@ -4353,12 +5656,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAmexVerbalAuthRef
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateAuthIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"authIndicator", "body", string(o.AuthIndicator), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"authIndicator", "body", o.AuthIndicator, 1); err != nil {
 		return err
 	}
 
@@ -4366,7 +5668,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAuthIndicator(for
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateAvs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Avs) { // not required
 		return nil
 	}
@@ -4375,6 +5676,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAvs(formats strfm
 		if err := o.Avs.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "avs")
 			}
 			return err
 		}
@@ -4384,7 +5687,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateAvs(formats strfm
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateCardVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardVerification) { // not required
 		return nil
 	}
@@ -4393,6 +5695,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateCardVerification(
 		if err := o.CardVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "cardVerification")
 			}
 			return err
 		}
@@ -4402,7 +5706,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateCardVerification(
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateConsumerAuthenticationResponse(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ConsumerAuthenticationResponse) { // not required
 		return nil
 	}
@@ -4411,6 +5714,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateConsumerAuthentic
 		if err := o.ConsumerAuthenticationResponse.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "consumerAuthenticationResponse")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "consumerAuthenticationResponse")
 			}
 			return err
 		}
@@ -4420,7 +5725,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateConsumerAuthentic
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -4429,6 +5733,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateCustomer(formats 
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -4438,7 +5744,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateCustomer(formats 
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateElectronicVerificationResults(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ElectronicVerificationResults) { // not required
 		return nil
 	}
@@ -4447,6 +5752,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateElectronicVerific
 		if err := o.ElectronicVerificationResults.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "electronicVerificationResults")
 			}
 			return err
 		}
@@ -4456,12 +5763,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateElectronicVerific
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateForwardedAcquirerCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForwardedAcquirerCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", string(o.ForwardedAcquirerCode), 32); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", o.ForwardedAcquirerCode, 32); err != nil {
 		return err
 	}
 
@@ -4469,12 +5775,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateForwardedAcquirer
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardAuthenticationType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MasterCardAuthenticationType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardAuthenticationType", "body", string(o.MasterCardAuthenticationType), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardAuthenticationType", "body", o.MasterCardAuthenticationType, 1); err != nil {
 		return err
 	}
 
@@ -4482,12 +5787,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardAuthent
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardServiceCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MasterCardServiceCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardServiceCode", "body", string(o.MasterCardServiceCode), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardServiceCode", "body", o.MasterCardServiceCode, 2); err != nil {
 		return err
 	}
 
@@ -4495,12 +5799,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardService
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardServiceReplyCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MasterCardServiceReplyCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardServiceReplyCode", "body", string(o.MasterCardServiceReplyCode), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"masterCardServiceReplyCode", "body", o.MasterCardServiceReplyCode, 1); err != nil {
 		return err
 	}
 
@@ -4508,7 +5811,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMasterCardService
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateMerchantAdvice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantAdvice) { // not required
 		return nil
 	}
@@ -4517,6 +5819,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMerchantAdvice(fo
 		if err := o.MerchantAdvice.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "merchantAdvice")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "merchantAdvice")
 			}
 			return err
 		}
@@ -4526,12 +5830,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMerchantAdvice(fo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateMerchantNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", string(o.MerchantNumber), 15); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", o.MerchantNumber, 15); err != nil {
 		return err
 	}
 
@@ -4539,12 +5842,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateMerchantNumber(fo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
@@ -4552,12 +5854,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateName(formats strf
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validatePaymentAccountReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentAccountReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"paymentAccountReferenceNumber", "body", string(o.PaymentAccountReferenceNumber), 32); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"paymentAccountReferenceNumber", "body", o.PaymentAccountReferenceNumber, 32); err != nil {
 		return err
 	}
 
@@ -4565,12 +5866,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validatePaymentAccountRef
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCategoryCode", "body", string(o.ResponseCategoryCode), 32); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCategoryCode", "body", o.ResponseCategoryCode, 32); err != nil {
 		return err
 	}
 
@@ -4578,12 +5878,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCategoryC
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -4591,12 +5890,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCode(form
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCodeSource(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCodeSource) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCodeSource", "body", string(o.ResponseCodeSource), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseCodeSource", "body", o.ResponseCodeSource, 1); err != nil {
 		return err
 	}
 
@@ -4604,12 +5902,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseCodeSourc
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseDetails) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseDetails", "body", string(o.ResponseDetails), 255); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"responseDetails", "body", o.ResponseDetails, 255); err != nil {
 		return err
 	}
 
@@ -4617,7 +5914,6 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateResponseDetails(f
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateRouting(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Routing) { // not required
 		return nil
 	}
@@ -4626,6 +5922,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateRouting(formats s
 		if err := o.Routing.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "routing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "routing")
 			}
 			return err
 		}
@@ -4635,12 +5933,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateRouting(formats s
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateSalesSlipNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SalesSlipNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentCreated"+"."+"processorInformation"+"."+"salesSlipNumber", "body", int64(o.SalesSlipNumber), 99999, false); err != nil {
+	if err := validate.MaximumInt("createPaymentCreated"+"."+"processorInformation"+"."+"salesSlipNumber", "body", o.SalesSlipNumber, 99999, false); err != nil {
 		return err
 	}
 
@@ -4648,12 +5945,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateSalesSlipNumber(f
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateSystemTraceAuditNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SystemTraceAuditNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", string(o.SystemTraceAuditNumber), 6); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", o.SystemTraceAuditNumber, 6); err != nil {
 		return err
 	}
 
@@ -4661,12 +5957,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateSystemTraceAuditN
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 50); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 50); err != nil {
 		return err
 	}
 
@@ -4674,13 +5969,222 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) validateTransactionID(for
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformation) validateTransactionIntegrityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionIntegrityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"transactionIntegrityCode", "body", string(o.TransactionIntegrityCode), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"transactionIntegrityCode", "body", o.TransactionIntegrityCode, 2); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment created body processor information based on the context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAchVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateAvs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCardVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateConsumerAuthenticationResponse(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateElectronicVerificationResults(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantAdvice(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRouting(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateAchVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AchVerification != nil {
+
+		if swag.IsZero(o.AchVerification) { // not required
+			return nil
+		}
+
+		if err := o.AchVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateAvs(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Avs != nil {
+
+		if swag.IsZero(o.Avs) { // not required
+			return nil
+		}
+
+		if err := o.Avs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "avs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateCardVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.CardVerification != nil {
+
+		if swag.IsZero(o.CardVerification) { // not required
+			return nil
+		}
+
+		if err := o.CardVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "cardVerification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateConsumerAuthenticationResponse(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ConsumerAuthenticationResponse != nil {
+
+		if swag.IsZero(o.ConsumerAuthenticationResponse) { // not required
+			return nil
+		}
+
+		if err := o.ConsumerAuthenticationResponse.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "consumerAuthenticationResponse")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "consumerAuthenticationResponse")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateElectronicVerificationResults(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ElectronicVerificationResults != nil {
+
+		if swag.IsZero(o.ElectronicVerificationResults) { // not required
+			return nil
+		}
+
+		if err := o.ElectronicVerificationResults.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateMerchantAdvice(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantAdvice != nil {
+
+		if swag.IsZero(o.MerchantAdvice) { // not required
+			return nil
+		}
+
+		if err := o.MerchantAdvice.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "merchantAdvice")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "merchantAdvice")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentCreatedBodyProcessorInformation) contextValidateRouting(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Routing != nil {
+
+		if swag.IsZero(o.Routing) { // not required
+			return nil
+		}
+
+		if err := o.Routing.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "routing")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentCreated" + "." + "processorInformation" + "." + "routing")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4704,7 +6208,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationAchVerification create payment created body processor information ach verification
+/*
+CreatePaymentCreatedBodyProcessorInformationAchVerification create payment created body processor information ach verification
 swagger:model CreatePaymentCreatedBodyProcessorInformationAchVerification
 */
 type CreatePaymentCreatedBodyProcessorInformationAchVerification struct {
@@ -4741,12 +6246,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) Validate(f
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", string(o.ResultCode), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", o.ResultCode, 2); err != nil {
 		return err
 	}
 
@@ -4754,15 +6258,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) validateRe
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) validateResultCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", string(o.ResultCodeRaw), 10); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", o.ResultCodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information ach verification based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4784,7 +6292,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAchVerification) UnmarshalB
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationAvs create payment created body processor information avs
+/*
+CreatePaymentCreatedBodyProcessorInformationAvs create payment created body processor information avs
 swagger:model CreatePaymentCreatedBodyProcessorInformationAvs
 */
 type CreatePaymentCreatedBodyProcessorInformationAvs struct {
@@ -4820,12 +6329,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAvs) Validate(formats strfm
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationAvs) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", string(o.Code), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", o.Code, 1); err != nil {
 		return err
 	}
 
@@ -4833,15 +6341,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAvs) validateCode(formats s
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationAvs) validateCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"avs"+"."+"codeRaw", "body", string(o.CodeRaw), 10); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"avs"+"."+"codeRaw", "body", o.CodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information avs based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationAvs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4863,7 +6375,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationAvs) UnmarshalBinary(b []by
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationCardVerification create payment created body processor information card verification
+/*
+CreatePaymentCreatedBodyProcessorInformationCardVerification create payment created body processor information card verification
 swagger:model CreatePaymentCreatedBodyProcessorInformationCardVerification
 */
 type CreatePaymentCreatedBodyProcessorInformationCardVerification struct {
@@ -4902,12 +6415,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) Validate(
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCode", "body", string(o.ResultCode), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCode", "body", o.ResultCode, 1); err != nil {
 		return err
 	}
 
@@ -4915,15 +6427,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) validateR
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) validateResultCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCodeRaw", "body", string(o.ResultCodeRaw), 10); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCodeRaw", "body", o.ResultCodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information card verification based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4945,7 +6461,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationCardVerification) Unmarshal
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse create payment created body processor information consumer authentication response
+/*
+CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse create payment created body processor information consumer authentication response
 swagger:model CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse
 */
 type CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse struct {
@@ -4984,12 +6501,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationRespo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"consumerAuthenticationResponse"+"."+"code", "body", string(o.Code), 3); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"consumerAuthenticationResponse"+"."+"code", "body", o.Code, 3); err != nil {
 		return err
 	}
 
@@ -4997,15 +6513,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationRespo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse) validateCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"consumerAuthenticationResponse"+"."+"codeRaw", "body", string(o.CodeRaw), 3); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"consumerAuthenticationResponse"+"."+"codeRaw", "body", o.CodeRaw, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information consumer authentication response based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5027,7 +6547,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationConsumerAuthenticationRespo
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationCustomer create payment created body processor information customer
+/*
+CreatePaymentCreatedBodyProcessorInformationCustomer create payment created body processor information customer
 swagger:model CreatePaymentCreatedBodyProcessorInformationCustomer
 */
 type CreatePaymentCreatedBodyProcessorInformationCustomer struct {
@@ -5066,15 +6587,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationCustomer) Validate(formats 
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationCustomer) validatePersonalIDResult(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PersonalIDResult) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"customer"+"."+"personalIdResult", "body", string(o.PersonalIDResult), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"customer"+"."+"personalIdResult", "body", o.PersonalIDResult, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information customer based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5096,7 +6621,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationCustomer) UnmarshalBinary(b
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults create payment created body processor information electronic verification results
+/*
+CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults create payment created body processor information electronic verification results
 swagger:model CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults
 */
 type CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults struct {
@@ -5226,12 +6752,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"code", "body", string(o.Code), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"code", "body", o.Code, 1); err != nil {
 		return err
 	}
 
@@ -5239,12 +6764,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"codeRaw", "body", string(o.CodeRaw), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"codeRaw", "body", o.CodeRaw, 1); err != nil {
 		return err
 	}
 
@@ -5252,12 +6776,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"email", "body", string(o.Email), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"email", "body", o.Email, 1); err != nil {
 		return err
 	}
 
@@ -5265,12 +6788,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateEmailRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EmailRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"emailRaw", "body", string(o.EmailRaw), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"emailRaw", "body", o.EmailRaw, 1); err != nil {
 		return err
 	}
 
@@ -5278,12 +6800,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
@@ -5291,12 +6812,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateNameRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NameRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"nameRaw", "body", string(o.NameRaw), 30); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"nameRaw", "body", o.NameRaw, 30); err != nil {
 		return err
 	}
 
@@ -5304,12 +6824,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumber", "body", string(o.PhoneNumber), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumber", "body", o.PhoneNumber, 1); err != nil {
 		return err
 	}
 
@@ -5317,12 +6836,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validatePhoneNumberRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumberRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumberRaw", "body", string(o.PhoneNumberRaw), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumberRaw", "body", o.PhoneNumberRaw, 1); err != nil {
 		return err
 	}
 
@@ -5330,12 +6848,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCode", "body", string(o.PostalCode), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCode", "body", o.PostalCode, 1); err != nil {
 		return err
 	}
 
@@ -5343,12 +6860,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validatePostalCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCodeRaw", "body", string(o.PostalCodeRaw), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCodeRaw", "body", o.PostalCodeRaw, 1); err != nil {
 		return err
 	}
 
@@ -5356,12 +6872,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateStreet(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Street) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"street", "body", string(o.Street), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"street", "body", o.Street, 1); err != nil {
 		return err
 	}
 
@@ -5369,15 +6884,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) validateStreetRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StreetRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"streetRaw", "body", string(o.StreetRaw), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"streetRaw", "body", o.StreetRaw, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information electronic verification results based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResults) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5399,7 +6918,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationElectronicVerificationResul
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationMerchantAdvice create payment created body processor information merchant advice
+/*
+CreatePaymentCreatedBodyProcessorInformationMerchantAdvice create payment created body processor information merchant advice
 swagger:model CreatePaymentCreatedBodyProcessorInformationMerchantAdvice
 */
 type CreatePaymentCreatedBodyProcessorInformationMerchantAdvice struct {
@@ -5459,12 +6979,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) Validate(fo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantAdvice"+"."+"code", "body", string(o.Code), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantAdvice"+"."+"code", "body", o.Code, 2); err != nil {
 		return err
 	}
 
@@ -5472,15 +6991,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) validateCod
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) validateCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantAdvice"+"."+"codeRaw", "body", string(o.CodeRaw), 2); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"merchantAdvice"+"."+"codeRaw", "body", o.CodeRaw, 2); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information merchant advice based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5502,7 +7025,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationMerchantAdvice) UnmarshalBi
 	return nil
 }
 
-/*CreatePaymentCreatedBodyProcessorInformationRouting create payment created body processor information routing
+/*
+CreatePaymentCreatedBodyProcessorInformationRouting create payment created body processor information routing
 swagger:model CreatePaymentCreatedBodyProcessorInformationRouting
 */
 type CreatePaymentCreatedBodyProcessorInformationRouting struct {
@@ -5568,12 +7092,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationRouting) Validate(formats s
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationRouting) validateCustomerSignatureRequired(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CustomerSignatureRequired) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"customerSignatureRequired", "body", string(o.CustomerSignatureRequired), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"customerSignatureRequired", "body", o.CustomerSignatureRequired, 1); err != nil {
 		return err
 	}
 
@@ -5581,12 +7104,11 @@ func (o *CreatePaymentCreatedBodyProcessorInformationRouting) validateCustomerSi
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationRouting) validateNetwork(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Network) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"network", "body", string(o.Network), 1); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"network", "body", o.Network, 1); err != nil {
 		return err
 	}
 
@@ -5594,15 +7116,19 @@ func (o *CreatePaymentCreatedBodyProcessorInformationRouting) validateNetwork(fo
 }
 
 func (o *CreatePaymentCreatedBodyProcessorInformationRouting) validateNetworkName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NetworkName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"networkName", "body", string(o.NetworkName), 10); err != nil {
+	if err := validate.MaxLength("createPaymentCreated"+"."+"processorInformation"+"."+"routing"+"."+"networkName", "body", o.NetworkName, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment created body processor information routing based on context it is used
+func (o *CreatePaymentCreatedBodyProcessorInformationRouting) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5624,7 +7150,8 @@ func (o *CreatePaymentCreatedBodyProcessorInformationRouting) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreatePaymentParamsBodyAggregatorInformation create payment params body aggregator information
+/*
+CreatePaymentParamsBodyAggregatorInformation create payment params body aggregator information
 swagger:model CreatePaymentParamsBodyAggregatorInformation
 */
 type CreatePaymentParamsBodyAggregatorInformation struct {
@@ -5690,12 +7217,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformation) Validate(formats strfmt.R
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformation) validateAggregatorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", string(o.AggregatorID), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", o.AggregatorID, 20); err != nil {
 		return err
 	}
 
@@ -5703,12 +7229,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformation) validateAggregatorID(form
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformation) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -5716,7 +7241,6 @@ func (o *CreatePaymentParamsBodyAggregatorInformation) validateName(formats strf
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformation) validateSubMerchant(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubMerchant) { // not required
 		return nil
 	}
@@ -5725,6 +7249,43 @@ func (o *CreatePaymentParamsBodyAggregatorInformation) validateSubMerchant(forma
 		if err := o.SubMerchant.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body aggregator information based on the context it is used
+func (o *CreatePaymentParamsBodyAggregatorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSubMerchant(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyAggregatorInformation) contextValidateSubMerchant(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.SubMerchant != nil {
+
+		if swag.IsZero(o.SubMerchant) { // not required
+			return nil
+		}
+
+		if err := o.SubMerchant.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
 			}
 			return err
 		}
@@ -5751,7 +7312,8 @@ func (o *CreatePaymentParamsBodyAggregatorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*CreatePaymentParamsBodyAggregatorInformationSubMerchant create payment params body aggregator information sub merchant
+/*
+CreatePaymentParamsBodyAggregatorInformationSubMerchant create payment params body aggregator information sub merchant
 swagger:model CreatePaymentParamsBodyAggregatorInformationSubMerchant
 */
 type CreatePaymentParamsBodyAggregatorInformationSubMerchant struct {
@@ -5950,12 +7512,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) Validate(forma
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", string(o.Address1), 38); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", o.Address1, 38); err != nil {
 		return err
 	}
 
@@ -5963,12 +7524,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateAddres
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -5976,12 +7536,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateAdmini
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateCardAcceptorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardAcceptorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"cardAcceptorId", "body", string(o.CardAcceptorID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"cardAcceptorId", "body", o.CardAcceptorID, 15); err != nil {
 		return err
 	}
 
@@ -5989,12 +7548,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateCardAc
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -6002,12 +7560,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateCountr
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", string(o.Email), 40); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", o.Email, 40); err != nil {
 		return err
 	}
 
@@ -6015,12 +7572,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateEmail(
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", string(o.Locality), 21); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", o.Locality, 21); err != nil {
 		return err
 	}
 
@@ -6028,12 +7584,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateLocali
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -6041,12 +7596,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateName(f
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", string(o.PhoneNumber), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", o.PhoneNumber, 20); err != nil {
 		return err
 	}
 
@@ -6054,12 +7608,11 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validatePhoneN
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", string(o.PostalCode), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", o.PostalCode, 15); err != nil {
 		return err
 	}
 
@@ -6067,15 +7620,19 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validatePostal
 }
 
 func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) validateRegion(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Region) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"region", "body", string(o.Region), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"region", "body", o.Region, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body aggregator information sub merchant based on context it is used
+func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6097,7 +7654,8 @@ func (o *CreatePaymentParamsBodyAggregatorInformationSubMerchant) UnmarshalBinar
 	return nil
 }
 
-/*CreatePaymentParamsBodyBuyerInformation create payment params body buyer information
+/*
+CreatePaymentParamsBodyBuyerInformation create payment params body buyer information
 swagger:model CreatePaymentParamsBodyBuyerInformation
 */
 type CreatePaymentParamsBodyBuyerInformation struct {
@@ -6200,12 +7758,11 @@ func (o *CreatePaymentParamsBodyBuyerInformation) Validate(formats strfmt.Regist
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validateCompanyTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CompanyTaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"companyTaxId", "body", string(o.CompanyTaxID), 9); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"companyTaxId", "body", o.CompanyTaxID, 9); err != nil {
 		return err
 	}
 
@@ -6213,12 +7770,11 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validateCompanyTaxID(formats s
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validateDateOfBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOfBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"dateOfBirth", "body", string(o.DateOfBirth), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"dateOfBirth", "body", o.DateOfBirth, 8); err != nil {
 		return err
 	}
 
@@ -6226,12 +7782,11 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validateDateOfBirth(formats st
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validateHashedPassword(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HashedPassword) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"hashedPassword", "body", string(o.HashedPassword), 100); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"hashedPassword", "body", o.HashedPassword, 100); err != nil {
 		return err
 	}
 
@@ -6239,12 +7794,11 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validateHashedPassword(formats
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validateMerchantCustomerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantCustomerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", string(o.MerchantCustomerID), 100); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", o.MerchantCustomerID, 100); err != nil {
 		return err
 	}
 
@@ -6252,7 +7806,6 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validateMerchantCustomerID(for
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validatePersonalIdentification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PersonalIdentification) { // not required
 		return nil
 	}
@@ -6266,6 +7819,8 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validatePersonalIdentification
 			if err := o.PersonalIdentification[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -6277,13 +7832,51 @@ func (o *CreatePaymentParamsBodyBuyerInformation) validatePersonalIdentification
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 20); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body buyer information based on the context it is used
+func (o *CreatePaymentParamsBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePersonalIdentification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyBuyerInformation) contextValidatePersonalIdentification(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.PersonalIdentification); i++ {
+
+		if o.PersonalIdentification[i] != nil {
+
+			if swag.IsZero(o.PersonalIdentification[i]) { // not required
+				return nil
+			}
+
+			if err := o.PersonalIdentification[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -6307,7 +7900,8 @@ func (o *CreatePaymentParamsBodyBuyerInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0 create payment params body buyer information personal identification items0
+/*
+CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0 create payment params body buyer information personal identification items0
 swagger:model CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0
 */
 type CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0 struct {
@@ -6390,15 +7984,19 @@ func (o *CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0) Va
 }
 
 func (o *CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body buyer information personal identification items0 based on context it is used
+func (o *CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6420,7 +8018,8 @@ func (o *CreatePaymentParamsBodyBuyerInformationPersonalIdentificationItems0) Un
 	return nil
 }
 
-/*CreatePaymentParamsBodyClientReferenceInformation create payment params body client reference information
+/*
+CreatePaymentParamsBodyClientReferenceInformation create payment params body client reference information
 swagger:model CreatePaymentParamsBodyClientReferenceInformation
 */
 type CreatePaymentParamsBodyClientReferenceInformation struct {
@@ -6470,12 +8069,11 @@ func (o *CreatePaymentParamsBodyClientReferenceInformation) Validate(formats str
 }
 
 func (o *CreatePaymentParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -6483,7 +8081,6 @@ func (o *CreatePaymentParamsBodyClientReferenceInformation) validateCode(formats
 }
 
 func (o *CreatePaymentParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -6492,6 +8089,43 @@ func (o *CreatePaymentParamsBodyClientReferenceInformation) validatePartner(form
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body client reference information based on the context it is used
+func (o *CreatePaymentParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -6518,7 +8152,8 @@ func (o *CreatePaymentParamsBodyClientReferenceInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentParamsBodyClientReferenceInformationPartner create payment params body client reference information partner
+/*
+CreatePaymentParamsBodyClientReferenceInformationPartner create payment params body client reference information partner
 swagger:model CreatePaymentParamsBodyClientReferenceInformationPartner
 */
 type CreatePaymentParamsBodyClientReferenceInformationPartner struct {
@@ -6579,12 +8214,11 @@ func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) Validate(form
 }
 
 func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -6592,12 +8226,11 @@ func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) validateDevel
 }
 
 func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) validateOriginalTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", string(o.OriginalTransactionID), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", o.OriginalTransactionID, 32); err != nil {
 		return err
 	}
 
@@ -6605,15 +8238,19 @@ func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) validateOrigi
 }
 
 func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body client reference information partner based on context it is used
+func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6635,7 +8272,8 @@ func (o *CreatePaymentParamsBodyClientReferenceInformationPartner) UnmarshalBina
 	return nil
 }
 
-/*CreatePaymentParamsBodyConsumerAuthenticationInformation create payment params body consumer authentication information
+/*
+CreatePaymentParamsBodyConsumerAuthenticationInformation create payment params body consumer authentication information
 swagger:model CreatePaymentParamsBodyConsumerAuthenticationInformation
 */
 type CreatePaymentParamsBodyConsumerAuthenticationInformation struct {
@@ -6741,12 +8379,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) Validate(form
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateCavv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Cavv) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"cavv", "body", string(o.Cavv), 40); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"cavv", "body", o.Cavv, 40); err != nil {
 		return err
 	}
 
@@ -6754,12 +8391,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateCavv(
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateCavvAlgorithm(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CavvAlgorithm) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"cavvAlgorithm", "body", string(o.CavvAlgorithm), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"cavvAlgorithm", "body", o.CavvAlgorithm, 1); err != nil {
 		return err
 	}
 
@@ -6767,12 +8403,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateCavvA
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateEciRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EciRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"eciRaw", "body", string(o.EciRaw), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"eciRaw", "body", o.EciRaw, 2); err != nil {
 		return err
 	}
 
@@ -6780,12 +8415,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateEciRa
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateParesStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ParesStatus) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"paresStatus", "body", string(o.ParesStatus), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"paresStatus", "body", o.ParesStatus, 1); err != nil {
 		return err
 	}
 
@@ -6793,12 +8427,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validatePares
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateUcafAuthenticationData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UcafAuthenticationData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"ucafAuthenticationData", "body", string(o.UcafAuthenticationData), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"ucafAuthenticationData", "body", o.UcafAuthenticationData, 32); err != nil {
 		return err
 	}
 
@@ -6806,12 +8439,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateUcafA
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateUcafCollectionIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UcafCollectionIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"ucafCollectionIndicator", "body", string(o.UcafCollectionIndicator), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"ucafCollectionIndicator", "body", o.UcafCollectionIndicator, 1); err != nil {
 		return err
 	}
 
@@ -6819,12 +8451,11 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateUcafC
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateVeresEnrolled(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VeresEnrolled) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"veresEnrolled", "body", string(o.VeresEnrolled), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"veresEnrolled", "body", o.VeresEnrolled, 1); err != nil {
 		return err
 	}
 
@@ -6832,15 +8463,19 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateVeres
 }
 
 func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) validateXid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Xid) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"xid", "body", string(o.Xid), 40); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"consumerAuthenticationInformation"+"."+"xid", "body", o.Xid, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body consumer authentication information based on context it is used
+func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6862,7 +8497,8 @@ func (o *CreatePaymentParamsBodyConsumerAuthenticationInformation) UnmarshalBina
 	return nil
 }
 
-/*CreatePaymentParamsBodyDeviceInformation create payment params body device information
+/*
+CreatePaymentParamsBodyDeviceInformation create payment params body device information
 swagger:model CreatePaymentParamsBodyDeviceInformation
 */
 type CreatePaymentParamsBodyDeviceInformation struct {
@@ -6906,12 +8542,11 @@ func (o *CreatePaymentParamsBodyDeviceInformation) Validate(formats strfmt.Regis
 }
 
 func (o *CreatePaymentParamsBodyDeviceInformation) validateHostName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HostName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"hostName", "body", string(o.HostName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"hostName", "body", o.HostName, 60); err != nil {
 		return err
 	}
 
@@ -6919,12 +8554,11 @@ func (o *CreatePaymentParamsBodyDeviceInformation) validateHostName(formats strf
 }
 
 func (o *CreatePaymentParamsBodyDeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
@@ -6932,15 +8566,19 @@ func (o *CreatePaymentParamsBodyDeviceInformation) validateIPAddress(formats str
 }
 
 func (o *CreatePaymentParamsBodyDeviceInformation) validateUserAgent(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UserAgent) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"userAgent", "body", string(o.UserAgent), 40); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"deviceInformation"+"."+"userAgent", "body", o.UserAgent, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body device information based on context it is used
+func (o *CreatePaymentParamsBodyDeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6962,7 +8600,8 @@ func (o *CreatePaymentParamsBodyDeviceInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreatePaymentParamsBodyInstallmentInformation create payment params body installment information
+/*
+CreatePaymentParamsBodyInstallmentInformation create payment params body installment information
 swagger:model CreatePaymentParamsBodyInstallmentInformation
 */
 type CreatePaymentParamsBodyInstallmentInformation struct {
@@ -7235,12 +8874,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"amount", "body", string(o.Amount), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"amount", "body", o.Amount, 12); err != nil {
 		return err
 	}
 
@@ -7248,12 +8886,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateAmount(formats s
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateEligibilityInquiry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EligibilityInquiry) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"eligibilityInquiry", "body", string(o.EligibilityInquiry), 9); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"eligibilityInquiry", "body", o.EligibilityInquiry, 9); err != nil {
 		return err
 	}
 
@@ -7261,12 +8898,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateEligibilityInqui
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateFirstInstallmentDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstInstallmentDate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"firstInstallmentDate", "body", string(o.FirstInstallmentDate), 6); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"firstInstallmentDate", "body", o.FirstInstallmentDate, 6); err != nil {
 		return err
 	}
 
@@ -7274,12 +8910,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateFirstInstallment
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateFrequency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Frequency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"frequency", "body", string(o.Frequency), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"frequency", "body", o.Frequency, 1); err != nil {
 		return err
 	}
 
@@ -7287,12 +8922,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateFrequency(format
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateInvoiceData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"invoiceData", "body", string(o.InvoiceData), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"invoiceData", "body", o.InvoiceData, 20); err != nil {
 		return err
 	}
 
@@ -7300,12 +8934,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateInvoiceData(form
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validatePaymentType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"paymentType", "body", string(o.PaymentType), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"paymentType", "body", o.PaymentType, 1); err != nil {
 		return err
 	}
 
@@ -7313,12 +8946,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validatePaymentType(form
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validatePlanType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PlanType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"planType", "body", string(o.PlanType), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"planType", "body", o.PlanType, 1); err != nil {
 		return err
 	}
 
@@ -7326,12 +8958,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validatePlanType(formats
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateSequence(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Sequence) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"installmentInformation"+"."+"sequence", "body", int64(o.Sequence), 99, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"installmentInformation"+"."+"sequence", "body", o.Sequence, 99, false); err != nil {
 		return err
 	}
 
@@ -7339,12 +8970,11 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateSequence(formats
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"totalAmount", "body", string(o.TotalAmount), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"installmentInformation"+"."+"totalAmount", "body", o.TotalAmount, 12); err != nil {
 		return err
 	}
 
@@ -7352,15 +8982,19 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) validateTotalAmount(form
 }
 
 func (o *CreatePaymentParamsBodyInstallmentInformation) validateTotalCount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalCount) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"installmentInformation"+"."+"totalCount", "body", int64(o.TotalCount), 99, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"installmentInformation"+"."+"totalCount", "body", o.TotalCount, 99, false); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body installment information based on context it is used
+func (o *CreatePaymentParamsBodyInstallmentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -7382,7 +9016,8 @@ func (o *CreatePaymentParamsBodyInstallmentInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyIssuerInformation create payment params body issuer information
+/*
+CreatePaymentParamsBodyIssuerInformation create payment params body issuer information
 swagger:model CreatePaymentParamsBodyIssuerInformation
 */
 type CreatePaymentParamsBodyIssuerInformation struct {
@@ -7414,15 +9049,19 @@ func (o *CreatePaymentParamsBodyIssuerInformation) Validate(formats strfmt.Regis
 }
 
 func (o *CreatePaymentParamsBodyIssuerInformation) validateDiscretionaryData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscretionaryData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"issuerInformation"+"."+"discretionaryData", "body", string(o.DiscretionaryData), 255); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"issuerInformation"+"."+"discretionaryData", "body", o.DiscretionaryData, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body issuer information based on context it is used
+func (o *CreatePaymentParamsBodyIssuerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -7444,7 +9083,122 @@ func (o *CreatePaymentParamsBodyIssuerInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreatePaymentParamsBodyMerchantInformation create payment params body merchant information
+/*
+CreatePaymentParamsBodyMerchantDefinedInformationItems0 create payment params body merchant defined information items0
+swagger:model CreatePaymentParamsBodyMerchantDefinedInformationItems0
+*/
+type CreatePaymentParamsBodyMerchantDefinedInformationItems0 struct {
+
+	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
+	//
+	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
+	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
+	// transaction.
+	//
+	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// Max Length: 50
+	Key string `json:"key,omitempty"`
+
+	// The value you assign for your merchant-defined data field.
+	//
+	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
+	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
+	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
+	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
+	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For installment payments with Mastercard in Brazil:
+	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 25-44
+	//   - Field: Reference Field 2
+	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 45-64
+	//   - Field: Reference Field 3
+	//
+	// Max Length: 255
+	Value string `json:"value,omitempty"`
+}
+
+// Validate validates this create payment params body merchant defined information items0
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
+	if swag.IsZero(o.Key) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("key", "body", o.Key, 50); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
+	if swag.IsZero(o.Value) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this create payment params body merchant defined information items0 based on context it is used
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreatePaymentParamsBodyMerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
+	var res CreatePaymentParamsBodyMerchantDefinedInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreatePaymentParamsBodyMerchantInformation create payment params body merchant information
 swagger:model CreatePaymentParamsBodyMerchantInformation
 */
 type CreatePaymentParamsBodyMerchantInformation struct {
@@ -7605,12 +9359,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) Validate(formats strfmt.Reg
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateCardAcceptorReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardAcceptorReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", string(o.CardAcceptorReferenceNumber), 25); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", o.CardAcceptorReferenceNumber, 25); err != nil {
 		return err
 	}
 
@@ -7618,12 +9371,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateCardAcceptorReferen
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", int64(o.CategoryCode), 9999, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", o.CategoryCode, 9999, false); err != nil {
 		return err
 	}
 
@@ -7631,12 +9383,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateCategoryCode(format
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateCategoryCodeDomestic(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CategoryCodeDomestic) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"merchantInformation"+"."+"categoryCodeDomestic", "body", int64(o.CategoryCodeDomestic), 9999, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"merchantInformation"+"."+"categoryCodeDomestic", "body", o.CategoryCodeDomestic, 9999, false); err != nil {
 		return err
 	}
 
@@ -7644,7 +9395,6 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateCategoryCodeDomesti
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -7653,6 +9403,8 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateMerchantDescriptor(
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -7662,12 +9414,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateMerchantDescriptor(
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateSalesOrganizationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SalesOrganizationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"salesOrganizationId", "body", string(o.SalesOrganizationID), 11); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"salesOrganizationId", "body", o.SalesOrganizationID, 11); err != nil {
 		return err
 	}
 
@@ -7675,7 +9426,6 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateSalesOrganizationID
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateServiceFeeDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ServiceFeeDescriptor) { // not required
 		return nil
 	}
@@ -7684,6 +9434,8 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateServiceFeeDescripto
 		if err := o.ServiceFeeDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "serviceFeeDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "serviceFeeDescriptor")
 			}
 			return err
 		}
@@ -7693,12 +9445,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateServiceFeeDescripto
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
@@ -7706,12 +9457,11 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateTaxID(formats strfm
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateTransactionLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"transactionLocalDateTime", "body", string(o.TransactionLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"transactionLocalDateTime", "body", o.TransactionLocalDateTime, 14); err != nil {
 		return err
 	}
 
@@ -7719,13 +9469,72 @@ func (o *CreatePaymentParamsBodyMerchantInformation) validateTransactionLocalDat
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 21); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 21); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body merchant information based on the context it is used
+func (o *CreatePaymentParamsBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateServiceFeeDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyMerchantInformation) contextValidateServiceFeeDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ServiceFeeDescriptor != nil {
+
+		if swag.IsZero(o.ServiceFeeDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.ServiceFeeDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "serviceFeeDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "merchantInformation" + "." + "serviceFeeDescriptor")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -7749,7 +9558,8 @@ func (o *CreatePaymentParamsBodyMerchantInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreatePaymentParamsBodyMerchantInformationMerchantDescriptor create payment params body merchant information merchant descriptor
+/*
+CreatePaymentParamsBodyMerchantInformationMerchantDescriptor create payment params body merchant information merchant descriptor
 swagger:model CreatePaymentParamsBodyMerchantInformationMerchantDescriptor
 */
 type CreatePaymentParamsBodyMerchantInformationMerchantDescriptor struct {
@@ -7862,12 +9672,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) Validate(
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -7875,12 +9684,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -7888,12 +9696,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateAlternateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AlternateName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", string(o.AlternateName), 13); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", o.AlternateName, 13); err != nil {
 		return err
 	}
 
@@ -7901,12 +9708,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateContact(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Contact) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", string(o.Contact), 14); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", o.Contact, 14); err != nil {
 		return err
 	}
 
@@ -7914,12 +9720,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -7927,12 +9732,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", string(o.Locality), 13); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", o.Locality, 13); err != nil {
 		return err
 	}
 
@@ -7940,15 +9744,19 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validateL
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", string(o.PostalCode), 14); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", o.PostalCode, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body merchant information merchant descriptor based on context it is used
+func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -7970,7 +9778,8 @@ func (o *CreatePaymentParamsBodyMerchantInformationMerchantDescriptor) Unmarshal
 	return nil
 }
 
-/*CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor create payment params body merchant information service fee descriptor
+/*
+CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor create payment params body merchant information service fee descriptor
 swagger:model CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor
 */
 type CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor struct {
@@ -8043,12 +9852,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) Validat
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) validateContact(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Contact) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"contact", "body", string(o.Contact), 11); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"contact", "body", o.Contact, 11); err != nil {
 		return err
 	}
 
@@ -8056,12 +9864,11 @@ func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) validat
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"name", "body", string(o.Name), 22); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"name", "body", o.Name, 22); err != nil {
 		return err
 	}
 
@@ -8069,15 +9876,19 @@ func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) validat
 }
 
 func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) validateState(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.State) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"state", "body", string(o.State), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"merchantInformation"+"."+"serviceFeeDescriptor"+"."+"state", "body", o.State, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body merchant information service fee descriptor based on context it is used
+func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -8099,7 +9910,8 @@ func (o *CreatePaymentParamsBodyMerchantInformationServiceFeeDescriptor) Unmarsh
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformation create payment params body order information
+/*
+CreatePaymentParamsBodyOrderInformation create payment params body order information
 swagger:model CreatePaymentParamsBodyOrderInformation
 */
 type CreatePaymentParamsBodyOrderInformation struct {
@@ -8158,7 +9970,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) Validate(formats strfmt.Regist
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -8167,6 +9978,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateAmountDetails(formats 
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -8176,7 +9989,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateAmountDetails(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -8185,6 +9997,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -8194,7 +10008,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -8203,6 +10016,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateInvoiceDetails(formats
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -8212,7 +10027,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateInvoiceDetails(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -8226,6 +10040,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateLineItems(formats strf
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -8237,7 +10053,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateLineItems(formats strf
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -8246,6 +10061,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -8255,7 +10072,6 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyOrderInformation) validateShippingDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingDetails) { // not required
 		return nil
 	}
@@ -8264,6 +10080,172 @@ func (o *CreatePaymentParamsBodyOrderInformation) validateShippingDetails(format
 		if err := o.ShippingDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body order information based on the context it is used
+func (o *CreatePaymentParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShippingDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformation) contextValidateShippingDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShippingDetails != nil {
+
+		if swag.IsZero(o.ShippingDetails) { // not required
+			return nil
+		}
+
+		if err := o.ShippingDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
 			}
 			return err
 		}
@@ -8290,7 +10272,8 @@ func (o *CreatePaymentParamsBodyOrderInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationAmountDetails create payment params body order information amount details
+/*
+CreatePaymentParamsBodyOrderInformationAmountDetails create payment params body order information amount details
 swagger:model CreatePaymentParamsBodyOrderInformationAmountDetails
 */
 type CreatePaymentParamsBodyOrderInformationAmountDetails struct {
@@ -8619,7 +10602,6 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) Validate(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateAmexAdditionalAmounts(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexAdditionalAmounts) { // not required
 		return nil
 	}
@@ -8633,6 +10615,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateAmexAddit
 			if err := o.AmexAdditionalAmounts[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -8644,12 +10628,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateAmexAddit
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -8657,12 +10640,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateCurrency(
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", string(o.DiscountAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", o.DiscountAmount, 15); err != nil {
 		return err
 	}
 
@@ -8670,12 +10652,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateDiscountA
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateDutyAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DutyAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", string(o.DutyAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", o.DutyAmount, 15); err != nil {
 		return err
 	}
 
@@ -8683,12 +10664,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateDutyAmoun
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateExchangeRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", string(o.ExchangeRate), 13); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", o.ExchangeRate, 13); err != nil {
 		return err
 	}
 
@@ -8696,12 +10676,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateExchangeRateTimeStamp(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRateTimeStamp) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", string(o.ExchangeRateTimeStamp), 14); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", o.ExchangeRateTimeStamp, 14); err != nil {
 		return err
 	}
 
@@ -8709,12 +10688,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateForeignAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", string(o.ForeignAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", o.ForeignAmount, 15); err != nil {
 		return err
 	}
 
@@ -8722,12 +10700,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateForeignAm
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateForeignCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", string(o.ForeignCurrency), 5); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", o.ForeignCurrency, 5); err != nil {
 		return err
 	}
 
@@ -8735,12 +10712,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateForeignCu
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateFreightAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FreightAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", string(o.FreightAmount), 13); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", o.FreightAmount, 13); err != nil {
 		return err
 	}
 
@@ -8748,12 +10724,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateFreightAm
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateGratuityAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.GratuityAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", string(o.GratuityAmount), 13); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", o.GratuityAmount, 13); err != nil {
 		return err
 	}
 
@@ -8761,12 +10736,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateGratuityA
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateNationalTaxIncluded(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NationalTaxIncluded) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", string(o.NationalTaxIncluded), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", o.NationalTaxIncluded, 1); err != nil {
 		return err
 	}
 
@@ -8774,12 +10748,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateNationalT
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateOriginalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalAmount", "body", string(o.OriginalAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalAmount", "body", o.OriginalAmount, 15); err != nil {
 		return err
 	}
 
@@ -8787,12 +10760,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateOriginalA
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateOriginalCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", string(o.OriginalCurrency), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", o.OriginalCurrency, 15); err != nil {
 		return err
 	}
 
@@ -8800,12 +10772,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateOriginalC
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateServiceFeeAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ServiceFeeAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", string(o.ServiceFeeAmount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", o.ServiceFeeAmount, 15); err != nil {
 		return err
 	}
 
@@ -8813,12 +10784,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateServiceFe
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSettlementAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", string(o.SettlementAmount), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", o.SettlementAmount, 12); err != nil {
 		return err
 	}
 
@@ -8826,12 +10796,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSettlemen
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSettlementCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", string(o.SettlementCurrency), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", o.SettlementCurrency, 3); err != nil {
 		return err
 	}
 
@@ -8839,7 +10808,6 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSettlemen
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcharge(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Surcharge) { // not required
 		return nil
 	}
@@ -8848,6 +10816,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcharge
 		if err := o.Surcharge.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
 			}
 			return err
 		}
@@ -8857,12 +10827,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateSurcharge
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", string(o.TaxAmount), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", o.TaxAmount, 12); err != nil {
 		return err
 	}
 
@@ -8870,12 +10839,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxAmount
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -8883,12 +10851,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxAppliedLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", string(o.TaxAppliedLevel), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", o.TaxAppliedLevel, 1); err != nil {
 		return err
 	}
 
@@ -8896,7 +10863,6 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -8910,6 +10876,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxDetail
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -8921,12 +10889,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxDetail
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", string(o.TaxTypeCode), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", o.TaxTypeCode, 3); err != nil {
 		return err
 	}
 
@@ -8934,13 +10901,105 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTaxTypeCo
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body order information amount details based on the context it is used
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmexAdditionalAmounts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSurcharge(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) contextValidateAmexAdditionalAmounts(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.AmexAdditionalAmounts); i++ {
+
+		if o.AmexAdditionalAmounts[i] != nil {
+
+			if swag.IsZero(o.AmexAdditionalAmounts[i]) { // not required
+				return nil
+			}
+
+			if err := o.AmexAdditionalAmounts[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) contextValidateSurcharge(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Surcharge != nil {
+
+		if swag.IsZero(o.Surcharge) { // not required
+			return nil
+		}
+
+		if err := o.Surcharge.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "surcharge")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -8964,7 +11023,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetails) UnmarshalBinary(b
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 create payment params body order information amount details amex additional amounts items0
+/*
+CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 create payment params body order information amount details amex additional amounts items0
 swagger:model CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0
 */
 type CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 struct {
@@ -9005,12 +11065,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 12); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 12); err != nil {
 		return err
 	}
 
@@ -9018,15 +11077,19 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 3); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information amount details amex additional amounts items0 based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -9048,7 +11111,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge create payment params body order information amount details surcharge
+/*
+CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge create payment params body order information amount details surcharge
 swagger:model CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge
 */
 type CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge struct {
@@ -9084,15 +11148,19 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) Validate
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"surcharge"+"."+"amount", "body", string(o.Amount), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"surcharge"+"."+"amount", "body", o.Amount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information amount details surcharge based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -9114,7 +11182,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsSurcharge) Unmarsha
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 create payment params body order information amount details tax details items0
+/*
+CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 create payment params body order information amount details tax details items0
 swagger:model CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0
 */
 type CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 struct {
@@ -9254,12 +11323,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) V
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -9267,12 +11335,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -9280,12 +11347,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -9293,12 +11359,11 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -9306,15 +11371,19 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information amount details tax details items0 based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -9336,7 +11405,8 @@ func (o *CreatePaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) U
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationBillTo create payment params body order information bill to
+/*
+CreatePaymentParamsBodyOrderInformationBillTo create payment params body order information bill to
 swagger:model CreatePaymentParamsBodyOrderInformationBillTo
 */
 type CreatePaymentParamsBodyOrderInformationBillTo struct {
@@ -9681,12 +11751,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -9694,12 +11763,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress1(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -9707,12 +11775,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress2(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress3(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address3) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address3", "body", string(o.Address3), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address3", "body", o.Address3, 60); err != nil {
 		return err
 	}
 
@@ -9720,12 +11787,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress3(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress4(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address4) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address4", "body", string(o.Address4), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address4", "body", o.Address4, 60); err != nil {
 		return err
 	}
 
@@ -9733,12 +11799,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAddress4(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -9746,12 +11811,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateAdministrativeAr
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateBuildingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuildingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"buildingNumber", "body", string(o.BuildingNumber), 256); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"buildingNumber", "body", o.BuildingNumber, 256); err != nil {
 		return err
 	}
 
@@ -9759,12 +11823,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateBuildingNumber(f
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -9772,12 +11835,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateCompany(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -9785,12 +11847,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateCountry(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateDistrict(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.District) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"district", "body", string(o.District), 50); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"district", "body", o.District, 50); err != nil {
 		return err
 	}
 
@@ -9798,12 +11859,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateDistrict(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -9811,12 +11871,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateEmail(formats st
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -9824,12 +11883,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateFirstName(format
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -9837,12 +11895,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateLastName(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -9850,12 +11907,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateLocality(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateMiddleName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MiddleName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"middleName", "body", string(o.MiddleName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"middleName", "body", o.MiddleName, 60); err != nil {
 		return err
 	}
 
@@ -9863,12 +11919,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateMiddleName(forma
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateNameSuffix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NameSuffix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"nameSuffix", "body", string(o.NameSuffix), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"nameSuffix", "body", o.NameSuffix, 60); err != nil {
 		return err
 	}
 
@@ -9876,12 +11931,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateNameSuffix(forma
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -9889,12 +11943,11 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(form
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
@@ -9902,15 +11955,19 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) validatePostalCode(forma
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationBillTo) validateTitle(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Title) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"title", "body", string(o.Title), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"title", "body", o.Title, 60); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information bill to based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -9932,7 +11989,8 @@ func (o *CreatePaymentParamsBodyOrderInformationBillTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationInvoiceDetails create payment params body order information invoice details
+/*
+CreatePaymentParamsBodyOrderInformationInvoiceDetails create payment params body order information invoice details
 swagger:model CreatePaymentParamsBodyOrderInformationInvoiceDetails
 */
 type CreatePaymentParamsBodyOrderInformationInvoiceDetails struct {
@@ -10075,12 +12133,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) Validate(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", string(o.CommodityCode), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", o.CommodityCode, 4); err != nil {
 		return err
 	}
 
@@ -10088,12 +12145,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateCommodit
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseContactName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseContactName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", string(o.PurchaseContactName), 36); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", o.PurchaseContactName, 36); err != nil {
 		return err
 	}
 
@@ -10101,12 +12157,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderDate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", string(o.PurchaseOrderDate), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", o.PurchaseOrderDate, 10); err != nil {
 		return err
 	}
 
@@ -10114,12 +12169,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", string(o.PurchaseOrderNumber), 25); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", o.PurchaseOrderNumber, 25); err != nil {
 		return err
 	}
 
@@ -10127,12 +12181,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateReferenceDataCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceDataCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"referenceDataCode", "body", string(o.ReferenceDataCode), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"referenceDataCode", "body", o.ReferenceDataCode, 3); err != nil {
 		return err
 	}
 
@@ -10140,12 +12193,11 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateReferenc
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateReferenceDataNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceDataNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"referenceDataNumber", "body", string(o.ReferenceDataNumber), 30); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"referenceDataNumber", "body", o.ReferenceDataNumber, 30); err != nil {
 		return err
 	}
 
@@ -10153,7 +12205,6 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateReferenc
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateTransactionAdviceAddendum(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionAdviceAddendum) { // not required
 		return nil
 	}
@@ -10167,6 +12218,8 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateTransact
 			if err := o.TransactionAdviceAddendum[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -10178,13 +12231,51 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateTransact
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) validateVatInvoiceReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatInvoiceReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", string(o.VatInvoiceReferenceNumber), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", o.VatInvoiceReferenceNumber, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body order information invoice details based on the context it is used
+func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactionAdviceAddendum(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) contextValidateTransactionAdviceAddendum(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TransactionAdviceAddendum); i++ {
+
+		if o.TransactionAdviceAddendum[i] != nil {
+
+			if swag.IsZero(o.TransactionAdviceAddendum[i]) { // not required
+				return nil
+			}
+
+			if err := o.TransactionAdviceAddendum[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -10208,7 +12299,8 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetails) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 create payment params body order information invoice details transaction advice addendum items0
+/*
+CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 create payment params body order information invoice details transaction advice addendum items0
 swagger:model CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0
 */
 type CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 struct {
@@ -10239,15 +12331,19 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) validateData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Data) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("data", "body", string(o.Data), 40); err != nil {
+	if err := validate.MaxLength("data", "body", o.Data, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information invoice details transaction advice addendum items0 based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -10269,7 +12365,8 @@ func (o *CreatePaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationLineItemsItems0 create payment params body order information line items items0
+/*
+CreatePaymentParamsBodyOrderInformationLineItemsItems0 create payment params body order information line items items0
 swagger:model CreatePaymentParamsBodyOrderInformationLineItemsItems0
 */
 type CreatePaymentParamsBodyOrderInformationLineItemsItems0 struct {
@@ -10661,12 +12758,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) Validate(format
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("commodityCode", "body", string(o.CommodityCode), 15); err != nil {
+	if err := validate.MaxLength("commodityCode", "body", o.CommodityCode, 15); err != nil {
 		return err
 	}
 
@@ -10674,12 +12770,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateCommodi
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountAmount", "body", string(o.DiscountAmount), 13); err != nil {
+	if err := validate.MaxLength("discountAmount", "body", o.DiscountAmount, 13); err != nil {
 		return err
 	}
 
@@ -10687,12 +12782,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateDiscountRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountRate", "body", string(o.DiscountRate), 6); err != nil {
+	if err := validate.MaxLength("discountRate", "body", o.DiscountRate, 6); err != nil {
 		return err
 	}
 
@@ -10700,12 +12794,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateInvoiceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("invoiceNumber", "body", string(o.InvoiceNumber), 23); err != nil {
+	if err := validate.MaxLength("invoiceNumber", "body", o.InvoiceNumber, 23); err != nil {
 		return err
 	}
 
@@ -10713,12 +12806,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateInvoice
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProductCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productCode", "body", string(o.ProductCode), 255); err != nil {
+	if err := validate.MaxLength("productCode", "body", o.ProductCode, 255); err != nil {
 		return err
 	}
 
@@ -10726,12 +12818,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productName", "body", string(o.ProductName), 255); err != nil {
+	if err := validate.MaxLength("productName", "body", o.ProductName, 255); err != nil {
 		return err
 	}
 
@@ -10739,12 +12830,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProductSku(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductSku) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productSku", "body", string(o.ProductSku), 255); err != nil {
+	if err := validate.MaxLength("productSku", "body", o.ProductSku, 255); err != nil {
 		return err
 	}
 
@@ -10752,16 +12842,15 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.Minimum("quantity", "body", float64(o.Quantity), 1, false); err != nil {
+	if err := validate.Minimum("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.Maximum("quantity", "body", float64(o.Quantity), 9.999999999e+09, false); err != nil {
+	if err := validate.Maximum("quantity", "body", o.Quantity, 9.999999999e+09, false); err != nil {
 		return err
 	}
 
@@ -10769,12 +12858,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateQuantit
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateReferenceDataCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceDataCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("referenceDataCode", "body", string(o.ReferenceDataCode), 2); err != nil {
+	if err := validate.MaxLength("referenceDataCode", "body", o.ReferenceDataCode, 2); err != nil {
 		return err
 	}
 
@@ -10782,12 +12870,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateReferen
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateReferenceDataNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceDataNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("referenceDataNumber", "body", string(o.ReferenceDataNumber), 30); err != nil {
+	if err := validate.MaxLength("referenceDataNumber", "body", o.ReferenceDataNumber, 30); err != nil {
 		return err
 	}
 
@@ -10795,12 +12882,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateReferen
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAmount", "body", string(o.TaxAmount), 15); err != nil {
+	if err := validate.MaxLength("taxAmount", "body", o.TaxAmount, 15); err != nil {
 		return err
 	}
 
@@ -10808,12 +12894,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAmou
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -10821,7 +12906,6 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAppl
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -10835,6 +12919,8 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -10846,12 +12932,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxRate", "body", string(o.TaxRate), 7); err != nil {
+	if err := validate.MaxLength("taxRate", "body", o.TaxRate, 7); err != nil {
 		return err
 	}
 
@@ -10859,12 +12944,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxRate
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxStatusIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxStatusIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxStatusIndicator", "body", string(o.TaxStatusIndicator), 1); err != nil {
+	if err := validate.MaxLength("taxStatusIndicator", "body", o.TaxStatusIndicator, 1); err != nil {
 		return err
 	}
 
@@ -10872,12 +12956,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxStat
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxTypeCode", "body", string(o.TaxTypeCode), 4); err != nil {
+	if err := validate.MaxLength("taxTypeCode", "body", o.TaxTypeCode, 4); err != nil {
 		return err
 	}
 
@@ -10885,12 +12968,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTaxType
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("totalAmount", "body", string(o.TotalAmount), 13); err != nil {
+	if err := validate.MaxLength("totalAmount", "body", o.TotalAmount, 13); err != nil {
 		return err
 	}
 
@@ -10898,12 +12980,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTotalAm
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTypeOfSupply(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TypeOfSupply) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("typeOfSupply", "body", string(o.TypeOfSupply), 2); err != nil {
+	if err := validate.MaxLength("typeOfSupply", "body", o.TypeOfSupply, 2); err != nil {
 		return err
 	}
 
@@ -10911,12 +12992,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateTypeOfS
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateUnitOfMeasure(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitOfMeasure) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitOfMeasure", "body", string(o.UnitOfMeasure), 12); err != nil {
+	if err := validate.MaxLength("unitOfMeasure", "body", o.UnitOfMeasure, 12); err != nil {
 		return err
 	}
 
@@ -10924,12 +13004,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateUnitOfM
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
 	}
 
@@ -10937,12 +13016,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateUnitPri
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateWeight(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Weight) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("weight", "body", string(o.Weight), 9); err != nil {
+	if err := validate.MaxLength("weight", "body", o.Weight, 9); err != nil {
 		return err
 	}
 
@@ -10950,12 +13028,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateWeight(
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateWeightIdentifier(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.WeightIdentifier) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("weightIdentifier", "body", string(o.WeightIdentifier), 1); err != nil {
+	if err := validate.MaxLength("weightIdentifier", "body", o.WeightIdentifier, 1); err != nil {
 		return err
 	}
 
@@ -10963,13 +13040,51 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateWeightI
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) validateWeightUnit(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.WeightUnit) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("weightUnit", "body", string(o.WeightUnit), 2); err != nil {
+	if err := validate.MaxLength("weightUnit", "body", o.WeightUnit, 2); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body order information line items items0 based on the context it is used
+func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -10993,7 +13108,8 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 create payment params body order information line items items0 tax details items0
+/*
+CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 create payment params body order information line items items0 tax details items0
 swagger:model CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0
 */
 type CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 struct {
@@ -11133,12 +13249,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -11146,12 +13261,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -11159,12 +13273,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -11172,12 +13285,11 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -11185,15 +13297,19 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information line items items0 tax details items0 based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -11215,7 +13331,8 @@ func (o *CreatePaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationShipTo create payment params body order information ship to
+/*
+CreatePaymentParamsBodyOrderInformationShipTo create payment params body order information ship to
 swagger:model CreatePaymentParamsBodyOrderInformationShipTo
 */
 type CreatePaymentParamsBodyOrderInformationShipTo struct {
@@ -11364,12 +13481,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -11377,12 +13493,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAddress1(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -11390,12 +13505,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAddress2(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 2); err != nil {
 		return err
 	}
 
@@ -11403,12 +13517,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateAdministrativeAr
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateBuildingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuildingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"buildingNumber", "body", string(o.BuildingNumber), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"buildingNumber", "body", o.BuildingNumber, 15); err != nil {
 		return err
 	}
 
@@ -11416,12 +13529,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateBuildingNumber(f
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -11429,12 +13541,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateCompany(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -11442,12 +13553,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateCountry(formats 
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateDistrict(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.District) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"district", "body", string(o.District), 50); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"district", "body", o.District, 50); err != nil {
 		return err
 	}
 
@@ -11455,12 +13565,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateDistrict(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -11468,12 +13577,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateFirstName(format
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -11481,12 +13589,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateLastName(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -11494,12 +13601,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validateLocality(formats
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -11507,15 +13613,19 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) validatePhoneNumber(form
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShipTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information ship to based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -11537,7 +13647,8 @@ func (o *CreatePaymentParamsBodyOrderInformationShipTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyOrderInformationShippingDetails Contains shipping information not related to address.
+/*
+CreatePaymentParamsBodyOrderInformationShippingDetails Contains shipping information not related to address.
 swagger:model CreatePaymentParamsBodyOrderInformationShippingDetails
 */
 type CreatePaymentParamsBodyOrderInformationShippingDetails struct {
@@ -11605,12 +13716,11 @@ func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) Validate(format
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) validateShipFromPostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipFromPostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", string(o.ShipFromPostalCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", o.ShipFromPostalCode, 10); err != nil {
 		return err
 	}
 
@@ -11618,15 +13728,19 @@ func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) validateShipFro
 }
 
 func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) validateShippingMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", string(o.ShippingMethod), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", o.ShippingMethod, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body order information shipping details based on context it is used
+func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -11648,7 +13762,8 @@ func (o *CreatePaymentParamsBodyOrderInformationShippingDetails) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformation create payment params body payment information
+/*
+CreatePaymentParamsBodyPaymentInformation create payment params body payment information
 swagger:model CreatePaymentParamsBodyPaymentInformation
 */
 type CreatePaymentParamsBodyPaymentInformation struct {
@@ -11700,7 +13815,6 @@ func (o *CreatePaymentParamsBodyPaymentInformation) Validate(formats strfmt.Regi
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformation) validateBank(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bank) { // not required
 		return nil
 	}
@@ -11709,6 +13823,8 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateBank(formats strfmt.
 		if err := o.Bank.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank")
 			}
 			return err
 		}
@@ -11718,7 +13834,6 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateBank(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -11727,6 +13842,8 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateCard(formats strfmt.
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -11736,7 +13853,6 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateCard(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -11745,6 +13861,8 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateCustomer(formats str
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -11754,7 +13872,6 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateCustomer(formats str
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformation) validateFluidData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FluidData) { // not required
 		return nil
 	}
@@ -11763,6 +13880,8 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateFluidData(formats st
 		if err := o.FluidData.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "fluidData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "fluidData")
 			}
 			return err
 		}
@@ -11772,7 +13891,6 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateFluidData(formats st
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformation) validateTokenizedCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TokenizedCard) { // not required
 		return nil
 	}
@@ -11781,6 +13899,143 @@ func (o *CreatePaymentParamsBodyPaymentInformation) validateTokenizedCard(format
 		if err := o.TokenizedCard.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body payment information based on the context it is used
+func (o *CreatePaymentParamsBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBank(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateFluidData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTokenizedCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformation) contextValidateBank(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Bank != nil {
+
+		if swag.IsZero(o.Bank) { // not required
+			return nil
+		}
+
+		if err := o.Bank.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformation) contextValidateFluidData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FluidData != nil {
+
+		if swag.IsZero(o.FluidData) { // not required
+			return nil
+		}
+
+		if err := o.FluidData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "fluidData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "fluidData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformation) contextValidateTokenizedCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.TokenizedCard != nil {
+
+		if swag.IsZero(o.TokenizedCard) { // not required
+			return nil
+		}
+
+		if err := o.TokenizedCard.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "tokenizedCard")
 			}
 			return err
 		}
@@ -11807,7 +14062,8 @@ func (o *CreatePaymentParamsBodyPaymentInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationBank create payment params body payment information bank
+/*
+CreatePaymentParamsBodyPaymentInformationBank create payment params body payment information bank
 swagger:model CreatePaymentParamsBodyPaymentInformationBank
 */
 type CreatePaymentParamsBodyPaymentInformationBank struct {
@@ -11842,7 +14098,6 @@ func (o *CreatePaymentParamsBodyPaymentInformationBank) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBank) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -11851,6 +14106,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationBank) validateAccount(formats 
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
 			}
 			return err
 		}
@@ -11860,13 +14117,47 @@ func (o *CreatePaymentParamsBodyPaymentInformationBank) validateAccount(formats 
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBank) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body payment information bank based on the context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationBank) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPaymentInformationBank) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -11890,7 +14181,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationBank) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationBankAccount create payment params body payment information bank account
+/*
+CreatePaymentParamsBodyPaymentInformationBankAccount create payment params body payment information bank account
 swagger:model CreatePaymentParamsBodyPaymentInformationBankAccount
 */
 type CreatePaymentParamsBodyPaymentInformationBankAccount struct {
@@ -11969,12 +14261,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) Validate(formats 
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateCheckImageReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckImageReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", string(o.CheckImageReferenceNumber), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", o.CheckImageReferenceNumber, 32); err != nil {
 		return err
 	}
 
@@ -11982,12 +14273,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateCheckImag
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateCheckNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", string(o.CheckNumber), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", o.CheckNumber, 8); err != nil {
 		return err
 	}
 
@@ -11995,12 +14285,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateCheckNumb
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", string(o.EncoderID), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", o.EncoderID, 3); err != nil {
 		return err
 	}
 
@@ -12008,12 +14297,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateEncoderID
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", string(o.Number), 17); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", o.Number, 17); err != nil {
 		return err
 	}
 
@@ -12021,15 +14309,19 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateNumber(fo
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Type) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", string(o.Type), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", o.Type, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body payment information bank account based on context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -12051,7 +14343,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationBankAccount) UnmarshalBinary(b
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationCard create payment params body payment information card
+/*
+CreatePaymentParamsBodyPaymentInformationCard create payment params body payment information card
 swagger:model CreatePaymentParamsBodyPaymentInformationCard
 */
 type CreatePaymentParamsBodyPaymentInformationCard struct {
@@ -12294,12 +14587,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateAccountEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountEncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", string(o.AccountEncoderID), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", o.AccountEncoderID, 3); err != nil {
 		return err
 	}
 
@@ -12307,12 +14599,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateAccountEncoderID
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -12320,12 +14611,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateExpirationMonth(
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -12333,12 +14623,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateExpirationYear(f
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 5); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 5); err != nil {
 		return err
 	}
 
@@ -12346,12 +14635,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateIssueNumber(form
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
@@ -12359,12 +14647,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateNumber(formats s
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"productName", "body", string(o.ProductName), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"productName", "body", o.ProductName, 15); err != nil {
 		return err
 	}
 
@@ -12372,12 +14659,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateProductName(form
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSecurityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SecurityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"securityCode", "body", string(o.SecurityCode), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"securityCode", "body", o.SecurityCode, 4); err != nil {
 		return err
 	}
 
@@ -12385,12 +14671,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSecurityCode(for
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSecurityCodeIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SecurityCodeIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"securityCodeIndicator", "body", string(o.SecurityCodeIndicator), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"securityCodeIndicator", "body", o.SecurityCodeIndicator, 1); err != nil {
 		return err
 	}
 
@@ -12398,12 +14683,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSecurityCodeIndi
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSourceAccountType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SourceAccountType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"sourceAccountType", "body", string(o.SourceAccountType), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"sourceAccountType", "body", o.SourceAccountType, 20); err != nil {
 		return err
 	}
 
@@ -12411,12 +14695,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateSourceAccountTyp
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -12424,12 +14707,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateStartMonth(forma
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
@@ -12437,15 +14719,19 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) validateStartYear(format
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationCard) validateUseAs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UseAs) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"useAs", "body", string(o.UseAs), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"useAs", "body", o.UseAs, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body payment information card based on context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -12467,7 +14753,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationCard) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationCustomer create payment params body payment information customer
+/*
+CreatePaymentParamsBodyPaymentInformationCustomer create payment params body payment information customer
 swagger:model CreatePaymentParamsBodyPaymentInformationCustomer
 */
 type CreatePaymentParamsBodyPaymentInformationCustomer struct {
@@ -12490,6 +14777,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationCustomer) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this create payment params body payment information customer based on context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentParamsBodyPaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -12508,7 +14800,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationCustomer) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationFluidData create payment params body payment information fluid data
+/*
+CreatePaymentParamsBodyPaymentInformationFluidData create payment params body payment information fluid data
 swagger:model CreatePaymentParamsBodyPaymentInformationFluidData
 */
 type CreatePaymentParamsBodyPaymentInformationFluidData struct {
@@ -12567,12 +14860,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationFluidData) Validate(formats st
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationFluidData) validateDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Descriptor) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"descriptor", "body", string(o.Descriptor), 128); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"descriptor", "body", o.Descriptor, 128); err != nil {
 		return err
 	}
 
@@ -12580,12 +14872,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationFluidData) validateDescriptor(
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationFluidData) validateEncoding(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Encoding) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"encoding", "body", string(o.Encoding), 6); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"encoding", "body", o.Encoding, 6); err != nil {
 		return err
 	}
 
@@ -12593,15 +14884,19 @@ func (o *CreatePaymentParamsBodyPaymentInformationFluidData) validateEncoding(fo
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationFluidData) validateValue(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Value) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"value", "body", string(o.Value), 3072); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"fluidData"+"."+"value", "body", o.Value, 3072); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body payment information fluid data based on context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationFluidData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -12623,7 +14918,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationFluidData) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreatePaymentParamsBodyPaymentInformationTokenizedCard create payment params body payment information tokenized card
+/*
+CreatePaymentParamsBodyPaymentInformationTokenizedCard create payment params body payment information tokenized card
 swagger:model CreatePaymentParamsBodyPaymentInformationTokenizedCard
 */
 type CreatePaymentParamsBodyPaymentInformationTokenizedCard struct {
@@ -12806,12 +15102,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) Validate(format
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateAssuranceLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AssuranceLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"assuranceLevel", "body", string(o.AssuranceLevel), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"assuranceLevel", "body", o.AssuranceLevel, 2); err != nil {
 		return err
 	}
 
@@ -12819,12 +15114,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateAssuran
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateCryptogram(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Cryptogram) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"cryptogram", "body", string(o.Cryptogram), 40); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"cryptogram", "body", o.Cryptogram, 40); err != nil {
 		return err
 	}
 
@@ -12832,12 +15126,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateCryptog
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -12845,12 +15138,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateExpirat
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -12858,12 +15150,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateExpirat
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
@@ -12871,12 +15162,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateNumber(
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateRequestorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RequestorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"requestorId", "body", string(o.RequestorID), 11); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"requestorId", "body", o.RequestorID, 11); err != nil {
 		return err
 	}
 
@@ -12884,12 +15174,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateRequest
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateSecurityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SecurityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"securityCode", "body", string(o.SecurityCode), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"securityCode", "body", o.SecurityCode, 4); err != nil {
 		return err
 	}
 
@@ -12897,12 +15186,11 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateSecurit
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateStorageMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StorageMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"storageMethod", "body", string(o.StorageMethod), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"storageMethod", "body", o.StorageMethod, 3); err != nil {
 		return err
 	}
 
@@ -12910,15 +15198,19 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateStorage
 }
 
 func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) validateTransactionType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"transactionType", "body", string(o.TransactionType), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"paymentInformation"+"."+"tokenizedCard"+"."+"transactionType", "body", o.TransactionType, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body payment information tokenized card based on context it is used
+func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -12940,7 +15232,8 @@ func (o *CreatePaymentParamsBodyPaymentInformationTokenizedCard) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentParamsBodyPointOfSaleInformation create payment params body point of sale information
+/*
+CreatePaymentParamsBodyPointOfSaleInformation create payment params body point of sale information
 swagger:model CreatePaymentParamsBodyPointOfSaleInformation
 */
 type CreatePaymentParamsBodyPointOfSaleInformation struct {
@@ -12962,6 +15255,7 @@ type CreatePaymentParamsBodyPointOfSaleInformation struct {
 	AmexCapnData string `json:"amexCapnData,omitempty"`
 
 	// cardholder verification method
+	// Example: ["PIN","Signature"]
 	CardholderVerificationMethod []string `json:"cardholderVerificationMethod"`
 
 	// Type of cardholder-activated terminal. Possible values:
@@ -13179,6 +15473,7 @@ type CreatePaymentParamsBodyPointOfSaleInformation struct {
 	TerminalID string `json:"terminalId,omitempty"`
 
 	// terminal input capability
+	// Example: ["Keyed","Swiped","Contact","QRcode"]
 	TerminalInputCapability []string `json:"terminalInputCapability"`
 
 	// Indicates whether the terminal can print or display messages.
@@ -13325,12 +15620,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) Validate(formats strfmt.
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateAmexCapnData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexCapnData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"amexCapnData", "body", string(o.AmexCapnData), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"amexCapnData", "body", o.AmexCapnData, 12); err != nil {
 		return err
 	}
 
@@ -13338,16 +15632,15 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateAmexCapnData(for
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateCatLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CatLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"catLevel", "body", int64(o.CatLevel), 1, false); err != nil {
+	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"catLevel", "body", o.CatLevel, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"catLevel", "body", int64(o.CatLevel), 9, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"catLevel", "body", o.CatLevel, 9, false); err != nil {
 		return err
 	}
 
@@ -13355,12 +15648,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateCatLevel(formats
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateDeviceID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"deviceId", "body", string(o.DeviceID), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"deviceId", "body", o.DeviceID, 32); err != nil {
 		return err
 	}
 
@@ -13368,7 +15660,6 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateDeviceID(formats
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -13377,6 +15668,8 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEmv(formats strf
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -13386,12 +15679,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEmv(formats strf
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEncryptedKeySerialNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncryptedKeySerialNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"encryptedKeySerialNumber", "body", string(o.EncryptedKeySerialNumber), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"encryptedKeySerialNumber", "body", o.EncryptedKeySerialNumber, 20); err != nil {
 		return err
 	}
 
@@ -13399,12 +15691,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEncryptedKeySeri
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEncryptedPin(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncryptedPin) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"encryptedPin", "body", string(o.EncryptedPin), 16); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"encryptedPin", "body", o.EncryptedPin, 16); err != nil {
 		return err
 	}
 
@@ -13412,12 +15703,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEncryptedPin(for
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEntryMode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EntryMode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"entryMode", "body", string(o.EntryMode), 11); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"entryMode", "body", o.EntryMode, 11); err != nil {
 		return err
 	}
 
@@ -13425,12 +15715,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateEntryMode(format
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateLaneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LaneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"laneNumber", "body", string(o.LaneNumber), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"laneNumber", "body", o.LaneNumber, 8); err != nil {
 		return err
 	}
 
@@ -13438,12 +15727,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateLaneNumber(forma
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateOperatingEnvironment(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OperatingEnvironment) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"operatingEnvironment", "body", string(o.OperatingEnvironment), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"operatingEnvironment", "body", o.OperatingEnvironment, 1); err != nil {
 		return err
 	}
 
@@ -13451,12 +15739,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateOperatingEnviron
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePartnerSdkVersion(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PartnerSdkVersion) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"partnerSdkVersion", "body", string(o.PartnerSdkVersion), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"partnerSdkVersion", "body", o.PartnerSdkVersion, 32); err != nil {
 		return err
 	}
 
@@ -13464,12 +15751,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePartnerSdkVersio
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePinBlockEncodingFormat(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PinBlockEncodingFormat) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinBlockEncodingFormat", "body", int64(o.PinBlockEncodingFormat), 9, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinBlockEncodingFormat", "body", o.PinBlockEncodingFormat, 9, false); err != nil {
 		return err
 	}
 
@@ -13477,16 +15763,15 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePinBlockEncoding
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePinEntryCapability(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PinEntryCapability) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinEntryCapability", "body", int64(o.PinEntryCapability), 1, false); err != nil {
+	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinEntryCapability", "body", o.PinEntryCapability, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinEntryCapability", "body", int64(o.PinEntryCapability), 1, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"pinEntryCapability", "body", o.PinEntryCapability, 1, false); err != nil {
 		return err
 	}
 
@@ -13494,12 +15779,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validatePinEntryCapabili
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateStoreAndForwardIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StoreAndForwardIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"storeAndForwardIndicator", "body", string(o.StoreAndForwardIndicator), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"storeAndForwardIndicator", "body", o.StoreAndForwardIndicator, 1); err != nil {
 		return err
 	}
 
@@ -13507,16 +15791,15 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateStoreAndForwardI
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalCapability(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalCapability) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", int64(o.TerminalCapability), 1, false); err != nil {
+	if err := validate.MinimumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", o.TerminalCapability, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", int64(o.TerminalCapability), 5, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", o.TerminalCapability, 5, false); err != nil {
 		return err
 	}
 
@@ -13524,12 +15807,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalCapabili
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalCardCaptureCapability(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalCardCaptureCapability) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCardCaptureCapability", "body", string(o.TerminalCardCaptureCapability), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalCardCaptureCapability", "body", o.TerminalCardCaptureCapability, 1); err != nil {
 		return err
 	}
 
@@ -13537,12 +15819,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalCardCapt
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalId", "body", string(o.TerminalID), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalId", "body", o.TerminalID, 8); err != nil {
 		return err
 	}
 
@@ -13550,12 +15831,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalID(forma
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalOutputCapability(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalOutputCapability) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalOutputCapability", "body", string(o.TerminalOutputCapability), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalOutputCapability", "body", o.TerminalOutputCapability, 1); err != nil {
 		return err
 	}
 
@@ -13563,13 +15843,47 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalOutputCa
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformation) validateTerminalSerialNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalSerialNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalSerialNumber", "body", string(o.TerminalSerialNumber), 32); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"terminalSerialNumber", "body", o.TerminalSerialNumber, 32); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body point of sale information based on the context it is used
+func (o *CreatePaymentParamsBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -13593,7 +15907,8 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentParamsBodyPointOfSaleInformationEmv create payment params body point of sale information emv
+/*
+CreatePaymentParamsBodyPointOfSaleInformationEmv create payment params body point of sale information emv
 swagger:model CreatePaymentParamsBodyPointOfSaleInformationEmv
 */
 type CreatePaymentParamsBodyPointOfSaleInformationEmv struct {
@@ -13714,12 +16029,11 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) Validate(formats strf
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) validateCardSequenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardSequenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"cardSequenceNumber", "body", string(o.CardSequenceNumber), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"cardSequenceNumber", "body", o.CardSequenceNumber, 3); err != nil {
 		return err
 	}
 
@@ -13727,15 +16041,19 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) validateCardSequenceN
 }
 
 func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body point of sale information emv based on context it is used
+func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -13757,7 +16075,8 @@ func (o *CreatePaymentParamsBodyPointOfSaleInformationEmv) UnmarshalBinary(b []b
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformation create payment params body processing information
+/*
+CreatePaymentParamsBodyProcessingInformation create payment params body processing information
 swagger:model CreatePaymentParamsBodyProcessingInformation
 */
 type CreatePaymentParamsBodyProcessingInformation struct {
@@ -13942,7 +16261,6 @@ func (o *CreatePaymentParamsBodyProcessingInformation) Validate(formats strfmt.R
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -13951,6 +16269,8 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateAuthorizationOpti
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -13960,7 +16280,6 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateAuthorizationOpti
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateBankTransferOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankTransferOptions) { // not required
 		return nil
 	}
@@ -13969,6 +16288,8 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateBankTransferOptio
 		if err := o.BankTransferOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
 			}
 			return err
 		}
@@ -13978,7 +16299,6 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateBankTransferOptio
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateCaptureOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CaptureOptions) { // not required
 		return nil
 	}
@@ -13987,6 +16307,8 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateCaptureOptions(fo
 		if err := o.CaptureOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "captureOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "captureOptions")
 			}
 			return err
 		}
@@ -13996,12 +16318,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateCaptureOptions(fo
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateCommerceIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommerceIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"commerceIndicator", "body", string(o.CommerceIndicator), 20); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"commerceIndicator", "body", o.CommerceIndicator, 20); err != nil {
 		return err
 	}
 
@@ -14009,12 +16330,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateCommerceIndicator
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateIndustryDataType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IndustryDataType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"industryDataType", "body", string(o.IndustryDataType), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"industryDataType", "body", o.IndustryDataType, 10); err != nil {
 		return err
 	}
 
@@ -14022,12 +16342,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateIndustryDataType(
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateLinkID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LinkID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"linkId", "body", string(o.LinkID), 26); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"linkId", "body", o.LinkID, 26); err != nil {
 		return err
 	}
 
@@ -14035,12 +16354,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateLinkID(formats st
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
 	}
 
@@ -14048,12 +16366,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validatePaymentSolution(f
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateProcessorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"processorId", "body", string(o.ProcessorID), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"processorId", "body", o.ProcessorID, 3); err != nil {
 		return err
 	}
 
@@ -14061,12 +16378,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateProcessorID(forma
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validatePurchaseLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", string(o.PurchaseLevel), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", o.PurchaseLevel, 1); err != nil {
 		return err
 	}
 
@@ -14074,12 +16390,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validatePurchaseLevel(for
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -14087,7 +16402,6 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateReconciliationID(
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateRecurringOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecurringOptions) { // not required
 		return nil
 	}
@@ -14096,6 +16410,8 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateRecurringOptions(
 		if err := o.RecurringOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
 			}
 			return err
 		}
@@ -14105,12 +16421,11 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateRecurringOptions(
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateReportGroup(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportGroup) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"reportGroup", "body", string(o.ReportGroup), 25); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"reportGroup", "body", o.ReportGroup, 25); err != nil {
 		return err
 	}
 
@@ -14118,13 +16433,122 @@ func (o *CreatePaymentParamsBodyProcessingInformation) validateReportGroup(forma
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformation) validateVisaCheckoutID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VisaCheckoutID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", string(o.VisaCheckoutID), 48); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", o.VisaCheckoutID, 48); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body processing information based on the context it is used
+func (o *CreatePaymentParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankTransferOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCaptureOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRecurringOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformation) contextValidateBankTransferOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankTransferOptions != nil {
+
+		if swag.IsZero(o.BankTransferOptions) { // not required
+			return nil
+		}
+
+		if err := o.BankTransferOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformation) contextValidateCaptureOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.CaptureOptions != nil {
+
+		if swag.IsZero(o.CaptureOptions) { // not required
+			return nil
+		}
+
+		if err := o.CaptureOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "captureOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "captureOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformation) contextValidateRecurringOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecurringOptions != nil {
+
+		if swag.IsZero(o.RecurringOptions) { // not required
+			return nil
+		}
+
+		if err := o.RecurringOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -14148,7 +16572,8 @@ func (o *CreatePaymentParamsBodyProcessingInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationAuthorizationOptions create payment params body processing information authorization options
+/*
+CreatePaymentParamsBodyProcessingInformationAuthorizationOptions create payment params body processing information authorization options
 swagger:model CreatePaymentParamsBodyProcessingInformationAuthorizationOptions
 */
 type CreatePaymentParamsBodyProcessingInformationAuthorizationOptions struct {
@@ -14439,12 +16864,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) Valid
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) validateAuthIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authIndicator", "body", string(o.AuthIndicator), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authIndicator", "body", o.AuthIndicator, 1); err != nil {
 		return err
 	}
 
@@ -14452,12 +16876,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) valid
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) validateAuthType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authType", "body", string(o.AuthType), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authType", "body", o.AuthType, 15); err != nil {
 		return err
 	}
 
@@ -14465,7 +16888,6 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) valid
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Initiator) { // not required
 		return nil
 	}
@@ -14474,6 +16896,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) valid
 		if err := o.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -14483,12 +16907,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) valid
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) validateVerbalAuthCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VerbalAuthCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"verbalAuthCode", "body", string(o.VerbalAuthCode), 7); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"verbalAuthCode", "body", o.VerbalAuthCode, 7); err != nil {
 		return err
 	}
 
@@ -14496,13 +16919,47 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) valid
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) validateVerbalAuthTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VerbalAuthTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"verbalAuthTransactionId", "body", string(o.VerbalAuthTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"verbalAuthTransactionId", "body", o.VerbalAuthTransactionID, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body processing information authorization options based on the context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Initiator != nil {
+
+		if swag.IsZero(o.Initiator) { // not required
+			return nil
+		}
+
+		if err := o.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -14526,7 +16983,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptions) Unmar
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator create payment params body processing information authorization options initiator
+/*
+CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator create payment params body processing information authorization options initiator
 swagger:model CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator
 */
 type CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator struct {
@@ -14583,7 +17041,6 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -14592,6 +17049,43 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 		if err := o.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment params body processing information authorization options initiator based on the context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentRequest" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -14618,7 +17112,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment params body processing information authorization options initiator merchant initiated transaction
+/*
+CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment params body processing information authorization options initiator merchant initiated transaction
 swagger:model CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 */
 type CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
@@ -14692,12 +17187,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validateOriginalAuthorizedAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalAuthorizedAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"originalAuthorizedAmount", "body", string(o.OriginalAuthorizedAmount), 61); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"originalAuthorizedAmount", "body", o.OriginalAuthorizedAmount, 61); err != nil {
 		return err
 	}
 
@@ -14705,12 +17199,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(o.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", o.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
@@ -14718,15 +17211,19 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validateReason(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Reason) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"reason", "body", string(o.Reason), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"reason", "body", o.Reason, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body processing information authorization options initiator merchant initiated transaction based on context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -14748,7 +17245,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationAuthorizationOptionsInitiat
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationBankTransferOptions create payment params body processing information bank transfer options
+/*
+CreatePaymentParamsBodyProcessingInformationBankTransferOptions create payment params body processing information bank transfer options
 swagger:model CreatePaymentParamsBodyProcessingInformationBankTransferOptions
 */
 type CreatePaymentParamsBodyProcessingInformationBankTransferOptions struct {
@@ -15001,12 +17499,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) Valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateCustomerMemo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CustomerMemo) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"customerMemo", "body", string(o.CustomerMemo), 80); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"customerMemo", "body", o.CustomerMemo, 80); err != nil {
 		return err
 	}
 
@@ -15014,12 +17511,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateDeclineAvsFlags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeclineAvsFlags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"declineAvsFlags", "body", string(o.DeclineAvsFlags), 15); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"declineAvsFlags", "body", o.DeclineAvsFlags, 15); err != nil {
 		return err
 	}
 
@@ -15027,12 +17523,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateEffectiveDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EffectiveDate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"effectiveDate", "body", string(o.EffectiveDate), 8); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"effectiveDate", "body", o.EffectiveDate, 8); err != nil {
 		return err
 	}
 
@@ -15040,12 +17535,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateFraudScreeningLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FraudScreeningLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"fraudScreeningLevel", "body", string(o.FraudScreeningLevel), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"fraudScreeningLevel", "body", o.FraudScreeningLevel, 1); err != nil {
 		return err
 	}
 
@@ -15053,12 +17547,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validatePartialPaymentID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PartialPaymentID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"partialPaymentId", "body", string(o.PartialPaymentID), 25); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"partialPaymentId", "body", o.PartialPaymentID, 25); err != nil {
 		return err
 	}
 
@@ -15066,12 +17559,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validatePaymentCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentCategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"paymentCategoryCode", "body", string(o.PaymentCategoryCode), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"paymentCategoryCode", "body", o.PaymentCategoryCode, 1); err != nil {
 		return err
 	}
 
@@ -15079,12 +17571,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateSecCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SecCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"secCode", "body", string(o.SecCode), 3); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"secCode", "body", o.SecCode, 3); err != nil {
 		return err
 	}
 
@@ -15092,12 +17583,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateSettlementMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"settlementMethod", "body", string(o.SettlementMethod), 1); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"settlementMethod", "body", o.SettlementMethod, 1); err != nil {
 		return err
 	}
 
@@ -15105,12 +17595,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateTerminalCity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalCity) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"terminalCity", "body", string(o.TerminalCity), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"terminalCity", "body", o.TerminalCity, 4); err != nil {
 		return err
 	}
 
@@ -15118,15 +17607,19 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) valida
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) validateTerminalState(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalState) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"terminalState", "body", string(o.TerminalState), 2); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"bankTransferOptions"+"."+"terminalState", "body", o.TerminalState, 2); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body processing information bank transfer options based on context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -15148,7 +17641,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationBankTransferOptions) Unmars
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationCaptureOptions create payment params body processing information capture options
+/*
+CreatePaymentParamsBodyProcessingInformationCaptureOptions create payment params body processing information capture options
 swagger:model CreatePaymentParamsBodyProcessingInformationCaptureOptions
 */
 type CreatePaymentParamsBodyProcessingInformationCaptureOptions struct {
@@ -15205,16 +17699,15 @@ func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) Validate(fo
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) validateCaptureSequenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CaptureSequenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"captureSequenceNumber", "body", int64(o.CaptureSequenceNumber), 1, false); err != nil {
+	if err := validate.MinimumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"captureSequenceNumber", "body", o.CaptureSequenceNumber, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"captureSequenceNumber", "body", int64(o.CaptureSequenceNumber), 99, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"captureSequenceNumber", "body", o.CaptureSequenceNumber, 99, false); err != nil {
 		return err
 	}
 
@@ -15222,12 +17715,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) validateCap
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) validateDateToCapture(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateToCapture) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"dateToCapture", "body", string(o.DateToCapture), 4); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"dateToCapture", "body", o.DateToCapture, 4); err != nil {
 		return err
 	}
 
@@ -15235,19 +17727,23 @@ func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) validateDat
 }
 
 func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) validateTotalCaptureCount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalCaptureCount) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"totalCaptureCount", "body", int64(o.TotalCaptureCount), 1, false); err != nil {
+	if err := validate.MinimumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"totalCaptureCount", "body", o.TotalCaptureCount, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"totalCaptureCount", "body", int64(o.TotalCaptureCount), 99, false); err != nil {
+	if err := validate.MaximumInt("createPaymentRequest"+"."+"processingInformation"+"."+"captureOptions"+"."+"totalCaptureCount", "body", o.TotalCaptureCount, 99, false); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body processing information capture options based on context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -15269,7 +17765,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationCaptureOptions) UnmarshalBi
 	return nil
 }
 
-/*CreatePaymentParamsBodyProcessingInformationRecurringOptions create payment params body processing information recurring options
+/*
+CreatePaymentParamsBodyProcessingInformationRecurringOptions create payment params body processing information recurring options
 swagger:model CreatePaymentParamsBodyProcessingInformationRecurringOptions
 */
 type CreatePaymentParamsBodyProcessingInformationRecurringOptions struct {
@@ -15303,6 +17800,11 @@ func (o *CreatePaymentParamsBodyProcessingInformationRecurringOptions) Validate(
 	return nil
 }
 
+// ContextValidate validates this create payment params body processing information recurring options based on context it is used
+func (o *CreatePaymentParamsBodyProcessingInformationRecurringOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreatePaymentParamsBodyProcessingInformationRecurringOptions) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -15321,7 +17823,8 @@ func (o *CreatePaymentParamsBodyProcessingInformationRecurringOptions) Unmarshal
 	return nil
 }
 
-/*CreatePaymentParamsBodyRecipientInformation create payment params body recipient information
+/*
+CreatePaymentParamsBodyRecipientInformation create payment params body recipient information
 swagger:model CreatePaymentParamsBodyRecipientInformation
 */
 type CreatePaymentParamsBodyRecipientInformation struct {
@@ -15379,12 +17882,11 @@ func (o *CreatePaymentParamsBodyRecipientInformation) Validate(formats strfmt.Re
 }
 
 func (o *CreatePaymentParamsBodyRecipientInformation) validateAccountID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"accountId", "body", string(o.AccountID), 10); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"accountId", "body", o.AccountID, 10); err != nil {
 		return err
 	}
 
@@ -15392,12 +17894,11 @@ func (o *CreatePaymentParamsBodyRecipientInformation) validateAccountID(formats 
 }
 
 func (o *CreatePaymentParamsBodyRecipientInformation) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"lastName", "body", string(o.LastName), 6); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"lastName", "body", o.LastName, 6); err != nil {
 		return err
 	}
 
@@ -15405,15 +17906,19 @@ func (o *CreatePaymentParamsBodyRecipientInformation) validateLastName(formats s
 }
 
 func (o *CreatePaymentParamsBodyRecipientInformation) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"postalCode", "body", string(o.PostalCode), 6); err != nil {
+	if err := validate.MaxLength("createPaymentRequest"+"."+"recipientInformation"+"."+"postalCode", "body", o.PostalCode, 6); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment params body recipient information based on context it is used
+func (o *CreatePaymentParamsBodyRecipientInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -15428,156 +17933,6 @@ func (o *CreatePaymentParamsBodyRecipientInformation) MarshalBinary() ([]byte, e
 // UnmarshalBinary interface implementation
 func (o *CreatePaymentParamsBodyRecipientInformation) UnmarshalBinary(b []byte) error {
 	var res CreatePaymentParamsBodyRecipientInformation
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*MerchantDefinedInformationItems0 merchant defined information items0
-swagger:model MerchantDefinedInformationItems0
-*/
-type MerchantDefinedInformationItems0 struct {
-
-	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
-	//
-	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
-	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
-	// transaction.
-	//
-	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// Max Length: 50
-	Key string `json:"key,omitempty"`
-
-	// The value you assign for your merchant-defined data field.
-	//
-	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
-	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
-	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
-	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
-	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For installment payments with Mastercard in Brazil:
-	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 25-44
-	//   - Field: Reference Field 2
-	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 45-64
-	//   - Field: Reference Field 3
-	//
-	// Max Length: 255
-	Value string `json:"value,omitempty"`
-}
-
-// Validate validates this merchant defined information items0
-func (o *MerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateKey(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateValue(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Key) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("key", "body", string(o.Key), 50); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Value) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("value", "body", string(o.Value), 255); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
-	var res MerchantDefinedInformationItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

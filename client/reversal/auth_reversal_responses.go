@@ -6,16 +6,16 @@ package reversal
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // AuthReversalReader is a Reader for the AuthReversal structure.
@@ -44,9 +44,8 @@ func (o *AuthReversalReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/payments/{id}/reversals] authReversal", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewAuthReversalCreated() *AuthReversalCreated {
 	return &AuthReversalCreated{}
 }
 
-/*AuthReversalCreated handles this case with default header values.
+/*
+AuthReversalCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type AuthReversalCreated struct {
 	Payload *AuthReversalCreatedBody
 }
 
+// IsSuccess returns true when this auth reversal created response has a 2xx status code
+func (o *AuthReversalCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this auth reversal created response has a 3xx status code
+func (o *AuthReversalCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this auth reversal created response has a 4xx status code
+func (o *AuthReversalCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this auth reversal created response has a 5xx status code
+func (o *AuthReversalCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this auth reversal created response a status code equal to that given
+func (o *AuthReversalCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the auth reversal created response
+func (o *AuthReversalCreated) Code() int {
+	return 201
+}
+
 func (o *AuthReversalCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalCreated  %+v", 201, o.Payload)
+}
+
+func (o *AuthReversalCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewAuthReversalBadRequest() *AuthReversalBadRequest {
 	return &AuthReversalBadRequest{}
 }
 
-/*AuthReversalBadRequest handles this case with default header values.
+/*
+AuthReversalBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type AuthReversalBadRequest struct {
 	Payload *AuthReversalBadRequestBody
 }
 
+// IsSuccess returns true when this auth reversal bad request response has a 2xx status code
+func (o *AuthReversalBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this auth reversal bad request response has a 3xx status code
+func (o *AuthReversalBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this auth reversal bad request response has a 4xx status code
+func (o *AuthReversalBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this auth reversal bad request response has a 5xx status code
+func (o *AuthReversalBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this auth reversal bad request response a status code equal to that given
+func (o *AuthReversalBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the auth reversal bad request response
+func (o *AuthReversalBadRequest) Code() int {
+	return 400
+}
+
 func (o *AuthReversalBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *AuthReversalBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewAuthReversalBadGateway() *AuthReversalBadGateway {
 	return &AuthReversalBadGateway{}
 }
 
-/*AuthReversalBadGateway handles this case with default header values.
+/*
+AuthReversalBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type AuthReversalBadGateway struct {
 	Payload *AuthReversalBadGatewayBody
 }
 
+// IsSuccess returns true when this auth reversal bad gateway response has a 2xx status code
+func (o *AuthReversalBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this auth reversal bad gateway response has a 3xx status code
+func (o *AuthReversalBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this auth reversal bad gateway response has a 4xx status code
+func (o *AuthReversalBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this auth reversal bad gateway response has a 5xx status code
+func (o *AuthReversalBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this auth reversal bad gateway response a status code equal to that given
+func (o *AuthReversalBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the auth reversal bad gateway response
+func (o *AuthReversalBadGateway) Code() int {
+	return 502
+}
+
 func (o *AuthReversalBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *AuthReversalBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/reversals][%d] authReversalBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *AuthReversalBadGateway) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*AuthReversalBadGatewayBody ptsV2PaymentsReversalsPost502Response
+/*
+AuthReversalBadGatewayBody ptsV2PaymentsReversalsPost502Response
 swagger:model AuthReversalBadGatewayBody
 */
 type AuthReversalBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *AuthReversalBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this auth reversal bad gateway body based on context it is used
+func (o *AuthReversalBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *AuthReversalBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *AuthReversalBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalBadRequestBody ptsV2PaymentsReversalsPost400Response
+/*
+AuthReversalBadRequestBody ptsV2PaymentsReversalsPost400Response
 swagger:model AuthReversalBadRequestBody
 */
 type AuthReversalBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*AuthReversalBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -260,7 +371,6 @@ func (o *AuthReversalBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -274,6 +384,47 @@ func (o *AuthReversalBadRequestBody) validateDetails(formats strfmt.Registry) er
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("authReversalBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("authReversalBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal bad request body based on the context it is used
+func (o *AuthReversalBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("authReversalBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("authReversalBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -302,7 +453,55 @@ func (o *AuthReversalBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalBody auth reversal body
+/*
+AuthReversalBadRequestBodyDetailsItems0 auth reversal bad request body details items0
+swagger:model AuthReversalBadRequestBodyDetailsItems0
+*/
+type AuthReversalBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this auth reversal bad request body details items0
+func (o *AuthReversalBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this auth reversal bad request body details items0 based on context it is used
+func (o *AuthReversalBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *AuthReversalBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *AuthReversalBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res AuthReversalBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+AuthReversalBody auth reversal body
+// Example: {"clientReferenceInformation":{"code":"TC50171_3"},"reversalInformation":{"amountDetails":{"totalAmount":"102.21"},"reason":"testing"}}
 swagger:model AuthReversalBody
 */
 type AuthReversalBody struct {
@@ -354,7 +553,6 @@ func (o *AuthReversalBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -363,6 +561,8 @@ func (o *AuthReversalBody) validateClientReferenceInformation(formats strfmt.Reg
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -372,7 +572,6 @@ func (o *AuthReversalBody) validateClientReferenceInformation(formats strfmt.Reg
 }
 
 func (o *AuthReversalBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -381,6 +580,8 @@ func (o *AuthReversalBody) validateOrderInformation(formats strfmt.Registry) err
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -390,7 +591,6 @@ func (o *AuthReversalBody) validateOrderInformation(formats strfmt.Registry) err
 }
 
 func (o *AuthReversalBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -399,6 +599,8 @@ func (o *AuthReversalBody) validatePointOfSaleInformation(formats strfmt.Registr
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -408,7 +610,6 @@ func (o *AuthReversalBody) validatePointOfSaleInformation(formats strfmt.Registr
 }
 
 func (o *AuthReversalBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -417,6 +618,8 @@ func (o *AuthReversalBody) validateProcessingInformation(formats strfmt.Registry
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -426,7 +629,6 @@ func (o *AuthReversalBody) validateProcessingInformation(formats strfmt.Registry
 }
 
 func (o *AuthReversalBody) validateReversalInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReversalInformation) { // not required
 		return nil
 	}
@@ -435,6 +637,143 @@ func (o *AuthReversalBody) validateReversalInformation(formats strfmt.Registry) 
 		if err := o.ReversalInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "reversalInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "reversalInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal body based on the context it is used
+func (o *AuthReversalBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateReversalInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalBody) contextValidateReversalInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ReversalInformation != nil {
+
+		if swag.IsZero(o.ReversalInformation) { // not required
+			return nil
+		}
+
+		if err := o.ReversalInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "reversalInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "reversalInformation")
 			}
 			return err
 		}
@@ -461,7 +800,9 @@ func (o *AuthReversalBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalCreatedBody ptsV2PaymentsReversalsPost201Response
+/*
+AuthReversalCreatedBody ptsV2PaymentsReversalsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/reversals/4963015523026180001545","method":"GET"}},"clientReferenceInformation":{"code":"TC50171_3"},"id":"4963015523026180001545","orderInformation":{"amountDetails":{"currency":"USD"}},"processorInformation":{"responseCode":"100"},"reversalAmountDetails":{"currency":"USD","reversedAmount":"102.21"},"status":"200","statusInformation":{"message":"Successful transaction.","reason":"SUCCESS"},"submitTimeUtc":"2017-06-01T071912Z"}
 swagger:model AuthReversalCreatedBody
 */
 type AuthReversalCreatedBody struct {
@@ -557,7 +898,6 @@ func (o *AuthReversalCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -566,6 +906,8 @@ func (o *AuthReversalCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -575,7 +917,6 @@ func (o *AuthReversalCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalCreatedBody) validateAuthorizationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationInformation) { // not required
 		return nil
 	}
@@ -584,6 +925,8 @@ func (o *AuthReversalCreatedBody) validateAuthorizationInformation(formats strfm
 		if err := o.AuthorizationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "authorizationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "authorizationInformation")
 			}
 			return err
 		}
@@ -593,7 +936,6 @@ func (o *AuthReversalCreatedBody) validateAuthorizationInformation(formats strfm
 }
 
 func (o *AuthReversalCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -602,6 +944,8 @@ func (o *AuthReversalCreatedBody) validateClientReferenceInformation(formats str
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -611,12 +955,11 @@ func (o *AuthReversalCreatedBody) validateClientReferenceInformation(formats str
 }
 
 func (o *AuthReversalCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -624,7 +967,6 @@ func (o *AuthReversalCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalCreatedBody) validateIssuerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssuerInformation) { // not required
 		return nil
 	}
@@ -633,6 +975,8 @@ func (o *AuthReversalCreatedBody) validateIssuerInformation(formats strfmt.Regis
 		if err := o.IssuerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "issuerInformation")
 			}
 			return err
 		}
@@ -642,7 +986,6 @@ func (o *AuthReversalCreatedBody) validateIssuerInformation(formats strfmt.Regis
 }
 
 func (o *AuthReversalCreatedBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -651,6 +994,8 @@ func (o *AuthReversalCreatedBody) validatePointOfSaleInformation(formats strfmt.
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -660,7 +1005,6 @@ func (o *AuthReversalCreatedBody) validatePointOfSaleInformation(formats strfmt.
 }
 
 func (o *AuthReversalCreatedBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -669,6 +1013,8 @@ func (o *AuthReversalCreatedBody) validateProcessorInformation(formats strfmt.Re
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -678,12 +1024,11 @@ func (o *AuthReversalCreatedBody) validateProcessorInformation(formats strfmt.Re
 }
 
 func (o *AuthReversalCreatedBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -691,7 +1036,6 @@ func (o *AuthReversalCreatedBody) validateReconciliationID(formats strfmt.Regist
 }
 
 func (o *AuthReversalCreatedBody) validateReversalAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReversalAmountDetails) { // not required
 		return nil
 	}
@@ -700,6 +1044,193 @@ func (o *AuthReversalCreatedBody) validateReversalAmountDetails(formats strfmt.R
 		if err := o.ReversalAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "reversalAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "reversalAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal created body based on the context it is used
+func (o *AuthReversalCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateAuthorizationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateIssuerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateReversalAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateAuthorizationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationInformation != nil {
+
+		if swag.IsZero(o.AuthorizationInformation) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "authorizationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "authorizationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateIssuerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IssuerInformation != nil {
+
+		if swag.IsZero(o.IssuerInformation) { // not required
+			return nil
+		}
+
+		if err := o.IssuerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "issuerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "issuerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalCreatedBody) contextValidateReversalAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ReversalAmountDetails != nil {
+
+		if swag.IsZero(o.ReversalAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.ReversalAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "reversalAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "reversalAmountDetails")
 			}
 			return err
 		}
@@ -726,7 +1257,8 @@ func (o *AuthReversalCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalCreatedBodyAuthorizationInformation auth reversal created body authorization information
+/*
+AuthReversalCreatedBodyAuthorizationInformation auth reversal created body authorization information
 swagger:model AuthReversalCreatedBodyAuthorizationInformation
 */
 type AuthReversalCreatedBodyAuthorizationInformation struct {
@@ -774,12 +1306,11 @@ func (o *AuthReversalCreatedBodyAuthorizationInformation) Validate(formats strfm
 }
 
 func (o *AuthReversalCreatedBodyAuthorizationInformation) validateApprovalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ApprovalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"approvalCode", "body", string(o.ApprovalCode), 6); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"approvalCode", "body", o.ApprovalCode, 6); err != nil {
 		return err
 	}
 
@@ -787,12 +1318,11 @@ func (o *AuthReversalCreatedBodyAuthorizationInformation) validateApprovalCode(f
 }
 
 func (o *AuthReversalCreatedBodyAuthorizationInformation) validateReasonCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReasonCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"reasonCode", "body", string(o.ReasonCode), 50); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"reasonCode", "body", o.ReasonCode, 50); err != nil {
 		return err
 	}
 
@@ -800,15 +1330,19 @@ func (o *AuthReversalCreatedBodyAuthorizationInformation) validateReasonCode(for
 }
 
 func (o *AuthReversalCreatedBodyAuthorizationInformation) validateReversalSubmitted(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReversalSubmitted) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"reversalSubmitted", "body", string(o.ReversalSubmitted), 1); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"authorizationInformation"+"."+"reversalSubmitted", "body", o.ReversalSubmitted, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body authorization information based on context it is used
+func (o *AuthReversalCreatedBodyAuthorizationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -830,7 +1364,8 @@ func (o *AuthReversalCreatedBodyAuthorizationInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*AuthReversalCreatedBodyClientReferenceInformation auth reversal created body client reference information
+/*
+AuthReversalCreatedBodyClientReferenceInformation auth reversal created body client reference information
 swagger:model AuthReversalCreatedBodyClientReferenceInformation
 */
 type AuthReversalCreatedBodyClientReferenceInformation struct {
@@ -885,12 +1420,11 @@ func (o *AuthReversalCreatedBodyClientReferenceInformation) Validate(formats str
 }
 
 func (o *AuthReversalCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -898,15 +1432,19 @@ func (o *AuthReversalCreatedBodyClientReferenceInformation) validateCode(formats
 }
 
 func (o *AuthReversalCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body client reference information based on context it is used
+func (o *AuthReversalCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -928,7 +1466,8 @@ func (o *AuthReversalCreatedBodyClientReferenceInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*AuthReversalCreatedBodyIssuerInformation auth reversal created body issuer information
+/*
+AuthReversalCreatedBodyIssuerInformation auth reversal created body issuer information
 swagger:model AuthReversalCreatedBodyIssuerInformation
 */
 type AuthReversalCreatedBodyIssuerInformation struct {
@@ -958,15 +1497,19 @@ func (o *AuthReversalCreatedBodyIssuerInformation) Validate(formats strfmt.Regis
 }
 
 func (o *AuthReversalCreatedBodyIssuerInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"issuerInformation"+"."+"responseCode", "body", string(o.ResponseCode), 6); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"issuerInformation"+"."+"responseCode", "body", o.ResponseCode, 6); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body issuer information based on context it is used
+func (o *AuthReversalCreatedBodyIssuerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -988,7 +1531,8 @@ func (o *AuthReversalCreatedBodyIssuerInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*AuthReversalCreatedBodyLinks auth reversal created body links
+/*
+AuthReversalCreatedBodyLinks auth reversal created body links
 swagger:model AuthReversalCreatedBodyLinks
 */
 type AuthReversalCreatedBodyLinks struct {
@@ -1012,7 +1556,6 @@ func (o *AuthReversalCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *AuthReversalCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -1021,6 +1564,43 @@ func (o *AuthReversalCreatedBodyLinks) validateSelf(formats strfmt.Registry) err
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal created body links based on the context it is used
+func (o *AuthReversalCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -1047,7 +1627,8 @@ func (o *AuthReversalCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalCreatedBodyLinksSelf auth reversal created body links self
+/*
+AuthReversalCreatedBodyLinksSelf auth reversal created body links self
 swagger:model AuthReversalCreatedBodyLinksSelf
 */
 type AuthReversalCreatedBodyLinksSelf struct {
@@ -1061,6 +1642,11 @@ type AuthReversalCreatedBodyLinksSelf struct {
 
 // Validate validates this auth reversal created body links self
 func (o *AuthReversalCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body links self based on context it is used
+func (o *AuthReversalCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1082,7 +1668,8 @@ func (o *AuthReversalCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*AuthReversalCreatedBodyPointOfSaleInformation auth reversal created body point of sale information
+/*
+AuthReversalCreatedBodyPointOfSaleInformation auth reversal created body point of sale information
 swagger:model AuthReversalCreatedBodyPointOfSaleInformation
 */
 type AuthReversalCreatedBodyPointOfSaleInformation struct {
@@ -1106,7 +1693,6 @@ func (o *AuthReversalCreatedBodyPointOfSaleInformation) Validate(formats strfmt.
 }
 
 func (o *AuthReversalCreatedBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -1115,6 +1701,43 @@ func (o *AuthReversalCreatedBodyPointOfSaleInformation) validateEmv(formats strf
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal created body point of sale information based on the context it is used
+func (o *AuthReversalCreatedBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalCreatedBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalCreated" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -1141,7 +1764,8 @@ func (o *AuthReversalCreatedBodyPointOfSaleInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*AuthReversalCreatedBodyPointOfSaleInformationEmv auth reversal created body point of sale information emv
+/*
+AuthReversalCreatedBodyPointOfSaleInformationEmv auth reversal created body point of sale information emv
 swagger:model AuthReversalCreatedBodyPointOfSaleInformationEmv
 */
 type AuthReversalCreatedBodyPointOfSaleInformationEmv struct {
@@ -1201,15 +1825,19 @@ func (o *AuthReversalCreatedBodyPointOfSaleInformationEmv) Validate(formats strf
 }
 
 func (o *AuthReversalCreatedBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body point of sale information emv based on context it is used
+func (o *AuthReversalCreatedBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1231,7 +1859,8 @@ func (o *AuthReversalCreatedBodyPointOfSaleInformationEmv) UnmarshalBinary(b []b
 	return nil
 }
 
-/*AuthReversalCreatedBodyProcessorInformation auth reversal created body processor information
+/*
+AuthReversalCreatedBodyProcessorInformation auth reversal created body processor information
 swagger:model AuthReversalCreatedBodyProcessorInformation
 */
 type AuthReversalCreatedBodyProcessorInformation struct {
@@ -1383,12 +2012,11 @@ func (o *AuthReversalCreatedBodyProcessorInformation) Validate(formats strfmt.Re
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateForwardedAcquirerCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForwardedAcquirerCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", string(o.ForwardedAcquirerCode), 32); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", o.ForwardedAcquirerCode, 32); err != nil {
 		return err
 	}
 
@@ -1396,12 +2024,11 @@ func (o *AuthReversalCreatedBodyProcessorInformation) validateForwardedAcquirerC
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateMasterCardServiceCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MasterCardServiceCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"masterCardServiceCode", "body", string(o.MasterCardServiceCode), 2); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"masterCardServiceCode", "body", o.MasterCardServiceCode, 2); err != nil {
 		return err
 	}
 
@@ -1409,12 +2036,11 @@ func (o *AuthReversalCreatedBodyProcessorInformation) validateMasterCardServiceC
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateMasterCardServiceReplyCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MasterCardServiceReplyCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"masterCardServiceReplyCode", "body", string(o.MasterCardServiceReplyCode), 1); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"masterCardServiceReplyCode", "body", o.MasterCardServiceReplyCode, 1); err != nil {
 		return err
 	}
 
@@ -1422,12 +2048,11 @@ func (o *AuthReversalCreatedBodyProcessorInformation) validateMasterCardServiceR
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateResponseCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"responseCategoryCode", "body", string(o.ResponseCategoryCode), 32); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"responseCategoryCode", "body", o.ResponseCategoryCode, 32); err != nil {
 		return err
 	}
 
@@ -1435,12 +2060,11 @@ func (o *AuthReversalCreatedBodyProcessorInformation) validateResponseCategoryCo
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -1448,15 +2072,19 @@ func (o *AuthReversalCreatedBodyProcessorInformation) validateResponseCode(forma
 }
 
 func (o *AuthReversalCreatedBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 18); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 18); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body processor information based on context it is used
+func (o *AuthReversalCreatedBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1478,7 +2106,8 @@ func (o *AuthReversalCreatedBodyProcessorInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*AuthReversalCreatedBodyReversalAmountDetails auth reversal created body reversal amount details
+/*
+AuthReversalCreatedBodyReversalAmountDetails auth reversal created body reversal amount details
 swagger:model AuthReversalCreatedBodyReversalAmountDetails
 */
 type AuthReversalCreatedBodyReversalAmountDetails struct {
@@ -1533,12 +2162,11 @@ func (o *AuthReversalCreatedBodyReversalAmountDetails) Validate(formats strfmt.R
 }
 
 func (o *AuthReversalCreatedBodyReversalAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1546,12 +2174,11 @@ func (o *AuthReversalCreatedBodyReversalAmountDetails) validateCurrency(formats 
 }
 
 func (o *AuthReversalCreatedBodyReversalAmountDetails) validateOriginalTransactionAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalTransactionAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"originalTransactionAmount", "body", string(o.OriginalTransactionAmount), 15); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"originalTransactionAmount", "body", o.OriginalTransactionAmount, 15); err != nil {
 		return err
 	}
 
@@ -1559,15 +2186,19 @@ func (o *AuthReversalCreatedBodyReversalAmountDetails) validateOriginalTransacti
 }
 
 func (o *AuthReversalCreatedBodyReversalAmountDetails) validateReversedAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReversedAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"reversedAmount", "body", string(o.ReversedAmount), 15); err != nil {
+	if err := validate.MaxLength("authReversalCreated"+"."+"reversalAmountDetails"+"."+"reversedAmount", "body", o.ReversedAmount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal created body reversal amount details based on context it is used
+func (o *AuthReversalCreatedBodyReversalAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1589,7 +2220,8 @@ func (o *AuthReversalCreatedBodyReversalAmountDetails) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*AuthReversalParamsBodyClientReferenceInformation auth reversal params body client reference information
+/*
+AuthReversalParamsBodyClientReferenceInformation auth reversal params body client reference information
 swagger:model AuthReversalParamsBodyClientReferenceInformation
 */
 type AuthReversalParamsBodyClientReferenceInformation struct {
@@ -1631,12 +2263,11 @@ func (o *AuthReversalParamsBodyClientReferenceInformation) Validate(formats strf
 }
 
 func (o *AuthReversalParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -1644,7 +2275,6 @@ func (o *AuthReversalParamsBodyClientReferenceInformation) validateCode(formats 
 }
 
 func (o *AuthReversalParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -1653,6 +2283,43 @@ func (o *AuthReversalParamsBodyClientReferenceInformation) validatePartner(forma
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal params body client reference information based on the context it is used
+func (o *AuthReversalParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -1679,7 +2346,8 @@ func (o *AuthReversalParamsBodyClientReferenceInformation) UnmarshalBinary(b []b
 	return nil
 }
 
-/*AuthReversalParamsBodyClientReferenceInformationPartner auth reversal params body client reference information partner
+/*
+AuthReversalParamsBodyClientReferenceInformationPartner auth reversal params body client reference information partner
 swagger:model AuthReversalParamsBodyClientReferenceInformationPartner
 */
 type AuthReversalParamsBodyClientReferenceInformationPartner struct {
@@ -1723,12 +2391,11 @@ func (o *AuthReversalParamsBodyClientReferenceInformationPartner) Validate(forma
 }
 
 func (o *AuthReversalParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -1736,15 +2403,19 @@ func (o *AuthReversalParamsBodyClientReferenceInformationPartner) validateDevelo
 }
 
 func (o *AuthReversalParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body client reference information partner based on context it is used
+func (o *AuthReversalParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1766,7 +2437,8 @@ func (o *AuthReversalParamsBodyClientReferenceInformationPartner) UnmarshalBinar
 	return nil
 }
 
-/*AuthReversalParamsBodyOrderInformation auth reversal params body order information
+/*
+AuthReversalParamsBodyOrderInformation auth reversal params body order information
 swagger:model AuthReversalParamsBodyOrderInformation
 */
 type AuthReversalParamsBodyOrderInformation struct {
@@ -1797,7 +2469,6 @@ func (o *AuthReversalParamsBodyOrderInformation) Validate(formats strfmt.Registr
 }
 
 func (o *AuthReversalParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -1806,6 +2477,8 @@ func (o *AuthReversalParamsBodyOrderInformation) validateAmountDetails(formats s
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -1815,7 +2488,6 @@ func (o *AuthReversalParamsBodyOrderInformation) validateAmountDetails(formats s
 }
 
 func (o *AuthReversalParamsBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -1829,6 +2501,72 @@ func (o *AuthReversalParamsBodyOrderInformation) validateLineItems(formats strfm
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal params body order information based on the context it is used
+func (o *AuthReversalParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *AuthReversalParamsBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("authReversalRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1857,7 +2595,8 @@ func (o *AuthReversalParamsBodyOrderInformation) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*AuthReversalParamsBodyOrderInformationAmountDetails auth reversal params body order information amount details
+/*
+AuthReversalParamsBodyOrderInformationAmountDetails auth reversal params body order information amount details
 swagger:model AuthReversalParamsBodyOrderInformationAmountDetails
 */
 type AuthReversalParamsBodyOrderInformationAmountDetails struct {
@@ -1883,15 +2622,19 @@ func (o *AuthReversalParamsBodyOrderInformationAmountDetails) Validate(formats s
 }
 
 func (o *AuthReversalParamsBodyOrderInformationAmountDetails) validateServiceFeeAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ServiceFeeAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", string(o.ServiceFeeAmount), 15); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", o.ServiceFeeAmount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body order information amount details based on context it is used
+func (o *AuthReversalParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1913,7 +2656,8 @@ func (o *AuthReversalParamsBodyOrderInformationAmountDetails) UnmarshalBinary(b 
 	return nil
 }
 
-/*AuthReversalParamsBodyOrderInformationLineItemsItems0 auth reversal params body order information line items items0
+/*
+AuthReversalParamsBodyOrderInformationLineItemsItems0 auth reversal params body order information line items items0
 swagger:model AuthReversalParamsBodyOrderInformationLineItemsItems0
 */
 type AuthReversalParamsBodyOrderInformationLineItemsItems0 struct {
@@ -1978,16 +2722,15 @@ func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) Validate(formats
 }
 
 func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.Minimum("quantity", "body", float64(o.Quantity), 1, false); err != nil {
+	if err := validate.Minimum("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.Maximum("quantity", "body", float64(o.Quantity), 9.999999999e+09, false); err != nil {
+	if err := validate.Maximum("quantity", "body", o.Quantity, 9.999999999e+09, false); err != nil {
 		return err
 	}
 
@@ -1995,15 +2738,19 @@ func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) validateQuantity
 }
 
 func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body order information line items items0 based on context it is used
+func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2025,7 +2772,8 @@ func (o *AuthReversalParamsBodyOrderInformationLineItemsItems0) UnmarshalBinary(
 	return nil
 }
 
-/*AuthReversalParamsBodyPointOfSaleInformation auth reversal params body point of sale information
+/*
+AuthReversalParamsBodyPointOfSaleInformation auth reversal params body point of sale information
 swagger:model AuthReversalParamsBodyPointOfSaleInformation
 */
 type AuthReversalParamsBodyPointOfSaleInformation struct {
@@ -2049,7 +2797,6 @@ func (o *AuthReversalParamsBodyPointOfSaleInformation) Validate(formats strfmt.R
 }
 
 func (o *AuthReversalParamsBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -2058,6 +2805,43 @@ func (o *AuthReversalParamsBodyPointOfSaleInformation) validateEmv(formats strfm
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal params body point of sale information based on the context it is used
+func (o *AuthReversalParamsBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalParamsBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -2084,7 +2868,8 @@ func (o *AuthReversalParamsBodyPointOfSaleInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*AuthReversalParamsBodyPointOfSaleInformationEmv auth reversal params body point of sale information emv
+/*
+AuthReversalParamsBodyPointOfSaleInformationEmv auth reversal params body point of sale information emv
 swagger:model AuthReversalParamsBodyPointOfSaleInformationEmv
 */
 type AuthReversalParamsBodyPointOfSaleInformationEmv struct {
@@ -2144,15 +2929,19 @@ func (o *AuthReversalParamsBodyPointOfSaleInformationEmv) Validate(formats strfm
 }
 
 func (o *AuthReversalParamsBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body point of sale information emv based on context it is used
+func (o *AuthReversalParamsBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2174,7 +2963,8 @@ func (o *AuthReversalParamsBodyPointOfSaleInformationEmv) UnmarshalBinary(b []by
 	return nil
 }
 
-/*AuthReversalParamsBodyProcessingInformation auth reversal params body processing information
+/*
+AuthReversalParamsBodyProcessingInformation auth reversal params body processing information
 swagger:model AuthReversalParamsBodyProcessingInformation
 */
 type AuthReversalParamsBodyProcessingInformation struct {
@@ -2267,7 +3057,6 @@ func (o *AuthReversalParamsBodyProcessingInformation) Validate(formats strfmt.Re
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validateIssuer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Issuer) { // not required
 		return nil
 	}
@@ -2276,6 +3065,8 @@ func (o *AuthReversalParamsBodyProcessingInformation) validateIssuer(formats str
 		if err := o.Issuer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "processingInformation" + "." + "issuer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "processingInformation" + "." + "issuer")
 			}
 			return err
 		}
@@ -2285,12 +3076,11 @@ func (o *AuthReversalParamsBodyProcessingInformation) validateIssuer(formats str
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validateLinkID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LinkID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"linkId", "body", string(o.LinkID), 26); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"linkId", "body", o.LinkID, 26); err != nil {
 		return err
 	}
 
@@ -2298,12 +3088,11 @@ func (o *AuthReversalParamsBodyProcessingInformation) validateLinkID(formats str
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
 	}
 
@@ -2311,12 +3100,11 @@ func (o *AuthReversalParamsBodyProcessingInformation) validatePaymentSolution(fo
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -2324,12 +3112,11 @@ func (o *AuthReversalParamsBodyProcessingInformation) validateReconciliationID(f
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validateReportGroup(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportGroup) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"reportGroup", "body", string(o.ReportGroup), 25); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"reportGroup", "body", o.ReportGroup, 25); err != nil {
 		return err
 	}
 
@@ -2337,13 +3124,47 @@ func (o *AuthReversalParamsBodyProcessingInformation) validateReportGroup(format
 }
 
 func (o *AuthReversalParamsBodyProcessingInformation) validateVisaCheckoutID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VisaCheckoutID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", string(o.VisaCheckoutID), 48); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", o.VisaCheckoutID, 48); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal params body processing information based on the context it is used
+func (o *AuthReversalParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateIssuer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalParamsBodyProcessingInformation) contextValidateIssuer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Issuer != nil {
+
+		if swag.IsZero(o.Issuer) { // not required
+			return nil
+		}
+
+		if err := o.Issuer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "processingInformation" + "." + "issuer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "processingInformation" + "." + "issuer")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -2367,7 +3188,8 @@ func (o *AuthReversalParamsBodyProcessingInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*AuthReversalParamsBodyProcessingInformationIssuer auth reversal params body processing information issuer
+/*
+AuthReversalParamsBodyProcessingInformationIssuer auth reversal params body processing information issuer
 swagger:model AuthReversalParamsBodyProcessingInformationIssuer
 */
 type AuthReversalParamsBodyProcessingInformationIssuer struct {
@@ -2399,15 +3221,19 @@ func (o *AuthReversalParamsBodyProcessingInformationIssuer) Validate(formats str
 }
 
 func (o *AuthReversalParamsBodyProcessingInformationIssuer) validateDiscretionaryData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscretionaryData) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"issuer"+"."+"discretionaryData", "body", string(o.DiscretionaryData), 255); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"processingInformation"+"."+"issuer"+"."+"discretionaryData", "body", o.DiscretionaryData, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body processing information issuer based on context it is used
+func (o *AuthReversalParamsBodyProcessingInformationIssuer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2429,7 +3255,8 @@ func (o *AuthReversalParamsBodyProcessingInformationIssuer) UnmarshalBinary(b []
 	return nil
 }
 
-/*AuthReversalParamsBodyReversalInformation auth reversal params body reversal information
+/*
+AuthReversalParamsBodyReversalInformation auth reversal params body reversal information
 swagger:model AuthReversalParamsBodyReversalInformation
 */
 type AuthReversalParamsBodyReversalInformation struct {
@@ -2463,7 +3290,6 @@ func (o *AuthReversalParamsBodyReversalInformation) Validate(formats strfmt.Regi
 }
 
 func (o *AuthReversalParamsBodyReversalInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -2472,6 +3298,43 @@ func (o *AuthReversalParamsBodyReversalInformation) validateAmountDetails(format
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authReversalRequest" + "." + "reversalInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "reversalInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this auth reversal params body reversal information based on the context it is used
+func (o *AuthReversalParamsBodyReversalInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *AuthReversalParamsBodyReversalInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authReversalRequest" + "." + "reversalInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authReversalRequest" + "." + "reversalInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -2498,7 +3361,8 @@ func (o *AuthReversalParamsBodyReversalInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*AuthReversalParamsBodyReversalInformationAmountDetails auth reversal params body reversal information amount details
+/*
+AuthReversalParamsBodyReversalInformationAmountDetails auth reversal params body reversal information amount details
 swagger:model AuthReversalParamsBodyReversalInformationAmountDetails
 */
 type AuthReversalParamsBodyReversalInformationAmountDetails struct {
@@ -2561,12 +3425,11 @@ func (o *AuthReversalParamsBodyReversalInformationAmountDetails) Validate(format
 }
 
 func (o *AuthReversalParamsBodyReversalInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"reversalInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"reversalInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -2574,15 +3437,19 @@ func (o *AuthReversalParamsBodyReversalInformationAmountDetails) validateCurrenc
 }
 
 func (o *AuthReversalParamsBodyReversalInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authReversalRequest"+"."+"reversalInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("authReversalRequest"+"."+"reversalInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this auth reversal params body reversal information amount details based on context it is used
+func (o *AuthReversalParamsBodyReversalInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2597,46 +3464,6 @@ func (o *AuthReversalParamsBodyReversalInformationAmountDetails) MarshalBinary()
 // UnmarshalBinary interface implementation
 func (o *AuthReversalParamsBodyReversalInformationAmountDetails) UnmarshalBinary(b []byte) error {
 	var res AuthReversalParamsBodyReversalInformationAmountDetails
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -6,29 +6,35 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // FileDetail file detail
+//
 // swagger:model FileDetail
 type FileDetail struct {
 
 	// Date and time for the file in PST
+	// Example: 2017-10-01T00:00:00+05:00
 	// Format: date-time
 	CreatedTime strfmt.DateTime `json:"createdTime,omitempty"`
 
 	// Date and time for the file in PST
+	// Example: 2017-10-05
 	// Format: date
 	Date strfmt.Date `json:"date,omitempty"`
 
 	// Unique identifier of a file
+	// Example: AC855F9F42C90361EC78202F47CDE98D70BEAA6FB00FB56AE83EE9A9DAEE077B
 	FileID string `json:"fileId,omitempty"`
 
 	// Date and time for the file in PST
+	// Example: 2017-10-01T00:00:00+05:00
 	// Format: date-time
 	LastModifiedTime strfmt.DateTime `json:"lastModifiedTime,omitempty"`
 
@@ -40,12 +46,15 @@ type FileDetail struct {
 	// - 'application/pdf'
 	// - 'application/octet-stream'
 	//
+	// Example: application/xml
 	MimeType string `json:"mimeType,omitempty"`
 
 	// Name of the file
+	// Example: MyTransactionDetailreport.xml
 	Name string `json:"name,omitempty"`
 
 	// Size of the file in bytes
+	// Example: 2245397
 	Size int64 `json:"size,omitempty"`
 }
 
@@ -72,7 +81,6 @@ func (m *FileDetail) Validate(formats strfmt.Registry) error {
 }
 
 func (m *FileDetail) validateCreatedTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedTime) { // not required
 		return nil
 	}
@@ -85,7 +93,6 @@ func (m *FileDetail) validateCreatedTime(formats strfmt.Registry) error {
 }
 
 func (m *FileDetail) validateDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Date) { // not required
 		return nil
 	}
@@ -98,7 +105,6 @@ func (m *FileDetail) validateDate(formats strfmt.Registry) error {
 }
 
 func (m *FileDetail) validateLastModifiedTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LastModifiedTime) { // not required
 		return nil
 	}
@@ -107,6 +113,11 @@ func (m *FileDetail) validateLastModifiedTime(formats strfmt.Registry) error {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this file detail based on context it is used
+func (m *FileDetail) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

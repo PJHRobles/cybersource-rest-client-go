@@ -13,68 +13,84 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewDeletePaymentInstrumentParams creates a new DeletePaymentInstrumentParams object
-// with the default values initialized.
+// NewDeletePaymentInstrumentParams creates a new DeletePaymentInstrumentParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeletePaymentInstrumentParams() *DeletePaymentInstrumentParams {
-	var ()
 	return &DeletePaymentInstrumentParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeletePaymentInstrumentParamsWithTimeout creates a new DeletePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeletePaymentInstrumentParamsWithTimeout(timeout time.Duration) *DeletePaymentInstrumentParams {
-	var ()
 	return &DeletePaymentInstrumentParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeletePaymentInstrumentParamsWithContext creates a new DeletePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeletePaymentInstrumentParamsWithContext(ctx context.Context) *DeletePaymentInstrumentParams {
-	var ()
 	return &DeletePaymentInstrumentParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeletePaymentInstrumentParamsWithHTTPClient creates a new DeletePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeletePaymentInstrumentParamsWithHTTPClient(client *http.Client) *DeletePaymentInstrumentParams {
-	var ()
 	return &DeletePaymentInstrumentParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeletePaymentInstrumentParams contains all the parameters to send to the API endpoint
-for the delete payment instrument operation typically these are written to a http.Request
+/*
+DeletePaymentInstrumentParams contains all the parameters to send to the API endpoint
+
+	for the delete payment instrument operation.
+
+	Typically these are written to a http.Request.
 */
 type DeletePaymentInstrumentParams struct {
 
-	/*ProfileID
-	  The id of a profile containing user specific TMS configuration.
+	/* ProfileID.
 
+	   The id of a profile containing user specific TMS configuration.
 	*/
 	ProfileID string
-	/*TokenID
-	  The TokenId of a Payment Instrument.
 
+	/* TokenID.
+
+	   The TokenId of a Payment Instrument.
 	*/
 	TokenID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeletePaymentInstrumentParams) WithDefaults() *DeletePaymentInstrumentParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeletePaymentInstrumentParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete payment instrument params

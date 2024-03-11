@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new report subscriptions API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,19 +25,33 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreateSubscription(params *CreateSubscriptionParams, opts ...ClientOption) (*CreateSubscriptionOK, error)
+
+	DeleteSubscription(params *DeleteSubscriptionParams, opts ...ClientOption) (*DeleteSubscriptionOK, error)
+
+	GetAllSubscriptions(params *GetAllSubscriptionsParams, opts ...ClientOption) (*GetAllSubscriptionsOK, error)
+
+	GetSubscription(params *GetSubscriptionParams, opts ...ClientOption) (*GetSubscriptionOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 CreateSubscription creates report subscription for a report name by organization
 
 Create a report subscription for your organization. The report name must be unique.
-
 */
-func (a *Client) CreateSubscription(params *CreateSubscriptionParams) (*CreateSubscriptionOK, error) {
+func (a *Client) CreateSubscription(params *CreateSubscriptionParams, opts ...ClientOption) (*CreateSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateSubscriptionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createSubscription",
 		Method:             "PUT",
 		PathPattern:        "/reporting/v3/report-subscriptions",
@@ -49,7 +62,12 @@ func (a *Client) CreateSubscription(params *CreateSubscriptionParams) (*CreateSu
 		Reader:             &CreateSubscriptionReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -64,20 +82,19 @@ func (a *Client) CreateSubscription(params *CreateSubscriptionParams) (*CreateSu
 }
 
 /*
-DeleteSubscription deletes subscription of a report name by organization
+	DeleteSubscription deletes subscription of a report name by organization
 
-Delete a report subscription for your
+	Delete a report subscription for your
+
 organization. You must know the unique name of the report
 you want to delete.
-
 */
-func (a *Client) DeleteSubscription(params *DeleteSubscriptionParams) (*DeleteSubscriptionOK, error) {
+func (a *Client) DeleteSubscription(params *DeleteSubscriptionParams, opts ...ClientOption) (*DeleteSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteSubscriptionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deleteSubscription",
 		Method:             "DELETE",
 		PathPattern:        "/reporting/v3/report-subscriptions/{reportName}",
@@ -88,7 +105,12 @@ func (a *Client) DeleteSubscription(params *DeleteSubscriptionParams) (*DeleteSu
 		Reader:             &DeleteSubscriptionReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -106,15 +128,13 @@ func (a *Client) DeleteSubscription(params *DeleteSubscriptionParams) (*DeleteSu
 GetAllSubscriptions gets all subscriptions
 
 View a summary of all report subscriptions.
-
 */
-func (a *Client) GetAllSubscriptions(params *GetAllSubscriptionsParams) (*GetAllSubscriptionsOK, error) {
+func (a *Client) GetAllSubscriptions(params *GetAllSubscriptionsParams, opts ...ClientOption) (*GetAllSubscriptionsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAllSubscriptionsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getAllSubscriptions",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/report-subscriptions",
@@ -125,7 +145,12 @@ func (a *Client) GetAllSubscriptions(params *GetAllSubscriptionsParams) (*GetAll
 		Reader:             &GetAllSubscriptionsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -140,20 +165,19 @@ func (a *Client) GetAllSubscriptions(params *GetAllSubscriptionsParams) (*GetAll
 }
 
 /*
-GetSubscription gets subscription for report name
+	GetSubscription gets subscription for report name
 
-View the details of a report subscription, such as
+	View the details of a report subscription, such as
+
 the report format or report frequency, using the report’s
 unique name.
-
 */
-func (a *Client) GetSubscription(params *GetSubscriptionParams) (*GetSubscriptionOK, error) {
+func (a *Client) GetSubscription(params *GetSubscriptionParams, opts ...ClientOption) (*GetSubscriptionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetSubscriptionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getSubscription",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/report-subscriptions/{reportName}",
@@ -164,7 +188,12 @@ func (a *Client) GetSubscription(params *GetSubscriptionParams) (*GetSubscriptio
 		Reader:             &GetSubscriptionReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ResponseStatusDetails response status details
+//
 // swagger:model ResponseStatusDetails
 type ResponseStatusDetails struct {
 
@@ -24,6 +26,11 @@ type ResponseStatusDetails struct {
 
 // Validate validates this response status details
 func (m *ResponseStatusDetails) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this response status details based on context it is used
+func (m *ResponseStatusDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

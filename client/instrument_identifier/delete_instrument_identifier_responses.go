@@ -6,14 +6,14 @@ package instrument_identifier
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // DeleteInstrumentIdentifierReader is a Reader for the DeleteInstrumentIdentifier structure.
@@ -66,9 +66,8 @@ func (o *DeleteInstrumentIdentifierReader) ReadResponse(response runtime.ClientR
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /tms/v1/instrumentidentifiers/{tokenId}] deleteInstrumentIdentifier", response, response.Code())
 	}
 }
 
@@ -77,24 +76,64 @@ func NewDeleteInstrumentIdentifierNoContent() *DeleteInstrumentIdentifierNoConte
 	return &DeleteInstrumentIdentifierNoContent{}
 }
 
-/*DeleteInstrumentIdentifierNoContent handles this case with default header values.
+/*
+DeleteInstrumentIdentifierNoContent describes a response with status code 204, with default header values.
 
 An existing Instrument Identifier associated with the supplied `tokenId` has been deleted.
 */
 type DeleteInstrumentIdentifierNoContent struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
+}
+
+// IsSuccess returns true when this delete instrument identifier no content response has a 2xx status code
+func (o *DeleteInstrumentIdentifierNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete instrument identifier no content response has a 3xx status code
+func (o *DeleteInstrumentIdentifierNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier no content response has a 4xx status code
+func (o *DeleteInstrumentIdentifierNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete instrument identifier no content response has a 5xx status code
+func (o *DeleteInstrumentIdentifierNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier no content response a status code equal to that given
+func (o *DeleteInstrumentIdentifierNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the delete instrument identifier no content response
+func (o *DeleteInstrumentIdentifierNoContent) Code() int {
+	return 204
 }
 
 func (o *DeleteInstrumentIdentifierNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierNoContent ", 204)
 }
 
+func (o *DeleteInstrumentIdentifierNoContent) String() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierNoContent ", 204)
+}
+
 func (o *DeleteInstrumentIdentifierNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	return nil
 }
@@ -104,19 +143,55 @@ func NewDeleteInstrumentIdentifierForbidden() *DeleteInstrumentIdentifierForbidd
 	return &DeleteInstrumentIdentifierForbidden{}
 }
 
-/*DeleteInstrumentIdentifierForbidden handles this case with default header values.
+/*
+DeleteInstrumentIdentifierForbidden describes a response with status code 403, with default header values.
 
 Forbidden. The profile might not have permission to perform the token operation.
 */
 type DeleteInstrumentIdentifierForbidden struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierForbiddenBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier forbidden response has a 2xx status code
+func (o *DeleteInstrumentIdentifierForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier forbidden response has a 3xx status code
+func (o *DeleteInstrumentIdentifierForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier forbidden response has a 4xx status code
+func (o *DeleteInstrumentIdentifierForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete instrument identifier forbidden response has a 5xx status code
+func (o *DeleteInstrumentIdentifierForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier forbidden response a status code equal to that given
+func (o *DeleteInstrumentIdentifierForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete instrument identifier forbidden response
+func (o *DeleteInstrumentIdentifierForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteInstrumentIdentifierForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierForbidden) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierForbidden  %+v", 403, o.Payload)
 }
 
@@ -126,8 +201,12 @@ func (o *DeleteInstrumentIdentifierForbidden) GetPayload() []*DeleteInstrumentId
 
 func (o *DeleteInstrumentIdentifierForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -142,19 +221,55 @@ func NewDeleteInstrumentIdentifierNotFound() *DeleteInstrumentIdentifierNotFound
 	return &DeleteInstrumentIdentifierNotFound{}
 }
 
-/*DeleteInstrumentIdentifierNotFound handles this case with default header values.
+/*
+DeleteInstrumentIdentifierNotFound describes a response with status code 404, with default header values.
 
 Token Not Found. The `tokenid` may not exist or was entered incorrectly.
 */
 type DeleteInstrumentIdentifierNotFound struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierNotFoundBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier not found response has a 2xx status code
+func (o *DeleteInstrumentIdentifierNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier not found response has a 3xx status code
+func (o *DeleteInstrumentIdentifierNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier not found response has a 4xx status code
+func (o *DeleteInstrumentIdentifierNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete instrument identifier not found response has a 5xx status code
+func (o *DeleteInstrumentIdentifierNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier not found response a status code equal to that given
+func (o *DeleteInstrumentIdentifierNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete instrument identifier not found response
+func (o *DeleteInstrumentIdentifierNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteInstrumentIdentifierNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierNotFound) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierNotFound  %+v", 404, o.Payload)
 }
 
@@ -164,8 +279,12 @@ func (o *DeleteInstrumentIdentifierNotFound) GetPayload() []*DeleteInstrumentIde
 
 func (o *DeleteInstrumentIdentifierNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -180,19 +299,55 @@ func NewDeleteInstrumentIdentifierConflict() *DeleteInstrumentIdentifierConflict
 	return &DeleteInstrumentIdentifierConflict{}
 }
 
-/*DeleteInstrumentIdentifierConflict handles this case with default header values.
+/*
+DeleteInstrumentIdentifierConflict describes a response with status code 409, with default header values.
 
 Conflict. The token is linked to a Payment Instrument.
 */
 type DeleteInstrumentIdentifierConflict struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierConflictBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier conflict response has a 2xx status code
+func (o *DeleteInstrumentIdentifierConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier conflict response has a 3xx status code
+func (o *DeleteInstrumentIdentifierConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier conflict response has a 4xx status code
+func (o *DeleteInstrumentIdentifierConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete instrument identifier conflict response has a 5xx status code
+func (o *DeleteInstrumentIdentifierConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier conflict response a status code equal to that given
+func (o *DeleteInstrumentIdentifierConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the delete instrument identifier conflict response
+func (o *DeleteInstrumentIdentifierConflict) Code() int {
+	return 409
+}
+
 func (o *DeleteInstrumentIdentifierConflict) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierConflict  %+v", 409, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierConflict) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierConflict  %+v", 409, o.Payload)
 }
 
@@ -202,8 +357,12 @@ func (o *DeleteInstrumentIdentifierConflict) GetPayload() []*DeleteInstrumentIde
 
 func (o *DeleteInstrumentIdentifierConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -218,19 +377,55 @@ func NewDeleteInstrumentIdentifierGone() *DeleteInstrumentIdentifierGone {
 	return &DeleteInstrumentIdentifierGone{}
 }
 
-/*DeleteInstrumentIdentifierGone handles this case with default header values.
+/*
+DeleteInstrumentIdentifierGone describes a response with status code 410, with default header values.
 
 Token Not Available. The token has been deleted.
 */
 type DeleteInstrumentIdentifierGone struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierGoneBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier gone response has a 2xx status code
+func (o *DeleteInstrumentIdentifierGone) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier gone response has a 3xx status code
+func (o *DeleteInstrumentIdentifierGone) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier gone response has a 4xx status code
+func (o *DeleteInstrumentIdentifierGone) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete instrument identifier gone response has a 5xx status code
+func (o *DeleteInstrumentIdentifierGone) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier gone response a status code equal to that given
+func (o *DeleteInstrumentIdentifierGone) IsCode(code int) bool {
+	return code == 410
+}
+
+// Code gets the status code for the delete instrument identifier gone response
+func (o *DeleteInstrumentIdentifierGone) Code() int {
+	return 410
+}
+
 func (o *DeleteInstrumentIdentifierGone) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierGone  %+v", 410, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierGone) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierGone  %+v", 410, o.Payload)
 }
 
@@ -240,8 +435,12 @@ func (o *DeleteInstrumentIdentifierGone) GetPayload() []*DeleteInstrumentIdentif
 
 func (o *DeleteInstrumentIdentifierGone) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -256,19 +455,55 @@ func NewDeleteInstrumentIdentifierFailedDependency() *DeleteInstrumentIdentifier
 	return &DeleteInstrumentIdentifierFailedDependency{}
 }
 
-/*DeleteInstrumentIdentifierFailedDependency handles this case with default header values.
+/*
+DeleteInstrumentIdentifierFailedDependency describes a response with status code 424, with default header values.
 
 Failed Dependency: e.g. The profile represented by the profile-id may not exist or the profile-id was entered incorrectly.
 */
 type DeleteInstrumentIdentifierFailedDependency struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierFailedDependencyBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier failed dependency response has a 2xx status code
+func (o *DeleteInstrumentIdentifierFailedDependency) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier failed dependency response has a 3xx status code
+func (o *DeleteInstrumentIdentifierFailedDependency) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier failed dependency response has a 4xx status code
+func (o *DeleteInstrumentIdentifierFailedDependency) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete instrument identifier failed dependency response has a 5xx status code
+func (o *DeleteInstrumentIdentifierFailedDependency) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete instrument identifier failed dependency response a status code equal to that given
+func (o *DeleteInstrumentIdentifierFailedDependency) IsCode(code int) bool {
+	return code == 424
+}
+
+// Code gets the status code for the delete instrument identifier failed dependency response
+func (o *DeleteInstrumentIdentifierFailedDependency) Code() int {
+	return 424
+}
+
 func (o *DeleteInstrumentIdentifierFailedDependency) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierFailedDependency  %+v", 424, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierFailedDependency) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierFailedDependency  %+v", 424, o.Payload)
 }
 
@@ -278,8 +513,12 @@ func (o *DeleteInstrumentIdentifierFailedDependency) GetPayload() []*DeleteInstr
 
 func (o *DeleteInstrumentIdentifierFailedDependency) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -294,19 +533,55 @@ func NewDeleteInstrumentIdentifierInternalServerError() *DeleteInstrumentIdentif
 	return &DeleteInstrumentIdentifierInternalServerError{}
 }
 
-/*DeleteInstrumentIdentifierInternalServerError handles this case with default header values.
+/*
+DeleteInstrumentIdentifierInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected error.
 */
 type DeleteInstrumentIdentifierInternalServerError struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*DeleteInstrumentIdentifierInternalServerErrorBodyItems0
 }
 
+// IsSuccess returns true when this delete instrument identifier internal server error response has a 2xx status code
+func (o *DeleteInstrumentIdentifierInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete instrument identifier internal server error response has a 3xx status code
+func (o *DeleteInstrumentIdentifierInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete instrument identifier internal server error response has a 4xx status code
+func (o *DeleteInstrumentIdentifierInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete instrument identifier internal server error response has a 5xx status code
+func (o *DeleteInstrumentIdentifierInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete instrument identifier internal server error response a status code equal to that given
+func (o *DeleteInstrumentIdentifierInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete instrument identifier internal server error response
+func (o *DeleteInstrumentIdentifierInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteInstrumentIdentifierInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteInstrumentIdentifierInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /tms/v1/instrumentidentifiers/{tokenId}][%d] deleteInstrumentIdentifierInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -316,8 +591,12 @@ func (o *DeleteInstrumentIdentifierInternalServerError) GetPayload() []*DeleteIn
 
 func (o *DeleteInstrumentIdentifierInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -327,7 +606,8 @@ func (o *DeleteInstrumentIdentifierInternalServerError) readResponse(response ru
 	return nil
 }
 
-/*DeleteInstrumentIdentifierConflictBodyItems0 delete instrument identifier conflict body items0
+/*
+DeleteInstrumentIdentifierConflictBodyItems0 delete instrument identifier conflict body items0
 swagger:model DeleteInstrumentIdentifierConflictBodyItems0
 */
 type DeleteInstrumentIdentifierConflictBodyItems0 struct {
@@ -357,7 +637,6 @@ func (o *DeleteInstrumentIdentifierConflictBodyItems0) Validate(formats strfmt.R
 }
 
 func (o *DeleteInstrumentIdentifierConflictBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -366,6 +645,43 @@ func (o *DeleteInstrumentIdentifierConflictBodyItems0) validateDetails(formats s
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier conflict body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierConflictBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierConflictBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -392,7 +708,8 @@ func (o *DeleteInstrumentIdentifierConflictBodyItems0) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*DeleteInstrumentIdentifierConflictBodyItems0Details delete instrument identifier conflict body items0 details
+/*
+DeleteInstrumentIdentifierConflictBodyItems0Details delete instrument identifier conflict body items0 details
 swagger:model DeleteInstrumentIdentifierConflictBodyItems0Details
 */
 type DeleteInstrumentIdentifierConflictBodyItems0Details struct {
@@ -406,6 +723,11 @@ type DeleteInstrumentIdentifierConflictBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier conflict body items0 details
 func (o *DeleteInstrumentIdentifierConflictBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier conflict body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierConflictBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -427,7 +749,8 @@ func (o *DeleteInstrumentIdentifierConflictBodyItems0Details) UnmarshalBinary(b 
 	return nil
 }
 
-/*DeleteInstrumentIdentifierConflictBodyLinks delete instrument identifier conflict body links
+/*
+DeleteInstrumentIdentifierConflictBodyLinks delete instrument identifier conflict body links
 swagger:model DeleteInstrumentIdentifierConflictBodyLinks
 */
 type DeleteInstrumentIdentifierConflictBodyLinks struct {
@@ -451,7 +774,6 @@ func (o *DeleteInstrumentIdentifierConflictBodyLinks) Validate(formats strfmt.Re
 }
 
 func (o *DeleteInstrumentIdentifierConflictBodyLinks) validatePaymentInstruments(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInstruments) { // not required
 		return nil
 	}
@@ -460,6 +782,43 @@ func (o *DeleteInstrumentIdentifierConflictBodyLinks) validatePaymentInstruments
 		if err := o.PaymentInstruments.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("deleteInstrumentIdentifierConflict" + "." + "_links" + "." + "paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deleteInstrumentIdentifierConflict" + "." + "_links" + "." + "paymentInstruments")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier conflict body links based on the context it is used
+func (o *DeleteInstrumentIdentifierConflictBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePaymentInstruments(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierConflictBodyLinks) contextValidatePaymentInstruments(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInstruments != nil {
+
+		if swag.IsZero(o.PaymentInstruments) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInstruments.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("deleteInstrumentIdentifierConflict" + "." + "_links" + "." + "paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("deleteInstrumentIdentifierConflict" + "." + "_links" + "." + "paymentInstruments")
 			}
 			return err
 		}
@@ -486,17 +845,24 @@ func (o *DeleteInstrumentIdentifierConflictBodyLinks) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments delete instrument identifier conflict body links payment instruments
+/*
+DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments delete instrument identifier conflict body links payment instruments
 swagger:model DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments
 */
 type DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789/paymentinstruments
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this delete instrument identifier conflict body links payment instruments
 func (o *DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier conflict body links payment instruments based on context it is used
+func (o *DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -518,7 +884,8 @@ func (o *DeleteInstrumentIdentifierConflictBodyLinksPaymentInstruments) Unmarsha
 	return nil
 }
 
-/*DeleteInstrumentIdentifierFailedDependencyBodyItems0 delete instrument identifier failed dependency body items0
+/*
+DeleteInstrumentIdentifierFailedDependencyBodyItems0 delete instrument identifier failed dependency body items0
 swagger:model DeleteInstrumentIdentifierFailedDependencyBodyItems0
 */
 type DeleteInstrumentIdentifierFailedDependencyBodyItems0 struct {
@@ -548,7 +915,6 @@ func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) Validate(formats 
 }
 
 func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -557,6 +923,43 @@ func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) validateDetails(f
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier failed dependency body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -583,7 +986,8 @@ func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0) UnmarshalBinary(b
 	return nil
 }
 
-/*DeleteInstrumentIdentifierFailedDependencyBodyItems0Details delete instrument identifier failed dependency body items0 details
+/*
+DeleteInstrumentIdentifierFailedDependencyBodyItems0Details delete instrument identifier failed dependency body items0 details
 swagger:model DeleteInstrumentIdentifierFailedDependencyBodyItems0Details
 */
 type DeleteInstrumentIdentifierFailedDependencyBodyItems0Details struct {
@@ -597,6 +1001,11 @@ type DeleteInstrumentIdentifierFailedDependencyBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier failed dependency body items0 details
 func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier failed dependency body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -618,7 +1027,8 @@ func (o *DeleteInstrumentIdentifierFailedDependencyBodyItems0Details) UnmarshalB
 	return nil
 }
 
-/*DeleteInstrumentIdentifierForbiddenBodyItems0 delete instrument identifier forbidden body items0
+/*
+DeleteInstrumentIdentifierForbiddenBodyItems0 delete instrument identifier forbidden body items0
 swagger:model DeleteInstrumentIdentifierForbiddenBodyItems0
 */
 type DeleteInstrumentIdentifierForbiddenBodyItems0 struct {
@@ -648,7 +1058,6 @@ func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) Validate(formats strfmt.
 }
 
 func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -657,6 +1066,43 @@ func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) validateDetails(formats 
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier forbidden body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -683,7 +1129,8 @@ func (o *DeleteInstrumentIdentifierForbiddenBodyItems0) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*DeleteInstrumentIdentifierForbiddenBodyItems0Details delete instrument identifier forbidden body items0 details
+/*
+DeleteInstrumentIdentifierForbiddenBodyItems0Details delete instrument identifier forbidden body items0 details
 swagger:model DeleteInstrumentIdentifierForbiddenBodyItems0Details
 */
 type DeleteInstrumentIdentifierForbiddenBodyItems0Details struct {
@@ -697,6 +1144,11 @@ type DeleteInstrumentIdentifierForbiddenBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier forbidden body items0 details
 func (o *DeleteInstrumentIdentifierForbiddenBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier forbidden body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierForbiddenBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -718,7 +1170,8 @@ func (o *DeleteInstrumentIdentifierForbiddenBodyItems0Details) UnmarshalBinary(b
 	return nil
 }
 
-/*DeleteInstrumentIdentifierGoneBodyItems0 delete instrument identifier gone body items0
+/*
+DeleteInstrumentIdentifierGoneBodyItems0 delete instrument identifier gone body items0
 swagger:model DeleteInstrumentIdentifierGoneBodyItems0
 */
 type DeleteInstrumentIdentifierGoneBodyItems0 struct {
@@ -748,7 +1201,6 @@ func (o *DeleteInstrumentIdentifierGoneBodyItems0) Validate(formats strfmt.Regis
 }
 
 func (o *DeleteInstrumentIdentifierGoneBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -757,6 +1209,43 @@ func (o *DeleteInstrumentIdentifierGoneBodyItems0) validateDetails(formats strfm
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier gone body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierGoneBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierGoneBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -783,7 +1272,8 @@ func (o *DeleteInstrumentIdentifierGoneBodyItems0) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*DeleteInstrumentIdentifierGoneBodyItems0Details delete instrument identifier gone body items0 details
+/*
+DeleteInstrumentIdentifierGoneBodyItems0Details delete instrument identifier gone body items0 details
 swagger:model DeleteInstrumentIdentifierGoneBodyItems0Details
 */
 type DeleteInstrumentIdentifierGoneBodyItems0Details struct {
@@ -797,6 +1287,11 @@ type DeleteInstrumentIdentifierGoneBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier gone body items0 details
 func (o *DeleteInstrumentIdentifierGoneBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier gone body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierGoneBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -818,7 +1313,8 @@ func (o *DeleteInstrumentIdentifierGoneBodyItems0Details) UnmarshalBinary(b []by
 	return nil
 }
 
-/*DeleteInstrumentIdentifierInternalServerErrorBodyItems0 delete instrument identifier internal server error body items0
+/*
+DeleteInstrumentIdentifierInternalServerErrorBodyItems0 delete instrument identifier internal server error body items0
 swagger:model DeleteInstrumentIdentifierInternalServerErrorBodyItems0
 */
 type DeleteInstrumentIdentifierInternalServerErrorBodyItems0 struct {
@@ -848,7 +1344,6 @@ func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) Validate(forma
 }
 
 func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -857,6 +1352,43 @@ func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) validateDetail
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier internal server error body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -883,7 +1415,8 @@ func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0) UnmarshalBinar
 	return nil
 }
 
-/*DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details delete instrument identifier internal server error body items0 details
+/*
+DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details delete instrument identifier internal server error body items0 details
 swagger:model DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details
 */
 type DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details struct {
@@ -897,6 +1430,11 @@ type DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier internal server error body items0 details
 func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier internal server error body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -918,7 +1456,8 @@ func (o *DeleteInstrumentIdentifierInternalServerErrorBodyItems0Details) Unmarsh
 	return nil
 }
 
-/*DeleteInstrumentIdentifierNotFoundBodyItems0 delete instrument identifier not found body items0
+/*
+DeleteInstrumentIdentifierNotFoundBodyItems0 delete instrument identifier not found body items0
 swagger:model DeleteInstrumentIdentifierNotFoundBodyItems0
 */
 type DeleteInstrumentIdentifierNotFoundBodyItems0 struct {
@@ -948,7 +1487,6 @@ func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) Validate(formats strfmt.R
 }
 
 func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -957,6 +1495,43 @@ func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) validateDetails(formats s
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this delete instrument identifier not found body items0 based on the context it is used
+func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -983,7 +1558,8 @@ func (o *DeleteInstrumentIdentifierNotFoundBodyItems0) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*DeleteInstrumentIdentifierNotFoundBodyItems0Details delete instrument identifier not found body items0 details
+/*
+DeleteInstrumentIdentifierNotFoundBodyItems0Details delete instrument identifier not found body items0 details
 swagger:model DeleteInstrumentIdentifierNotFoundBodyItems0Details
 */
 type DeleteInstrumentIdentifierNotFoundBodyItems0Details struct {
@@ -997,6 +1573,11 @@ type DeleteInstrumentIdentifierNotFoundBodyItems0Details struct {
 
 // Validate validates this delete instrument identifier not found body items0 details
 func (o *DeleteInstrumentIdentifierNotFoundBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this delete instrument identifier not found body items0 details based on context it is used
+func (o *DeleteInstrumentIdentifierNotFoundBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

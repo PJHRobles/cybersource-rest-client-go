@@ -13,68 +13,84 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewGetResourceInfoByReportDefinitionParams creates a new GetResourceInfoByReportDefinitionParams object
-// with the default values initialized.
+// NewGetResourceInfoByReportDefinitionParams creates a new GetResourceInfoByReportDefinitionParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetResourceInfoByReportDefinitionParams() *GetResourceInfoByReportDefinitionParams {
-	var ()
 	return &GetResourceInfoByReportDefinitionParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetResourceInfoByReportDefinitionParamsWithTimeout creates a new GetResourceInfoByReportDefinitionParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetResourceInfoByReportDefinitionParamsWithTimeout(timeout time.Duration) *GetResourceInfoByReportDefinitionParams {
-	var ()
 	return &GetResourceInfoByReportDefinitionParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetResourceInfoByReportDefinitionParamsWithContext creates a new GetResourceInfoByReportDefinitionParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetResourceInfoByReportDefinitionParamsWithContext(ctx context.Context) *GetResourceInfoByReportDefinitionParams {
-	var ()
 	return &GetResourceInfoByReportDefinitionParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetResourceInfoByReportDefinitionParamsWithHTTPClient creates a new GetResourceInfoByReportDefinitionParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetResourceInfoByReportDefinitionParamsWithHTTPClient(client *http.Client) *GetResourceInfoByReportDefinitionParams {
-	var ()
 	return &GetResourceInfoByReportDefinitionParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetResourceInfoByReportDefinitionParams contains all the parameters to send to the API endpoint
-for the get resource info by report definition operation typically these are written to a http.Request
+/*
+GetResourceInfoByReportDefinitionParams contains all the parameters to send to the API endpoint
+
+	for the get resource info by report definition operation.
+
+	Typically these are written to a http.Request.
 */
 type GetResourceInfoByReportDefinitionParams struct {
 
-	/*OrganizationID
-	  Valid Cybersource Organization Id
+	/* OrganizationID.
 
+	   Valid Cybersource Organization Id
 	*/
 	OrganizationID *string
-	/*ReportDefinitionName
-	  Name of the Report definition to retrieve
 
+	/* ReportDefinitionName.
+
+	   Name of the Report definition to retrieve
 	*/
 	ReportDefinitionName string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get resource info by report definition params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetResourceInfoByReportDefinitionParams) WithDefaults() *GetResourceInfoByReportDefinitionParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get resource info by report definition params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetResourceInfoByReportDefinitionParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get resource info by report definition params
@@ -144,16 +160,17 @@ func (o *GetResourceInfoByReportDefinitionParams) WriteToRequest(r runtime.Clien
 
 		// query param organizationId
 		var qrOrganizationID string
+
 		if o.OrganizationID != nil {
 			qrOrganizationID = *o.OrganizationID
 		}
 		qOrganizationID := qrOrganizationID
 		if qOrganizationID != "" {
+
 			if err := r.SetQueryParam("organizationId", qOrganizationID); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	// path param reportDefinitionName

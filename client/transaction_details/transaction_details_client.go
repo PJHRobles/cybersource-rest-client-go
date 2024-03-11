@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new transaction details API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetTransaction(params *GetTransactionParams, opts ...ClientOption) (*GetTransactionOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetTransaction retrieves a transaction
 
 Include the Request ID in the GET request to retrieve the transaction details.
 */
-func (a *Client) GetTransaction(params *GetTransactionParams) (*GetTransactionOK, error) {
+func (a *Client) GetTransaction(params *GetTransactionParams, opts ...ClientOption) (*GetTransactionOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetTransactionParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getTransaction",
 		Method:             "GET",
 		PathPattern:        "/tss/v2/transactions/{id}",
@@ -48,7 +56,12 @@ func (a *Client) GetTransaction(params *GetTransactionParams) (*GetTransactionOK
 		Reader:             &GetTransactionReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // InstrumentIdentifierProcessingInformation instrument identifier processing information
+//
 // swagger:model InstrumentIdentifierProcessingInformation
 type InstrumentIdentifierProcessingInformation struct {
 
@@ -36,7 +38,6 @@ func (m *InstrumentIdentifierProcessingInformation) Validate(formats strfmt.Regi
 }
 
 func (m *InstrumentIdentifierProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -45,6 +46,43 @@ func (m *InstrumentIdentifierProcessingInformation) validateAuthorizationOptions
 		if err := m.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this instrument identifier processing information based on the context it is used
+func (m *InstrumentIdentifierProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *InstrumentIdentifierProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AuthorizationOptions != nil {
+
+		if swag.IsZero(m.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := m.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions")
 			}
 			return err
 		}
@@ -72,6 +110,7 @@ func (m *InstrumentIdentifierProcessingInformation) UnmarshalBinary(b []byte) er
 }
 
 // InstrumentIdentifierProcessingInformationAuthorizationOptions instrument identifier processing information authorization options
+//
 // swagger:model InstrumentIdentifierProcessingInformationAuthorizationOptions
 type InstrumentIdentifierProcessingInformationAuthorizationOptions struct {
 
@@ -94,7 +133,6 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) Validate
 }
 
 func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Initiator) { // not required
 		return nil
 	}
@@ -103,6 +141,43 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) validate
 		if err := m.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this instrument identifier processing information authorization options based on the context it is used
+func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Initiator != nil {
+
+		if swag.IsZero(m.Initiator) { // not required
+			return nil
+		}
+
+		if err := m.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -130,6 +205,7 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptions) Unmarsha
 }
 
 // InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator instrument identifier processing information authorization options initiator
+//
 // swagger:model InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator
 type InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator struct {
 
@@ -152,7 +228,6 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator)
 }
 
 func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -161,6 +236,43 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator)
 		if err := m.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this instrument identifier processing information authorization options initiator based on the context it is used
+func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := m.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -188,10 +300,12 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator)
 }
 
 // InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction instrument identifier processing information authorization options initiator merchant initiated transaction
+//
 // swagger:model InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 type InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -211,15 +325,19 @@ func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorM
 }
 
 func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(m.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", m.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this instrument identifier processing information authorization options initiator merchant initiated transaction based on context it is used
+func (m *InstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,15 +6,15 @@ package transaction_batches
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetTransactionBatchDetailsReader is a Reader for the GetTransactionBatchDetails structure.
@@ -61,9 +61,8 @@ func (o *GetTransactionBatchDetailsReader) ReadResponse(response runtime.ClientR
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /pts/v1/transaction-batch-details/{id}] getTransactionBatchDetails", response, response.Code())
 	}
 }
 
@@ -72,14 +71,49 @@ func NewGetTransactionBatchDetailsOK() *GetTransactionBatchDetailsOK {
 	return &GetTransactionBatchDetailsOK{}
 }
 
-/*GetTransactionBatchDetailsOK handles this case with default header values.
+/*
+GetTransactionBatchDetailsOK describes a response with status code 200, with default header values.
 
 OK
 */
 type GetTransactionBatchDetailsOK struct {
 }
 
+// IsSuccess returns true when this get transaction batch details o k response has a 2xx status code
+func (o *GetTransactionBatchDetailsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction batch details o k response has a 3xx status code
+func (o *GetTransactionBatchDetailsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details o k response has a 4xx status code
+func (o *GetTransactionBatchDetailsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction batch details o k response has a 5xx status code
+func (o *GetTransactionBatchDetailsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch details o k response a status code equal to that given
+func (o *GetTransactionBatchDetailsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction batch details o k response
+func (o *GetTransactionBatchDetailsOK) Code() int {
+	return 200
+}
+
 func (o *GetTransactionBatchDetailsOK) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsOK ", 200)
+}
+
+func (o *GetTransactionBatchDetailsOK) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsOK ", 200)
 }
 
@@ -93,7 +127,8 @@ func NewGetTransactionBatchDetailsBadRequest() *GetTransactionBatchDetailsBadReq
 	return &GetTransactionBatchDetailsBadRequest{}
 }
 
-/*GetTransactionBatchDetailsBadRequest handles this case with default header values.
+/*
+GetTransactionBatchDetailsBadRequest describes a response with status code 400, with default header values.
 
 Bad Request
 */
@@ -101,7 +136,41 @@ type GetTransactionBatchDetailsBadRequest struct {
 	Payload *GetTransactionBatchDetailsBadRequestBody
 }
 
+// IsSuccess returns true when this get transaction batch details bad request response has a 2xx status code
+func (o *GetTransactionBatchDetailsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch details bad request response has a 3xx status code
+func (o *GetTransactionBatchDetailsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details bad request response has a 4xx status code
+func (o *GetTransactionBatchDetailsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch details bad request response has a 5xx status code
+func (o *GetTransactionBatchDetailsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch details bad request response a status code equal to that given
+func (o *GetTransactionBatchDetailsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get transaction batch details bad request response
+func (o *GetTransactionBatchDetailsBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetTransactionBatchDetailsBadRequest) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetTransactionBatchDetailsBadRequest) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsBadRequest  %+v", 400, o.Payload)
 }
 
@@ -126,7 +195,8 @@ func NewGetTransactionBatchDetailsUnauthorized() *GetTransactionBatchDetailsUnau
 	return &GetTransactionBatchDetailsUnauthorized{}
 }
 
-/*GetTransactionBatchDetailsUnauthorized handles this case with default header values.
+/*
+GetTransactionBatchDetailsUnauthorized describes a response with status code 401, with default header values.
 
 Not Authorized
 */
@@ -134,7 +204,41 @@ type GetTransactionBatchDetailsUnauthorized struct {
 	Payload *GetTransactionBatchDetailsUnauthorizedBody
 }
 
+// IsSuccess returns true when this get transaction batch details unauthorized response has a 2xx status code
+func (o *GetTransactionBatchDetailsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch details unauthorized response has a 3xx status code
+func (o *GetTransactionBatchDetailsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details unauthorized response has a 4xx status code
+func (o *GetTransactionBatchDetailsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch details unauthorized response has a 5xx status code
+func (o *GetTransactionBatchDetailsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch details unauthorized response a status code equal to that given
+func (o *GetTransactionBatchDetailsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get transaction batch details unauthorized response
+func (o *GetTransactionBatchDetailsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetTransactionBatchDetailsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetTransactionBatchDetailsUnauthorized) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,7 +263,8 @@ func NewGetTransactionBatchDetailsForbidden() *GetTransactionBatchDetailsForbidd
 	return &GetTransactionBatchDetailsForbidden{}
 }
 
-/*GetTransactionBatchDetailsForbidden handles this case with default header values.
+/*
+GetTransactionBatchDetailsForbidden describes a response with status code 403, with default header values.
 
 No Authenticated
 */
@@ -167,7 +272,41 @@ type GetTransactionBatchDetailsForbidden struct {
 	Payload *GetTransactionBatchDetailsForbiddenBody
 }
 
+// IsSuccess returns true when this get transaction batch details forbidden response has a 2xx status code
+func (o *GetTransactionBatchDetailsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch details forbidden response has a 3xx status code
+func (o *GetTransactionBatchDetailsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details forbidden response has a 4xx status code
+func (o *GetTransactionBatchDetailsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch details forbidden response has a 5xx status code
+func (o *GetTransactionBatchDetailsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch details forbidden response a status code equal to that given
+func (o *GetTransactionBatchDetailsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get transaction batch details forbidden response
+func (o *GetTransactionBatchDetailsForbidden) Code() int {
+	return 403
+}
+
 func (o *GetTransactionBatchDetailsForbidden) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetTransactionBatchDetailsForbidden) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsForbidden  %+v", 403, o.Payload)
 }
 
@@ -192,7 +331,8 @@ func NewGetTransactionBatchDetailsNotFound() *GetTransactionBatchDetailsNotFound
 	return &GetTransactionBatchDetailsNotFound{}
 }
 
-/*GetTransactionBatchDetailsNotFound handles this case with default header values.
+/*
+GetTransactionBatchDetailsNotFound describes a response with status code 404, with default header values.
 
 No Reports Found
 */
@@ -200,7 +340,41 @@ type GetTransactionBatchDetailsNotFound struct {
 	Payload *GetTransactionBatchDetailsNotFoundBody
 }
 
+// IsSuccess returns true when this get transaction batch details not found response has a 2xx status code
+func (o *GetTransactionBatchDetailsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch details not found response has a 3xx status code
+func (o *GetTransactionBatchDetailsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details not found response has a 4xx status code
+func (o *GetTransactionBatchDetailsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction batch details not found response has a 5xx status code
+func (o *GetTransactionBatchDetailsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction batch details not found response a status code equal to that given
+func (o *GetTransactionBatchDetailsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction batch details not found response
+func (o *GetTransactionBatchDetailsNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTransactionBatchDetailsNotFound) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetTransactionBatchDetailsNotFound) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsNotFound  %+v", 404, o.Payload)
 }
 
@@ -225,7 +399,8 @@ func NewGetTransactionBatchDetailsBadGateway() *GetTransactionBatchDetailsBadGat
 	return &GetTransactionBatchDetailsBadGateway{}
 }
 
-/*GetTransactionBatchDetailsBadGateway handles this case with default header values.
+/*
+GetTransactionBatchDetailsBadGateway describes a response with status code 502, with default header values.
 
 Bad Gateway
 */
@@ -233,7 +408,41 @@ type GetTransactionBatchDetailsBadGateway struct {
 	Payload *GetTransactionBatchDetailsBadGatewayBody
 }
 
+// IsSuccess returns true when this get transaction batch details bad gateway response has a 2xx status code
+func (o *GetTransactionBatchDetailsBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction batch details bad gateway response has a 3xx status code
+func (o *GetTransactionBatchDetailsBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction batch details bad gateway response has a 4xx status code
+func (o *GetTransactionBatchDetailsBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction batch details bad gateway response has a 5xx status code
+func (o *GetTransactionBatchDetailsBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction batch details bad gateway response a status code equal to that given
+func (o *GetTransactionBatchDetailsBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the get transaction batch details bad gateway response
+func (o *GetTransactionBatchDetailsBadGateway) Code() int {
+	return 502
+}
+
 func (o *GetTransactionBatchDetailsBadGateway) Error() string {
+	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *GetTransactionBatchDetailsBadGateway) String() string {
 	return fmt.Sprintf("[GET /pts/v1/transaction-batch-details/{id}][%d] getTransactionBatchDetailsBadGateway  %+v", 502, o.Payload)
 }
 
@@ -253,7 +462,8 @@ func (o *GetTransactionBatchDetailsBadGateway) readResponse(response runtime.Cli
 	return nil
 }
 
-/*GetTransactionBatchDetailsBadGatewayBody ptsV1TransactionBatchDetailsGet502Response
+/*
+GetTransactionBatchDetailsBadGatewayBody ptsV1TransactionBatchDetailsGet502Response
 swagger:model GetTransactionBatchDetailsBadGatewayBody
 */
 type GetTransactionBatchDetailsBadGatewayBody struct {
@@ -283,7 +493,6 @@ func (o *GetTransactionBatchDetailsBadGatewayBody) Validate(formats strfmt.Regis
 }
 
 func (o *GetTransactionBatchDetailsBadGatewayBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -292,6 +501,43 @@ func (o *GetTransactionBatchDetailsBadGatewayBody) validateErrorInformation(form
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchDetailsBadGateway" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsBadGateway" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details bad gateway body based on the context it is used
+func (o *GetTransactionBatchDetailsBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsBadGatewayBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchDetailsBadGateway" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsBadGateway" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -318,7 +564,8 @@ func (o *GetTransactionBatchDetailsBadGatewayBody) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*GetTransactionBatchDetailsBadGatewayBodyErrorInformation get transaction batch details bad gateway body error information
+/*
+GetTransactionBatchDetailsBadGatewayBodyErrorInformation get transaction batch details bad gateway body error information
 swagger:model GetTransactionBatchDetailsBadGatewayBodyErrorInformation
 */
 type GetTransactionBatchDetailsBadGatewayBodyErrorInformation struct {
@@ -332,6 +579,11 @@ type GetTransactionBatchDetailsBadGatewayBodyErrorInformation struct {
 
 // Validate validates this get transaction batch details bad gateway body error information
 func (o *GetTransactionBatchDetailsBadGatewayBodyErrorInformation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch details bad gateway body error information based on context it is used
+func (o *GetTransactionBatchDetailsBadGatewayBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -353,7 +605,8 @@ func (o *GetTransactionBatchDetailsBadGatewayBodyErrorInformation) UnmarshalBina
 	return nil
 }
 
-/*GetTransactionBatchDetailsBadRequestBody ptsV1TransactionBatchDetailsGet400Response
+/*
+GetTransactionBatchDetailsBadRequestBody ptsV1TransactionBatchDetailsGet400Response
 swagger:model GetTransactionBatchDetailsBadRequestBody
 */
 type GetTransactionBatchDetailsBadRequestBody struct {
@@ -383,7 +636,6 @@ func (o *GetTransactionBatchDetailsBadRequestBody) Validate(formats strfmt.Regis
 }
 
 func (o *GetTransactionBatchDetailsBadRequestBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -392,6 +644,43 @@ func (o *GetTransactionBatchDetailsBadRequestBody) validateErrorInformation(form
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details bad request body based on the context it is used
+func (o *GetTransactionBatchDetailsBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsBadRequestBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -418,7 +707,8 @@ func (o *GetTransactionBatchDetailsBadRequestBody) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*GetTransactionBatchDetailsBadRequestBodyErrorInformation get transaction batch details bad request body error information
+/*
+GetTransactionBatchDetailsBadRequestBodyErrorInformation get transaction batch details bad request body error information
 swagger:model GetTransactionBatchDetailsBadRequestBodyErrorInformation
 */
 type GetTransactionBatchDetailsBadRequestBodyErrorInformation struct {
@@ -448,7 +738,6 @@ func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) Validate(form
 }
 
 func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -462,6 +751,47 @@ func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) validateDetai
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details bad request body error information based on the context it is used
+func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsBadRequest" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -490,7 +820,8 @@ func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformation) UnmarshalBina
 	return nil
 }
 
-/*GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0 get transaction batch details bad request body error information details items0
+/*
+GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0 get transaction batch details bad request body error information details items0
 swagger:model GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0 struct {
@@ -506,6 +837,11 @@ type GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0 struc
 
 // Validate validates this get transaction batch details bad request body error information details items0
 func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch details bad request body error information details items0 based on context it is used
+func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -527,7 +863,8 @@ func (o *GetTransactionBatchDetailsBadRequestBodyErrorInformationDetailsItems0) 
 	return nil
 }
 
-/*GetTransactionBatchDetailsForbiddenBody ptsV1TransactionBatchDetailsGet403Response
+/*
+GetTransactionBatchDetailsForbiddenBody ptsV1TransactionBatchDetailsGet403Response
 swagger:model GetTransactionBatchDetailsForbiddenBody
 */
 type GetTransactionBatchDetailsForbiddenBody struct {
@@ -557,7 +894,6 @@ func (o *GetTransactionBatchDetailsForbiddenBody) Validate(formats strfmt.Regist
 }
 
 func (o *GetTransactionBatchDetailsForbiddenBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -566,6 +902,43 @@ func (o *GetTransactionBatchDetailsForbiddenBody) validateErrorInformation(forma
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details forbidden body based on the context it is used
+func (o *GetTransactionBatchDetailsForbiddenBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsForbiddenBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -592,7 +965,8 @@ func (o *GetTransactionBatchDetailsForbiddenBody) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*GetTransactionBatchDetailsForbiddenBodyErrorInformation get transaction batch details forbidden body error information
+/*
+GetTransactionBatchDetailsForbiddenBodyErrorInformation get transaction batch details forbidden body error information
 swagger:model GetTransactionBatchDetailsForbiddenBodyErrorInformation
 */
 type GetTransactionBatchDetailsForbiddenBodyErrorInformation struct {
@@ -622,7 +996,6 @@ func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) Validate(forma
 }
 
 func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -636,6 +1009,47 @@ func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) validateDetail
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details forbidden body error information based on the context it is used
+func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsForbidden" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -664,7 +1078,8 @@ func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformation) UnmarshalBinar
 	return nil
 }
 
-/*GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0 get transaction batch details forbidden body error information details items0
+/*
+GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0 get transaction batch details forbidden body error information details items0
 swagger:model GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0 struct {
@@ -680,6 +1095,11 @@ type GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0 struct
 
 // Validate validates this get transaction batch details forbidden body error information details items0
 func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch details forbidden body error information details items0 based on context it is used
+func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -701,7 +1121,8 @@ func (o *GetTransactionBatchDetailsForbiddenBodyErrorInformationDetailsItems0) U
 	return nil
 }
 
-/*GetTransactionBatchDetailsNotFoundBody ptsV1TransactionBatchDetailsGet404Response
+/*
+GetTransactionBatchDetailsNotFoundBody ptsV1TransactionBatchDetailsGet404Response
 swagger:model GetTransactionBatchDetailsNotFoundBody
 */
 type GetTransactionBatchDetailsNotFoundBody struct {
@@ -731,7 +1152,6 @@ func (o *GetTransactionBatchDetailsNotFoundBody) Validate(formats strfmt.Registr
 }
 
 func (o *GetTransactionBatchDetailsNotFoundBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -740,6 +1160,43 @@ func (o *GetTransactionBatchDetailsNotFoundBody) validateErrorInformation(format
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details not found body based on the context it is used
+func (o *GetTransactionBatchDetailsNotFoundBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsNotFoundBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -766,7 +1223,8 @@ func (o *GetTransactionBatchDetailsNotFoundBody) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*GetTransactionBatchDetailsNotFoundBodyErrorInformation get transaction batch details not found body error information
+/*
+GetTransactionBatchDetailsNotFoundBodyErrorInformation get transaction batch details not found body error information
 swagger:model GetTransactionBatchDetailsNotFoundBodyErrorInformation
 */
 type GetTransactionBatchDetailsNotFoundBodyErrorInformation struct {
@@ -796,7 +1254,6 @@ func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) Validate(format
 }
 
 func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -810,6 +1267,47 @@ func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) validateDetails
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details not found body error information based on the context it is used
+func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsNotFound" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -838,7 +1336,8 @@ func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformation) UnmarshalBinary
 	return nil
 }
 
-/*GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0 get transaction batch details not found body error information details items0
+/*
+GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0 get transaction batch details not found body error information details items0
 swagger:model GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0 struct {
@@ -854,6 +1353,11 @@ type GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0 struct 
 
 // Validate validates this get transaction batch details not found body error information details items0
 func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch details not found body error information details items0 based on context it is used
+func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -875,7 +1379,8 @@ func (o *GetTransactionBatchDetailsNotFoundBodyErrorInformationDetailsItems0) Un
 	return nil
 }
 
-/*GetTransactionBatchDetailsUnauthorizedBody ptsV1TransactionBatchDetailsGet401Response
+/*
+GetTransactionBatchDetailsUnauthorizedBody ptsV1TransactionBatchDetailsGet401Response
 swagger:model GetTransactionBatchDetailsUnauthorizedBody
 */
 type GetTransactionBatchDetailsUnauthorizedBody struct {
@@ -905,7 +1410,6 @@ func (o *GetTransactionBatchDetailsUnauthorizedBody) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionBatchDetailsUnauthorizedBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -914,6 +1418,43 @@ func (o *GetTransactionBatchDetailsUnauthorizedBody) validateErrorInformation(fo
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details unauthorized body based on the context it is used
+func (o *GetTransactionBatchDetailsUnauthorizedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsUnauthorizedBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -940,7 +1481,8 @@ func (o *GetTransactionBatchDetailsUnauthorizedBody) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionBatchDetailsUnauthorizedBodyErrorInformation get transaction batch details unauthorized body error information
+/*
+GetTransactionBatchDetailsUnauthorizedBodyErrorInformation get transaction batch details unauthorized body error information
 swagger:model GetTransactionBatchDetailsUnauthorizedBodyErrorInformation
 */
 type GetTransactionBatchDetailsUnauthorizedBodyErrorInformation struct {
@@ -970,7 +1512,6 @@ func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) Validate(fo
 }
 
 func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -984,6 +1525,47 @@ func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) validateDet
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction batch details unauthorized body error information based on the context it is used
+func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionBatchDetailsUnauthorized" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1012,7 +1594,8 @@ func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformation) UnmarshalBi
 	return nil
 }
 
-/*GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0 get transaction batch details unauthorized body error information details items0
+/*
+GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0 get transaction batch details unauthorized body error information details items0
 swagger:model GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0
 */
 type GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0 struct {
@@ -1028,6 +1611,11 @@ type GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0 str
 
 // Validate validates this get transaction batch details unauthorized body error information details items0
 func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction batch details unauthorized body error information details items0 based on context it is used
+func (o *GetTransactionBatchDetailsUnauthorizedBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

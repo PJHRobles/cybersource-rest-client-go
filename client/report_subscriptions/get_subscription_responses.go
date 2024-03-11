@@ -6,16 +6,16 @@ package report_subscriptions
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetSubscriptionReader is a Reader for the GetSubscription structure.
@@ -44,9 +44,8 @@ func (o *GetSubscriptionReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /reporting/v3/report-subscriptions/{reportName}] getSubscription", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewGetSubscriptionOK() *GetSubscriptionOK {
 	return &GetSubscriptionOK{}
 }
 
-/*GetSubscriptionOK handles this case with default header values.
+/*
+GetSubscriptionOK describes a response with status code 200, with default header values.
 
 Ok
 */
@@ -63,7 +63,41 @@ type GetSubscriptionOK struct {
 	Payload *GetSubscriptionOKBody
 }
 
+// IsSuccess returns true when this get subscription o k response has a 2xx status code
+func (o *GetSubscriptionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get subscription o k response has a 3xx status code
+func (o *GetSubscriptionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get subscription o k response has a 4xx status code
+func (o *GetSubscriptionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get subscription o k response has a 5xx status code
+func (o *GetSubscriptionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get subscription o k response a status code equal to that given
+func (o *GetSubscriptionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get subscription o k response
+func (o *GetSubscriptionOK) Code() int {
+	return 200
+}
+
 func (o *GetSubscriptionOK) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionOK  %+v", 200, o.Payload)
+}
+
+func (o *GetSubscriptionOK) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionOK  %+v", 200, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewGetSubscriptionBadRequest() *GetSubscriptionBadRequest {
 	return &GetSubscriptionBadRequest{}
 }
 
-/*GetSubscriptionBadRequest handles this case with default header values.
+/*
+GetSubscriptionBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
@@ -96,7 +131,41 @@ type GetSubscriptionBadRequest struct {
 	Payload *GetSubscriptionBadRequestBody
 }
 
+// IsSuccess returns true when this get subscription bad request response has a 2xx status code
+func (o *GetSubscriptionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get subscription bad request response has a 3xx status code
+func (o *GetSubscriptionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get subscription bad request response has a 4xx status code
+func (o *GetSubscriptionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get subscription bad request response has a 5xx status code
+func (o *GetSubscriptionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get subscription bad request response a status code equal to that given
+func (o *GetSubscriptionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get subscription bad request response
+func (o *GetSubscriptionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetSubscriptionBadRequest) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetSubscriptionBadRequest) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,14 +190,49 @@ func NewGetSubscriptionNotFound() *GetSubscriptionNotFound {
 	return &GetSubscriptionNotFound{}
 }
 
-/*GetSubscriptionNotFound handles this case with default header values.
+/*
+GetSubscriptionNotFound describes a response with status code 404, with default header values.
 
 Subscription not found
 */
 type GetSubscriptionNotFound struct {
 }
 
+// IsSuccess returns true when this get subscription not found response has a 2xx status code
+func (o *GetSubscriptionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get subscription not found response has a 3xx status code
+func (o *GetSubscriptionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get subscription not found response has a 4xx status code
+func (o *GetSubscriptionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get subscription not found response has a 5xx status code
+func (o *GetSubscriptionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get subscription not found response a status code equal to that given
+func (o *GetSubscriptionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get subscription not found response
+func (o *GetSubscriptionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSubscriptionNotFound) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionNotFound ", 404)
+}
+
+func (o *GetSubscriptionNotFound) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/report-subscriptions/{reportName}][%d] getSubscriptionNotFound ", 404)
 }
 
@@ -137,7 +241,8 @@ func (o *GetSubscriptionNotFound) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*GetSubscriptionBadRequestBody reportingV3ReportSubscriptionsNameGet400Response
+/*
+GetSubscriptionBadRequestBody reportingV3ReportSubscriptionsNameGet400Response
 //
 // HTTP status code for client application
 swagger:model GetSubscriptionBadRequestBody
@@ -147,20 +252,23 @@ type GetSubscriptionBadRequestBody struct {
 	// Error field list
 	//
 	// Required: true
-	Details []*DetailsItems0 `json:"details"`
+	Details []*GetSubscriptionBadRequestBodyDetailsItems0 `json:"details"`
 
 	// Short descriptive message to the user.
 	//
+	// Example: One or more fields contains invalid data
 	// Required: true
 	Message *string `json:"message"`
 
 	// Documented reason code
 	//
+	// Example: INVALID_DATA
 	// Required: true
 	Reason *string `json:"reason"`
 
 	// Time of request in UTC.
 	//
+	// Example: 2016-08-11T22:47:57Z
 	// Required: true
 	// Format: date-time
 	SubmitTimeUtc *strfmt.DateTime `json:"submitTimeUtc"`
@@ -207,6 +315,8 @@ func (o *GetSubscriptionBadRequestBody) validateDetails(formats strfmt.Registry)
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getSubscriptionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getSubscriptionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -248,6 +358,45 @@ func (o *GetSubscriptionBadRequestBody) validateSubmitTimeUtc(formats strfmt.Reg
 	return nil
 }
 
+// ContextValidate validate this get subscription bad request body based on the context it is used
+func (o *GetSubscriptionBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetSubscriptionBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getSubscriptionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getSubscriptionBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetSubscriptionBadRequestBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -266,7 +415,52 @@ func (o *GetSubscriptionBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetSubscriptionOKBody reportingV3ReportsSbscriptionsNameGet200Response
+/*
+GetSubscriptionBadRequestBodyDetailsItems0 Provides failed validation input field detail
+//
+swagger:model GetSubscriptionBadRequestBodyDetailsItems0
+*/
+type GetSubscriptionBadRequestBodyDetailsItems0 struct {
+
+	// Field in request that caused an error
+	//
+	Field string `json:"field,omitempty"`
+
+	// Documented reason code
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this get subscription bad request body details items0
+func (o *GetSubscriptionBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get subscription bad request body details items0 based on context it is used
+func (o *GetSubscriptionBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetSubscriptionBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetSubscriptionBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res GetSubscriptionBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetSubscriptionOKBody reportingV3ReportsSbscriptionsNameGet200Response
 //
 // Subscription Details
 swagger:model GetSubscriptionOKBody
@@ -274,21 +468,27 @@ swagger:model GetSubscriptionOKBody
 type GetSubscriptionOKBody struct {
 
 	// Id for the selected group.
+	// Example: 12345
 	GroupID string `json:"groupId,omitempty"`
 
 	// Selected Organization Id
+	// Example: Merchant 1
 	OrganizationID string `json:"organizationId,omitempty"`
 
 	// Report Definition Id
+	// Example: 210
 	ReportDefinitionID string `json:"reportDefinitionId,omitempty"`
 
 	// Report Definition Class
+	// Example: TransactionRequestDetailClass
 	ReportDefinitionName string `json:"reportDefinitionName,omitempty"`
 
 	// List of all fields String values
+	// Example: ["Request.RequestID","Request.TransactionDate","Request.MerchantID"]
 	ReportFields []string `json:"reportFields"`
 
 	// List of filters to apply
+	// Example: {"Application.Name":["ics_auth","ics_bill"]}
 	ReportFilters map[string][]string `json:"reportFilters,omitempty"`
 
 	// 'Report Frequency'
@@ -299,6 +499,7 @@ type GetSubscriptionOKBody struct {
 	// - MONTHLY
 	// - ADHOC
 	//
+	// Example: DAILY
 	ReportFrequency string `json:"reportFrequency,omitempty"`
 
 	// Report Format
@@ -307,22 +508,27 @@ type GetSubscriptionOKBody struct {
 	// - application/xml
 	// - text/csv
 	//
+	// Example: application/xml
 	ReportMimeType string `json:"reportMimeType,omitempty"`
 
 	// Report Name
+	// Example: My Transaction Request Detail Report
 	ReportName string `json:"reportName,omitempty"`
 
 	// report preferences
 	ReportPreferences *GetSubscriptionOKBodyReportPreferences `json:"reportPreferences,omitempty"`
 
 	// Start Day
+	// Example: 1
 	StartDay int32 `json:"startDay,omitempty"`
 
 	// Start Time
+	// Example: 2017-10-01T10:10:10+05:00
 	// Format: date-time
 	StartTime strfmt.DateTime `json:"startTime,omitempty"`
 
 	// Time Zone
+	// Example: America/Chicago
 	Timezone string `json:"timezone,omitempty"`
 }
 
@@ -345,7 +551,6 @@ func (o *GetSubscriptionOKBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GetSubscriptionOKBody) validateReportPreferences(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportPreferences) { // not required
 		return nil
 	}
@@ -354,6 +559,8 @@ func (o *GetSubscriptionOKBody) validateReportPreferences(formats strfmt.Registr
 		if err := o.ReportPreferences.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getSubscriptionOK" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getSubscriptionOK" + "." + "reportPreferences")
 			}
 			return err
 		}
@@ -363,13 +570,47 @@ func (o *GetSubscriptionOKBody) validateReportPreferences(formats strfmt.Registr
 }
 
 func (o *GetSubscriptionOKBody) validateStartTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartTime) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("getSubscriptionOK"+"."+"startTime", "body", "date-time", o.StartTime.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get subscription o k body based on the context it is used
+func (o *GetSubscriptionOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateReportPreferences(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetSubscriptionOKBody) contextValidateReportPreferences(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ReportPreferences != nil {
+
+		if swag.IsZero(o.ReportPreferences) { // not required
+			return nil
+		}
+
+		if err := o.ReportPreferences.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getSubscriptionOK" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getSubscriptionOK" + "." + "reportPreferences")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -393,7 +634,8 @@ func (o *GetSubscriptionOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetSubscriptionOKBodyReportPreferences Report Preferences
+/*
+GetSubscriptionOKBodyReportPreferences Report Preferences
 swagger:model GetSubscriptionOKBodyReportPreferences
 */
 type GetSubscriptionOKBodyReportPreferences struct {
@@ -412,6 +654,11 @@ type GetSubscriptionOKBodyReportPreferences struct {
 
 // Validate validates this get subscription o k body report preferences
 func (o *GetSubscriptionOKBodyReportPreferences) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get subscription o k body report preferences based on context it is used
+func (o *GetSubscriptionOKBodyReportPreferences) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,16 +6,16 @@ package reports
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreateReportReader is a Reader for the CreateReport structure.
@@ -44,9 +44,8 @@ func (o *CreateReportReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /reporting/v3/reports] createReport", response, response.Code())
 	}
 }
 
@@ -55,14 +54,49 @@ func NewCreateReportCreated() *CreateReportCreated {
 	return &CreateReportCreated{}
 }
 
-/*CreateReportCreated handles this case with default header values.
+/*
+CreateReportCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type CreateReportCreated struct {
 }
 
+// IsSuccess returns true when this create report created response has a 2xx status code
+func (o *CreateReportCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create report created response has a 3xx status code
+func (o *CreateReportCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create report created response has a 4xx status code
+func (o *CreateReportCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create report created response has a 5xx status code
+func (o *CreateReportCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create report created response a status code equal to that given
+func (o *CreateReportCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create report created response
+func (o *CreateReportCreated) Code() int {
+	return 201
+}
+
 func (o *CreateReportCreated) Error() string {
+	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportCreated ", 201)
+}
+
+func (o *CreateReportCreated) String() string {
 	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportCreated ", 201)
 }
 
@@ -76,14 +110,49 @@ func NewCreateReportNotModified() *CreateReportNotModified {
 	return &CreateReportNotModified{}
 }
 
-/*CreateReportNotModified handles this case with default header values.
+/*
+CreateReportNotModified describes a response with status code 304, with default header values.
 
 Not Modified
 */
 type CreateReportNotModified struct {
 }
 
+// IsSuccess returns true when this create report not modified response has a 2xx status code
+func (o *CreateReportNotModified) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create report not modified response has a 3xx status code
+func (o *CreateReportNotModified) IsRedirect() bool {
+	return true
+}
+
+// IsClientError returns true when this create report not modified response has a 4xx status code
+func (o *CreateReportNotModified) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create report not modified response has a 5xx status code
+func (o *CreateReportNotModified) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create report not modified response a status code equal to that given
+func (o *CreateReportNotModified) IsCode(code int) bool {
+	return code == 304
+}
+
+// Code gets the status code for the create report not modified response
+func (o *CreateReportNotModified) Code() int {
+	return 304
+}
+
 func (o *CreateReportNotModified) Error() string {
+	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportNotModified ", 304)
+}
+
+func (o *CreateReportNotModified) String() string {
 	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportNotModified ", 304)
 }
 
@@ -97,7 +166,8 @@ func NewCreateReportBadRequest() *CreateReportBadRequest {
 	return &CreateReportBadRequest{}
 }
 
-/*CreateReportBadRequest handles this case with default header values.
+/*
+CreateReportBadRequest describes a response with status code 400, with default header values.
 
 Invalid request
 */
@@ -105,7 +175,41 @@ type CreateReportBadRequest struct {
 	Payload *CreateReportBadRequestBody
 }
 
+// IsSuccess returns true when this create report bad request response has a 2xx status code
+func (o *CreateReportBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create report bad request response has a 3xx status code
+func (o *CreateReportBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create report bad request response has a 4xx status code
+func (o *CreateReportBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create report bad request response has a 5xx status code
+func (o *CreateReportBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create report bad request response a status code equal to that given
+func (o *CreateReportBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create report bad request response
+func (o *CreateReportBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateReportBadRequest) Error() string {
+	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateReportBadRequest) String() string {
 	return fmt.Sprintf("[POST /reporting/v3/reports][%d] createReportBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,7 +229,8 @@ func (o *CreateReportBadRequest) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-/*CreateReportBadRequestBody reportingV3ReportsPost400Response
+/*
+CreateReportBadRequestBody reportingV3ReportsPost400Response
 //
 // HTTP status code for client application
 swagger:model CreateReportBadRequestBody
@@ -135,20 +240,23 @@ type CreateReportBadRequestBody struct {
 	// Error field list
 	//
 	// Required: true
-	Details []*DetailsItems0 `json:"details"`
+	Details []*CreateReportBadRequestBodyDetailsItems0 `json:"details"`
 
 	// Short descriptive message to the user.
 	//
+	// Example: One or more fields contains invalid data
 	// Required: true
 	Message *string `json:"message"`
 
 	// Documented reason code
 	//
+	// Example: INVALID_DATA
 	// Required: true
 	Reason *string `json:"reason"`
 
 	// Time of request in UTC.
 	//
+	// Example: 2016-08-11T22:47:57Z
 	// Required: true
 	// Format: date-time
 	SubmitTimeUtc *strfmt.DateTime `json:"submitTimeUtc"`
@@ -195,6 +303,8 @@ func (o *CreateReportBadRequestBody) validateDetails(formats strfmt.Registry) er
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createReportBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createReportBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -236,6 +346,45 @@ func (o *CreateReportBadRequestBody) validateSubmitTimeUtc(formats strfmt.Regist
 	return nil
 }
 
+// ContextValidate validate this create report bad request body based on the context it is used
+func (o *CreateReportBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateReportBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createReportBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createReportBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateReportBadRequestBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -254,33 +403,84 @@ func (o *CreateReportBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateReportBody create report body
+/*
+CreateReportBadRequestBodyDetailsItems0 Provides failed validation input field detail
+//
+swagger:model CreateReportBadRequestBodyDetailsItems0
+*/
+type CreateReportBadRequestBodyDetailsItems0 struct {
+
+	// Field in request that caused an error
+	//
+	Field string `json:"field,omitempty"`
+
+	// Documented reason code
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this create report bad request body details items0
+func (o *CreateReportBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create report bad request body details items0 based on context it is used
+func (o *CreateReportBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *CreateReportBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *CreateReportBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res CreateReportBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+CreateReportBody create report body
 swagger:model CreateReportBody
 */
 type CreateReportBody struct {
 
 	// Specifies the group name
+	// Example: myGroup
 	// Pattern: [0-9]*
 	GroupName string `json:"groupName,omitempty"`
 
 	// Valid CyberSource Organization Id
+	// Example: Test_Merchatnt_id
 	// Pattern: [a-zA-Z0-9-_]+
 	OrganizationID string `json:"organizationId,omitempty"`
 
 	// report definition name
+	// Example: TransactionRequestClass
 	// Max Length: 80
 	// Min Length: 1
 	// Pattern: [a-zA-Z0-9-]+
 	ReportDefinitionName string `json:"reportDefinitionName,omitempty"`
 
 	// End time of the report
+	// Example: 2017-10-02T10:10:10+05:00
 	// Format: date-time
 	ReportEndTime strfmt.DateTime `json:"reportEndTime,omitempty"`
 
 	// List of fields which needs to get included in a report
+	// Example: ["Request.RequestID","Request.TransactionDate","Request.MerchantID"]
 	ReportFields []string `json:"reportFields"`
 
 	// List of filters to apply
+	// Example: {"Application.Name":["ics_auth","ics_bill"]}
 	ReportFilters map[string][]string `json:"reportFilters,omitempty"`
 
 	// 'Format of the report'
@@ -289,9 +489,11 @@ type CreateReportBody struct {
 	// - application/xml
 	// - text/csv
 	//
+	// Example: application/xml
 	ReportMimeType string `json:"reportMimeType,omitempty"`
 
 	// Name of the report
+	// Example: My Transaction Request report
 	// Max Length: 128
 	// Min Length: 1
 	// Pattern: [a-zA-Z0-9-_ ]+
@@ -301,10 +503,12 @@ type CreateReportBody struct {
 	ReportPreferences *CreateReportParamsBodyReportPreferences `json:"reportPreferences,omitempty"`
 
 	// Start time of the report
+	// Example: 2017-10-01T10:10:10+05:00
 	// Format: date-time
 	ReportStartTime strfmt.DateTime `json:"reportStartTime,omitempty"`
 
 	// Timezone of the report
+	// Example: America/Chicago
 	Timezone string `json:"timezone,omitempty"`
 }
 
@@ -347,12 +551,11 @@ func (o *CreateReportBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreateReportBody) validateGroupName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.GroupName) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("requestBody"+"."+"groupName", "body", string(o.GroupName), `[0-9]*`); err != nil {
+	if err := validate.Pattern("requestBody"+"."+"groupName", "body", o.GroupName, `[0-9]*`); err != nil {
 		return err
 	}
 
@@ -360,12 +563,11 @@ func (o *CreateReportBody) validateGroupName(formats strfmt.Registry) error {
 }
 
 func (o *CreateReportBody) validateOrganizationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrganizationID) { // not required
 		return nil
 	}
 
-	if err := validate.Pattern("requestBody"+"."+"organizationId", "body", string(o.OrganizationID), `[a-zA-Z0-9-_]+`); err != nil {
+	if err := validate.Pattern("requestBody"+"."+"organizationId", "body", o.OrganizationID, `[a-zA-Z0-9-_]+`); err != nil {
 		return err
 	}
 
@@ -373,20 +575,19 @@ func (o *CreateReportBody) validateOrganizationID(formats strfmt.Registry) error
 }
 
 func (o *CreateReportBody) validateReportDefinitionName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportDefinitionName) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("requestBody"+"."+"reportDefinitionName", "body", string(o.ReportDefinitionName), 1); err != nil {
+	if err := validate.MinLength("requestBody"+"."+"reportDefinitionName", "body", o.ReportDefinitionName, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("requestBody"+"."+"reportDefinitionName", "body", string(o.ReportDefinitionName), 80); err != nil {
+	if err := validate.MaxLength("requestBody"+"."+"reportDefinitionName", "body", o.ReportDefinitionName, 80); err != nil {
 		return err
 	}
 
-	if err := validate.Pattern("requestBody"+"."+"reportDefinitionName", "body", string(o.ReportDefinitionName), `[a-zA-Z0-9-]+`); err != nil {
+	if err := validate.Pattern("requestBody"+"."+"reportDefinitionName", "body", o.ReportDefinitionName, `[a-zA-Z0-9-]+`); err != nil {
 		return err
 	}
 
@@ -394,7 +595,6 @@ func (o *CreateReportBody) validateReportDefinitionName(formats strfmt.Registry)
 }
 
 func (o *CreateReportBody) validateReportEndTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportEndTime) { // not required
 		return nil
 	}
@@ -407,20 +607,19 @@ func (o *CreateReportBody) validateReportEndTime(formats strfmt.Registry) error 
 }
 
 func (o *CreateReportBody) validateReportName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportName) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("requestBody"+"."+"reportName", "body", string(o.ReportName), 1); err != nil {
+	if err := validate.MinLength("requestBody"+"."+"reportName", "body", o.ReportName, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("requestBody"+"."+"reportName", "body", string(o.ReportName), 128); err != nil {
+	if err := validate.MaxLength("requestBody"+"."+"reportName", "body", o.ReportName, 128); err != nil {
 		return err
 	}
 
-	if err := validate.Pattern("requestBody"+"."+"reportName", "body", string(o.ReportName), `[a-zA-Z0-9-_ ]+`); err != nil {
+	if err := validate.Pattern("requestBody"+"."+"reportName", "body", o.ReportName, `[a-zA-Z0-9-_ ]+`); err != nil {
 		return err
 	}
 
@@ -428,7 +627,6 @@ func (o *CreateReportBody) validateReportName(formats strfmt.Registry) error {
 }
 
 func (o *CreateReportBody) validateReportPreferences(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportPreferences) { // not required
 		return nil
 	}
@@ -437,6 +635,8 @@ func (o *CreateReportBody) validateReportPreferences(formats strfmt.Registry) er
 		if err := o.ReportPreferences.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("requestBody" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("requestBody" + "." + "reportPreferences")
 			}
 			return err
 		}
@@ -446,13 +646,47 @@ func (o *CreateReportBody) validateReportPreferences(formats strfmt.Registry) er
 }
 
 func (o *CreateReportBody) validateReportStartTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportStartTime) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("requestBody"+"."+"reportStartTime", "body", "date-time", o.ReportStartTime.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create report body based on the context it is used
+func (o *CreateReportBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateReportPreferences(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateReportBody) contextValidateReportPreferences(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ReportPreferences != nil {
+
+		if swag.IsZero(o.ReportPreferences) { // not required
+			return nil
+		}
+
+		if err := o.ReportPreferences.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("requestBody" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("requestBody" + "." + "reportPreferences")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -476,7 +710,8 @@ func (o *CreateReportBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateReportParamsBodyReportPreferences Report Preferences
+/*
+CreateReportParamsBodyReportPreferences Report Preferences
 swagger:model CreateReportParamsBodyReportPreferences
 */
 type CreateReportParamsBodyReportPreferences struct {
@@ -498,6 +733,11 @@ func (o *CreateReportParamsBodyReportPreferences) Validate(formats strfmt.Regist
 	return nil
 }
 
+// ContextValidate validates this create report params body report preferences based on context it is used
+func (o *CreateReportParamsBodyReportPreferences) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *CreateReportParamsBodyReportPreferences) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -509,44 +749,6 @@ func (o *CreateReportParamsBodyReportPreferences) MarshalBinary() ([]byte, error
 // UnmarshalBinary interface implementation
 func (o *CreateReportParamsBodyReportPreferences) UnmarshalBinary(b []byte) error {
 	var res CreateReportParamsBodyReportPreferences
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*DetailsItems0 Provides failed validation input field detail
-//
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// Field in request that caused an error
-	//
-	Field string `json:"field,omitempty"`
-
-	// Documented reason code
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

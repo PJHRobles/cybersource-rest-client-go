@@ -13,56 +13,71 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewGetAllSubscriptionsParams creates a new GetAllSubscriptionsParams object
-// with the default values initialized.
+// NewGetAllSubscriptionsParams creates a new GetAllSubscriptionsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetAllSubscriptionsParams() *GetAllSubscriptionsParams {
-
 	return &GetAllSubscriptionsParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetAllSubscriptionsParamsWithTimeout creates a new GetAllSubscriptionsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetAllSubscriptionsParamsWithTimeout(timeout time.Duration) *GetAllSubscriptionsParams {
-
 	return &GetAllSubscriptionsParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetAllSubscriptionsParamsWithContext creates a new GetAllSubscriptionsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetAllSubscriptionsParamsWithContext(ctx context.Context) *GetAllSubscriptionsParams {
-
 	return &GetAllSubscriptionsParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetAllSubscriptionsParamsWithHTTPClient creates a new GetAllSubscriptionsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetAllSubscriptionsParamsWithHTTPClient(client *http.Client) *GetAllSubscriptionsParams {
-
 	return &GetAllSubscriptionsParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetAllSubscriptionsParams contains all the parameters to send to the API endpoint
-for the get all subscriptions operation typically these are written to a http.Request
+/*
+GetAllSubscriptionsParams contains all the parameters to send to the API endpoint
+
+	for the get all subscriptions operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAllSubscriptionsParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get all subscriptions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetAllSubscriptionsParams) WithDefaults() *GetAllSubscriptionsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get all subscriptions params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetAllSubscriptionsParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get all subscriptions params

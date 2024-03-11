@@ -13,73 +13,90 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewUpdatePaymentInstrumentParams creates a new UpdatePaymentInstrumentParams object
-// with the default values initialized.
+// NewUpdatePaymentInstrumentParams creates a new UpdatePaymentInstrumentParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdatePaymentInstrumentParams() *UpdatePaymentInstrumentParams {
-	var ()
 	return &UpdatePaymentInstrumentParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdatePaymentInstrumentParamsWithTimeout creates a new UpdatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdatePaymentInstrumentParamsWithTimeout(timeout time.Duration) *UpdatePaymentInstrumentParams {
-	var ()
 	return &UpdatePaymentInstrumentParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdatePaymentInstrumentParamsWithContext creates a new UpdatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdatePaymentInstrumentParamsWithContext(ctx context.Context) *UpdatePaymentInstrumentParams {
-	var ()
 	return &UpdatePaymentInstrumentParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdatePaymentInstrumentParamsWithHTTPClient creates a new UpdatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdatePaymentInstrumentParamsWithHTTPClient(client *http.Client) *UpdatePaymentInstrumentParams {
-	var ()
 	return &UpdatePaymentInstrumentParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdatePaymentInstrumentParams contains all the parameters to send to the API endpoint
-for the update payment instrument operation typically these are written to a http.Request
+/*
+UpdatePaymentInstrumentParams contains all the parameters to send to the API endpoint
+
+	for the update payment instrument operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdatePaymentInstrumentParams struct {
 
-	/*ProfileID
-	  The id of a profile containing user specific TMS configuration.
+	/* ProfileID.
 
+	   The id of a profile containing user specific TMS configuration.
 	*/
 	ProfileID string
-	/*TokenID
-	  The TokenId of a Payment Instrument.
 
+	/* TokenID.
+
+	   The TokenId of a Payment Instrument.
 	*/
 	TokenID string
-	/*UpdatePaymentInstrumentRequest
-	  Specify the customer's payment details.
 
+	/* UpdatePaymentInstrumentRequest.
+
+	   Specify the customer's payment details.
 	*/
 	UpdatePaymentInstrumentRequest UpdatePaymentInstrumentBody
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdatePaymentInstrumentParams) WithDefaults() *UpdatePaymentInstrumentParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdatePaymentInstrumentParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update payment instrument params
@@ -165,7 +182,6 @@ func (o *UpdatePaymentInstrumentParams) WriteToRequest(r runtime.ClientRequest, 
 	if err := r.SetPathParam("tokenId", o.TokenID); err != nil {
 		return err
 	}
-
 	if err := r.SetBodyParam(o.UpdatePaymentInstrumentRequest); err != nil {
 		return err
 	}

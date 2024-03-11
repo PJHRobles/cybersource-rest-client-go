@@ -6,16 +6,16 @@ package key_generation
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GeneratePublicKeyReader is a Reader for the GeneratePublicKey structure.
@@ -49,7 +49,8 @@ func NewGeneratePublicKeyOK() *GeneratePublicKeyOK {
 	return &GeneratePublicKeyOK{}
 }
 
-/*GeneratePublicKeyOK handles this case with default header values.
+/*
+GeneratePublicKeyOK describes a response with status code 200, with default header values.
 
 Retrieved key.
 */
@@ -57,7 +58,41 @@ type GeneratePublicKeyOK struct {
 	Payload *GeneratePublicKeyOKBody
 }
 
+// IsSuccess returns true when this generate public key o k response has a 2xx status code
+func (o *GeneratePublicKeyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this generate public key o k response has a 3xx status code
+func (o *GeneratePublicKeyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this generate public key o k response has a 4xx status code
+func (o *GeneratePublicKeyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this generate public key o k response has a 5xx status code
+func (o *GeneratePublicKeyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this generate public key o k response a status code equal to that given
+func (o *GeneratePublicKeyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the generate public key o k response
+func (o *GeneratePublicKeyOK) Code() int {
+	return 200
+}
+
 func (o *GeneratePublicKeyOK) Error() string {
+	return fmt.Sprintf("[POST /flex/v1/keys][%d] generatePublicKeyOK  %+v", 200, o.Payload)
+}
+
+func (o *GeneratePublicKeyOK) String() string {
 	return fmt.Sprintf("[POST /flex/v1/keys][%d] generatePublicKeyOK  %+v", 200, o.Payload)
 }
 
@@ -84,7 +119,8 @@ func NewGeneratePublicKeyDefault(code int) *GeneratePublicKeyDefault {
 	}
 }
 
-/*GeneratePublicKeyDefault handles this case with default header values.
+/*
+GeneratePublicKeyDefault describes a response with status code -1, with default header values.
 
 Error retrieving key.
 */
@@ -94,12 +130,41 @@ type GeneratePublicKeyDefault struct {
 	Payload *GeneratePublicKeyDefaultBody
 }
 
+// IsSuccess returns true when this generate public key default response has a 2xx status code
+func (o *GeneratePublicKeyDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this generate public key default response has a 3xx status code
+func (o *GeneratePublicKeyDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this generate public key default response has a 4xx status code
+func (o *GeneratePublicKeyDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this generate public key default response has a 5xx status code
+func (o *GeneratePublicKeyDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this generate public key default response a status code equal to that given
+func (o *GeneratePublicKeyDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 // Code gets the status code for the generate public key default response
 func (o *GeneratePublicKeyDefault) Code() int {
 	return o._statusCode
 }
 
 func (o *GeneratePublicKeyDefault) Error() string {
+	return fmt.Sprintf("[POST /flex/v1/keys][%d] generatePublicKey default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GeneratePublicKeyDefault) String() string {
 	return fmt.Sprintf("[POST /flex/v1/keys][%d] generatePublicKey default  %+v", o._statusCode, o.Payload)
 }
 
@@ -119,7 +184,8 @@ func (o *GeneratePublicKeyDefault) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
-/*GeneratePublicKeyBody generate public key body
+/*
+GeneratePublicKeyBody generate public key body
 swagger:model GeneratePublicKeyBody
 */
 type GeneratePublicKeyBody struct {
@@ -152,6 +218,11 @@ func (o *GeneratePublicKeyBody) validateEncryptionType(formats strfmt.Registry) 
 	return nil
 }
 
+// ContextValidate validates this generate public key body based on context it is used
+func (o *GeneratePublicKeyBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GeneratePublicKeyBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -170,7 +241,8 @@ func (o *GeneratePublicKeyBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBody generate public key default body
+/*
+GeneratePublicKeyDefaultBody generate public key default body
 swagger:model GeneratePublicKeyDefaultBody
 */
 type GeneratePublicKeyDefaultBody struct {
@@ -201,7 +273,6 @@ func (o *GeneratePublicKeyDefaultBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GeneratePublicKeyDefaultBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -210,6 +281,8 @@ func (o *GeneratePublicKeyDefaultBody) validateLinks(formats strfmt.Registry) er
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("generatePublicKey default" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "_links")
 			}
 			return err
 		}
@@ -219,7 +292,6 @@ func (o *GeneratePublicKeyDefaultBody) validateLinks(formats strfmt.Registry) er
 }
 
 func (o *GeneratePublicKeyDefaultBody) validateResponseStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseStatus) { // not required
 		return nil
 	}
@@ -228,6 +300,68 @@ func (o *GeneratePublicKeyDefaultBody) validateResponseStatus(formats strfmt.Reg
 		if err := o.ResponseStatus.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("generatePublicKey default" + "." + "responseStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "responseStatus")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this generate public key default body based on the context it is used
+func (o *GeneratePublicKeyDefaultBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateResponseStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("generatePublicKey default" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBody) contextValidateResponseStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ResponseStatus != nil {
+
+		if swag.IsZero(o.ResponseStatus) { // not required
+			return nil
+		}
+
+		if err := o.ResponseStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("generatePublicKey default" + "." + "responseStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "responseStatus")
 			}
 			return err
 		}
@@ -254,7 +388,8 @@ func (o *GeneratePublicKeyDefaultBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyLinks generate public key default body links
+/*
+GeneratePublicKeyDefaultBodyLinks generate public key default body links
 swagger:model GeneratePublicKeyDefaultBodyLinks
 */
 type GeneratePublicKeyDefaultBodyLinks struct {
@@ -292,7 +427,6 @@ func (o *GeneratePublicKeyDefaultBodyLinks) Validate(formats strfmt.Registry) er
 }
 
 func (o *GeneratePublicKeyDefaultBodyLinks) validateDocumentation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Documentation) { // not required
 		return nil
 	}
@@ -306,6 +440,8 @@ func (o *GeneratePublicKeyDefaultBodyLinks) validateDocumentation(formats strfmt
 			if err := o.Documentation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "documentation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -317,7 +453,6 @@ func (o *GeneratePublicKeyDefaultBodyLinks) validateDocumentation(formats strfmt
 }
 
 func (o *GeneratePublicKeyDefaultBodyLinks) validateNext(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Next) { // not required
 		return nil
 	}
@@ -331,6 +466,8 @@ func (o *GeneratePublicKeyDefaultBodyLinks) validateNext(formats strfmt.Registry
 			if err := o.Next[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "next" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -342,7 +479,6 @@ func (o *GeneratePublicKeyDefaultBodyLinks) validateNext(formats strfmt.Registry
 }
 
 func (o *GeneratePublicKeyDefaultBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -351,6 +487,101 @@ func (o *GeneratePublicKeyDefaultBodyLinks) validateSelf(formats strfmt.Registry
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this generate public key default body links based on the context it is used
+func (o *GeneratePublicKeyDefaultBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDocumentation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateNext(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBodyLinks) contextValidateDocumentation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Documentation); i++ {
+
+		if o.Documentation[i] != nil {
+
+			if swag.IsZero(o.Documentation[i]) { // not required
+				return nil
+			}
+
+			if err := o.Documentation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBodyLinks) contextValidateNext(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Next); i++ {
+
+		if o.Next[i] != nil {
+
+			if swag.IsZero(o.Next[i]) { // not required
+				return nil
+			}
+
+			if err := o.Next[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "next" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("generatePublicKey default" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKey default" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -377,7 +608,8 @@ func (o *GeneratePublicKeyDefaultBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyLinksDocumentationItems0 generate public key default body links documentation items0
+/*
+GeneratePublicKeyDefaultBodyLinksDocumentationItems0 generate public key default body links documentation items0
 swagger:model GeneratePublicKeyDefaultBodyLinksDocumentationItems0
 */
 type GeneratePublicKeyDefaultBodyLinksDocumentationItems0 struct {
@@ -394,6 +626,11 @@ type GeneratePublicKeyDefaultBodyLinksDocumentationItems0 struct {
 
 // Validate validates this generate public key default body links documentation items0
 func (o *GeneratePublicKeyDefaultBodyLinksDocumentationItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key default body links documentation items0 based on context it is used
+func (o *GeneratePublicKeyDefaultBodyLinksDocumentationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -415,7 +652,8 @@ func (o *GeneratePublicKeyDefaultBodyLinksDocumentationItems0) UnmarshalBinary(b
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyLinksNextItems0 generate public key default body links next items0
+/*
+GeneratePublicKeyDefaultBodyLinksNextItems0 generate public key default body links next items0
 swagger:model GeneratePublicKeyDefaultBodyLinksNextItems0
 */
 type GeneratePublicKeyDefaultBodyLinksNextItems0 struct {
@@ -432,6 +670,11 @@ type GeneratePublicKeyDefaultBodyLinksNextItems0 struct {
 
 // Validate validates this generate public key default body links next items0
 func (o *GeneratePublicKeyDefaultBodyLinksNextItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key default body links next items0 based on context it is used
+func (o *GeneratePublicKeyDefaultBodyLinksNextItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -453,7 +696,8 @@ func (o *GeneratePublicKeyDefaultBodyLinksNextItems0) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyLinksSelf generate public key default body links self
+/*
+GeneratePublicKeyDefaultBodyLinksSelf generate public key default body links self
 swagger:model GeneratePublicKeyDefaultBodyLinksSelf
 */
 type GeneratePublicKeyDefaultBodyLinksSelf struct {
@@ -470,6 +714,11 @@ type GeneratePublicKeyDefaultBodyLinksSelf struct {
 
 // Validate validates this generate public key default body links self
 func (o *GeneratePublicKeyDefaultBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key default body links self based on context it is used
+func (o *GeneratePublicKeyDefaultBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -491,7 +740,8 @@ func (o *GeneratePublicKeyDefaultBodyLinksSelf) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyResponseStatus generate public key default body response status
+/*
+GeneratePublicKeyDefaultBodyResponseStatus generate public key default body response status
 swagger:model GeneratePublicKeyDefaultBodyResponseStatus
 */
 type GeneratePublicKeyDefaultBodyResponseStatus struct {
@@ -527,7 +777,6 @@ func (o *GeneratePublicKeyDefaultBodyResponseStatus) Validate(formats strfmt.Reg
 }
 
 func (o *GeneratePublicKeyDefaultBodyResponseStatus) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -541,6 +790,47 @@ func (o *GeneratePublicKeyDefaultBodyResponseStatus) validateDetails(formats str
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("generatePublicKey default" + "." + "responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this generate public key default body response status based on the context it is used
+func (o *GeneratePublicKeyDefaultBodyResponseStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GeneratePublicKeyDefaultBodyResponseStatus) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("generatePublicKey default" + "." + "responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("generatePublicKey default" + "." + "responseStatus" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -569,7 +859,8 @@ func (o *GeneratePublicKeyDefaultBodyResponseStatus) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0 generate public key default body response status details items0
+/*
+GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0 generate public key default body response status details items0
 swagger:model GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0
 */
 type GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0 struct {
@@ -583,6 +874,11 @@ type GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0 struct {
 
 // Validate validates this generate public key default body response status details items0
 func (o *GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key default body response status details items0 based on context it is used
+func (o *GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -604,7 +900,8 @@ func (o *GeneratePublicKeyDefaultBodyResponseStatusDetailsItems0) UnmarshalBinar
 	return nil
 }
 
-/*GeneratePublicKeyOKBody flexV1KeysPost200Response
+/*
+GeneratePublicKeyOKBody flexV1KeysPost200Response
 swagger:model GeneratePublicKeyOKBody
 */
 type GeneratePublicKeyOKBody struct {
@@ -638,7 +935,6 @@ func (o *GeneratePublicKeyOKBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GeneratePublicKeyOKBody) validateDer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Der) { // not required
 		return nil
 	}
@@ -647,6 +943,8 @@ func (o *GeneratePublicKeyOKBody) validateDer(formats strfmt.Registry) error {
 		if err := o.Der.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("generatePublicKeyOK" + "." + "der")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKeyOK" + "." + "der")
 			}
 			return err
 		}
@@ -656,7 +954,6 @@ func (o *GeneratePublicKeyOKBody) validateDer(formats strfmt.Registry) error {
 }
 
 func (o *GeneratePublicKeyOKBody) validateJwk(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Jwk) { // not required
 		return nil
 	}
@@ -665,6 +962,68 @@ func (o *GeneratePublicKeyOKBody) validateJwk(formats strfmt.Registry) error {
 		if err := o.Jwk.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("generatePublicKeyOK" + "." + "jwk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKeyOK" + "." + "jwk")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this generate public key o k body based on the context it is used
+func (o *GeneratePublicKeyOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateJwk(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GeneratePublicKeyOKBody) contextValidateDer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Der != nil {
+
+		if swag.IsZero(o.Der) { // not required
+			return nil
+		}
+
+		if err := o.Der.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("generatePublicKeyOK" + "." + "der")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKeyOK" + "." + "der")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GeneratePublicKeyOKBody) contextValidateJwk(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Jwk != nil {
+
+		if swag.IsZero(o.Jwk) { // not required
+			return nil
+		}
+
+		if err := o.Jwk.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("generatePublicKeyOK" + "." + "jwk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("generatePublicKeyOK" + "." + "jwk")
 			}
 			return err
 		}
@@ -691,7 +1050,8 @@ func (o *GeneratePublicKeyOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GeneratePublicKeyOKBodyDer The public key in DER format. Used to validate the response from the Tokenize Card request. Additionally this format is useful for client side encryption in Android and iOS implementations.
+/*
+GeneratePublicKeyOKBodyDer The public key in DER format. Used to validate the response from the Tokenize Card request. Additionally this format is useful for client side encryption in Android and iOS implementations.
 swagger:model GeneratePublicKeyOKBodyDer
 */
 type GeneratePublicKeyOKBodyDer struct {
@@ -708,6 +1068,11 @@ type GeneratePublicKeyOKBodyDer struct {
 
 // Validate validates this generate public key o k body der
 func (o *GeneratePublicKeyOKBodyDer) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key o k body der based on context it is used
+func (o *GeneratePublicKeyOKBodyDer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -729,7 +1094,8 @@ func (o *GeneratePublicKeyOKBodyDer) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GeneratePublicKeyOKBodyJwk The public key in JSON Web Key (JWK) format. This format is useful for client side encryption in JavaScript based implementations.
+/*
+GeneratePublicKeyOKBodyJwk The public key in JSON Web Key (JWK) format. This format is useful for client side encryption in JavaScript based implementations.
 swagger:model GeneratePublicKeyOKBodyJwk
 */
 type GeneratePublicKeyOKBodyJwk struct {
@@ -752,6 +1118,11 @@ type GeneratePublicKeyOKBodyJwk struct {
 
 // Validate validates this generate public key o k body jwk
 func (o *GeneratePublicKeyOKBodyJwk) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this generate public key o k body jwk based on context it is used
+func (o *GeneratePublicKeyOKBodyJwk) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

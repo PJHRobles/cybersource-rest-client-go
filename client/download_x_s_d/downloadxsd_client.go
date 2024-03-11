@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new download x s d API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetXSDV2(params *GetXSDV2Params, opts ...ClientOption) (*GetXSDV2OK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetXSDV2 useds to download x s ds for reports
 
 Downloads XSDs for reports on no-auth.
 */
-func (a *Client) GetXSDV2(params *GetXSDV2Params) (*GetXSDV2OK, error) {
+func (a *Client) GetXSDV2(params *GetXSDV2Params, opts ...ClientOption) (*GetXSDV2OK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetXSDV2Params()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getXSDV2",
 		Method:             "GET",
 		PathPattern:        "/xsds/{reportDefinitionNameVersion}",
@@ -48,7 +56,12 @@ func (a *Client) GetXSDV2(params *GetXSDV2Params) (*GetXSDV2OK, error) {
 		Reader:             &GetXSDV2Reader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

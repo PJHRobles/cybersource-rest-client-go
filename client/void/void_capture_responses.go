@@ -6,16 +6,16 @@ package void
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // VoidCaptureReader is a Reader for the VoidCapture structure.
@@ -44,9 +44,8 @@ func (o *VoidCaptureReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/captures/{id}/voids] voidCapture", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewVoidCaptureCreated() *VoidCaptureCreated {
 	return &VoidCaptureCreated{}
 }
 
-/*VoidCaptureCreated handles this case with default header values.
+/*
+VoidCaptureCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type VoidCaptureCreated struct {
 	Payload *VoidCaptureCreatedBody
 }
 
+// IsSuccess returns true when this void capture created response has a 2xx status code
+func (o *VoidCaptureCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this void capture created response has a 3xx status code
+func (o *VoidCaptureCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void capture created response has a 4xx status code
+func (o *VoidCaptureCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void capture created response has a 5xx status code
+func (o *VoidCaptureCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void capture created response a status code equal to that given
+func (o *VoidCaptureCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the void capture created response
+func (o *VoidCaptureCreated) Code() int {
+	return 201
+}
+
 func (o *VoidCaptureCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureCreated  %+v", 201, o.Payload)
+}
+
+func (o *VoidCaptureCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewVoidCaptureBadRequest() *VoidCaptureBadRequest {
 	return &VoidCaptureBadRequest{}
 }
 
-/*VoidCaptureBadRequest handles this case with default header values.
+/*
+VoidCaptureBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type VoidCaptureBadRequest struct {
 	Payload *VoidCaptureBadRequestBody
 }
 
+// IsSuccess returns true when this void capture bad request response has a 2xx status code
+func (o *VoidCaptureBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void capture bad request response has a 3xx status code
+func (o *VoidCaptureBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void capture bad request response has a 4xx status code
+func (o *VoidCaptureBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this void capture bad request response has a 5xx status code
+func (o *VoidCaptureBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void capture bad request response a status code equal to that given
+func (o *VoidCaptureBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the void capture bad request response
+func (o *VoidCaptureBadRequest) Code() int {
+	return 400
+}
+
 func (o *VoidCaptureBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *VoidCaptureBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewVoidCaptureBadGateway() *VoidCaptureBadGateway {
 	return &VoidCaptureBadGateway{}
 }
 
-/*VoidCaptureBadGateway handles this case with default header values.
+/*
+VoidCaptureBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type VoidCaptureBadGateway struct {
 	Payload *VoidCaptureBadGatewayBody
 }
 
+// IsSuccess returns true when this void capture bad gateway response has a 2xx status code
+func (o *VoidCaptureBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void capture bad gateway response has a 3xx status code
+func (o *VoidCaptureBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void capture bad gateway response has a 4xx status code
+func (o *VoidCaptureBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void capture bad gateway response has a 5xx status code
+func (o *VoidCaptureBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this void capture bad gateway response a status code equal to that given
+func (o *VoidCaptureBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the void capture bad gateway response
+func (o *VoidCaptureBadGateway) Code() int {
+	return 502
+}
+
 func (o *VoidCaptureBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *VoidCaptureBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/captures/{id}/voids][%d] voidCaptureBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,47 +253,8 @@ func (o *VoidCaptureBadGateway) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*DetailsItems0 details items0
-swagger:model DetailsItems0
-*/
-type DetailsItems0 struct {
-
-	// This is the flattened JSON object field name/path that is either missing or invalid.
-	Field string `json:"field,omitempty"`
-
-	// Possible reasons for the error.
-	//
-	// Possible values:
-	//  - MISSING_FIELD
-	//  - INVALID_DATA
-	//
-	Reason string `json:"reason,omitempty"`
-}
-
-// Validate validates this details items0
-func (o *DetailsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *DetailsItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *DetailsItems0) UnmarshalBinary(b []byte) error {
-	var res DetailsItems0
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*VoidCaptureBadGatewayBody ptsV2CapturesVoidsPost502Response
+/*
+VoidCaptureBadGatewayBody ptsV2CapturesVoidsPost502Response
 swagger:model VoidCaptureBadGatewayBody
 */
 type VoidCaptureBadGatewayBody struct {
@@ -226,6 +291,11 @@ func (o *VoidCaptureBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this void capture bad gateway body based on context it is used
+func (o *VoidCaptureBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *VoidCaptureBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -244,13 +314,14 @@ func (o *VoidCaptureBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureBadRequestBody ptsV2CapturesVoidsPost400Response
+/*
+VoidCaptureBadRequestBody ptsV2CapturesVoidsPost400Response
 swagger:model VoidCaptureBadRequestBody
 */
 type VoidCaptureBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*VoidCaptureBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -295,7 +366,6 @@ func (o *VoidCaptureBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -309,6 +379,47 @@ func (o *VoidCaptureBadRequestBody) validateDetails(formats strfmt.Registry) err
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("voidCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void capture bad request body based on the context it is used
+func (o *VoidCaptureBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCaptureBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("voidCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidCaptureBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -337,7 +448,55 @@ func (o *VoidCaptureBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureBody void capture body
+/*
+VoidCaptureBadRequestBodyDetailsItems0 void capture bad request body details items0
+swagger:model VoidCaptureBadRequestBodyDetailsItems0
+*/
+type VoidCaptureBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this void capture bad request body details items0
+func (o *VoidCaptureBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void capture bad request body details items0 based on context it is used
+func (o *VoidCaptureBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *VoidCaptureBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *VoidCaptureBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res VoidCaptureBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+VoidCaptureBody void capture body
+// Example: {"clientReferenceInformation":{"code":"test_void"}}
 swagger:model VoidCaptureBody
 */
 type VoidCaptureBody struct {
@@ -361,7 +520,6 @@ func (o *VoidCaptureBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -370,6 +528,43 @@ func (o *VoidCaptureBody) validateClientReferenceInformation(formats strfmt.Regi
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void capture body based on the context it is used
+func (o *VoidCaptureBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCaptureBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -396,7 +591,9 @@ func (o *VoidCaptureBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureCreatedBody ptsV2CapturesVoidsPost201Response
+/*
+VoidCaptureCreatedBody ptsV2CapturesVoidsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/voids/4963015122056179201545","method":"GET"}},"clientReferenceInformation":{"code":"test_void"},"id":"4963015122056179201545","orderInformation":{"amountDetails":{"currency":"USD"}},"status":"VOIDED","submitTimeUtc":"2017-06-01T071832Z","voidAmountDetails":{"currency":"usd","voidAmount":"102.21"}}
 swagger:model VoidCaptureCreatedBody
 */
 type VoidCaptureCreatedBody struct {
@@ -455,7 +652,6 @@ func (o *VoidCaptureCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -464,6 +660,8 @@ func (o *VoidCaptureCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -473,7 +671,6 @@ func (o *VoidCaptureCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -482,6 +679,8 @@ func (o *VoidCaptureCreatedBody) validateClientReferenceInformation(formats strf
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -491,12 +690,11 @@ func (o *VoidCaptureCreatedBody) validateClientReferenceInformation(formats strf
 }
 
 func (o *VoidCaptureCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("voidCaptureCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -504,7 +702,6 @@ func (o *VoidCaptureCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureCreatedBody) validateVoidAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VoidAmountDetails) { // not required
 		return nil
 	}
@@ -513,6 +710,93 @@ func (o *VoidCaptureCreatedBody) validateVoidAmountDetails(formats strfmt.Regist
 		if err := o.VoidAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "voidAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void capture created body based on the context it is used
+func (o *VoidCaptureCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoidAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCaptureCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidCaptureCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidCaptureCreatedBody) contextValidateVoidAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.VoidAmountDetails != nil {
+
+		if swag.IsZero(o.VoidAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.VoidAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "voidAmountDetails")
 			}
 			return err
 		}
@@ -539,7 +823,8 @@ func (o *VoidCaptureCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureCreatedBodyClientReferenceInformation void capture created body client reference information
+/*
+VoidCaptureCreatedBodyClientReferenceInformation void capture created body client reference information
 swagger:model VoidCaptureCreatedBodyClientReferenceInformation
 */
 type VoidCaptureCreatedBodyClientReferenceInformation struct {
@@ -594,12 +879,11 @@ func (o *VoidCaptureCreatedBodyClientReferenceInformation) Validate(formats strf
 }
 
 func (o *VoidCaptureCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidCaptureCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -607,15 +891,19 @@ func (o *VoidCaptureCreatedBodyClientReferenceInformation) validateCode(formats 
 }
 
 func (o *VoidCaptureCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("voidCaptureCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void capture created body client reference information based on context it is used
+func (o *VoidCaptureCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -637,7 +925,8 @@ func (o *VoidCaptureCreatedBodyClientReferenceInformation) UnmarshalBinary(b []b
 	return nil
 }
 
-/*VoidCaptureCreatedBodyLinks void capture created body links
+/*
+VoidCaptureCreatedBodyLinks void capture created body links
 swagger:model VoidCaptureCreatedBodyLinks
 */
 type VoidCaptureCreatedBodyLinks struct {
@@ -661,7 +950,6 @@ func (o *VoidCaptureCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidCaptureCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -670,6 +958,43 @@ func (o *VoidCaptureCreatedBodyLinks) validateSelf(formats strfmt.Registry) erro
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void capture created body links based on the context it is used
+func (o *VoidCaptureCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCaptureCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -696,7 +1021,8 @@ func (o *VoidCaptureCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureCreatedBodyLinksSelf void capture created body links self
+/*
+VoidCaptureCreatedBodyLinksSelf void capture created body links self
 swagger:model VoidCaptureCreatedBodyLinksSelf
 */
 type VoidCaptureCreatedBodyLinksSelf struct {
@@ -710,6 +1036,11 @@ type VoidCaptureCreatedBodyLinksSelf struct {
 
 // Validate validates this void capture created body links self
 func (o *VoidCaptureCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void capture created body links self based on context it is used
+func (o *VoidCaptureCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -731,7 +1062,8 @@ func (o *VoidCaptureCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidCaptureCreatedBodyVoidAmountDetails void capture created body void amount details
+/*
+VoidCaptureCreatedBodyVoidAmountDetails void capture created body void amount details
 swagger:model VoidCaptureCreatedBodyVoidAmountDetails
 */
 type VoidCaptureCreatedBodyVoidAmountDetails struct {
@@ -770,15 +1102,19 @@ func (o *VoidCaptureCreatedBodyVoidAmountDetails) Validate(formats strfmt.Regist
 }
 
 func (o *VoidCaptureCreatedBodyVoidAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureCreated"+"."+"voidAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("voidCaptureCreated"+"."+"voidAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void capture created body void amount details based on context it is used
+func (o *VoidCaptureCreatedBodyVoidAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -800,7 +1136,8 @@ func (o *VoidCaptureCreatedBodyVoidAmountDetails) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*VoidCaptureParamsBodyClientReferenceInformation void capture params body client reference information
+/*
+VoidCaptureParamsBodyClientReferenceInformation void capture params body client reference information
 swagger:model VoidCaptureParamsBodyClientReferenceInformation
 */
 type VoidCaptureParamsBodyClientReferenceInformation struct {
@@ -842,12 +1179,11 @@ func (o *VoidCaptureParamsBodyClientReferenceInformation) Validate(formats strfm
 }
 
 func (o *VoidCaptureParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -855,7 +1191,6 @@ func (o *VoidCaptureParamsBodyClientReferenceInformation) validateCode(formats s
 }
 
 func (o *VoidCaptureParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -864,6 +1199,43 @@ func (o *VoidCaptureParamsBodyClientReferenceInformation) validatePartner(format
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void capture params body client reference information based on the context it is used
+func (o *VoidCaptureParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidCaptureParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidCaptureRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -890,7 +1262,8 @@ func (o *VoidCaptureParamsBodyClientReferenceInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*VoidCaptureParamsBodyClientReferenceInformationPartner void capture params body client reference information partner
+/*
+VoidCaptureParamsBodyClientReferenceInformationPartner void capture params body client reference information partner
 swagger:model VoidCaptureParamsBodyClientReferenceInformationPartner
 */
 type VoidCaptureParamsBodyClientReferenceInformationPartner struct {
@@ -934,12 +1307,11 @@ func (o *VoidCaptureParamsBodyClientReferenceInformationPartner) Validate(format
 }
 
 func (o *VoidCaptureParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -947,15 +1319,19 @@ func (o *VoidCaptureParamsBodyClientReferenceInformationPartner) validateDevelop
 }
 
 func (o *VoidCaptureParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("voidCaptureRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void capture params body client reference information partner based on context it is used
+func (o *VoidCaptureParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

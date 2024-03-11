@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new capture API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CapturePayment(params *CapturePaymentParams, opts ...ClientOption) (*CapturePaymentCreated, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 CapturePayment captures a payment
 
 Include the payment ID in the POST request to capture the payment amount.
 */
-func (a *Client) CapturePayment(params *CapturePaymentParams) (*CapturePaymentCreated, error) {
+func (a *Client) CapturePayment(params *CapturePaymentParams, opts ...ClientOption) (*CapturePaymentCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCapturePaymentParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "capturePayment",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/payments/{id}/captures",
@@ -48,7 +56,12 @@ func (a *Client) CapturePayment(params *CapturePaymentParams) (*CapturePaymentCr
 		Reader:             &CapturePaymentReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

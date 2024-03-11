@@ -6,16 +6,17 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // FileDetailsResponse file details response
+//
 // swagger:model FileDetailsResponse
 type FileDetailsResponse struct {
 
@@ -45,7 +46,6 @@ func (m *FileDetailsResponse) Validate(formats strfmt.Registry) error {
 }
 
 func (m *FileDetailsResponse) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -54,6 +54,8 @@ func (m *FileDetailsResponse) validateLinks(formats strfmt.Registry) error {
 		if err := m.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -63,7 +65,6 @@ func (m *FileDetailsResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 func (m *FileDetailsResponse) validateFileDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.FileDetails) { // not required
 		return nil
 	}
@@ -77,6 +78,72 @@ func (m *FileDetailsResponse) validateFileDetails(formats strfmt.Registry) error
 			if err := m.FileDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("fileDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("fileDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this file details response based on the context it is used
+func (m *FileDetailsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFileDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *FileDetailsResponse) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *FileDetailsResponse) contextValidateFileDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.FileDetails); i++ {
+
+		if m.FileDetails[i] != nil {
+
+			if swag.IsZero(m.FileDetails[i]) { // not required
+				return nil
+			}
+
+			if err := m.FileDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("fileDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("fileDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -106,21 +173,26 @@ func (m *FileDetailsResponse) UnmarshalBinary(b []byte) error {
 }
 
 // FileDetailsResponseFileDetailsItems0 file details response file details items0
+//
 // swagger:model FileDetailsResponseFileDetailsItems0
 type FileDetailsResponseFileDetailsItems0 struct {
 
 	// Date and time for the file in PST
+	// Example: 2017-10-01T00:00:00+05:00
 	// Format: date-time
 	CreatedTime strfmt.DateTime `json:"createdTime,omitempty"`
 
 	// Date and time for the file in PST
+	// Example: 2017-10-05
 	// Format: date
 	Date strfmt.Date `json:"date,omitempty"`
 
 	// Unique identifier of a file
+	// Example: AC855F9F42C90361EC78202F47CDE98D70BEAA6FB00FB56AE83EE9A9DAEE077B
 	FileID string `json:"fileId,omitempty"`
 
 	// Date and time for the file in PST
+	// Example: 2017-10-01T00:00:00+05:00
 	// Format: date-time
 	LastModifiedTime strfmt.DateTime `json:"lastModifiedTime,omitempty"`
 
@@ -132,12 +204,15 @@ type FileDetailsResponseFileDetailsItems0 struct {
 	// - 'application/pdf'
 	// - 'application/octet-stream'
 	//
+	// Example: application/xml
 	MimeType string `json:"mimeType,omitempty"`
 
 	// Name of the file
+	// Example: MyTransactionDetailreport.xml
 	Name string `json:"name,omitempty"`
 
 	// Size of the file in bytes
+	// Example: 2245397
 	Size int64 `json:"size,omitempty"`
 }
 
@@ -164,7 +239,6 @@ func (m *FileDetailsResponseFileDetailsItems0) Validate(formats strfmt.Registry)
 }
 
 func (m *FileDetailsResponseFileDetailsItems0) validateCreatedTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreatedTime) { // not required
 		return nil
 	}
@@ -177,7 +251,6 @@ func (m *FileDetailsResponseFileDetailsItems0) validateCreatedTime(formats strfm
 }
 
 func (m *FileDetailsResponseFileDetailsItems0) validateDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Date) { // not required
 		return nil
 	}
@@ -190,7 +263,6 @@ func (m *FileDetailsResponseFileDetailsItems0) validateDate(formats strfmt.Regis
 }
 
 func (m *FileDetailsResponseFileDetailsItems0) validateLastModifiedTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.LastModifiedTime) { // not required
 		return nil
 	}
@@ -199,6 +271,11 @@ func (m *FileDetailsResponseFileDetailsItems0) validateLastModifiedTime(formats 
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this file details response file details items0 based on context it is used
+func (m *FileDetailsResponseFileDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -221,6 +298,7 @@ func (m *FileDetailsResponseFileDetailsItems0) UnmarshalBinary(b []byte) error {
 }
 
 // FileDetailsResponseLinks file details response links
+//
 // swagger:model FileDetailsResponseLinks
 type FileDetailsResponseLinks struct {
 
@@ -250,7 +328,6 @@ func (m *FileDetailsResponseLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (m *FileDetailsResponseLinks) validateFiles(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Files) { // not required
 		return nil
 	}
@@ -264,6 +341,8 @@ func (m *FileDetailsResponseLinks) validateFiles(formats strfmt.Registry) error 
 			if err := m.Files[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("_links" + "." + "files" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "files" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -275,7 +354,6 @@ func (m *FileDetailsResponseLinks) validateFiles(formats strfmt.Registry) error 
 }
 
 func (m *FileDetailsResponseLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Self) { // not required
 		return nil
 	}
@@ -284,6 +362,72 @@ func (m *FileDetailsResponseLinks) validateSelf(formats strfmt.Registry) error {
 		if err := m.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this file details response links based on the context it is used
+func (m *FileDetailsResponseLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFiles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *FileDetailsResponseLinks) contextValidateFiles(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Files); i++ {
+
+		if m.Files[i] != nil {
+
+			if swag.IsZero(m.Files[i]) { // not required
+				return nil
+			}
+
+			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("_links" + "." + "files" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "files" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *FileDetailsResponseLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
 			}
 			return err
 		}
@@ -311,21 +455,30 @@ func (m *FileDetailsResponseLinks) UnmarshalBinary(b []byte) error {
 }
 
 // FileDetailsResponseLinksFilesItems0 file details response links files items0
+//
 // swagger:model FileDetailsResponseLinksFilesItems0
 type FileDetailsResponseLinksFilesItems0 struct {
 
 	// Unique identifier for each file
+	// Example: AC855F9F42C90361EC78202F47CDE98D70BEAA6FB00FB56AE83EE9A9DAEE077B
 	FileID string `json:"fileId,omitempty"`
 
 	// href
+	// Example: /sfs/v1/files/AC855F9F42C90361EC78202F47CDE98D70BEAA6FB00FB56AE83EE9A9DAEE077B
 	Href string `json:"href,omitempty"`
 
 	// method
+	// Example: GET
 	Method string `json:"method,omitempty"`
 }
 
 // Validate validates this file details response links files items0
 func (m *FileDetailsResponseLinksFilesItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this file details response links files items0 based on context it is used
+func (m *FileDetailsResponseLinksFilesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -348,18 +501,26 @@ func (m *FileDetailsResponseLinksFilesItems0) UnmarshalBinary(b []byte) error {
 }
 
 // FileDetailsResponseLinksSelf file details response links self
+//
 // swagger:model FileDetailsResponseLinksSelf
 type FileDetailsResponseLinksSelf struct {
 
 	// href
+	// Example: /sfs/v1/file-details?startDate=2018-01-01\u0026endDate=2018-01-02
 	Href string `json:"href,omitempty"`
 
 	// method
+	// Example: GET
 	Method string `json:"method,omitempty"`
 }
 
 // Validate validates this file details response links self
 func (m *FileDetailsResponseLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this file details response links self based on context it is used
+func (m *FileDetailsResponseLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,15 +6,15 @@ package instrument_identifier
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreateInstrumentIdentifierReader is a Reader for the CreateInstrumentIdentifier structure.
@@ -61,9 +61,8 @@ func (o *CreateInstrumentIdentifierReader) ReadResponse(response runtime.ClientR
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /tms/v1/instrumentidentifiers] createInstrumentIdentifier", response, response.Code())
 	}
 }
 
@@ -72,22 +71,59 @@ func NewCreateInstrumentIdentifierOK() *CreateInstrumentIdentifierOK {
 	return &CreateInstrumentIdentifierOK{}
 }
 
-/*CreateInstrumentIdentifierOK handles this case with default header values.
+/*
+CreateInstrumentIdentifierOK describes a response with status code 200, with default header values.
 
 An existing Instrument Identifier containing the same data has already been returned.
 */
 type CreateInstrumentIdentifierOK struct {
-	/*Link to the Instrument Identifier.
+
+	/* Link to the Instrument Identifier.
 	 */
 	Location string
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload *CreateInstrumentIdentifierOKBody
 }
 
+// IsSuccess returns true when this create instrument identifier o k response has a 2xx status code
+func (o *CreateInstrumentIdentifierOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create instrument identifier o k response has a 3xx status code
+func (o *CreateInstrumentIdentifierOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier o k response has a 4xx status code
+func (o *CreateInstrumentIdentifierOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instrument identifier o k response has a 5xx status code
+func (o *CreateInstrumentIdentifierOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instrument identifier o k response a status code equal to that given
+func (o *CreateInstrumentIdentifierOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the create instrument identifier o k response
+func (o *CreateInstrumentIdentifierOK) Code() int {
+	return 200
+}
+
 func (o *CreateInstrumentIdentifierOK) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierOK  %+v", 200, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierOK) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierOK  %+v", 200, o.Payload)
 }
 
@@ -97,11 +133,19 @@ func (o *CreateInstrumentIdentifierOK) GetPayload() *CreateInstrumentIdentifierO
 
 func (o *CreateInstrumentIdentifierOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	o.Payload = new(CreateInstrumentIdentifierOKBody)
 
@@ -118,22 +162,59 @@ func NewCreateInstrumentIdentifierCreated() *CreateInstrumentIdentifierCreated {
 	return &CreateInstrumentIdentifierCreated{}
 }
 
-/*CreateInstrumentIdentifierCreated handles this case with default header values.
+/*
+CreateInstrumentIdentifierCreated describes a response with status code 201, with default header values.
 
 A new Instrument Identifier has been created.
 */
 type CreateInstrumentIdentifierCreated struct {
-	/*Link to the Instrument Identifier.
+
+	/* Link to the Instrument Identifier.
 	 */
 	Location string
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload *CreateInstrumentIdentifierCreatedBody
 }
 
+// IsSuccess returns true when this create instrument identifier created response has a 2xx status code
+func (o *CreateInstrumentIdentifierCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create instrument identifier created response has a 3xx status code
+func (o *CreateInstrumentIdentifierCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier created response has a 4xx status code
+func (o *CreateInstrumentIdentifierCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instrument identifier created response has a 5xx status code
+func (o *CreateInstrumentIdentifierCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instrument identifier created response a status code equal to that given
+func (o *CreateInstrumentIdentifierCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create instrument identifier created response
+func (o *CreateInstrumentIdentifierCreated) Code() int {
+	return 201
+}
+
 func (o *CreateInstrumentIdentifierCreated) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierCreated) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierCreated  %+v", 201, o.Payload)
 }
 
@@ -143,11 +224,19 @@ func (o *CreateInstrumentIdentifierCreated) GetPayload() *CreateInstrumentIdenti
 
 func (o *CreateInstrumentIdentifierCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	o.Payload = new(CreateInstrumentIdentifierCreatedBody)
 
@@ -164,19 +253,55 @@ func NewCreateInstrumentIdentifierBadRequest() *CreateInstrumentIdentifierBadReq
 	return &CreateInstrumentIdentifierBadRequest{}
 }
 
-/*CreateInstrumentIdentifierBadRequest handles this case with default header values.
+/*
+CreateInstrumentIdentifierBadRequest describes a response with status code 400, with default header values.
 
 Bad Request. A required header value could be missing.
 */
 type CreateInstrumentIdentifierBadRequest struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreateInstrumentIdentifierBadRequestBodyItems0
 }
 
+// IsSuccess returns true when this create instrument identifier bad request response has a 2xx status code
+func (o *CreateInstrumentIdentifierBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instrument identifier bad request response has a 3xx status code
+func (o *CreateInstrumentIdentifierBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier bad request response has a 4xx status code
+func (o *CreateInstrumentIdentifierBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instrument identifier bad request response has a 5xx status code
+func (o *CreateInstrumentIdentifierBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instrument identifier bad request response a status code equal to that given
+func (o *CreateInstrumentIdentifierBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create instrument identifier bad request response
+func (o *CreateInstrumentIdentifierBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateInstrumentIdentifierBadRequest) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierBadRequest) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierBadRequest  %+v", 400, o.Payload)
 }
 
@@ -186,8 +311,12 @@ func (o *CreateInstrumentIdentifierBadRequest) GetPayload() []*CreateInstrumentI
 
 func (o *CreateInstrumentIdentifierBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -202,19 +331,55 @@ func NewCreateInstrumentIdentifierForbidden() *CreateInstrumentIdentifierForbidd
 	return &CreateInstrumentIdentifierForbidden{}
 }
 
-/*CreateInstrumentIdentifierForbidden handles this case with default header values.
+/*
+CreateInstrumentIdentifierForbidden describes a response with status code 403, with default header values.
 
 Forbidden. The profile might not have permission to perform the token operation.
 */
 type CreateInstrumentIdentifierForbidden struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreateInstrumentIdentifierForbiddenBodyItems0
 }
 
+// IsSuccess returns true when this create instrument identifier forbidden response has a 2xx status code
+func (o *CreateInstrumentIdentifierForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instrument identifier forbidden response has a 3xx status code
+func (o *CreateInstrumentIdentifierForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier forbidden response has a 4xx status code
+func (o *CreateInstrumentIdentifierForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instrument identifier forbidden response has a 5xx status code
+func (o *CreateInstrumentIdentifierForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instrument identifier forbidden response a status code equal to that given
+func (o *CreateInstrumentIdentifierForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create instrument identifier forbidden response
+func (o *CreateInstrumentIdentifierForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateInstrumentIdentifierForbidden) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierForbidden) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierForbidden  %+v", 403, o.Payload)
 }
 
@@ -224,8 +389,12 @@ func (o *CreateInstrumentIdentifierForbidden) GetPayload() []*CreateInstrumentId
 
 func (o *CreateInstrumentIdentifierForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -240,19 +409,55 @@ func NewCreateInstrumentIdentifierFailedDependency() *CreateInstrumentIdentifier
 	return &CreateInstrumentIdentifierFailedDependency{}
 }
 
-/*CreateInstrumentIdentifierFailedDependency handles this case with default header values.
+/*
+CreateInstrumentIdentifierFailedDependency describes a response with status code 424, with default header values.
 
 Failed Dependency: e.g. The profile represented by the profile-id may not exist or the profile-id was entered incorrectly.
 */
 type CreateInstrumentIdentifierFailedDependency struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreateInstrumentIdentifierFailedDependencyBodyItems0
 }
 
+// IsSuccess returns true when this create instrument identifier failed dependency response has a 2xx status code
+func (o *CreateInstrumentIdentifierFailedDependency) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instrument identifier failed dependency response has a 3xx status code
+func (o *CreateInstrumentIdentifierFailedDependency) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier failed dependency response has a 4xx status code
+func (o *CreateInstrumentIdentifierFailedDependency) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instrument identifier failed dependency response has a 5xx status code
+func (o *CreateInstrumentIdentifierFailedDependency) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instrument identifier failed dependency response a status code equal to that given
+func (o *CreateInstrumentIdentifierFailedDependency) IsCode(code int) bool {
+	return code == 424
+}
+
+// Code gets the status code for the create instrument identifier failed dependency response
+func (o *CreateInstrumentIdentifierFailedDependency) Code() int {
+	return 424
+}
+
 func (o *CreateInstrumentIdentifierFailedDependency) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierFailedDependency  %+v", 424, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierFailedDependency) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierFailedDependency  %+v", 424, o.Payload)
 }
 
@@ -262,8 +467,12 @@ func (o *CreateInstrumentIdentifierFailedDependency) GetPayload() []*CreateInstr
 
 func (o *CreateInstrumentIdentifierFailedDependency) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -278,19 +487,55 @@ func NewCreateInstrumentIdentifierInternalServerError() *CreateInstrumentIdentif
 	return &CreateInstrumentIdentifierInternalServerError{}
 }
 
-/*CreateInstrumentIdentifierInternalServerError handles this case with default header values.
+/*
+CreateInstrumentIdentifierInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected error.
 */
 type CreateInstrumentIdentifierInternalServerError struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreateInstrumentIdentifierInternalServerErrorBodyItems0
 }
 
+// IsSuccess returns true when this create instrument identifier internal server error response has a 2xx status code
+func (o *CreateInstrumentIdentifierInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instrument identifier internal server error response has a 3xx status code
+func (o *CreateInstrumentIdentifierInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instrument identifier internal server error response has a 4xx status code
+func (o *CreateInstrumentIdentifierInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instrument identifier internal server error response has a 5xx status code
+func (o *CreateInstrumentIdentifierInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create instrument identifier internal server error response a status code equal to that given
+func (o *CreateInstrumentIdentifierInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create instrument identifier internal server error response
+func (o *CreateInstrumentIdentifierInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateInstrumentIdentifierInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateInstrumentIdentifierInternalServerError) String() string {
 	return fmt.Sprintf("[POST /tms/v1/instrumentidentifiers][%d] createInstrumentIdentifierInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -300,8 +545,12 @@ func (o *CreateInstrumentIdentifierInternalServerError) GetPayload() []*CreateIn
 
 func (o *CreateInstrumentIdentifierInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -311,7 +560,8 @@ func (o *CreateInstrumentIdentifierInternalServerError) readResponse(response ru
 	return nil
 }
 
-/*CreateInstrumentIdentifierBadRequestBodyItems0 create instrument identifier bad request body items0
+/*
+CreateInstrumentIdentifierBadRequestBodyItems0 create instrument identifier bad request body items0
 swagger:model CreateInstrumentIdentifierBadRequestBodyItems0
 */
 type CreateInstrumentIdentifierBadRequestBodyItems0 struct {
@@ -341,7 +591,6 @@ func (o *CreateInstrumentIdentifierBadRequestBodyItems0) Validate(formats strfmt
 }
 
 func (o *CreateInstrumentIdentifierBadRequestBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -350,6 +599,43 @@ func (o *CreateInstrumentIdentifierBadRequestBodyItems0) validateDetails(formats
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier bad request body items0 based on the context it is used
+func (o *CreateInstrumentIdentifierBadRequestBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierBadRequestBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -376,7 +662,8 @@ func (o *CreateInstrumentIdentifierBadRequestBodyItems0) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreateInstrumentIdentifierBadRequestBodyItems0Details create instrument identifier bad request body items0 details
+/*
+CreateInstrumentIdentifierBadRequestBodyItems0Details create instrument identifier bad request body items0 details
 swagger:model CreateInstrumentIdentifierBadRequestBodyItems0Details
 */
 type CreateInstrumentIdentifierBadRequestBodyItems0Details struct {
@@ -390,6 +677,11 @@ type CreateInstrumentIdentifierBadRequestBodyItems0Details struct {
 
 // Validate validates this create instrument identifier bad request body items0 details
 func (o *CreateInstrumentIdentifierBadRequestBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier bad request body items0 details based on context it is used
+func (o *CreateInstrumentIdentifierBadRequestBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -411,7 +703,8 @@ func (o *CreateInstrumentIdentifierBadRequestBodyItems0Details) UnmarshalBinary(
 	return nil
 }
 
-/*CreateInstrumentIdentifierBody create instrument identifier body
+/*
+CreateInstrumentIdentifierBody create instrument identifier body
 swagger:model CreateInstrumentIdentifierBody
 */
 type CreateInstrumentIdentifierBody struct {
@@ -426,6 +719,7 @@ type CreateInstrumentIdentifierBody struct {
 	Card *CreateInstrumentIdentifierParamsBodyCard `json:"card,omitempty"`
 
 	// Type of Card
+	// Example: enrollable card
 	Type string `json:"type,omitempty"`
 }
 
@@ -452,7 +746,6 @@ func (o *CreateInstrumentIdentifierBody) Validate(formats strfmt.Registry) error
 }
 
 func (o *CreateInstrumentIdentifierBody) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -461,6 +754,8 @@ func (o *CreateInstrumentIdentifierBody) validateBankAccount(formats strfmt.Regi
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "BankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "BankAccount")
 			}
 			return err
 		}
@@ -470,7 +765,6 @@ func (o *CreateInstrumentIdentifierBody) validateBankAccount(formats strfmt.Regi
 }
 
 func (o *CreateInstrumentIdentifierBody) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -479,6 +773,8 @@ func (o *CreateInstrumentIdentifierBody) validateBillTo(formats strfmt.Registry)
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "billTo")
 			}
 			return err
 		}
@@ -488,7 +784,6 @@ func (o *CreateInstrumentIdentifierBody) validateBillTo(formats strfmt.Registry)
 }
 
 func (o *CreateInstrumentIdentifierBody) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -497,6 +792,93 @@ func (o *CreateInstrumentIdentifierBody) validateCard(formats strfmt.Registry) e
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier body based on the context it is used
+func (o *CreateInstrumentIdentifierBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierBody) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "BankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "BankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierBody) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierBody) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierRequest" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierRequest" + "." + "card")
 			}
 			return err
 		}
@@ -523,7 +905,8 @@ func (o *CreateInstrumentIdentifierBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBody tmsV1InstrumentIdentifiersPost201Response
+/*
+CreateInstrumentIdentifierCreatedBody tmsV1InstrumentIdentifiersPost201Response
 swagger:model CreateInstrumentIdentifierCreatedBody
 */
 type CreateInstrumentIdentifierCreatedBody struct {
@@ -538,6 +921,7 @@ type CreateInstrumentIdentifierCreatedBody struct {
 	Card *CreateInstrumentIdentifierCreatedBodyCard `json:"card,omitempty"`
 
 	// Unique identification number assigned by CyberSource to the submitted request.
+	// Example: 1234567890123456800
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
@@ -549,6 +933,7 @@ type CreateInstrumentIdentifierCreatedBody struct {
 	// Valid values:
 	// - instrumentIdentifier
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -561,6 +946,7 @@ type CreateInstrumentIdentifierCreatedBody struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -596,7 +982,6 @@ func (o *CreateInstrumentIdentifierCreatedBody) Validate(formats strfmt.Registry
 }
 
 func (o *CreateInstrumentIdentifierCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -605,6 +990,8 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateLinks(formats strfmt.Reg
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -614,7 +1001,6 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateLinks(formats strfmt.Reg
 }
 
 func (o *CreateInstrumentIdentifierCreatedBody) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -623,6 +1009,8 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateBankAccount(formats strf
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -632,7 +1020,6 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateBankAccount(formats strf
 }
 
 func (o *CreateInstrumentIdentifierCreatedBody) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -641,6 +1028,8 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateCard(formats strfmt.Regi
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "card")
 			}
 			return err
 		}
@@ -650,7 +1039,6 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateCard(formats strfmt.Regi
 }
 
 func (o *CreateInstrumentIdentifierCreatedBody) validateMetadata(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Metadata) { // not required
 		return nil
 	}
@@ -659,6 +1047,8 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateMetadata(formats strfmt.
 		if err := o.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "metadata")
 			}
 			return err
 		}
@@ -668,7 +1058,6 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateMetadata(formats strfmt.
 }
 
 func (o *CreateInstrumentIdentifierCreatedBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -677,9 +1066,185 @@ func (o *CreateInstrumentIdentifierCreatedBody) validateProcessingInformation(fo
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierCreated"+"."+"id", "body", string(o.ID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Metadata != nil {
+
+		if swag.IsZero(o.Metadata) { // not required
+			return nil
+		}
+
+		if err := o.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierCreated"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBody) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierCreated"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -703,17 +1268,20 @@ func (o *CreateInstrumentIdentifierCreatedBody) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyBankAccount create instrument identifier created body bank account
+/*
+CreateInstrumentIdentifierCreatedBodyBankAccount create instrument identifier created body bank account
 swagger:model CreateInstrumentIdentifierCreatedBodyBankAccount
 */
 type CreateInstrumentIdentifierCreatedBodyBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -738,16 +1306,15 @@ func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) Validate(formats strf
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"number", "body", o.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -755,19 +1322,23 @@ func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) validateNumber(format
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body bank account based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -789,12 +1360,14 @@ func (o *CreateInstrumentIdentifierCreatedBodyBankAccount) UnmarshalBinary(b []b
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyCard create instrument identifier created body card
+/*
+CreateInstrumentIdentifierCreatedBodyCard create instrument identifier created body card
 swagger:model CreateInstrumentIdentifierCreatedBodyCard
 */
 type CreateInstrumentIdentifierCreatedBodyCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -815,19 +1388,23 @@ func (o *CreateInstrumentIdentifierCreatedBodyCard) Validate(formats strfmt.Regi
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"card"+"."+"number", "body", string(o.Number), 12); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierCreated"+"."+"card"+"."+"number", "body", o.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"card"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"card"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body card based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -849,7 +1426,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyCard) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyLinks create instrument identifier created body links
+/*
+CreateInstrumentIdentifierCreatedBodyLinks create instrument identifier created body links
 swagger:model CreateInstrumentIdentifierCreatedBodyLinks
 */
 type CreateInstrumentIdentifierCreatedBodyLinks struct {
@@ -887,7 +1465,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) Validate(formats strfmt.Reg
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -896,6 +1473,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateAncestor(formats st
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -905,7 +1484,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateAncestor(formats st
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -914,6 +1492,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateSelf(formats strfmt
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -923,7 +1503,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateSelf(formats strfmt
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -932,6 +1511,93 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) validateSuccessor(formats s
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body links based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -958,17 +1624,24 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinks) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyLinksAncestor create instrument identifier created body links ancestor
+/*
+CreateInstrumentIdentifierCreatedBodyLinksAncestor create instrument identifier created body links ancestor
 swagger:model CreateInstrumentIdentifierCreatedBodyLinksAncestor
 */
 type CreateInstrumentIdentifierCreatedBodyLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier created body links ancestor
 func (o *CreateInstrumentIdentifierCreatedBodyLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body links ancestor based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -990,17 +1663,24 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinksAncestor) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyLinksSelf create instrument identifier created body links self
+/*
+CreateInstrumentIdentifierCreatedBodyLinksSelf create instrument identifier created body links self
 swagger:model CreateInstrumentIdentifierCreatedBodyLinksSelf
 */
 type CreateInstrumentIdentifierCreatedBodyLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier created body links self
 func (o *CreateInstrumentIdentifierCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body links self based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1022,17 +1702,24 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinksSelf) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyLinksSuccessor create instrument identifier created body links successor
+/*
+CreateInstrumentIdentifierCreatedBodyLinksSuccessor create instrument identifier created body links successor
 swagger:model CreateInstrumentIdentifierCreatedBodyLinksSuccessor
 */
 type CreateInstrumentIdentifierCreatedBodyLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier created body links successor
 func (o *CreateInstrumentIdentifierCreatedBodyLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body links successor based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1054,17 +1741,29 @@ func (o *CreateInstrumentIdentifierCreatedBodyLinksSuccessor) UnmarshalBinary(b 
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyMetadata create instrument identifier created body metadata
+/*
+CreateInstrumentIdentifierCreatedBodyMetadata create instrument identifier created body metadata
 swagger:model CreateInstrumentIdentifierCreatedBodyMetadata
 */
 type CreateInstrumentIdentifierCreatedBodyMetadata struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create instrument identifier created body metadata
 func (o *CreateInstrumentIdentifierCreatedBodyMetadata) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body metadata based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -1086,7 +1785,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyMetadata) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyProcessingInformation create instrument identifier created body processing information
+/*
+CreateInstrumentIdentifierCreatedBodyProcessingInformation create instrument identifier created body processing information
 swagger:model CreateInstrumentIdentifierCreatedBodyProcessingInformation
 */
 type CreateInstrumentIdentifierCreatedBodyProcessingInformation struct {
@@ -1110,7 +1810,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) Validate(fo
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -1119,6 +1818,43 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) validateAut
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body processing information based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -1145,7 +1881,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformation) UnmarshalBi
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions create instrument identifier created body processing information authorization options
+/*
+CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions create instrument identifier created body processing information authorization options
 swagger:model CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions
 */
 type CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions struct {
@@ -1169,7 +1906,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Initiator) { // not required
 		return nil
 	}
@@ -1178,6 +1914,43 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 		if err := o.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body processing information authorization options based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Initiator != nil {
+
+		if swag.IsZero(o.Initiator) { // not required
+			return nil
+		}
+
+		if err := o.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -1204,7 +1977,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator create instrument identifier created body processing information authorization options initiator
+/*
+CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator create instrument identifier created body processing information authorization options initiator
 swagger:model CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator
 */
 type CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator struct {
@@ -1228,7 +2002,6 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -1237,6 +2010,43 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 		if err := o.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier created body processing information authorization options initiator based on the context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierCreated" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -1263,12 +2073,14 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 	return nil
 }
 
-/*CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create instrument identifier created body processing information authorization options initiator merchant initiated transaction
+/*
+CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create instrument identifier created body processing information authorization options initiator merchant initiated transaction
 swagger:model CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 */
 type CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -1288,15 +2100,19 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 }
 
 func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(o.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierCreated"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", o.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier created body processing information authorization options initiator merchant initiated transaction based on context it is used
+func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1318,7 +2134,8 @@ func (o *CreateInstrumentIdentifierCreatedBodyProcessingInformationAuthorization
 	return nil
 }
 
-/*CreateInstrumentIdentifierFailedDependencyBodyItems0 create instrument identifier failed dependency body items0
+/*
+CreateInstrumentIdentifierFailedDependencyBodyItems0 create instrument identifier failed dependency body items0
 swagger:model CreateInstrumentIdentifierFailedDependencyBodyItems0
 */
 type CreateInstrumentIdentifierFailedDependencyBodyItems0 struct {
@@ -1348,7 +2165,6 @@ func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) Validate(formats 
 }
 
 func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1357,6 +2173,43 @@ func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) validateDetails(f
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier failed dependency body items0 based on the context it is used
+func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -1383,7 +2236,8 @@ func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0) UnmarshalBinary(b
 	return nil
 }
 
-/*CreateInstrumentIdentifierFailedDependencyBodyItems0Details create instrument identifier failed dependency body items0 details
+/*
+CreateInstrumentIdentifierFailedDependencyBodyItems0Details create instrument identifier failed dependency body items0 details
 swagger:model CreateInstrumentIdentifierFailedDependencyBodyItems0Details
 */
 type CreateInstrumentIdentifierFailedDependencyBodyItems0Details struct {
@@ -1397,6 +2251,11 @@ type CreateInstrumentIdentifierFailedDependencyBodyItems0Details struct {
 
 // Validate validates this create instrument identifier failed dependency body items0 details
 func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier failed dependency body items0 details based on context it is used
+func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1418,7 +2277,8 @@ func (o *CreateInstrumentIdentifierFailedDependencyBodyItems0Details) UnmarshalB
 	return nil
 }
 
-/*CreateInstrumentIdentifierForbiddenBodyItems0 create instrument identifier forbidden body items0
+/*
+CreateInstrumentIdentifierForbiddenBodyItems0 create instrument identifier forbidden body items0
 swagger:model CreateInstrumentIdentifierForbiddenBodyItems0
 */
 type CreateInstrumentIdentifierForbiddenBodyItems0 struct {
@@ -1448,7 +2308,6 @@ func (o *CreateInstrumentIdentifierForbiddenBodyItems0) Validate(formats strfmt.
 }
 
 func (o *CreateInstrumentIdentifierForbiddenBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1457,6 +2316,43 @@ func (o *CreateInstrumentIdentifierForbiddenBodyItems0) validateDetails(formats 
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier forbidden body items0 based on the context it is used
+func (o *CreateInstrumentIdentifierForbiddenBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierForbiddenBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -1483,7 +2379,8 @@ func (o *CreateInstrumentIdentifierForbiddenBodyItems0) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreateInstrumentIdentifierForbiddenBodyItems0Details create instrument identifier forbidden body items0 details
+/*
+CreateInstrumentIdentifierForbiddenBodyItems0Details create instrument identifier forbidden body items0 details
 swagger:model CreateInstrumentIdentifierForbiddenBodyItems0Details
 */
 type CreateInstrumentIdentifierForbiddenBodyItems0Details struct {
@@ -1497,6 +2394,11 @@ type CreateInstrumentIdentifierForbiddenBodyItems0Details struct {
 
 // Validate validates this create instrument identifier forbidden body items0 details
 func (o *CreateInstrumentIdentifierForbiddenBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier forbidden body items0 details based on context it is used
+func (o *CreateInstrumentIdentifierForbiddenBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1518,7 +2420,8 @@ func (o *CreateInstrumentIdentifierForbiddenBodyItems0Details) UnmarshalBinary(b
 	return nil
 }
 
-/*CreateInstrumentIdentifierInternalServerErrorBodyItems0 create instrument identifier internal server error body items0
+/*
+CreateInstrumentIdentifierInternalServerErrorBodyItems0 create instrument identifier internal server error body items0
 swagger:model CreateInstrumentIdentifierInternalServerErrorBodyItems0
 */
 type CreateInstrumentIdentifierInternalServerErrorBodyItems0 struct {
@@ -1548,7 +2451,6 @@ func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) Validate(forma
 }
 
 func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1557,6 +2459,43 @@ func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) validateDetail
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier internal server error body items0 based on the context it is used
+func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -1583,7 +2522,8 @@ func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0) UnmarshalBinar
 	return nil
 }
 
-/*CreateInstrumentIdentifierInternalServerErrorBodyItems0Details create instrument identifier internal server error body items0 details
+/*
+CreateInstrumentIdentifierInternalServerErrorBodyItems0Details create instrument identifier internal server error body items0 details
 swagger:model CreateInstrumentIdentifierInternalServerErrorBodyItems0Details
 */
 type CreateInstrumentIdentifierInternalServerErrorBodyItems0Details struct {
@@ -1597,6 +2537,11 @@ type CreateInstrumentIdentifierInternalServerErrorBodyItems0Details struct {
 
 // Validate validates this create instrument identifier internal server error body items0 details
 func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier internal server error body items0 details based on context it is used
+func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1618,7 +2563,8 @@ func (o *CreateInstrumentIdentifierInternalServerErrorBodyItems0Details) Unmarsh
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBody tmsV1InstrumentIdentifiersPost200Response
+/*
+CreateInstrumentIdentifierOKBody tmsV1InstrumentIdentifiersPost200Response
 swagger:model CreateInstrumentIdentifierOKBody
 */
 type CreateInstrumentIdentifierOKBody struct {
@@ -1633,6 +2579,7 @@ type CreateInstrumentIdentifierOKBody struct {
 	Card *CreateInstrumentIdentifierOKBodyCard `json:"card,omitempty"`
 
 	// Unique identification number assigned by CyberSource to the submitted request.
+	// Example: 1234567890123456800
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
@@ -1644,6 +2591,7 @@ type CreateInstrumentIdentifierOKBody struct {
 	// Valid values:
 	// - instrumentIdentifier
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -1656,6 +2604,7 @@ type CreateInstrumentIdentifierOKBody struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -1691,7 +2640,6 @@ func (o *CreateInstrumentIdentifierOKBody) Validate(formats strfmt.Registry) err
 }
 
 func (o *CreateInstrumentIdentifierOKBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -1700,6 +2648,8 @@ func (o *CreateInstrumentIdentifierOKBody) validateLinks(formats strfmt.Registry
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links")
 			}
 			return err
 		}
@@ -1709,7 +2659,6 @@ func (o *CreateInstrumentIdentifierOKBody) validateLinks(formats strfmt.Registry
 }
 
 func (o *CreateInstrumentIdentifierOKBody) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -1718,6 +2667,8 @@ func (o *CreateInstrumentIdentifierOKBody) validateBankAccount(formats strfmt.Re
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -1727,7 +2678,6 @@ func (o *CreateInstrumentIdentifierOKBody) validateBankAccount(formats strfmt.Re
 }
 
 func (o *CreateInstrumentIdentifierOKBody) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -1736,6 +2686,8 @@ func (o *CreateInstrumentIdentifierOKBody) validateCard(formats strfmt.Registry)
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "card")
 			}
 			return err
 		}
@@ -1745,7 +2697,6 @@ func (o *CreateInstrumentIdentifierOKBody) validateCard(formats strfmt.Registry)
 }
 
 func (o *CreateInstrumentIdentifierOKBody) validateMetadata(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Metadata) { // not required
 		return nil
 	}
@@ -1754,6 +2705,8 @@ func (o *CreateInstrumentIdentifierOKBody) validateMetadata(formats strfmt.Regis
 		if err := o.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "metadata")
 			}
 			return err
 		}
@@ -1763,7 +2716,6 @@ func (o *CreateInstrumentIdentifierOKBody) validateMetadata(formats strfmt.Regis
 }
 
 func (o *CreateInstrumentIdentifierOKBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -1772,9 +2724,185 @@ func (o *CreateInstrumentIdentifierOKBody) validateProcessingInformation(formats
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body based on the context it is used
+func (o *CreateInstrumentIdentifierOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierOK"+"."+"id", "body", string(o.ID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Metadata != nil {
+
+		if swag.IsZero(o.Metadata) { // not required
+			return nil
+		}
+
+		if err := o.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierOK"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBody) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createInstrumentIdentifierOK"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -1798,17 +2926,20 @@ func (o *CreateInstrumentIdentifierOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyBankAccount create instrument identifier o k body bank account
+/*
+CreateInstrumentIdentifierOKBodyBankAccount create instrument identifier o k body bank account
 swagger:model CreateInstrumentIdentifierOKBodyBankAccount
 */
 type CreateInstrumentIdentifierOKBodyBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -1833,16 +2964,15 @@ func (o *CreateInstrumentIdentifierOKBodyBankAccount) Validate(formats strfmt.Re
 }
 
 func (o *CreateInstrumentIdentifierOKBodyBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"number", "body", o.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -1850,19 +2980,23 @@ func (o *CreateInstrumentIdentifierOKBodyBankAccount) validateNumber(formats str
 }
 
 func (o *CreateInstrumentIdentifierOKBodyBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body bank account based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1884,12 +3018,14 @@ func (o *CreateInstrumentIdentifierOKBodyBankAccount) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyCard create instrument identifier o k body card
+/*
+CreateInstrumentIdentifierOKBodyCard create instrument identifier o k body card
 swagger:model CreateInstrumentIdentifierOKBodyCard
 */
 type CreateInstrumentIdentifierOKBodyCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -1910,19 +3046,23 @@ func (o *CreateInstrumentIdentifierOKBodyCard) Validate(formats strfmt.Registry)
 }
 
 func (o *CreateInstrumentIdentifierOKBodyCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"card"+"."+"number", "body", string(o.Number), 12); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierOK"+"."+"card"+"."+"number", "body", o.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"card"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"card"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body card based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1944,7 +3084,8 @@ func (o *CreateInstrumentIdentifierOKBodyCard) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyLinks create instrument identifier o k body links
+/*
+CreateInstrumentIdentifierOKBodyLinks create instrument identifier o k body links
 swagger:model CreateInstrumentIdentifierOKBodyLinks
 */
 type CreateInstrumentIdentifierOKBodyLinks struct {
@@ -1982,7 +3123,6 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) Validate(formats strfmt.Registry
 }
 
 func (o *CreateInstrumentIdentifierOKBodyLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -1991,6 +3131,8 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) validateAncestor(formats strfmt.
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -2000,7 +3142,6 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) validateAncestor(formats strfmt.
 }
 
 func (o *CreateInstrumentIdentifierOKBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -2009,6 +3150,8 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) validateSelf(formats strfmt.Regi
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -2018,7 +3161,6 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) validateSelf(formats strfmt.Regi
 }
 
 func (o *CreateInstrumentIdentifierOKBodyLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -2027,6 +3169,93 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) validateSuccessor(formats strfmt
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body links based on the context it is used
+func (o *CreateInstrumentIdentifierOKBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -2053,17 +3282,24 @@ func (o *CreateInstrumentIdentifierOKBodyLinks) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyLinksAncestor create instrument identifier o k body links ancestor
+/*
+CreateInstrumentIdentifierOKBodyLinksAncestor create instrument identifier o k body links ancestor
 swagger:model CreateInstrumentIdentifierOKBodyLinksAncestor
 */
 type CreateInstrumentIdentifierOKBodyLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier o k body links ancestor
 func (o *CreateInstrumentIdentifierOKBodyLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body links ancestor based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2085,17 +3321,24 @@ func (o *CreateInstrumentIdentifierOKBodyLinksAncestor) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyLinksSelf create instrument identifier o k body links self
+/*
+CreateInstrumentIdentifierOKBodyLinksSelf create instrument identifier o k body links self
 swagger:model CreateInstrumentIdentifierOKBodyLinksSelf
 */
 type CreateInstrumentIdentifierOKBodyLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier o k body links self
 func (o *CreateInstrumentIdentifierOKBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body links self based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2117,17 +3360,24 @@ func (o *CreateInstrumentIdentifierOKBodyLinksSelf) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyLinksSuccessor create instrument identifier o k body links successor
+/*
+CreateInstrumentIdentifierOKBodyLinksSuccessor create instrument identifier o k body links successor
 swagger:model CreateInstrumentIdentifierOKBodyLinksSuccessor
 */
 type CreateInstrumentIdentifierOKBodyLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create instrument identifier o k body links successor
 func (o *CreateInstrumentIdentifierOKBodyLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body links successor based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2149,17 +3399,29 @@ func (o *CreateInstrumentIdentifierOKBodyLinksSuccessor) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyMetadata create instrument identifier o k body metadata
+/*
+CreateInstrumentIdentifierOKBodyMetadata create instrument identifier o k body metadata
 swagger:model CreateInstrumentIdentifierOKBodyMetadata
 */
 type CreateInstrumentIdentifierOKBodyMetadata struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create instrument identifier o k body metadata
 func (o *CreateInstrumentIdentifierOKBodyMetadata) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body metadata based on the context it is used
+func (o *CreateInstrumentIdentifierOKBodyMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -2181,7 +3443,8 @@ func (o *CreateInstrumentIdentifierOKBodyMetadata) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyProcessingInformation create instrument identifier o k body processing information
+/*
+CreateInstrumentIdentifierOKBodyProcessingInformation create instrument identifier o k body processing information
 swagger:model CreateInstrumentIdentifierOKBodyProcessingInformation
 */
 type CreateInstrumentIdentifierOKBodyProcessingInformation struct {
@@ -2205,7 +3468,6 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) Validate(formats
 }
 
 func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -2214,6 +3476,43 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) validateAuthoriz
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body processing information based on the context it is used
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -2240,7 +3539,8 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformation) UnmarshalBinary(
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions create instrument identifier o k body processing information authorization options
+/*
+CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions create instrument identifier o k body processing information authorization options
 swagger:model CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions
 */
 type CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions struct {
@@ -2264,7 +3564,6 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 }
 
 func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Initiator) { // not required
 		return nil
 	}
@@ -2273,6 +3572,43 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 		if err := o.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body processing information authorization options based on the context it is used
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Initiator != nil {
+
+		if swag.IsZero(o.Initiator) { // not required
+			return nil
+		}
+
+		if err := o.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -2299,7 +3635,8 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator create instrument identifier o k body processing information authorization options initiator
+/*
+CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator create instrument identifier o k body processing information authorization options initiator
 swagger:model CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator
 */
 type CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator struct {
@@ -2323,7 +3660,6 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 }
 
 func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -2332,6 +3668,43 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 		if err := o.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create instrument identifier o k body processing information authorization options initiator based on the context it is used
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createInstrumentIdentifierOK" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -2358,12 +3731,14 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 	return nil
 }
 
-/*CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create instrument identifier o k body processing information authorization options initiator merchant initiated transaction
+/*
+CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create instrument identifier o k body processing information authorization options initiator merchant initiated transaction
 swagger:model CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 */
 type CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -2383,15 +3758,19 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 }
 
 func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(o.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierOK"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", o.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier o k body processing information authorization options initiator merchant initiated transaction based on context it is used
+func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2413,17 +3792,20 @@ func (o *CreateInstrumentIdentifierOKBodyProcessingInformationAuthorizationOptio
 	return nil
 }
 
-/*CreateInstrumentIdentifierParamsBodyBankAccount create instrument identifier params body bank account
+/*
+CreateInstrumentIdentifierParamsBodyBankAccount create instrument identifier params body bank account
 swagger:model CreateInstrumentIdentifierParamsBodyBankAccount
 */
 type CreateInstrumentIdentifierParamsBodyBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -2448,16 +3830,15 @@ func (o *CreateInstrumentIdentifierParamsBodyBankAccount) Validate(formats strfm
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"number", "body", string(o.Number), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"number", "body", o.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -2465,19 +3846,23 @@ func (o *CreateInstrumentIdentifierParamsBodyBankAccount) validateNumber(formats
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"BankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier params body bank account based on context it is used
+func (o *CreateInstrumentIdentifierParamsBodyBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2499,32 +3884,44 @@ func (o *CreateInstrumentIdentifierParamsBodyBankAccount) UnmarshalBinary(b []by
 	return nil
 }
 
-/*CreateInstrumentIdentifierParamsBodyBillTo create instrument identifier params body bill to
+/*
+CreateInstrumentIdentifierParamsBodyBillTo create instrument identifier params body bill to
 swagger:model CreateInstrumentIdentifierParamsBodyBillTo
 */
 type CreateInstrumentIdentifierParamsBodyBillTo struct {
 
 	// First address line registered with card.
+	// Example: 8310 Capital of Texas Highway North
 	Address1 string `json:"address1,omitempty"`
 
 	// Second address line registered with card.
+	// Example: Bluffstone Drive
 	Address2 string `json:"address2,omitempty"`
 
 	// Administrative area registered with card.
+	// Example: TX
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 
 	// Country registered with card.
+	// Example: US
 	Country string `json:"country,omitempty"`
 
 	// Locality registered with card.
+	// Example: Austin
 	Locality string `json:"locality,omitempty"`
 
 	// Postal code registered with card.
+	// Example: 78731
 	PostalCode string `json:"postalCode,omitempty"`
 }
 
 // Validate validates this create instrument identifier params body bill to
 func (o *CreateInstrumentIdentifierParamsBodyBillTo) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier params body bill to based on context it is used
+func (o *CreateInstrumentIdentifierParamsBodyBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2546,7 +3943,8 @@ func (o *CreateInstrumentIdentifierParamsBodyBillTo) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreateInstrumentIdentifierParamsBodyCard create instrument identifier params body card
+/*
+CreateInstrumentIdentifierParamsBodyCard create instrument identifier params body card
 swagger:model CreateInstrumentIdentifierParamsBodyCard
 */
 type CreateInstrumentIdentifierParamsBodyCard struct {
@@ -2556,6 +3954,7 @@ type CreateInstrumentIdentifierParamsBodyCard struct {
 	// Format: `MM`.
 	// Possible values: `01` through `12`.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	ExpirationMonth string `json:"expirationMonth,omitempty"`
@@ -2565,16 +3964,19 @@ type CreateInstrumentIdentifierParamsBodyCard struct {
 	// Format: `YYYY`.
 	// Possible values: `1900` through `2099`.
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	ExpirationYear string `json:"expirationYear,omitempty"`
 
 	// Credit card number (PAN).
+	// Example: 4622943127013705
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
 
 	// Card security code.
+	// Example: 838
 	// Max Length: 4
 	// Min Length: 3
 	SecurityCode string `json:"securityCode,omitempty"`
@@ -2607,16 +4009,15 @@ func (o *CreateInstrumentIdentifierParamsBodyCard) Validate(formats strfmt.Regis
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -2624,16 +4025,15 @@ func (o *CreateInstrumentIdentifierParamsBodyCard) validateExpirationMonth(forma
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -2641,16 +4041,15 @@ func (o *CreateInstrumentIdentifierParamsBodyCard) validateExpirationYear(format
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"number", "body", string(o.Number), 12); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"number", "body", o.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -2658,19 +4057,23 @@ func (o *CreateInstrumentIdentifierParamsBodyCard) validateNumber(formats strfmt
 }
 
 func (o *CreateInstrumentIdentifierParamsBodyCard) validateSecurityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SecurityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"securityCode", "body", string(o.SecurityCode), 3); err != nil {
+	if err := validate.MinLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"securityCode", "body", o.SecurityCode, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"securityCode", "body", string(o.SecurityCode), 4); err != nil {
+	if err := validate.MaxLength("createInstrumentIdentifierRequest"+"."+"card"+"."+"securityCode", "body", o.SecurityCode, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create instrument identifier params body card based on context it is used
+func (o *CreateInstrumentIdentifierParamsBodyCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

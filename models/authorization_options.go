@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // AuthorizationOptions authorization options
+//
 // swagger:model AuthorizationOptions
 type AuthorizationOptions struct {
 
@@ -36,7 +38,6 @@ func (m *AuthorizationOptions) Validate(formats strfmt.Registry) error {
 }
 
 func (m *AuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Initiator) { // not required
 		return nil
 	}
@@ -45,6 +46,43 @@ func (m *AuthorizationOptions) validateInitiator(formats strfmt.Registry) error 
 		if err := m.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this authorization options based on the context it is used
+func (m *AuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Initiator != nil {
+
+		if swag.IsZero(m.Initiator) { // not required
+			return nil
+		}
+
+		if err := m.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("initiator")
 			}
 			return err
 		}
@@ -72,6 +110,7 @@ func (m *AuthorizationOptions) UnmarshalBinary(b []byte) error {
 }
 
 // AuthorizationOptionsInitiator authorization options initiator
+//
 // swagger:model AuthorizationOptionsInitiator
 type AuthorizationOptionsInitiator struct {
 
@@ -94,7 +133,6 @@ func (m *AuthorizationOptionsInitiator) Validate(formats strfmt.Registry) error 
 }
 
 func (m *AuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -103,6 +141,43 @@ func (m *AuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(for
 		if err := m.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this authorization options initiator based on the context it is used
+func (m *AuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *AuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := m.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -130,10 +205,12 @@ func (m *AuthorizationOptionsInitiator) UnmarshalBinary(b []byte) error {
 }
 
 // AuthorizationOptionsInitiatorMerchantInitiatedTransaction authorization options initiator merchant initiated transaction
+//
 // swagger:model AuthorizationOptionsInitiatorMerchantInitiatedTransaction
 type AuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -153,15 +230,19 @@ func (m *AuthorizationOptionsInitiatorMerchantInitiatedTransaction) Validate(for
 }
 
 func (m *AuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(m.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", m.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this authorization options initiator merchant initiated transaction based on context it is used
+func (m *AuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

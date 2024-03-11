@@ -13,73 +13,90 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewUpdateInstrumentIdentifierParams creates a new UpdateInstrumentIdentifierParams object
-// with the default values initialized.
+// NewUpdateInstrumentIdentifierParams creates a new UpdateInstrumentIdentifierParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUpdateInstrumentIdentifierParams() *UpdateInstrumentIdentifierParams {
-	var ()
 	return &UpdateInstrumentIdentifierParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateInstrumentIdentifierParamsWithTimeout creates a new UpdateInstrumentIdentifierParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUpdateInstrumentIdentifierParamsWithTimeout(timeout time.Duration) *UpdateInstrumentIdentifierParams {
-	var ()
 	return &UpdateInstrumentIdentifierParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUpdateInstrumentIdentifierParamsWithContext creates a new UpdateInstrumentIdentifierParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUpdateInstrumentIdentifierParamsWithContext(ctx context.Context) *UpdateInstrumentIdentifierParams {
-	var ()
 	return &UpdateInstrumentIdentifierParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUpdateInstrumentIdentifierParamsWithHTTPClient creates a new UpdateInstrumentIdentifierParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUpdateInstrumentIdentifierParamsWithHTTPClient(client *http.Client) *UpdateInstrumentIdentifierParams {
-	var ()
 	return &UpdateInstrumentIdentifierParams{
 		HTTPClient: client,
 	}
 }
 
-/*UpdateInstrumentIdentifierParams contains all the parameters to send to the API endpoint
-for the update instrument identifier operation typically these are written to a http.Request
+/*
+UpdateInstrumentIdentifierParams contains all the parameters to send to the API endpoint
+
+	for the update instrument identifier operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateInstrumentIdentifierParams struct {
 
-	/*ProfileID
-	  The id of a profile containing user specific TMS configuration.
+	/* ProfileID.
 
+	   The id of a profile containing user specific TMS configuration.
 	*/
 	ProfileID string
-	/*TokenID
-	  The TokenId of an Instrument Identifier.
 
+	/* TokenID.
+
+	   The TokenId of an Instrument Identifier.
 	*/
 	TokenID string
-	/*UpdateInstrumentIdentifierRequest
-	  Specify the previous transaction ID to update.
 
+	/* UpdateInstrumentIdentifierRequest.
+
+	   Specify the previous transaction ID to update.
 	*/
 	UpdateInstrumentIdentifierRequest UpdateInstrumentIdentifierBody
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the update instrument identifier params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateInstrumentIdentifierParams) WithDefaults() *UpdateInstrumentIdentifierParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the update instrument identifier params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UpdateInstrumentIdentifierParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update instrument identifier params
@@ -165,7 +182,6 @@ func (o *UpdateInstrumentIdentifierParams) WriteToRequest(r runtime.ClientReques
 	if err := r.SetPathParam("tokenId", o.TokenID); err != nil {
 		return err
 	}
-
 	if err := r.SetBodyParam(o.UpdateInstrumentIdentifierRequest); err != nil {
 		return err
 	}

@@ -13,68 +13,84 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewCreatePaymentInstrumentParams creates a new CreatePaymentInstrumentParams object
-// with the default values initialized.
+// NewCreatePaymentInstrumentParams creates a new CreatePaymentInstrumentParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreatePaymentInstrumentParams() *CreatePaymentInstrumentParams {
-	var ()
 	return &CreatePaymentInstrumentParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreatePaymentInstrumentParamsWithTimeout creates a new CreatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreatePaymentInstrumentParamsWithTimeout(timeout time.Duration) *CreatePaymentInstrumentParams {
-	var ()
 	return &CreatePaymentInstrumentParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewCreatePaymentInstrumentParamsWithContext creates a new CreatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreatePaymentInstrumentParamsWithContext(ctx context.Context) *CreatePaymentInstrumentParams {
-	var ()
 	return &CreatePaymentInstrumentParams{
-
 		Context: ctx,
 	}
 }
 
 // NewCreatePaymentInstrumentParamsWithHTTPClient creates a new CreatePaymentInstrumentParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreatePaymentInstrumentParamsWithHTTPClient(client *http.Client) *CreatePaymentInstrumentParams {
-	var ()
 	return &CreatePaymentInstrumentParams{
 		HTTPClient: client,
 	}
 }
 
-/*CreatePaymentInstrumentParams contains all the parameters to send to the API endpoint
-for the create payment instrument operation typically these are written to a http.Request
+/*
+CreatePaymentInstrumentParams contains all the parameters to send to the API endpoint
+
+	for the create payment instrument operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePaymentInstrumentParams struct {
 
-	/*CreatePaymentInstrumentRequest
-	  Specify the customer's payment details for card or bank account.
+	/* CreatePaymentInstrumentRequest.
 
+	   Specify the customer's payment details for card or bank account.
 	*/
 	CreatePaymentInstrumentRequest CreatePaymentInstrumentBody
-	/*ProfileID
-	  The id of a profile containing user specific TMS configuration.
 
+	/* ProfileID.
+
+	   The id of a profile containing user specific TMS configuration.
 	*/
 	ProfileID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreatePaymentInstrumentParams) WithDefaults() *CreatePaymentInstrumentParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create payment instrument params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreatePaymentInstrumentParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the create payment instrument params
@@ -139,7 +155,6 @@ func (o *CreatePaymentInstrumentParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
-
 	if err := r.SetBodyParam(o.CreatePaymentInstrumentRequest); err != nil {
 		return err
 	}

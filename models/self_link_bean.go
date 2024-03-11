@@ -6,24 +6,33 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // SelfLinkBean self link bean
+//
 // swagger:model SelfLinkBean
 type SelfLinkBean struct {
 
 	// href
+	// Example: /sfs/v1/file-details?startDate=2018-01-01\u0026endDate=2018-01-02
 	Href string `json:"href,omitempty"`
 
 	// method
+	// Example: GET
 	Method string `json:"method,omitempty"`
 }
 
 // Validate validates this self link bean
 func (m *SelfLinkBean) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this self link bean based on context it is used
+func (m *SelfLinkBean) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

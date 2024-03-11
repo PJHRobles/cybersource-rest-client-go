@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // EmbeddedInstrumentIdentifier embedded instrument identifier
+//
 // swagger:model EmbeddedInstrumentIdentifier
 type EmbeddedInstrumentIdentifier struct {
 
@@ -27,6 +29,7 @@ type EmbeddedInstrumentIdentifier struct {
 	Card *EmbeddedInstrumentIdentifierCard `json:"card,omitempty"`
 
 	// The ID of the existing instrument identifier to be linked to the newly created payment instrument.
+	// Example: 1234567890123456789
 	// Max Length: 32
 	// Min Length: 16
 	ID string `json:"id,omitempty"`
@@ -39,6 +42,7 @@ type EmbeddedInstrumentIdentifier struct {
 	// Valid values:
 	// - instrumentIdentifier
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -51,6 +55,7 @@ type EmbeddedInstrumentIdentifier struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -90,7 +95,6 @@ func (m *EmbeddedInstrumentIdentifier) Validate(formats strfmt.Registry) error {
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -99,6 +103,8 @@ func (m *EmbeddedInstrumentIdentifier) validateLinks(formats strfmt.Registry) er
 		if err := m.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -108,7 +114,6 @@ func (m *EmbeddedInstrumentIdentifier) validateLinks(formats strfmt.Registry) er
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.BankAccount) { // not required
 		return nil
 	}
@@ -117,6 +122,8 @@ func (m *EmbeddedInstrumentIdentifier) validateBankAccount(formats strfmt.Regist
 		if err := m.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("bankAccount")
 			}
 			return err
 		}
@@ -126,7 +133,6 @@ func (m *EmbeddedInstrumentIdentifier) validateBankAccount(formats strfmt.Regist
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Card) { // not required
 		return nil
 	}
@@ -135,6 +141,8 @@ func (m *EmbeddedInstrumentIdentifier) validateCard(formats strfmt.Registry) err
 		if err := m.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("card")
 			}
 			return err
 		}
@@ -144,16 +152,15 @@ func (m *EmbeddedInstrumentIdentifier) validateCard(formats strfmt.Registry) err
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("id", "body", string(m.ID), 16); err != nil {
+	if err := validate.MinLength("id", "body", m.ID, 16); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("id", "body", string(m.ID), 32); err != nil {
+	if err := validate.MaxLength("id", "body", m.ID, 32); err != nil {
 		return err
 	}
 
@@ -161,7 +168,6 @@ func (m *EmbeddedInstrumentIdentifier) validateID(formats strfmt.Registry) error
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateMetadata(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Metadata) { // not required
 		return nil
 	}
@@ -170,6 +176,8 @@ func (m *EmbeddedInstrumentIdentifier) validateMetadata(formats strfmt.Registry)
 		if err := m.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -179,7 +187,6 @@ func (m *EmbeddedInstrumentIdentifier) validateMetadata(formats strfmt.Registry)
 }
 
 func (m *EmbeddedInstrumentIdentifier) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ProcessingInformation) { // not required
 		return nil
 	}
@@ -188,9 +195,172 @@ func (m *EmbeddedInstrumentIdentifier) validateProcessingInformation(formats str
 		if err := m.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier based on the context it is used
+func (m *EmbeddedInstrumentIdentifier) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BankAccount != nil {
+
+		if swag.IsZero(m.BankAccount) { // not required
+			return nil
+		}
+
+		if err := m.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Card != nil {
+
+		if swag.IsZero(m.Card) { // not required
+			return nil
+		}
+
+		if err := m.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Metadata != nil {
+
+		if swag.IsZero(m.Metadata) { // not required
+			return nil
+		}
+
+		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "object", "body", string(m.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ProcessingInformation != nil {
+
+		if swag.IsZero(m.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := m.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifier) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "state", "body", string(m.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -215,15 +385,18 @@ func (m *EmbeddedInstrumentIdentifier) UnmarshalBinary(b []byte) error {
 }
 
 // EmbeddedInstrumentIdentifierBankAccount embedded instrument identifier bank account
+//
 // swagger:model EmbeddedInstrumentIdentifierBankAccount
 type EmbeddedInstrumentIdentifierBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -248,16 +421,15 @@ func (m *EmbeddedInstrumentIdentifierBankAccount) Validate(formats strfmt.Regist
 }
 
 func (m *EmbeddedInstrumentIdentifierBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("bankAccount"+"."+"number", "body", string(m.Number), 1); err != nil {
+	if err := validate.MinLength("bankAccount"+"."+"number", "body", m.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("bankAccount"+"."+"number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("bankAccount"+"."+"number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
@@ -265,19 +437,23 @@ func (m *EmbeddedInstrumentIdentifierBankAccount) validateNumber(formats strfmt.
 }
 
 func (m *EmbeddedInstrumentIdentifierBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("bankAccount"+"."+"routingNumber", "body", string(m.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("bankAccount"+"."+"routingNumber", "body", m.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("bankAccount"+"."+"routingNumber", "body", string(m.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("bankAccount"+"."+"routingNumber", "body", m.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier bank account based on context it is used
+func (m *EmbeddedInstrumentIdentifierBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -300,10 +476,12 @@ func (m *EmbeddedInstrumentIdentifierBankAccount) UnmarshalBinary(b []byte) erro
 }
 
 // EmbeddedInstrumentIdentifierCard embedded instrument identifier card
+//
 // swagger:model EmbeddedInstrumentIdentifierCard
 type EmbeddedInstrumentIdentifierCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -324,19 +502,23 @@ func (m *EmbeddedInstrumentIdentifierCard) Validate(formats strfmt.Registry) err
 }
 
 func (m *EmbeddedInstrumentIdentifierCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("card"+"."+"number", "body", string(m.Number), 12); err != nil {
+	if err := validate.MinLength("card"+"."+"number", "body", m.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("card"+"."+"number", "body", string(m.Number), 19); err != nil {
+	if err := validate.MaxLength("card"+"."+"number", "body", m.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier card based on context it is used
+func (m *EmbeddedInstrumentIdentifierCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -359,6 +541,7 @@ func (m *EmbeddedInstrumentIdentifierCard) UnmarshalBinary(b []byte) error {
 }
 
 // EmbeddedInstrumentIdentifierLinks embedded instrument identifier links
+//
 // swagger:model EmbeddedInstrumentIdentifierLinks
 type EmbeddedInstrumentIdentifierLinks struct {
 
@@ -395,7 +578,6 @@ func (m *EmbeddedInstrumentIdentifierLinks) Validate(formats strfmt.Registry) er
 }
 
 func (m *EmbeddedInstrumentIdentifierLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Ancestor) { // not required
 		return nil
 	}
@@ -404,6 +586,8 @@ func (m *EmbeddedInstrumentIdentifierLinks) validateAncestor(formats strfmt.Regi
 		if err := m.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -413,7 +597,6 @@ func (m *EmbeddedInstrumentIdentifierLinks) validateAncestor(formats strfmt.Regi
 }
 
 func (m *EmbeddedInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Self) { // not required
 		return nil
 	}
@@ -422,6 +605,8 @@ func (m *EmbeddedInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry
 		if err := m.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
 			}
 			return err
 		}
@@ -431,7 +616,6 @@ func (m *EmbeddedInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry
 }
 
 func (m *EmbeddedInstrumentIdentifierLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Successor) { // not required
 		return nil
 	}
@@ -440,6 +624,93 @@ func (m *EmbeddedInstrumentIdentifierLinks) validateSuccessor(formats strfmt.Reg
 		if err := m.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier links based on the context it is used
+func (m *EmbeddedInstrumentIdentifierLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Ancestor != nil {
+
+		if swag.IsZero(m.Ancestor) { // not required
+			return nil
+		}
+
+		if err := m.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Successor != nil {
+
+		if swag.IsZero(m.Successor) { // not required
+			return nil
+		}
+
+		if err := m.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "successor")
 			}
 			return err
 		}
@@ -467,15 +738,22 @@ func (m *EmbeddedInstrumentIdentifierLinks) UnmarshalBinary(b []byte) error {
 }
 
 // EmbeddedInstrumentIdentifierLinksAncestor embedded instrument identifier links ancestor
+//
 // swagger:model EmbeddedInstrumentIdentifierLinksAncestor
 type EmbeddedInstrumentIdentifierLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this embedded instrument identifier links ancestor
 func (m *EmbeddedInstrumentIdentifierLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier links ancestor based on context it is used
+func (m *EmbeddedInstrumentIdentifierLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -498,15 +776,22 @@ func (m *EmbeddedInstrumentIdentifierLinksAncestor) UnmarshalBinary(b []byte) er
 }
 
 // EmbeddedInstrumentIdentifierLinksSelf embedded instrument identifier links self
+//
 // swagger:model EmbeddedInstrumentIdentifierLinksSelf
 type EmbeddedInstrumentIdentifierLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this embedded instrument identifier links self
 func (m *EmbeddedInstrumentIdentifierLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier links self based on context it is used
+func (m *EmbeddedInstrumentIdentifierLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -529,15 +814,22 @@ func (m *EmbeddedInstrumentIdentifierLinksSelf) UnmarshalBinary(b []byte) error 
 }
 
 // EmbeddedInstrumentIdentifierLinksSuccessor embedded instrument identifier links successor
+//
 // swagger:model EmbeddedInstrumentIdentifierLinksSuccessor
 type EmbeddedInstrumentIdentifierLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this embedded instrument identifier links successor
 func (m *EmbeddedInstrumentIdentifierLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier links successor based on context it is used
+func (m *EmbeddedInstrumentIdentifierLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -560,15 +852,27 @@ func (m *EmbeddedInstrumentIdentifierLinksSuccessor) UnmarshalBinary(b []byte) e
 }
 
 // EmbeddedInstrumentIdentifierMetadata embedded instrument identifier metadata
+//
 // swagger:model EmbeddedInstrumentIdentifierMetadata
 type EmbeddedInstrumentIdentifierMetadata struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this embedded instrument identifier metadata
 func (m *EmbeddedInstrumentIdentifierMetadata) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier metadata based on the context it is used
+func (m *EmbeddedInstrumentIdentifierMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -591,6 +895,7 @@ func (m *EmbeddedInstrumentIdentifierMetadata) UnmarshalBinary(b []byte) error {
 }
 
 // EmbeddedInstrumentIdentifierProcessingInformation embedded instrument identifier processing information
+//
 // swagger:model EmbeddedInstrumentIdentifierProcessingInformation
 type EmbeddedInstrumentIdentifierProcessingInformation struct {
 
@@ -613,7 +918,6 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformation) Validate(formats str
 }
 
 func (m *EmbeddedInstrumentIdentifierProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -622,6 +926,43 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformation) validateAuthorizatio
 		if err := m.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier processing information based on the context it is used
+func (m *EmbeddedInstrumentIdentifierProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AuthorizationOptions != nil {
+
+		if swag.IsZero(m.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := m.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -649,6 +990,7 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformation) UnmarshalBinary(b []
 }
 
 // EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions embedded instrument identifier processing information authorization options
+//
 // swagger:model EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions
 type EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions struct {
 
@@ -671,7 +1013,6 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) 
 }
 
 func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Initiator) { // not required
 		return nil
 	}
@@ -680,6 +1021,43 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) 
 		if err := m.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier processing information authorization options based on the context it is used
+func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Initiator != nil {
+
+		if swag.IsZero(m.Initiator) { // not required
+			return nil
+		}
+
+		if err := m.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -707,6 +1085,7 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions) 
 }
 
 // EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator embedded instrument identifier processing information authorization options initiator
+//
 // swagger:model EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator
 type EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator struct {
 
@@ -729,7 +1108,6 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsIn
 }
 
 func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -738,6 +1116,43 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsIn
 		if err := m.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this embedded instrument identifier processing information authorization options initiator based on the context it is used
+func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(m.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := m.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -765,10 +1180,12 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsIn
 }
 
 // EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction embedded instrument identifier processing information authorization options initiator merchant initiated transaction
+//
 // swagger:model EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 type EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -788,15 +1205,19 @@ func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsIn
 }
 
 func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(m.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", m.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this embedded instrument identifier processing information authorization options initiator merchant initiated transaction based on context it is used
+func (m *EmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

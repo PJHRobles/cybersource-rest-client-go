@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new net fundings API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetNetFundingDetails(params *GetNetFundingDetailsParams, opts ...ClientOption) (*GetNetFundingDetailsOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetNetFundingDetails gets netfunding information for an account or a merchant
 
 Get Netfunding information for an account or a merchant.
 */
-func (a *Client) GetNetFundingDetails(params *GetNetFundingDetailsParams) (*GetNetFundingDetailsOK, error) {
+func (a *Client) GetNetFundingDetails(params *GetNetFundingDetailsParams, opts ...ClientOption) (*GetNetFundingDetailsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetNetFundingDetailsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getNetFundingDetails",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/net-fundings",
@@ -48,7 +56,12 @@ func (a *Client) GetNetFundingDetails(params *GetNetFundingDetailsParams) (*GetN
 		Reader:             &GetNetFundingDetailsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

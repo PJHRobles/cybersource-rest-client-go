@@ -6,21 +6,29 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // PIForIILinkLast p i for i i link last
+//
 // swagger:model PIForIILinkLast
 type PIForIILinkLast struct {
 
 	// A link to the last collection containing the remaining objects.
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=35\u0026limit=5
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this p i for i i link last
 func (m *PIForIILinkLast) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this p i for i i link last based on context it is used
+func (m *PIForIILinkLast) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

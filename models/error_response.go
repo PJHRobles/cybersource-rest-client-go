@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ErrorResponse error response
+//
 // swagger:model ErrorResponse
 type ErrorResponse struct {
 
@@ -44,7 +45,6 @@ func (m *ErrorResponse) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponse) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -53,6 +53,8 @@ func (m *ErrorResponse) validateLinks(formats strfmt.Registry) error {
 		if err := m.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -62,7 +64,6 @@ func (m *ErrorResponse) validateLinks(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponse) validateResponseStatus(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ResponseStatus) { // not required
 		return nil
 	}
@@ -71,6 +72,68 @@ func (m *ErrorResponse) validateResponseStatus(formats strfmt.Registry) error {
 		if err := m.ResponseStatus.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("responseStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("responseStatus")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response based on the context it is used
+func (m *ErrorResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateResponseStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponse) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ErrorResponse) contextValidateResponseStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ResponseStatus != nil {
+
+		if swag.IsZero(m.ResponseStatus) { // not required
+			return nil
+		}
+
+		if err := m.ResponseStatus.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("responseStatus")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("responseStatus")
 			}
 			return err
 		}
@@ -98,6 +161,7 @@ func (m *ErrorResponse) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseLinks error response links
+//
 // swagger:model ErrorResponseLinks
 type ErrorResponseLinks struct {
 
@@ -134,7 +198,6 @@ func (m *ErrorResponseLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseLinks) validateDocumentation(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Documentation) { // not required
 		return nil
 	}
@@ -148,6 +211,8 @@ func (m *ErrorResponseLinks) validateDocumentation(formats strfmt.Registry) erro
 			if err := m.Documentation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "documentation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -159,7 +224,6 @@ func (m *ErrorResponseLinks) validateDocumentation(formats strfmt.Registry) erro
 }
 
 func (m *ErrorResponseLinks) validateNext(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Next) { // not required
 		return nil
 	}
@@ -173,6 +237,8 @@ func (m *ErrorResponseLinks) validateNext(formats strfmt.Registry) error {
 			if err := m.Next[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("_links" + "." + "next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "next" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -184,7 +250,6 @@ func (m *ErrorResponseLinks) validateNext(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Self) { // not required
 		return nil
 	}
@@ -193,6 +258,101 @@ func (m *ErrorResponseLinks) validateSelf(formats strfmt.Registry) error {
 		if err := m.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response links based on the context it is used
+func (m *ErrorResponseLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDocumentation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNext(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponseLinks) contextValidateDocumentation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Documentation); i++ {
+
+		if m.Documentation[i] != nil {
+
+			if swag.IsZero(m.Documentation[i]) { // not required
+				return nil
+			}
+
+			if err := m.Documentation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "documentation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ErrorResponseLinks) contextValidateNext(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Next); i++ {
+
+		if m.Next[i] != nil {
+
+			if swag.IsZero(m.Next[i]) { // not required
+				return nil
+			}
+
+			if err := m.Next[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("_links" + "." + "next" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("_links" + "." + "next" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ErrorResponseLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
 			}
 			return err
 		}
@@ -220,6 +380,7 @@ func (m *ErrorResponseLinks) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseLinksDocumentationItems0 error response links documentation items0
+//
 // swagger:model ErrorResponseLinksDocumentationItems0
 type ErrorResponseLinksDocumentationItems0 struct {
 
@@ -235,6 +396,11 @@ type ErrorResponseLinksDocumentationItems0 struct {
 
 // Validate validates this error response links documentation items0
 func (m *ErrorResponseLinksDocumentationItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response links documentation items0 based on context it is used
+func (m *ErrorResponseLinksDocumentationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -257,6 +423,7 @@ func (m *ErrorResponseLinksDocumentationItems0) UnmarshalBinary(b []byte) error 
 }
 
 // ErrorResponseLinksNextItems0 error response links next items0
+//
 // swagger:model ErrorResponseLinksNextItems0
 type ErrorResponseLinksNextItems0 struct {
 
@@ -272,6 +439,11 @@ type ErrorResponseLinksNextItems0 struct {
 
 // Validate validates this error response links next items0
 func (m *ErrorResponseLinksNextItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response links next items0 based on context it is used
+func (m *ErrorResponseLinksNextItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -294,6 +466,7 @@ func (m *ErrorResponseLinksNextItems0) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseLinksSelf error response links self
+//
 // swagger:model ErrorResponseLinksSelf
 type ErrorResponseLinksSelf struct {
 
@@ -309,6 +482,11 @@ type ErrorResponseLinksSelf struct {
 
 // Validate validates this error response links self
 func (m *ErrorResponseLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response links self based on context it is used
+func (m *ErrorResponseLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -331,6 +509,7 @@ func (m *ErrorResponseLinksSelf) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseResponseStatus error response response status
+//
 // swagger:model ErrorResponseResponseStatus
 type ErrorResponseResponseStatus struct {
 
@@ -365,7 +544,6 @@ func (m *ErrorResponseResponseStatus) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseResponseStatus) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Details) { // not required
 		return nil
 	}
@@ -379,6 +557,47 @@ func (m *ErrorResponseResponseStatus) validateDetails(formats strfmt.Registry) e
 			if err := m.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response response status based on the context it is used
+func (m *ErrorResponseResponseStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponseResponseStatus) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Details); i++ {
+
+		if m.Details[i] != nil {
+
+			if swag.IsZero(m.Details[i]) { // not required
+				return nil
+			}
+
+			if err := m.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("responseStatus" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("responseStatus" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -408,6 +627,7 @@ func (m *ErrorResponseResponseStatus) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseResponseStatusDetailsItems0 error response response status details items0
+//
 // swagger:model ErrorResponseResponseStatusDetailsItems0
 type ErrorResponseResponseStatusDetailsItems0 struct {
 
@@ -420,6 +640,11 @@ type ErrorResponseResponseStatusDetailsItems0 struct {
 
 // Validate validates this error response response status details items0
 func (m *ErrorResponseResponseStatusDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response response status details items0 based on context it is used
+func (m *ErrorResponseResponseStatusDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

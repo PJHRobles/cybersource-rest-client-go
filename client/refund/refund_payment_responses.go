@@ -6,16 +6,16 @@ package refund
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // RefundPaymentReader is a Reader for the RefundPayment structure.
@@ -44,9 +44,8 @@ func (o *RefundPaymentReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/payments/{id}/refunds] refundPayment", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewRefundPaymentCreated() *RefundPaymentCreated {
 	return &RefundPaymentCreated{}
 }
 
-/*RefundPaymentCreated handles this case with default header values.
+/*
+RefundPaymentCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type RefundPaymentCreated struct {
 	Payload *RefundPaymentCreatedBody
 }
 
+// IsSuccess returns true when this refund payment created response has a 2xx status code
+func (o *RefundPaymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this refund payment created response has a 3xx status code
+func (o *RefundPaymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund payment created response has a 4xx status code
+func (o *RefundPaymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refund payment created response has a 5xx status code
+func (o *RefundPaymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refund payment created response a status code equal to that given
+func (o *RefundPaymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the refund payment created response
+func (o *RefundPaymentCreated) Code() int {
+	return 201
+}
+
 func (o *RefundPaymentCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentCreated  %+v", 201, o.Payload)
+}
+
+func (o *RefundPaymentCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewRefundPaymentBadRequest() *RefundPaymentBadRequest {
 	return &RefundPaymentBadRequest{}
 }
 
-/*RefundPaymentBadRequest handles this case with default header values.
+/*
+RefundPaymentBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type RefundPaymentBadRequest struct {
 	Payload *RefundPaymentBadRequestBody
 }
 
+// IsSuccess returns true when this refund payment bad request response has a 2xx status code
+func (o *RefundPaymentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refund payment bad request response has a 3xx status code
+func (o *RefundPaymentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund payment bad request response has a 4xx status code
+func (o *RefundPaymentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refund payment bad request response has a 5xx status code
+func (o *RefundPaymentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refund payment bad request response a status code equal to that given
+func (o *RefundPaymentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the refund payment bad request response
+func (o *RefundPaymentBadRequest) Code() int {
+	return 400
+}
+
 func (o *RefundPaymentBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *RefundPaymentBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewRefundPaymentBadGateway() *RefundPaymentBadGateway {
 	return &RefundPaymentBadGateway{}
 }
 
-/*RefundPaymentBadGateway handles this case with default header values.
+/*
+RefundPaymentBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type RefundPaymentBadGateway struct {
 	Payload *RefundPaymentBadGatewayBody
 }
 
+// IsSuccess returns true when this refund payment bad gateway response has a 2xx status code
+func (o *RefundPaymentBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refund payment bad gateway response has a 3xx status code
+func (o *RefundPaymentBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refund payment bad gateway response has a 4xx status code
+func (o *RefundPaymentBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refund payment bad gateway response has a 5xx status code
+func (o *RefundPaymentBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this refund payment bad gateway response a status code equal to that given
+func (o *RefundPaymentBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the refund payment bad gateway response
+func (o *RefundPaymentBadGateway) Code() int {
+	return 502
+}
+
 func (o *RefundPaymentBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *RefundPaymentBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/refunds][%d] refundPaymentBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *RefundPaymentBadGateway) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-/*RefundPaymentBadGatewayBody ptsV2PaymentsRefundPost502Response
+/*
+RefundPaymentBadGatewayBody ptsV2PaymentsRefundPost502Response
 swagger:model RefundPaymentBadGatewayBody
 */
 type RefundPaymentBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *RefundPaymentBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this refund payment bad gateway body based on context it is used
+func (o *RefundPaymentBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundPaymentBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *RefundPaymentBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentBadRequestBody ptsV2PaymentsRefundPost400Response
+/*
+RefundPaymentBadRequestBody ptsV2PaymentsRefundPost400Response
 swagger:model RefundPaymentBadRequestBody
 */
 type RefundPaymentBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*RefundPaymentBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -258,7 +369,6 @@ func (o *RefundPaymentBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundPaymentBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -272,6 +382,47 @@ func (o *RefundPaymentBadRequestBody) validateDetails(formats strfmt.Registry) e
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment bad request body based on the context it is used
+func (o *RefundPaymentBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -300,7 +451,55 @@ func (o *RefundPaymentBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentBody refund payment body
+/*
+RefundPaymentBadRequestBodyDetailsItems0 refund payment bad request body details items0
+swagger:model RefundPaymentBadRequestBodyDetailsItems0
+*/
+type RefundPaymentBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this refund payment bad request body details items0
+func (o *RefundPaymentBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund payment bad request body details items0 based on context it is used
+func (o *RefundPaymentBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *RefundPaymentBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *RefundPaymentBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res RefundPaymentBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+RefundPaymentBody refund payment body
+// Example: {"clientReferenceInformation":{"code":"Testing-VDP-Payments-Refund"},"orderInformation":{"amountDetails":{"currency":"USD","totalAmount":"102.21"}}}
 swagger:model RefundPaymentBody
 */
 type RefundPaymentBody struct {
@@ -319,7 +518,7 @@ type RefundPaymentBody struct {
 
 	// The object containing the custom data that the merchant defines.
 	//
-	MerchantDefinedInformation []*MerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
+	MerchantDefinedInformation []*RefundPaymentParamsBodyMerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
 
 	// merchant information
 	MerchantInformation *RefundPaymentParamsBodyMerchantInformation `json:"merchantInformation,omitempty"`
@@ -388,7 +587,6 @@ func (o *RefundPaymentBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundPaymentBody) validateAggregatorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorInformation) { // not required
 		return nil
 	}
@@ -397,6 +595,8 @@ func (o *RefundPaymentBody) validateAggregatorInformation(formats strfmt.Registr
 		if err := o.AggregatorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation")
 			}
 			return err
 		}
@@ -406,7 +606,6 @@ func (o *RefundPaymentBody) validateAggregatorInformation(formats strfmt.Registr
 }
 
 func (o *RefundPaymentBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -415,6 +614,8 @@ func (o *RefundPaymentBody) validateBuyerInformation(formats strfmt.Registry) er
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -424,7 +625,6 @@ func (o *RefundPaymentBody) validateBuyerInformation(formats strfmt.Registry) er
 }
 
 func (o *RefundPaymentBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -433,6 +633,8 @@ func (o *RefundPaymentBody) validateClientReferenceInformation(formats strfmt.Re
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -442,7 +644,6 @@ func (o *RefundPaymentBody) validateClientReferenceInformation(formats strfmt.Re
 }
 
 func (o *RefundPaymentBody) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -451,6 +652,8 @@ func (o *RefundPaymentBody) validateDeviceInformation(formats strfmt.Registry) e
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "deviceInformation")
 			}
 			return err
 		}
@@ -460,7 +663,6 @@ func (o *RefundPaymentBody) validateDeviceInformation(formats strfmt.Registry) e
 }
 
 func (o *RefundPaymentBody) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -474,6 +676,8 @@ func (o *RefundPaymentBody) validateMerchantDefinedInformation(formats strfmt.Re
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -485,7 +689,6 @@ func (o *RefundPaymentBody) validateMerchantDefinedInformation(formats strfmt.Re
 }
 
 func (o *RefundPaymentBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -494,6 +697,8 @@ func (o *RefundPaymentBody) validateMerchantInformation(formats strfmt.Registry)
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -503,7 +708,6 @@ func (o *RefundPaymentBody) validateMerchantInformation(formats strfmt.Registry)
 }
 
 func (o *RefundPaymentBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -512,6 +716,8 @@ func (o *RefundPaymentBody) validateOrderInformation(formats strfmt.Registry) er
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -521,7 +727,6 @@ func (o *RefundPaymentBody) validateOrderInformation(formats strfmt.Registry) er
 }
 
 func (o *RefundPaymentBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -530,6 +735,8 @@ func (o *RefundPaymentBody) validatePaymentInformation(formats strfmt.Registry) 
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -539,7 +746,6 @@ func (o *RefundPaymentBody) validatePaymentInformation(formats strfmt.Registry) 
 }
 
 func (o *RefundPaymentBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -548,6 +754,8 @@ func (o *RefundPaymentBody) validatePointOfSaleInformation(formats strfmt.Regist
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -557,7 +765,6 @@ func (o *RefundPaymentBody) validatePointOfSaleInformation(formats strfmt.Regist
 }
 
 func (o *RefundPaymentBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -566,6 +773,272 @@ func (o *RefundPaymentBody) validateProcessingInformation(formats strfmt.Registr
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment body based on the context it is used
+func (o *RefundPaymentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAggregatorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateAggregatorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AggregatorInformation != nil {
+
+		if swag.IsZero(o.AggregatorInformation) { // not required
+			return nil
+		}
+
+		if err := o.AggregatorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -592,7 +1065,9 @@ func (o *RefundPaymentBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentCreatedBody ptsV2PaymentsRefundPost201Response
+/*
+RefundPaymentCreatedBody ptsV2PaymentsRefundPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/refunds/4963014779006178301545","method":"GET"},"void":{"href":"/pts/v2/refunds/4963014779006178301545/voids","method":"POST"}},"clientReferenceInformation":{"code":"Testing-VDP-Payments-Refund"},"id":"4963014779006178301545","orderInformation":{"amountDetails":{"currency":"USD"}},"reconciliationId":"39571012D3DFEKS0","refundAmountDetails":{"currency":"USD","refundAmount":"102.21"},"status":"200","statusInformation":{"message":"Successful transaction.","reason":"SUCCESS"},"submitTimeUtc":"2017-06-01T071757Z"}
 swagger:model RefundPaymentCreatedBody
 */
 type RefundPaymentCreatedBody struct {
@@ -674,7 +1149,6 @@ func (o *RefundPaymentCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *RefundPaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -683,6 +1157,8 @@ func (o *RefundPaymentCreatedBody) validateLinks(formats strfmt.Registry) error 
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -692,7 +1168,6 @@ func (o *RefundPaymentCreatedBody) validateLinks(formats strfmt.Registry) error 
 }
 
 func (o *RefundPaymentCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -701,6 +1176,8 @@ func (o *RefundPaymentCreatedBody) validateClientReferenceInformation(formats st
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -710,12 +1187,11 @@ func (o *RefundPaymentCreatedBody) validateClientReferenceInformation(formats st
 }
 
 func (o *RefundPaymentCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -723,7 +1199,6 @@ func (o *RefundPaymentCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *RefundPaymentCreatedBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -732,6 +1207,8 @@ func (o *RefundPaymentCreatedBody) validateOrderInformation(formats strfmt.Regis
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -741,7 +1218,6 @@ func (o *RefundPaymentCreatedBody) validateOrderInformation(formats strfmt.Regis
 }
 
 func (o *RefundPaymentCreatedBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -750,6 +1226,8 @@ func (o *RefundPaymentCreatedBody) validateProcessorInformation(formats strfmt.R
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -759,12 +1237,11 @@ func (o *RefundPaymentCreatedBody) validateProcessorInformation(formats strfmt.R
 }
 
 func (o *RefundPaymentCreatedBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -772,7 +1249,6 @@ func (o *RefundPaymentCreatedBody) validateReconciliationID(formats strfmt.Regis
 }
 
 func (o *RefundPaymentCreatedBody) validateRefundAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RefundAmountDetails) { // not required
 		return nil
 	}
@@ -781,6 +1257,143 @@ func (o *RefundPaymentCreatedBody) validateRefundAmountDetails(formats strfmt.Re
 		if err := o.RefundAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "refundAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "refundAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment created body based on the context it is used
+func (o *RefundPaymentCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRefundAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentCreatedBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentCreatedBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentCreatedBody) contextValidateRefundAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RefundAmountDetails != nil {
+
+		if swag.IsZero(o.RefundAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.RefundAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "refundAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "refundAmountDetails")
 			}
 			return err
 		}
@@ -807,7 +1420,8 @@ func (o *RefundPaymentCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentCreatedBodyClientReferenceInformation refund payment created body client reference information
+/*
+RefundPaymentCreatedBodyClientReferenceInformation refund payment created body client reference information
 swagger:model RefundPaymentCreatedBodyClientReferenceInformation
 */
 type RefundPaymentCreatedBodyClientReferenceInformation struct {
@@ -862,12 +1476,11 @@ func (o *RefundPaymentCreatedBodyClientReferenceInformation) Validate(formats st
 }
 
 func (o *RefundPaymentCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -875,15 +1488,19 @@ func (o *RefundPaymentCreatedBodyClientReferenceInformation) validateCode(format
 }
 
 func (o *RefundPaymentCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment created body client reference information based on context it is used
+func (o *RefundPaymentCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -905,7 +1522,8 @@ func (o *RefundPaymentCreatedBodyClientReferenceInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*RefundPaymentCreatedBodyLinks refund payment created body links
+/*
+RefundPaymentCreatedBodyLinks refund payment created body links
 swagger:model RefundPaymentCreatedBodyLinks
 */
 type RefundPaymentCreatedBodyLinks struct {
@@ -936,7 +1554,6 @@ func (o *RefundPaymentCreatedBodyLinks) Validate(formats strfmt.Registry) error 
 }
 
 func (o *RefundPaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -945,6 +1562,8 @@ func (o *RefundPaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) er
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -954,7 +1573,6 @@ func (o *RefundPaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) er
 }
 
 func (o *RefundPaymentCreatedBodyLinks) validateVoid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Void) { // not required
 		return nil
 	}
@@ -963,6 +1581,68 @@ func (o *RefundPaymentCreatedBodyLinks) validateVoid(formats strfmt.Registry) er
 		if err := o.Void.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "void")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "void")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment created body links based on the context it is used
+func (o *RefundPaymentCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoid(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentCreatedBodyLinks) contextValidateVoid(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Void != nil {
+
+		if swag.IsZero(o.Void) { // not required
+			return nil
+		}
+
+		if err := o.Void.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "void")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "_links" + "." + "void")
 			}
 			return err
 		}
@@ -989,7 +1669,8 @@ func (o *RefundPaymentCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentCreatedBodyLinksSelf refund payment created body links self
+/*
+RefundPaymentCreatedBodyLinksSelf refund payment created body links self
 swagger:model RefundPaymentCreatedBodyLinksSelf
 */
 type RefundPaymentCreatedBodyLinksSelf struct {
@@ -1003,6 +1684,11 @@ type RefundPaymentCreatedBodyLinksSelf struct {
 
 // Validate validates this refund payment created body links self
 func (o *RefundPaymentCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund payment created body links self based on context it is used
+func (o *RefundPaymentCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1024,7 +1710,8 @@ func (o *RefundPaymentCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentCreatedBodyLinksVoid refund payment created body links void
+/*
+RefundPaymentCreatedBodyLinksVoid refund payment created body links void
 swagger:model RefundPaymentCreatedBodyLinksVoid
 */
 type RefundPaymentCreatedBodyLinksVoid struct {
@@ -1038,6 +1725,11 @@ type RefundPaymentCreatedBodyLinksVoid struct {
 
 // Validate validates this refund payment created body links void
 func (o *RefundPaymentCreatedBodyLinksVoid) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund payment created body links void based on context it is used
+func (o *RefundPaymentCreatedBodyLinksVoid) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1059,7 +1751,8 @@ func (o *RefundPaymentCreatedBodyLinksVoid) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*RefundPaymentCreatedBodyOrderInformation refund payment created body order information
+/*
+RefundPaymentCreatedBodyOrderInformation refund payment created body order information
 swagger:model RefundPaymentCreatedBodyOrderInformation
 */
 type RefundPaymentCreatedBodyOrderInformation struct {
@@ -1083,7 +1776,6 @@ func (o *RefundPaymentCreatedBodyOrderInformation) Validate(formats strfmt.Regis
 }
 
 func (o *RefundPaymentCreatedBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -1092,6 +1784,43 @@ func (o *RefundPaymentCreatedBodyOrderInformation) validateInvoiceDetails(format
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment created body order information based on the context it is used
+func (o *RefundPaymentCreatedBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentCreatedBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -1118,7 +1847,8 @@ func (o *RefundPaymentCreatedBodyOrderInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*RefundPaymentCreatedBodyOrderInformationInvoiceDetails refund payment created body order information invoice details
+/*
+RefundPaymentCreatedBodyOrderInformationInvoiceDetails refund payment created body order information invoice details
 swagger:model RefundPaymentCreatedBodyOrderInformationInvoiceDetails
 */
 type RefundPaymentCreatedBodyOrderInformationInvoiceDetails struct {
@@ -1143,6 +1873,11 @@ func (o *RefundPaymentCreatedBodyOrderInformationInvoiceDetails) Validate(format
 	return nil
 }
 
+// ContextValidate validates this refund payment created body order information invoice details based on context it is used
+func (o *RefundPaymentCreatedBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundPaymentCreatedBodyOrderInformationInvoiceDetails) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1161,7 +1896,8 @@ func (o *RefundPaymentCreatedBodyOrderInformationInvoiceDetails) UnmarshalBinary
 	return nil
 }
 
-/*RefundPaymentCreatedBodyProcessorInformation refund payment created body processor information
+/*
+RefundPaymentCreatedBodyProcessorInformation refund payment created body processor information
 swagger:model RefundPaymentCreatedBodyProcessorInformation
 */
 type RefundPaymentCreatedBodyProcessorInformation struct {
@@ -1266,7 +2002,6 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformation) validateAchVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AchVerification) { // not required
 		return nil
 	}
@@ -1275,6 +2010,8 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) validateAchVerification(f
 		if err := o.AchVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
 			}
 			return err
 		}
@@ -1284,12 +2021,11 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) validateAchVerification(f
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformation) validateForwardedAcquirerCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForwardedAcquirerCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", string(o.ForwardedAcquirerCode), 32); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"forwardedAcquirerCode", "body", o.ForwardedAcquirerCode, 32); err != nil {
 		return err
 	}
 
@@ -1297,12 +2033,11 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) validateForwardedAcquirer
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformation) validateMerchantNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", string(o.MerchantNumber), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"merchantNumber", "body", o.MerchantNumber, 15); err != nil {
 		return err
 	}
 
@@ -1310,12 +2045,11 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) validateMerchantNumber(fo
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -1323,13 +2057,47 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) validateResponseCode(form
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 18); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 18); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment created body processor information based on the context it is used
+func (o *RefundPaymentCreatedBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAchVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentCreatedBodyProcessorInformation) contextValidateAchVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AchVerification != nil {
+
+		if swag.IsZero(o.AchVerification) { // not required
+			return nil
+		}
+
+		if err := o.AchVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentCreated" + "." + "processorInformation" + "." + "achVerification")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1353,7 +2121,8 @@ func (o *RefundPaymentCreatedBodyProcessorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundPaymentCreatedBodyProcessorInformationAchVerification refund payment created body processor information ach verification
+/*
+RefundPaymentCreatedBodyProcessorInformationAchVerification refund payment created body processor information ach verification
 swagger:model RefundPaymentCreatedBodyProcessorInformationAchVerification
 */
 type RefundPaymentCreatedBodyProcessorInformationAchVerification struct {
@@ -1390,12 +2159,11 @@ func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) Validate(f
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", string(o.ResultCode), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", o.ResultCode, 2); err != nil {
 		return err
 	}
 
@@ -1403,15 +2171,19 @@ func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) validateRe
 }
 
 func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) validateResultCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", string(o.ResultCodeRaw), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", o.ResultCodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment created body processor information ach verification based on context it is used
+func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1433,7 +2205,8 @@ func (o *RefundPaymentCreatedBodyProcessorInformationAchVerification) UnmarshalB
 	return nil
 }
 
-/*RefundPaymentCreatedBodyRefundAmountDetails refund payment created body refund amount details
+/*
+RefundPaymentCreatedBodyRefundAmountDetails refund payment created body refund amount details
 swagger:model RefundPaymentCreatedBodyRefundAmountDetails
 */
 type RefundPaymentCreatedBodyRefundAmountDetails struct {
@@ -1474,12 +2247,11 @@ func (o *RefundPaymentCreatedBodyRefundAmountDetails) Validate(formats strfmt.Re
 }
 
 func (o *RefundPaymentCreatedBodyRefundAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"refundAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"refundAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1487,15 +2259,19 @@ func (o *RefundPaymentCreatedBodyRefundAmountDetails) validateCurrency(formats s
 }
 
 func (o *RefundPaymentCreatedBodyRefundAmountDetails) validateRefundAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RefundAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentCreated"+"."+"refundAmountDetails"+"."+"refundAmount", "body", string(o.RefundAmount), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentCreated"+"."+"refundAmountDetails"+"."+"refundAmount", "body", o.RefundAmount, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment created body refund amount details based on context it is used
+func (o *RefundPaymentCreatedBodyRefundAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1517,7 +2293,8 @@ func (o *RefundPaymentCreatedBodyRefundAmountDetails) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*RefundPaymentParamsBodyAggregatorInformation refund payment params body aggregator information
+/*
+RefundPaymentParamsBodyAggregatorInformation refund payment params body aggregator information
 swagger:model RefundPaymentParamsBodyAggregatorInformation
 */
 type RefundPaymentParamsBodyAggregatorInformation struct {
@@ -1583,12 +2360,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformation) validateAggregatorID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AggregatorID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", string(o.AggregatorID), 20); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"aggregatorId", "body", o.AggregatorID, 20); err != nil {
 		return err
 	}
 
@@ -1596,12 +2372,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformation) validateAggregatorID(form
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformation) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -1609,7 +2384,6 @@ func (o *RefundPaymentParamsBodyAggregatorInformation) validateName(formats strf
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformation) validateSubMerchant(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubMerchant) { // not required
 		return nil
 	}
@@ -1618,6 +2392,43 @@ func (o *RefundPaymentParamsBodyAggregatorInformation) validateSubMerchant(forma
 		if err := o.SubMerchant.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body aggregator information based on the context it is used
+func (o *RefundPaymentParamsBodyAggregatorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSubMerchant(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyAggregatorInformation) contextValidateSubMerchant(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.SubMerchant != nil {
+
+		if swag.IsZero(o.SubMerchant) { // not required
+			return nil
+		}
+
+		if err := o.SubMerchant.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "aggregatorInformation" + "." + "subMerchant")
 			}
 			return err
 		}
@@ -1644,7 +2455,8 @@ func (o *RefundPaymentParamsBodyAggregatorInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundPaymentParamsBodyAggregatorInformationSubMerchant refund payment params body aggregator information sub merchant
+/*
+RefundPaymentParamsBodyAggregatorInformationSubMerchant refund payment params body aggregator information sub merchant
 swagger:model RefundPaymentParamsBodyAggregatorInformationSubMerchant
 */
 type RefundPaymentParamsBodyAggregatorInformationSubMerchant struct {
@@ -1821,12 +2633,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) Validate(forma
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", string(o.Address1), 38); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"address1", "body", o.Address1, 38); err != nil {
 		return err
 	}
 
@@ -1834,12 +2645,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateAddres
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -1847,12 +2657,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateAdmini
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -1860,12 +2669,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateCountr
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", string(o.Email), 40); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"email", "body", o.Email, 40); err != nil {
 		return err
 	}
 
@@ -1873,12 +2681,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateEmail(
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", string(o.Locality), 21); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"locality", "body", o.Locality, 21); err != nil {
 		return err
 	}
 
@@ -1886,12 +2693,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateLocali
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", string(o.Name), 37); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"name", "body", o.Name, 37); err != nil {
 		return err
 	}
 
@@ -1899,12 +2705,11 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validateName(f
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", string(o.PhoneNumber), 20); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"phoneNumber", "body", o.PhoneNumber, 20); err != nil {
 		return err
 	}
 
@@ -1912,15 +2717,19 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validatePhoneN
 }
 
 func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", string(o.PostalCode), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"aggregatorInformation"+"."+"subMerchant"+"."+"postalCode", "body", o.PostalCode, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body aggregator information sub merchant based on context it is used
+func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1942,7 +2751,8 @@ func (o *RefundPaymentParamsBodyAggregatorInformationSubMerchant) UnmarshalBinar
 	return nil
 }
 
-/*RefundPaymentParamsBodyBuyerInformation refund payment params body buyer information
+/*
+RefundPaymentParamsBodyBuyerInformation refund payment params body buyer information
 swagger:model RefundPaymentParamsBodyBuyerInformation
 */
 type RefundPaymentParamsBodyBuyerInformation struct {
@@ -1997,12 +2807,11 @@ func (o *RefundPaymentParamsBodyBuyerInformation) Validate(formats strfmt.Regist
 }
 
 func (o *RefundPaymentParamsBodyBuyerInformation) validateMerchantCustomerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantCustomerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", string(o.MerchantCustomerID), 100); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", o.MerchantCustomerID, 100); err != nil {
 		return err
 	}
 
@@ -2010,15 +2819,19 @@ func (o *RefundPaymentParamsBodyBuyerInformation) validateMerchantCustomerID(for
 }
 
 func (o *RefundPaymentParamsBodyBuyerInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 20); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"buyerInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body buyer information based on context it is used
+func (o *RefundPaymentParamsBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2040,7 +2853,8 @@ func (o *RefundPaymentParamsBodyBuyerInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*RefundPaymentParamsBodyClientReferenceInformation refund payment params body client reference information
+/*
+RefundPaymentParamsBodyClientReferenceInformation refund payment params body client reference information
 swagger:model RefundPaymentParamsBodyClientReferenceInformation
 */
 type RefundPaymentParamsBodyClientReferenceInformation struct {
@@ -2090,12 +2904,11 @@ func (o *RefundPaymentParamsBodyClientReferenceInformation) Validate(formats str
 }
 
 func (o *RefundPaymentParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -2103,7 +2916,6 @@ func (o *RefundPaymentParamsBodyClientReferenceInformation) validateCode(formats
 }
 
 func (o *RefundPaymentParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -2112,6 +2924,43 @@ func (o *RefundPaymentParamsBodyClientReferenceInformation) validatePartner(form
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body client reference information based on the context it is used
+func (o *RefundPaymentParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -2138,7 +2987,8 @@ func (o *RefundPaymentParamsBodyClientReferenceInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*RefundPaymentParamsBodyClientReferenceInformationPartner refund payment params body client reference information partner
+/*
+RefundPaymentParamsBodyClientReferenceInformationPartner refund payment params body client reference information partner
 swagger:model RefundPaymentParamsBodyClientReferenceInformationPartner
 */
 type RefundPaymentParamsBodyClientReferenceInformationPartner struct {
@@ -2199,12 +3049,11 @@ func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) Validate(form
 }
 
 func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -2212,12 +3061,11 @@ func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) validateDevel
 }
 
 func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) validateOriginalTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", string(o.OriginalTransactionID), 32); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"originalTransactionId", "body", o.OriginalTransactionID, 32); err != nil {
 		return err
 	}
 
@@ -2225,15 +3073,19 @@ func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) validateOrigi
 }
 
 func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body client reference information partner based on context it is used
+func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2255,7 +3107,8 @@ func (o *RefundPaymentParamsBodyClientReferenceInformationPartner) UnmarshalBina
 	return nil
 }
 
-/*RefundPaymentParamsBodyDeviceInformation refund payment params body device information
+/*
+RefundPaymentParamsBodyDeviceInformation refund payment params body device information
 swagger:model RefundPaymentParamsBodyDeviceInformation
 */
 type RefundPaymentParamsBodyDeviceInformation struct {
@@ -2299,12 +3152,11 @@ func (o *RefundPaymentParamsBodyDeviceInformation) Validate(formats strfmt.Regis
 }
 
 func (o *RefundPaymentParamsBodyDeviceInformation) validateHostName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HostName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"hostName", "body", string(o.HostName), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"hostName", "body", o.HostName, 60); err != nil {
 		return err
 	}
 
@@ -2312,12 +3164,11 @@ func (o *RefundPaymentParamsBodyDeviceInformation) validateHostName(formats strf
 }
 
 func (o *RefundPaymentParamsBodyDeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
@@ -2325,15 +3176,19 @@ func (o *RefundPaymentParamsBodyDeviceInformation) validateIPAddress(formats str
 }
 
 func (o *RefundPaymentParamsBodyDeviceInformation) validateUserAgent(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UserAgent) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"userAgent", "body", string(o.UserAgent), 40); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"deviceInformation"+"."+"userAgent", "body", o.UserAgent, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body device information based on context it is used
+func (o *RefundPaymentParamsBodyDeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2355,7 +3210,122 @@ func (o *RefundPaymentParamsBodyDeviceInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*RefundPaymentParamsBodyMerchantInformation refund payment params body merchant information
+/*
+RefundPaymentParamsBodyMerchantDefinedInformationItems0 refund payment params body merchant defined information items0
+swagger:model RefundPaymentParamsBodyMerchantDefinedInformationItems0
+*/
+type RefundPaymentParamsBodyMerchantDefinedInformationItems0 struct {
+
+	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
+	//
+	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
+	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
+	// transaction.
+	//
+	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// Max Length: 50
+	Key string `json:"key,omitempty"`
+
+	// The value you assign for your merchant-defined data field.
+	//
+	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
+	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
+	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
+	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
+	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For installment payments with Mastercard in Brazil:
+	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 25-44
+	//   - Field: Reference Field 2
+	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 45-64
+	//   - Field: Reference Field 3
+	//
+	// Max Length: 255
+	Value string `json:"value,omitempty"`
+}
+
+// Validate validates this refund payment params body merchant defined information items0
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
+	if swag.IsZero(o.Key) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("key", "body", o.Key, 50); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
+	if swag.IsZero(o.Value) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this refund payment params body merchant defined information items0 based on context it is used
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *RefundPaymentParamsBodyMerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
+	var res RefundPaymentParamsBodyMerchantDefinedInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+RefundPaymentParamsBodyMerchantInformation refund payment params body merchant information
 swagger:model RefundPaymentParamsBodyMerchantInformation
 */
 type RefundPaymentParamsBodyMerchantInformation struct {
@@ -2444,12 +3414,11 @@ func (o *RefundPaymentParamsBodyMerchantInformation) Validate(formats strfmt.Reg
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformation) validateCardAcceptorReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardAcceptorReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", string(o.CardAcceptorReferenceNumber), 25); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"cardAcceptorReferenceNumber", "body", o.CardAcceptorReferenceNumber, 25); err != nil {
 		return err
 	}
 
@@ -2457,12 +3426,11 @@ func (o *RefundPaymentParamsBodyMerchantInformation) validateCardAcceptorReferen
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformation) validateCategoryCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CategoryCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaximumInt("refundPaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", int64(o.CategoryCode), 9999, false); err != nil {
+	if err := validate.MaximumInt("refundPaymentRequest"+"."+"merchantInformation"+"."+"categoryCode", "body", o.CategoryCode, 9999, false); err != nil {
 		return err
 	}
 
@@ -2470,7 +3438,6 @@ func (o *RefundPaymentParamsBodyMerchantInformation) validateCategoryCode(format
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -2479,6 +3446,8 @@ func (o *RefundPaymentParamsBodyMerchantInformation) validateMerchantDescriptor(
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -2488,12 +3457,11 @@ func (o *RefundPaymentParamsBodyMerchantInformation) validateMerchantDescriptor(
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformation) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
@@ -2501,13 +3469,47 @@ func (o *RefundPaymentParamsBodyMerchantInformation) validateTaxID(formats strfm
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformation) validateVatRegistrationNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatRegistrationNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", string(o.VatRegistrationNumber), 21); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"vatRegistrationNumber", "body", o.VatRegistrationNumber, 21); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body merchant information based on the context it is used
+func (o *RefundPaymentParamsBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -2531,7 +3533,8 @@ func (o *RefundPaymentParamsBodyMerchantInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*RefundPaymentParamsBodyMerchantInformationMerchantDescriptor refund payment params body merchant information merchant descriptor
+/*
+RefundPaymentParamsBodyMerchantInformationMerchantDescriptor refund payment params body merchant information merchant descriptor
 swagger:model RefundPaymentParamsBodyMerchantInformationMerchantDescriptor
 */
 type RefundPaymentParamsBodyMerchantInformationMerchantDescriptor struct {
@@ -2644,12 +3647,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) Validate(
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2657,12 +3659,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"administrativeArea", "body", o.AdministrativeArea, 3); err != nil {
 		return err
 	}
 
@@ -2670,12 +3671,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateAlternateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AlternateName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", string(o.AlternateName), 13); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"alternateName", "body", o.AlternateName, 13); err != nil {
 		return err
 	}
 
@@ -2683,12 +3683,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateA
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateContact(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Contact) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", string(o.Contact), 14); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"contact", "body", o.Contact, 14); err != nil {
 		return err
 	}
 
@@ -2696,12 +3695,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2709,12 +3707,11 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateC
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", string(o.Locality), 13); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"locality", "body", o.Locality, 13); err != nil {
 		return err
 	}
 
@@ -2722,15 +3719,19 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validateL
 }
 
 func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", string(o.PostalCode), 14); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"merchantInformation"+"."+"merchantDescriptor"+"."+"postalCode", "body", o.PostalCode, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body merchant information merchant descriptor based on context it is used
+func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2752,7 +3753,8 @@ func (o *RefundPaymentParamsBodyMerchantInformationMerchantDescriptor) Unmarshal
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformation refund payment params body order information
+/*
+RefundPaymentParamsBodyOrderInformation refund payment params body order information
 swagger:model RefundPaymentParamsBodyOrderInformation
 */
 type RefundPaymentParamsBodyOrderInformation struct {
@@ -2811,7 +3813,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) Validate(formats strfmt.Regist
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -2820,6 +3821,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateAmountDetails(formats 
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -2829,7 +3832,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateAmountDetails(formats 
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -2838,6 +3840,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -2847,7 +3851,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateBillTo(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateInvoiceDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceDetails) { // not required
 		return nil
 	}
@@ -2856,6 +3859,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateInvoiceDetails(formats
 		if err := o.InvoiceDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
 			}
 			return err
 		}
@@ -2865,7 +3870,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateInvoiceDetails(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -2879,6 +3883,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateLineItems(formats strf
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -2890,7 +3896,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateLineItems(formats strf
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -2899,6 +3904,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -2908,7 +3915,6 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateShipTo(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyOrderInformation) validateShippingDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingDetails) { // not required
 		return nil
 	}
@@ -2917,6 +3923,172 @@ func (o *RefundPaymentParamsBodyOrderInformation) validateShippingDetails(format
 		if err := o.ShippingDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body order information based on the context it is used
+func (o *RefundPaymentParamsBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInvoiceDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShippingDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateInvoiceDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InvoiceDetails != nil {
+
+		if swag.IsZero(o.InvoiceDetails) { // not required
+			return nil
+		}
+
+		if err := o.InvoiceDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformation) contextValidateShippingDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShippingDetails != nil {
+
+		if swag.IsZero(o.ShippingDetails) { // not required
+			return nil
+		}
+
+		if err := o.ShippingDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "shippingDetails")
 			}
 			return err
 		}
@@ -2943,7 +4115,8 @@ func (o *RefundPaymentParamsBodyOrderInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationAmountDetails refund payment params body order information amount details
+/*
+RefundPaymentParamsBodyOrderInformationAmountDetails refund payment params body order information amount details
 swagger:model RefundPaymentParamsBodyOrderInformationAmountDetails
 */
 type RefundPaymentParamsBodyOrderInformationAmountDetails struct {
@@ -3231,7 +4404,6 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) Validate(formats 
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateAmexAdditionalAmounts(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmexAdditionalAmounts) { // not required
 		return nil
 	}
@@ -3245,6 +4417,8 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateAmexAddit
 			if err := o.AmexAdditionalAmounts[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3256,12 +4430,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateAmexAddit
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -3269,12 +4442,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateCurrency(
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", string(o.DiscountAmount), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"discountAmount", "body", o.DiscountAmount, 15); err != nil {
 		return err
 	}
 
@@ -3282,12 +4454,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateDiscountA
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateDutyAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DutyAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", string(o.DutyAmount), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"dutyAmount", "body", o.DutyAmount, 15); err != nil {
 		return err
 	}
 
@@ -3295,12 +4466,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateDutyAmoun
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateExchangeRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", string(o.ExchangeRate), 13); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRate", "body", o.ExchangeRate, 13); err != nil {
 		return err
 	}
 
@@ -3308,12 +4478,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateExchangeRateTimeStamp(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExchangeRateTimeStamp) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", string(o.ExchangeRateTimeStamp), 14); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"exchangeRateTimeStamp", "body", o.ExchangeRateTimeStamp, 14); err != nil {
 		return err
 	}
 
@@ -3321,12 +4490,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateExchangeR
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateForeignAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", string(o.ForeignAmount), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignAmount", "body", o.ForeignAmount, 15); err != nil {
 		return err
 	}
 
@@ -3334,12 +4502,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateForeignAm
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateForeignCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ForeignCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", string(o.ForeignCurrency), 5); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"foreignCurrency", "body", o.ForeignCurrency, 5); err != nil {
 		return err
 	}
 
@@ -3347,12 +4514,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateForeignCu
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateFreightAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FreightAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", string(o.FreightAmount), 13); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"freightAmount", "body", o.FreightAmount, 13); err != nil {
 		return err
 	}
 
@@ -3360,12 +4526,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateFreightAm
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateGratuityAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.GratuityAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", string(o.GratuityAmount), 13); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"gratuityAmount", "body", o.GratuityAmount, 13); err != nil {
 		return err
 	}
 
@@ -3373,12 +4538,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateGratuityA
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateNationalTaxIncluded(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NationalTaxIncluded) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", string(o.NationalTaxIncluded), 1); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"nationalTaxIncluded", "body", o.NationalTaxIncluded, 1); err != nil {
 		return err
 	}
 
@@ -3386,12 +4550,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateNationalT
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateOriginalCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OriginalCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", string(o.OriginalCurrency), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"originalCurrency", "body", o.OriginalCurrency, 15); err != nil {
 		return err
 	}
 
@@ -3399,12 +4562,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateOriginalC
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateServiceFeeAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ServiceFeeAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", string(o.ServiceFeeAmount), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"serviceFeeAmount", "body", o.ServiceFeeAmount, 15); err != nil {
 		return err
 	}
 
@@ -3412,12 +4574,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateServiceFe
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", string(o.TaxAmount), 12); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", o.TaxAmount, 12); err != nil {
 		return err
 	}
 
@@ -3425,12 +4586,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxAmount
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -3438,12 +4598,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxAppliedLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", string(o.TaxAppliedLevel), 1); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAppliedLevel", "body", o.TaxAppliedLevel, 1); err != nil {
 		return err
 	}
 
@@ -3451,7 +4610,6 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxApplie
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -3465,6 +4623,8 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxDetail
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3476,12 +4636,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxDetail
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", string(o.TaxTypeCode), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxTypeCode", "body", o.TaxTypeCode, 3); err != nil {
 		return err
 	}
 
@@ -3489,13 +4648,80 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTaxTypeCo
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body order information amount details based on the context it is used
+func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmexAdditionalAmounts(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) contextValidateAmexAdditionalAmounts(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.AmexAdditionalAmounts); i++ {
+
+		if o.AmexAdditionalAmounts[i] != nil {
+
+			if swag.IsZero(o.AmexAdditionalAmounts[i]) { // not required
+				return nil
+			}
+
+			if err := o.AmexAdditionalAmounts[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "amexAdditionalAmounts" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "amountDetails" + "." + "taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -3519,7 +4745,8 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetails) UnmarshalBinary(b
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 refund payment params body order information amount details amex additional amounts items0
+/*
+RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 refund payment params body order information amount details amex additional amounts items0
 swagger:model RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0
 */
 type RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0 struct {
@@ -3560,12 +4787,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 12); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 12); err != nil {
 		return err
 	}
 
@@ -3573,15 +4799,19 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 3); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information amount details amex additional amounts items0 based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmountsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3603,7 +4833,8 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsAmexAdditionalAmoun
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 refund payment params body order information amount details tax details items0
+/*
+RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 refund payment params body order information amount details tax details items0
 swagger:model RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0
 */
 type RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0 struct {
@@ -3743,12 +4974,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) V
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -3756,12 +4986,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -3769,12 +4998,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -3782,12 +5010,11 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -3795,15 +5022,19 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) v
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information amount details tax details items0 based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3825,7 +5056,8 @@ func (o *RefundPaymentParamsBodyOrderInformationAmountDetailsTaxDetailsItems0) U
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationBillTo refund payment params body order information bill to
+/*
+RefundPaymentParamsBodyOrderInformationBillTo refund payment params body order information bill to
 swagger:model RefundPaymentParamsBodyOrderInformationBillTo
 */
 type RefundPaymentParamsBodyOrderInformationBillTo struct {
@@ -4085,12 +5317,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) Validate(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -4098,12 +5329,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAddress1(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -4111,12 +5341,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAddress2(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -4124,12 +5353,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateAdministrativeAr
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -4137,12 +5365,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateCompany(formats 
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -4150,12 +5377,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateCountry(formats 
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -4163,12 +5389,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateEmail(formats st
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -4176,12 +5401,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateFirstName(format
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -4189,12 +5413,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateLastName(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -4202,12 +5425,11 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validateLocality(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -4215,15 +5437,19 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) validatePhoneNumber(form
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information bill to based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4245,7 +5471,8 @@ func (o *RefundPaymentParamsBodyOrderInformationBillTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationInvoiceDetails refund payment params body order information invoice details
+/*
+RefundPaymentParamsBodyOrderInformationInvoiceDetails refund payment params body order information invoice details
 swagger:model RefundPaymentParamsBodyOrderInformationInvoiceDetails
 */
 type RefundPaymentParamsBodyOrderInformationInvoiceDetails struct {
@@ -4345,12 +5572,11 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) Validate(formats
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", string(o.CommodityCode), 4); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"commodityCode", "body", o.CommodityCode, 4); err != nil {
 		return err
 	}
 
@@ -4358,12 +5584,11 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateCommodit
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseContactName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseContactName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", string(o.PurchaseContactName), 36); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseContactName", "body", o.PurchaseContactName, 36); err != nil {
 		return err
 	}
 
@@ -4371,12 +5596,11 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderDate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderDate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", string(o.PurchaseOrderDate), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderDate", "body", o.PurchaseOrderDate, 10); err != nil {
 		return err
 	}
 
@@ -4384,12 +5608,11 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchaseOrderNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseOrderNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", string(o.PurchaseOrderNumber), 25); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"purchaseOrderNumber", "body", o.PurchaseOrderNumber, 25); err != nil {
 		return err
 	}
 
@@ -4397,7 +5620,6 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validatePurchase
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateTransactionAdviceAddendum(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionAdviceAddendum) { // not required
 		return nil
 	}
@@ -4411,6 +5633,8 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateTransact
 			if err := o.TransactionAdviceAddendum[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -4422,13 +5646,51 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateTransact
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) validateVatInvoiceReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VatInvoiceReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", string(o.VatInvoiceReferenceNumber), 15); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"invoiceDetails"+"."+"vatInvoiceReferenceNumber", "body", o.VatInvoiceReferenceNumber, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body order information invoice details based on the context it is used
+func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTransactionAdviceAddendum(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) contextValidateTransactionAdviceAddendum(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TransactionAdviceAddendum); i++ {
+
+		if o.TransactionAdviceAddendum[i] != nil {
+
+			if swag.IsZero(o.TransactionAdviceAddendum[i]) { // not required
+				return nil
+			}
+
+			if err := o.TransactionAdviceAddendum[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("refundPaymentRequest" + "." + "orderInformation" + "." + "invoiceDetails" + "." + "transactionAdviceAddendum" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -4452,7 +5714,8 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetails) UnmarshalBinary(
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 refund payment params body order information invoice details transaction advice addendum items0
+/*
+RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 refund payment params body order information invoice details transaction advice addendum items0
 swagger:model RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0
 */
 type RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0 struct {
@@ -4483,15 +5746,19 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) validateData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Data) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("data", "body", string(o.Data), 40); err != nil {
+	if err := validate.MaxLength("data", "body", o.Data, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information invoice details transaction advice addendum items0 based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceAddendumItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4513,7 +5780,8 @@ func (o *RefundPaymentParamsBodyOrderInformationInvoiceDetailsTransactionAdviceA
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationLineItemsItems0 refund payment params body order information line items items0
+/*
+RefundPaymentParamsBodyOrderInformationLineItemsItems0 refund payment params body order information line items items0
 swagger:model RefundPaymentParamsBodyOrderInformationLineItemsItems0
 */
 type RefundPaymentParamsBodyOrderInformationLineItemsItems0 struct {
@@ -4821,12 +6089,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) Validate(format
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateCommodityCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommodityCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("commodityCode", "body", string(o.CommodityCode), 15); err != nil {
+	if err := validate.MaxLength("commodityCode", "body", o.CommodityCode, 15); err != nil {
 		return err
 	}
 
@@ -4834,12 +6101,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateCommodi
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateDiscountAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountAmount", "body", string(o.DiscountAmount), 13); err != nil {
+	if err := validate.MaxLength("discountAmount", "body", o.DiscountAmount, 13); err != nil {
 		return err
 	}
 
@@ -4847,12 +6113,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateDiscountRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DiscountRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("discountRate", "body", string(o.DiscountRate), 6); err != nil {
+	if err := validate.MaxLength("discountRate", "body", o.DiscountRate, 6); err != nil {
 		return err
 	}
 
@@ -4860,12 +6125,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateDiscoun
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateInvoiceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InvoiceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("invoiceNumber", "body", string(o.InvoiceNumber), 23); err != nil {
+	if err := validate.MaxLength("invoiceNumber", "body", o.InvoiceNumber, 23); err != nil {
 		return err
 	}
 
@@ -4873,12 +6137,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateInvoice
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProductCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productCode", "body", string(o.ProductCode), 255); err != nil {
+	if err := validate.MaxLength("productCode", "body", o.ProductCode, 255); err != nil {
 		return err
 	}
 
@@ -4886,12 +6149,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productName", "body", string(o.ProductName), 255); err != nil {
+	if err := validate.MaxLength("productName", "body", o.ProductName, 255); err != nil {
 		return err
 	}
 
@@ -4899,12 +6161,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProductSku(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductSku) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productSku", "body", string(o.ProductSku), 255); err != nil {
+	if err := validate.MaxLength("productSku", "body", o.ProductSku, 255); err != nil {
 		return err
 	}
 
@@ -4912,16 +6173,15 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateProduct
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.Minimum("quantity", "body", float64(o.Quantity), 1, false); err != nil {
+	if err := validate.Minimum("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.Maximum("quantity", "body", float64(o.Quantity), 9.999999999e+09, false); err != nil {
+	if err := validate.Maximum("quantity", "body", o.Quantity, 9.999999999e+09, false); err != nil {
 		return err
 	}
 
@@ -4929,12 +6189,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateQuantit
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAmount", "body", string(o.TaxAmount), 15); err != nil {
+	if err := validate.MaxLength("taxAmount", "body", o.TaxAmount, 15); err != nil {
 		return err
 	}
 
@@ -4942,12 +6201,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAmou
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAppliedAfterDiscount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAppliedAfterDiscount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", string(o.TaxAppliedAfterDiscount), 1); err != nil {
+	if err := validate.MaxLength("taxAppliedAfterDiscount", "body", o.TaxAppliedAfterDiscount, 1); err != nil {
 		return err
 	}
 
@@ -4955,7 +6213,6 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxAppl
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxDetails) { // not required
 		return nil
 	}
@@ -4969,6 +6226,8 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 			if err := o.TaxDetails[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -4980,12 +6239,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxDeta
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxRate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxRate", "body", string(o.TaxRate), 7); err != nil {
+	if err := validate.MaxLength("taxRate", "body", o.TaxRate, 7); err != nil {
 		return err
 	}
 
@@ -4993,12 +6251,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxRate
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxStatusIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxStatusIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxStatusIndicator", "body", string(o.TaxStatusIndicator), 1); err != nil {
+	if err := validate.MaxLength("taxStatusIndicator", "body", o.TaxStatusIndicator, 1); err != nil {
 		return err
 	}
 
@@ -5006,12 +6263,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxStat
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxTypeCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxTypeCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxTypeCode", "body", string(o.TaxTypeCode), 4); err != nil {
+	if err := validate.MaxLength("taxTypeCode", "body", o.TaxTypeCode, 4); err != nil {
 		return err
 	}
 
@@ -5019,12 +6275,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTaxType
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("totalAmount", "body", string(o.TotalAmount), 13); err != nil {
+	if err := validate.MaxLength("totalAmount", "body", o.TotalAmount, 13); err != nil {
 		return err
 	}
 
@@ -5032,12 +6287,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTotalAm
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTypeOfSupply(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TypeOfSupply) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("typeOfSupply", "body", string(o.TypeOfSupply), 2); err != nil {
+	if err := validate.MaxLength("typeOfSupply", "body", o.TypeOfSupply, 2); err != nil {
 		return err
 	}
 
@@ -5045,12 +6299,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateTypeOfS
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateUnitOfMeasure(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitOfMeasure) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitOfMeasure", "body", string(o.UnitOfMeasure), 12); err != nil {
+	if err := validate.MaxLength("unitOfMeasure", "body", o.UnitOfMeasure, 12); err != nil {
 		return err
 	}
 
@@ -5058,13 +6311,51 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateUnitOfM
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body order information line items items0 based on the context it is used
+func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateTaxDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) contextValidateTaxDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.TaxDetails); i++ {
+
+		if o.TaxDetails[i] != nil {
+
+			if swag.IsZero(o.TaxDetails[i]) { // not required
+				return nil
+			}
+
+			if err := o.TaxDetails[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("taxDetails" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -5088,7 +6379,8 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0) UnmarshalBinary
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 refund payment params body order information line items items0 tax details items0
+/*
+RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 refund payment params body order information line items items0 tax details items0
 swagger:model RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0
 */
 type RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0 struct {
@@ -5228,12 +6520,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Amount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("amount", "body", string(o.Amount), 13); err != nil {
+	if err := validate.MaxLength("amount", "body", o.Amount, 13); err != nil {
 		return err
 	}
 
@@ -5241,12 +6532,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("code", "body", string(o.Code), 4); err != nil {
+	if err := validate.MaxLength("code", "body", o.Code, 4); err != nil {
 		return err
 	}
 
@@ -5254,12 +6544,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateExemptionCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExemptionCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("exemptionCode", "body", string(o.ExemptionCode), 1); err != nil {
+	if err := validate.MaxLength("exemptionCode", "body", o.ExemptionCode, 1); err != nil {
 		return err
 	}
 
@@ -5267,12 +6556,11 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateRate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rate) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("rate", "body", string(o.Rate), 6); err != nil {
+	if err := validate.MaxLength("rate", "body", o.Rate, 6); err != nil {
 		return err
 	}
 
@@ -5280,15 +6568,19 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) validateTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxId", "body", string(o.TaxID), 15); err != nil {
+	if err := validate.MaxLength("taxId", "body", o.TaxID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information line items items0 tax details items0 based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5310,7 +6602,8 @@ func (o *RefundPaymentParamsBodyOrderInformationLineItemsItems0TaxDetailsItems0)
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationShipTo refund payment params body order information ship to
+/*
+RefundPaymentParamsBodyOrderInformationShipTo refund payment params body order information ship to
 swagger:model RefundPaymentParamsBodyOrderInformationShipTo
 */
 type RefundPaymentParamsBodyOrderInformationShipTo struct {
@@ -5368,12 +6661,11 @@ func (o *RefundPaymentParamsBodyOrderInformationShipTo) Validate(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationShipTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 2); err != nil {
 		return err
 	}
 
@@ -5381,12 +6673,11 @@ func (o *RefundPaymentParamsBodyOrderInformationShipTo) validateAdministrativeAr
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -5394,15 +6685,19 @@ func (o *RefundPaymentParamsBodyOrderInformationShipTo) validateCountry(formats 
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationShipTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information ship to based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5424,7 +6719,8 @@ func (o *RefundPaymentParamsBodyOrderInformationShipTo) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundPaymentParamsBodyOrderInformationShippingDetails refund payment params body order information shipping details
+/*
+RefundPaymentParamsBodyOrderInformationShippingDetails refund payment params body order information shipping details
 swagger:model RefundPaymentParamsBodyOrderInformationShippingDetails
 */
 type RefundPaymentParamsBodyOrderInformationShippingDetails struct {
@@ -5466,15 +6762,19 @@ func (o *RefundPaymentParamsBodyOrderInformationShippingDetails) Validate(format
 }
 
 func (o *RefundPaymentParamsBodyOrderInformationShippingDetails) validateShipFromPostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipFromPostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", string(o.ShipFromPostalCode), 10); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shipFromPostalCode", "body", o.ShipFromPostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body order information shipping details based on context it is used
+func (o *RefundPaymentParamsBodyOrderInformationShippingDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5496,7 +6796,8 @@ func (o *RefundPaymentParamsBodyOrderInformationShippingDetails) UnmarshalBinary
 	return nil
 }
 
-/*RefundPaymentParamsBodyPaymentInformation refund payment params body payment information
+/*
+RefundPaymentParamsBodyPaymentInformation refund payment params body payment information
 swagger:model RefundPaymentParamsBodyPaymentInformation
 */
 type RefundPaymentParamsBodyPaymentInformation struct {
@@ -5534,7 +6835,6 @@ func (o *RefundPaymentParamsBodyPaymentInformation) Validate(formats strfmt.Regi
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformation) validateBank(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bank) { // not required
 		return nil
 	}
@@ -5543,6 +6843,8 @@ func (o *RefundPaymentParamsBodyPaymentInformation) validateBank(formats strfmt.
 		if err := o.Bank.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank")
 			}
 			return err
 		}
@@ -5552,7 +6854,6 @@ func (o *RefundPaymentParamsBodyPaymentInformation) validateBank(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -5561,6 +6862,8 @@ func (o *RefundPaymentParamsBodyPaymentInformation) validateCard(formats strfmt.
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -5570,7 +6873,6 @@ func (o *RefundPaymentParamsBodyPaymentInformation) validateCard(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -5579,6 +6881,93 @@ func (o *RefundPaymentParamsBodyPaymentInformation) validateCustomer(formats str
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body payment information based on the context it is used
+func (o *RefundPaymentParamsBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBank(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyPaymentInformation) contextValidateBank(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Bank != nil {
+
+		if swag.IsZero(o.Bank) { // not required
+			return nil
+		}
+
+		if err := o.Bank.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyPaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -5605,7 +6994,8 @@ func (o *RefundPaymentParamsBodyPaymentInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*RefundPaymentParamsBodyPaymentInformationBank refund payment params body payment information bank
+/*
+RefundPaymentParamsBodyPaymentInformationBank refund payment params body payment information bank
 swagger:model RefundPaymentParamsBodyPaymentInformationBank
 */
 type RefundPaymentParamsBodyPaymentInformationBank struct {
@@ -5640,7 +7030,6 @@ func (o *RefundPaymentParamsBodyPaymentInformationBank) Validate(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBank) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -5649,6 +7038,8 @@ func (o *RefundPaymentParamsBodyPaymentInformationBank) validateAccount(formats 
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
 			}
 			return err
 		}
@@ -5658,13 +7049,47 @@ func (o *RefundPaymentParamsBodyPaymentInformationBank) validateAccount(formats 
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBank) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body payment information bank based on the context it is used
+func (o *RefundPaymentParamsBodyPaymentInformationBank) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyPaymentInformationBank) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -5688,7 +7113,8 @@ func (o *RefundPaymentParamsBodyPaymentInformationBank) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundPaymentParamsBodyPaymentInformationBankAccount refund payment params body payment information bank account
+/*
+RefundPaymentParamsBodyPaymentInformationBankAccount refund payment params body payment information bank account
 swagger:model RefundPaymentParamsBodyPaymentInformationBankAccount
 */
 type RefundPaymentParamsBodyPaymentInformationBankAccount struct {
@@ -5767,12 +7193,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) Validate(formats 
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateCheckImageReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckImageReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", string(o.CheckImageReferenceNumber), 32); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkImageReferenceNumber", "body", o.CheckImageReferenceNumber, 32); err != nil {
 		return err
 	}
 
@@ -5780,12 +7205,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateCheckImag
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateCheckNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", string(o.CheckNumber), 8); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", o.CheckNumber, 8); err != nil {
 		return err
 	}
 
@@ -5793,12 +7217,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateCheckNumb
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", string(o.EncoderID), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", o.EncoderID, 3); err != nil {
 		return err
 	}
 
@@ -5806,12 +7229,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateEncoderID
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", string(o.Number), 17); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"number", "body", o.Number, 17); err != nil {
 		return err
 	}
 
@@ -5819,15 +7241,19 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateNumber(fo
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Type) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", string(o.Type), 1); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", o.Type, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body payment information bank account based on context it is used
+func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5849,7 +7275,8 @@ func (o *RefundPaymentParamsBodyPaymentInformationBankAccount) UnmarshalBinary(b
 	return nil
 }
 
-/*RefundPaymentParamsBodyPaymentInformationCard refund payment params body payment information card
+/*
+RefundPaymentParamsBodyPaymentInformationCard refund payment params body payment information card
 swagger:model RefundPaymentParamsBodyPaymentInformationCard
 */
 type RefundPaymentParamsBodyPaymentInformationCard struct {
@@ -5987,12 +7414,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) Validate(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateAccountEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountEncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", string(o.AccountEncoderID), 3); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", o.AccountEncoderID, 3); err != nil {
 		return err
 	}
 
@@ -6000,12 +7426,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateAccountEncoderID
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -6013,12 +7438,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateExpirationMonth(
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -6026,12 +7450,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateExpirationYear(f
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 5); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 5); err != nil {
 		return err
 	}
 
@@ -6039,12 +7462,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateIssueNumber(form
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", string(o.Number), 20); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"number", "body", o.Number, 20); err != nil {
 		return err
 	}
 
@@ -6052,12 +7474,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateNumber(formats s
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -6065,15 +7486,19 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) validateStartMonth(forma
 }
 
 func (o *RefundPaymentParamsBodyPaymentInformationCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body payment information card based on context it is used
+func (o *RefundPaymentParamsBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6095,7 +7520,8 @@ func (o *RefundPaymentParamsBodyPaymentInformationCard) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundPaymentParamsBodyPaymentInformationCustomer refund payment params body payment information customer
+/*
+RefundPaymentParamsBodyPaymentInformationCustomer refund payment params body payment information customer
 swagger:model RefundPaymentParamsBodyPaymentInformationCustomer
 */
 type RefundPaymentParamsBodyPaymentInformationCustomer struct {
@@ -6118,6 +7544,11 @@ func (o *RefundPaymentParamsBodyPaymentInformationCustomer) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this refund payment params body payment information customer based on context it is used
+func (o *RefundPaymentParamsBodyPaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *RefundPaymentParamsBodyPaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -6136,7 +7567,8 @@ func (o *RefundPaymentParamsBodyPaymentInformationCustomer) UnmarshalBinary(b []
 	return nil
 }
 
-/*RefundPaymentParamsBodyPointOfSaleInformation refund payment params body point of sale information
+/*
+RefundPaymentParamsBodyPointOfSaleInformation refund payment params body point of sale information
 swagger:model RefundPaymentParamsBodyPointOfSaleInformation
 */
 type RefundPaymentParamsBodyPointOfSaleInformation struct {
@@ -6160,7 +7592,6 @@ func (o *RefundPaymentParamsBodyPointOfSaleInformation) Validate(formats strfmt.
 }
 
 func (o *RefundPaymentParamsBodyPointOfSaleInformation) validateEmv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Emv) { // not required
 		return nil
 	}
@@ -6169,6 +7600,43 @@ func (o *RefundPaymentParamsBodyPointOfSaleInformation) validateEmv(formats strf
 		if err := o.Emv.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body point of sale information based on the context it is used
+func (o *RefundPaymentParamsBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateEmv(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyPointOfSaleInformation) contextValidateEmv(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Emv != nil {
+
+		if swag.IsZero(o.Emv) { // not required
+			return nil
+		}
+
+		if err := o.Emv.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "pointOfSaleInformation" + "." + "emv")
 			}
 			return err
 		}
@@ -6195,7 +7663,8 @@ func (o *RefundPaymentParamsBodyPointOfSaleInformation) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*RefundPaymentParamsBodyPointOfSaleInformationEmv refund payment params body point of sale information emv
+/*
+RefundPaymentParamsBodyPointOfSaleInformationEmv refund payment params body point of sale information emv
 swagger:model RefundPaymentParamsBodyPointOfSaleInformationEmv
 */
 type RefundPaymentParamsBodyPointOfSaleInformationEmv struct {
@@ -6269,15 +7738,19 @@ func (o *RefundPaymentParamsBodyPointOfSaleInformationEmv) Validate(formats strf
 }
 
 func (o *RefundPaymentParamsBodyPointOfSaleInformationEmv) validateTags(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Tags) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", string(o.Tags), 1998); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"pointOfSaleInformation"+"."+"emv"+"."+"tags", "body", o.Tags, 1998); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this refund payment params body point of sale information emv based on context it is used
+func (o *RefundPaymentParamsBodyPointOfSaleInformationEmv) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -6299,7 +7772,8 @@ func (o *RefundPaymentParamsBodyPointOfSaleInformationEmv) UnmarshalBinary(b []b
 	return nil
 }
 
-/*RefundPaymentParamsBodyProcessingInformation refund payment params body processing information
+/*
+RefundPaymentParamsBodyProcessingInformation refund payment params body processing information
 swagger:model RefundPaymentParamsBodyProcessingInformation
 */
 type RefundPaymentParamsBodyProcessingInformation struct {
@@ -6400,12 +7874,11 @@ func (o *RefundPaymentParamsBodyProcessingInformation) Validate(formats strfmt.R
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validateLinkID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LinkID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"linkId", "body", string(o.LinkID), 26); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"linkId", "body", o.LinkID, 26); err != nil {
 		return err
 	}
 
@@ -6413,12 +7886,11 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validateLinkID(formats st
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
 	}
 
@@ -6426,12 +7898,11 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validatePaymentSolution(f
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validatePurchaseLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PurchaseLevel) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", string(o.PurchaseLevel), 1); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"purchaseLevel", "body", o.PurchaseLevel, 1); err != nil {
 		return err
 	}
 
@@ -6439,12 +7910,11 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validatePurchaseLevel(for
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -6452,7 +7922,6 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validateReconciliationID(
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validateRecurringOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RecurringOptions) { // not required
 		return nil
 	}
@@ -6461,6 +7930,8 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validateRecurringOptions(
 		if err := o.RecurringOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("refundPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
 			}
 			return err
 		}
@@ -6470,12 +7941,11 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validateRecurringOptions(
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validateReportGroup(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportGroup) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"reportGroup", "body", string(o.ReportGroup), 25); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"reportGroup", "body", o.ReportGroup, 25); err != nil {
 		return err
 	}
 
@@ -6483,13 +7953,47 @@ func (o *RefundPaymentParamsBodyProcessingInformation) validateReportGroup(forma
 }
 
 func (o *RefundPaymentParamsBodyProcessingInformation) validateVisaCheckoutID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VisaCheckoutID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", string(o.VisaCheckoutID), 48); err != nil {
+	if err := validate.MaxLength("refundPaymentRequest"+"."+"processingInformation"+"."+"visaCheckoutId", "body", o.VisaCheckoutID, 48); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this refund payment params body processing information based on the context it is used
+func (o *RefundPaymentParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRecurringOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *RefundPaymentParamsBodyProcessingInformation) contextValidateRecurringOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RecurringOptions != nil {
+
+		if swag.IsZero(o.RecurringOptions) { // not required
+			return nil
+		}
+
+		if err := o.RecurringOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("refundPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("refundPaymentRequest" + "." + "processingInformation" + "." + "recurringOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -6513,7 +8017,8 @@ func (o *RefundPaymentParamsBodyProcessingInformation) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*RefundPaymentParamsBodyProcessingInformationRecurringOptions refund payment params body processing information recurring options
+/*
+RefundPaymentParamsBodyProcessingInformationRecurringOptions refund payment params body processing information recurring options
 swagger:model RefundPaymentParamsBodyProcessingInformationRecurringOptions
 */
 type RefundPaymentParamsBodyProcessingInformationRecurringOptions struct {
@@ -6531,6 +8036,11 @@ type RefundPaymentParamsBodyProcessingInformationRecurringOptions struct {
 
 // Validate validates this refund payment params body processing information recurring options
 func (o *RefundPaymentParamsBodyProcessingInformationRecurringOptions) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this refund payment params body processing information recurring options based on context it is used
+func (o *RefundPaymentParamsBodyProcessingInformationRecurringOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

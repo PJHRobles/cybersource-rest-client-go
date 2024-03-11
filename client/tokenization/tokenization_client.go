@@ -7,12 +7,11 @@ package tokenization
 
 import (
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new tokenization API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -24,18 +23,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	Tokenize(params *TokenizeParams, opts ...ClientOption) (*TokenizeOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 Tokenize tokenizes card
 
 Returns a token representing the supplied card details. The token replaces card data and can be used as the Subscription ID in the CyberSource Simple Order API or SCMP API. This is an unauthenticated call that you should initiate from your customer’s device or browser.
 */
-func (a *Client) Tokenize(params *TokenizeParams) (*TokenizeOK, error) {
+func (a *Client) Tokenize(params *TokenizeParams, opts ...ClientOption) (*TokenizeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewTokenizeParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "tokenize",
 		Method:             "POST",
 		PathPattern:        "/flex/v1/tokens",
@@ -46,7 +54,12 @@ func (a *Client) Tokenize(params *TokenizeParams) (*TokenizeOK, error) {
 		Reader:             &TokenizeReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

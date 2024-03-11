@@ -6,16 +6,16 @@ package transaction_details
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetTransactionReader is a Reader for the GetTransaction structure.
@@ -44,9 +44,8 @@ func (o *GetTransactionReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /tss/v2/transactions/{id}] getTransaction", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewGetTransactionOK() *GetTransactionOK {
 	return &GetTransactionOK{}
 }
 
-/*GetTransactionOK handles this case with default header values.
+/*
+GetTransactionOK describes a response with status code 200, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type GetTransactionOK struct {
 	Payload *GetTransactionOKBody
 }
 
+// IsSuccess returns true when this get transaction o k response has a 2xx status code
+func (o *GetTransactionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get transaction o k response has a 3xx status code
+func (o *GetTransactionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction o k response has a 4xx status code
+func (o *GetTransactionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction o k response has a 5xx status code
+func (o *GetTransactionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction o k response a status code equal to that given
+func (o *GetTransactionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get transaction o k response
+func (o *GetTransactionOK) Code() int {
+	return 200
+}
+
 func (o *GetTransactionOK) Error() string {
+	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionOK  %+v", 200, o.Payload)
+}
+
+func (o *GetTransactionOK) String() string {
 	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionOK  %+v", 200, o.Payload)
 }
 
@@ -88,14 +122,49 @@ func NewGetTransactionNotFound() *GetTransactionNotFound {
 	return &GetTransactionNotFound{}
 }
 
-/*GetTransactionNotFound handles this case with default header values.
+/*
+GetTransactionNotFound describes a response with status code 404, with default header values.
 
 The specified resource not found in the system.
 */
 type GetTransactionNotFound struct {
 }
 
+// IsSuccess returns true when this get transaction not found response has a 2xx status code
+func (o *GetTransactionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction not found response has a 3xx status code
+func (o *GetTransactionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction not found response has a 4xx status code
+func (o *GetTransactionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get transaction not found response has a 5xx status code
+func (o *GetTransactionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get transaction not found response a status code equal to that given
+func (o *GetTransactionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get transaction not found response
+func (o *GetTransactionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTransactionNotFound) Error() string {
+	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionNotFound ", 404)
+}
+
+func (o *GetTransactionNotFound) String() string {
 	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionNotFound ", 404)
 }
 
@@ -109,14 +178,49 @@ func NewGetTransactionInternalServerError() *GetTransactionInternalServerError {
 	return &GetTransactionInternalServerError{}
 }
 
-/*GetTransactionInternalServerError handles this case with default header values.
+/*
+GetTransactionInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected server error
 */
 type GetTransactionInternalServerError struct {
 }
 
+// IsSuccess returns true when this get transaction internal server error response has a 2xx status code
+func (o *GetTransactionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get transaction internal server error response has a 3xx status code
+func (o *GetTransactionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get transaction internal server error response has a 4xx status code
+func (o *GetTransactionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get transaction internal server error response has a 5xx status code
+func (o *GetTransactionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get transaction internal server error response a status code equal to that given
+func (o *GetTransactionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get transaction internal server error response
+func (o *GetTransactionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetTransactionInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionInternalServerError ", 500)
+}
+
+func (o *GetTransactionInternalServerError) String() string {
 	return fmt.Sprintf("[GET /tss/v2/transactions/{id}][%d] getTransactionInternalServerError ", 500)
 }
 
@@ -125,7 +229,9 @@ func (o *GetTransactionInternalServerError) readResponse(response runtime.Client
 	return nil
 }
 
-/*GetTransactionOKBody tssV2TransactionsGet200Response
+/*
+GetTransactionOKBody tssV2TransactionsGet200Response
+// Example: {"_links":{"relatedTransactions":[{"href":"https://api.visa.com/payment/tss/v2/transactions/5330579740206278601010","method":"GET"},{"href":"https://api.visa.com/payment/tss/v2/transactions/5330579740206278601011","method":"GET"}],"self":{"href":"https://api.visa.com/payment/tss/v2/transactions/5330579740206278601009","method":"GET"}},"applicationInformation":{"applications":[{"name":"ics_bill","rCode":"1","rFlag":"SOK","rMessage":"Request was processed successfully.","reasonCode":"100","reconciliationId":"53703847LK9LPPXY","returnCode":"1260000","status":"PENDING"}],"rCode":"1","rFlag":"SOK","reasonCode":"100","status":"PENDING"},"buyerInformation":{"hashedPassword":"fhjfhj","merchantCustomerId":"123456"},"clientReferenceInformation":{"applicationName":"SCMP API","applicationUser":"ng_paymentech","applicationVersion":"1.0","code":"ECERT001","comments":"test comment"},"consumerAuthenticationInformation":{"cavv":"12345","eciRaw":"1234","transactionId":"00152259513040478521","xid":"12345678"},"deviceInformation":{"cookiesAccepted":"no","hostName":"cybs test","ipAddress":"1.10.10.10"},"errorInformation":{"details":[{"field":"xyz","reason":"1"}],"message":"abc","reason":"1"},"fraudMarkingInformation":{"reason":"suspected"},"id":"5330579740206278601009","installmentInformation":{"numberOfInstallments":0},"merchantDefinedInformation":[{"key":"abc","value":"xyz"}],"merchantId":"pa_rbsworldpay","merchantInformation":{"merchantDescriptor":{"name":"ng_paymentech"}},"orderInformation":{"amountDetails":{"authorizedAmount":"100.00","currency":"USD","settlementAmount":"97.50","settlementCurrency":"USD","taxAmount":"5","totalAmount":"100.00"},"billTo":{"address1":"600 Morgan Falls Road","address2":"Room 2-2123","administrativeArea":"GA","company":"cybersource","country":"US","email":"jdough@cybersource.com","firstName":"JAMES","lastName":"DOUGH","locality":"Atlanta","middleName":"ROY","nameSuffix":"Mr","phoneNumber":"6509656111","postalCode":"30350","title":"Manager"},"lineItems":[{"fulfillmentType":"abc","productCode":"code2","productName":"name2","productSku":"KKY","quantity":2,"taxAmount":"3.00","unitPrice":"5.00"}],"shipTo":{"address1":"201S.DivisionSt._1","address2":"Suite500","administrativeArea":"TX","company":"cybs","country":"US","firstName":"Test","lastName":"TSS","locality":"Austin","phoneNumber":"5120000000","postalCode":"78750"},"shippingDetails":{"giftWrap":"none","shippingMethod":"xyz"}},"paymentInformation":{"accountFeatures":{"balanceAmount":"3.00","currency":"usd","previousBalanceAmount":"2.00"},"bank":{"account":{"checkDigit":"CD","checkNumber":"123456","encoderId":"AID","name":"BankAccountName123456789012345","prefix":"PREF","suffix":"SUFF","type":"check"},"bankCode":"bankcode1212345","branchCode":"branchcode1234567","iban":"SUFF","mandate":{"id":"mandateId1","recurringType":"direct1234","referenceNumber":"mandaterefnum1234567"},"routingNumber":"routing123","swiftCode":"bankswift1"},"card":{"accountEncoderId":"12","expirationMonth":"10","expirationYear":"2017","issueNumber":"1234","prefix":"123","startMonth":"11","startYear":"2011","suffix":"1111","type":"001","useAs":"overidepaymentmethod"},"customer":{"customerId":"123"},"invoice":{"barcodeNumber":"barcode1234567890123barcode12345678901231234567890","expirationDate":"2018-01-07T07:59:59.999Z","number":"BOLETONUM34567890123barcode12345678901231234567890"},"paymentType":{"authenticationMethod":"authentication method","fundingSource":{"affiliations":"Visa","credential":"Credit Card PAN","name":"fundingSource Name","type":"Credit Account","underwriter":"Chase"},"method":{"name":"method name","operator":"method operator","schemeName":"method scheme name","schemeOperator":"method scheme operator"},"name":"paymentProcessor1234","subTypeName":"Credit"}},"pointOfSaleInformation":{"entryMode":"posentrymode1234512","terminalCapability":"integer"},"processingInformation":{"authorizationOptions":{"authType":"O"},"bankTransferOptions":{"secCode":"web"},"businessApplicationId":"12345","commerceIndicator":"7","paymentSolution":"Visa"},"processorInformation":{"achVerification":{"resultCode":"rspcodmap","resultCodeRaw":"responsecode12345678"},"approvalCode":"authcode1234567","avs":{"code":"ARM","codeRaw":"avsResults"},"cardVerification":{"resultCode":"Y"},"electronicVerificationResults":{"email":"email@email.com","emailRaw":"emailRaw12","name":"ename","nameRaw":"enameRaw12","phoneNumber":"01179","phoneNumberRaw":"9925551608","postalCode":"78717","postalCodeRaw":"1166678717","street":"123 street","streetRaw":"SteertRaw12"},"networkTransactionId":"networktransactionid67890","processor":{"name":"paymentProcessor1234"},"providerTransactionId":"78906","responseCode":"responsecode12345678","responseCodeSource":"0","responseId":"1212","systemTraceAuditNumber":"123456","transactionId":"processortransactionid123"},"reconciliationId":"53703847LK9LPPXY","riskInformation":{"localTime":"2018-07-31T17:26:14Z","passiveProfile":{"decision":"xyz3","name":"abc3"},"passiveRules":[{"decision":"xyz4","name":"abc4"}],"profile":{"decision":"xyz","name":"abc"},"rules":[{"decision":"xyz2","name":"abc2"}],"score":{"factorCodes":["AB"],"result":10}},"rootId":"5330571038726320201013","senderInformation":{"referenceNumber":"senderRefNumber1"},"status":"PENDING","submitTimeUtc":"2018-07-31T17:26:14Z"}
 swagger:model GetTransactionOKBody
 */
 type GetTransactionOKBody struct {
@@ -163,7 +269,7 @@ type GetTransactionOKBody struct {
 
 	// The object containing the custom data that the merchant defines.
 	//
-	MerchantDefinedInformation []*MerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
+	MerchantDefinedInformation []*GetTransactionOKBodyMerchantDefinedInformationItems0 `json:"merchantDefinedInformation"`
 
 	// Your CyberSource merchant ID.
 	MerchantID string `json:"merchantId,omitempty"`
@@ -306,7 +412,6 @@ func (o *GetTransactionOKBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionOKBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -315,6 +420,8 @@ func (o *GetTransactionOKBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "_links")
 			}
 			return err
 		}
@@ -324,7 +431,6 @@ func (o *GetTransactionOKBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionOKBody) validateApplicationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ApplicationInformation) { // not required
 		return nil
 	}
@@ -333,6 +439,8 @@ func (o *GetTransactionOKBody) validateApplicationInformation(formats strfmt.Reg
 		if err := o.ApplicationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "applicationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "applicationInformation")
 			}
 			return err
 		}
@@ -342,7 +450,6 @@ func (o *GetTransactionOKBody) validateApplicationInformation(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -351,6 +458,8 @@ func (o *GetTransactionOKBody) validateBuyerInformation(formats strfmt.Registry)
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -360,7 +469,6 @@ func (o *GetTransactionOKBody) validateBuyerInformation(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -369,6 +477,8 @@ func (o *GetTransactionOKBody) validateClientReferenceInformation(formats strfmt
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -378,7 +488,6 @@ func (o *GetTransactionOKBody) validateClientReferenceInformation(formats strfmt
 }
 
 func (o *GetTransactionOKBody) validateConsumerAuthenticationInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
 		return nil
 	}
@@ -387,6 +496,8 @@ func (o *GetTransactionOKBody) validateConsumerAuthenticationInformation(formats
 		if err := o.ConsumerAuthenticationInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "consumerAuthenticationInformation")
 			}
 			return err
 		}
@@ -396,7 +507,6 @@ func (o *GetTransactionOKBody) validateConsumerAuthenticationInformation(formats
 }
 
 func (o *GetTransactionOKBody) validateDeviceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeviceInformation) { // not required
 		return nil
 	}
@@ -405,6 +515,8 @@ func (o *GetTransactionOKBody) validateDeviceInformation(formats strfmt.Registry
 		if err := o.DeviceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "deviceInformation")
 			}
 			return err
 		}
@@ -414,7 +526,6 @@ func (o *GetTransactionOKBody) validateDeviceInformation(formats strfmt.Registry
 }
 
 func (o *GetTransactionOKBody) validateErrorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ErrorInformation) { // not required
 		return nil
 	}
@@ -423,6 +534,8 @@ func (o *GetTransactionOKBody) validateErrorInformation(formats strfmt.Registry)
 		if err := o.ErrorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "errorInformation")
 			}
 			return err
 		}
@@ -432,7 +545,6 @@ func (o *GetTransactionOKBody) validateErrorInformation(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBody) validateFraudMarkingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FraudMarkingInformation) { // not required
 		return nil
 	}
@@ -441,6 +553,8 @@ func (o *GetTransactionOKBody) validateFraudMarkingInformation(formats strfmt.Re
 		if err := o.FraudMarkingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "fraudMarkingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "fraudMarkingInformation")
 			}
 			return err
 		}
@@ -450,12 +564,11 @@ func (o *GetTransactionOKBody) validateFraudMarkingInformation(formats strfmt.Re
 }
 
 func (o *GetTransactionOKBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -463,7 +576,6 @@ func (o *GetTransactionOKBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionOKBody) validateInstallmentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InstallmentInformation) { // not required
 		return nil
 	}
@@ -472,6 +584,8 @@ func (o *GetTransactionOKBody) validateInstallmentInformation(formats strfmt.Reg
 		if err := o.InstallmentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "installmentInformation")
 			}
 			return err
 		}
@@ -481,7 +595,6 @@ func (o *GetTransactionOKBody) validateInstallmentInformation(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBody) validateMerchantDefinedInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDefinedInformation) { // not required
 		return nil
 	}
@@ -495,6 +608,8 @@ func (o *GetTransactionOKBody) validateMerchantDefinedInformation(formats strfmt
 			if err := o.MerchantDefinedInformation[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -506,7 +621,6 @@ func (o *GetTransactionOKBody) validateMerchantDefinedInformation(formats strfmt
 }
 
 func (o *GetTransactionOKBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -515,6 +629,8 @@ func (o *GetTransactionOKBody) validateMerchantInformation(formats strfmt.Regist
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -524,7 +640,6 @@ func (o *GetTransactionOKBody) validateMerchantInformation(formats strfmt.Regist
 }
 
 func (o *GetTransactionOKBody) validateOrderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.OrderInformation) { // not required
 		return nil
 	}
@@ -533,6 +648,8 @@ func (o *GetTransactionOKBody) validateOrderInformation(formats strfmt.Registry)
 		if err := o.OrderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation")
 			}
 			return err
 		}
@@ -542,7 +659,6 @@ func (o *GetTransactionOKBody) validateOrderInformation(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBody) validatePaymentInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentInformation) { // not required
 		return nil
 	}
@@ -551,6 +667,8 @@ func (o *GetTransactionOKBody) validatePaymentInformation(formats strfmt.Registr
 		if err := o.PaymentInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation")
 			}
 			return err
 		}
@@ -560,7 +678,6 @@ func (o *GetTransactionOKBody) validatePaymentInformation(formats strfmt.Registr
 }
 
 func (o *GetTransactionOKBody) validatePointOfSaleInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PointOfSaleInformation) { // not required
 		return nil
 	}
@@ -569,6 +686,8 @@ func (o *GetTransactionOKBody) validatePointOfSaleInformation(formats strfmt.Reg
 		if err := o.PointOfSaleInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "pointOfSaleInformation")
 			}
 			return err
 		}
@@ -578,7 +697,6 @@ func (o *GetTransactionOKBody) validatePointOfSaleInformation(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -587,6 +705,8 @@ func (o *GetTransactionOKBody) validateProcessingInformation(formats strfmt.Regi
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation")
 			}
 			return err
 		}
@@ -596,7 +716,6 @@ func (o *GetTransactionOKBody) validateProcessingInformation(formats strfmt.Regi
 }
 
 func (o *GetTransactionOKBody) validateProcessorInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessorInformation) { // not required
 		return nil
 	}
@@ -605,6 +724,8 @@ func (o *GetTransactionOKBody) validateProcessorInformation(formats strfmt.Regis
 		if err := o.ProcessorInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation")
 			}
 			return err
 		}
@@ -614,12 +735,11 @@ func (o *GetTransactionOKBody) validateProcessorInformation(formats strfmt.Regis
 }
 
 func (o *GetTransactionOKBody) validateReconciliationID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReconciliationID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"reconciliationId", "body", string(o.ReconciliationID), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"reconciliationId", "body", o.ReconciliationID, 60); err != nil {
 		return err
 	}
 
@@ -627,7 +747,6 @@ func (o *GetTransactionOKBody) validateReconciliationID(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBody) validateRiskInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RiskInformation) { // not required
 		return nil
 	}
@@ -636,6 +755,8 @@ func (o *GetTransactionOKBody) validateRiskInformation(formats strfmt.Registry) 
 		if err := o.RiskInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation")
 			}
 			return err
 		}
@@ -645,12 +766,11 @@ func (o *GetTransactionOKBody) validateRiskInformation(formats strfmt.Registry) 
 }
 
 func (o *GetTransactionOKBody) validateRootID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RootID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"rootId", "body", string(o.RootID), 26); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"rootId", "body", o.RootID, 26); err != nil {
 		return err
 	}
 
@@ -658,7 +778,6 @@ func (o *GetTransactionOKBody) validateRootID(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionOKBody) validateSenderInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SenderInformation) { // not required
 		return nil
 	}
@@ -667,6 +786,472 @@ func (o *GetTransactionOKBody) validateSenderInformation(formats strfmt.Registry
 		if err := o.SenderInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "senderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "senderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body based on the context it is used
+func (o *GetTransactionOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateApplicationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateConsumerAuthenticationInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateDeviceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateErrorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateFraudMarkingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInstallmentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantDefinedInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateOrderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePointOfSaleInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessorInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRiskInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSenderInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateApplicationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ApplicationInformation != nil {
+
+		if swag.IsZero(o.ApplicationInformation) { // not required
+			return nil
+		}
+
+		if err := o.ApplicationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "applicationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "applicationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateConsumerAuthenticationInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ConsumerAuthenticationInformation != nil {
+
+		if swag.IsZero(o.ConsumerAuthenticationInformation) { // not required
+			return nil
+		}
+
+		if err := o.ConsumerAuthenticationInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "consumerAuthenticationInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "consumerAuthenticationInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateDeviceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.DeviceInformation != nil {
+
+		if swag.IsZero(o.DeviceInformation) { // not required
+			return nil
+		}
+
+		if err := o.DeviceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "deviceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "deviceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateErrorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ErrorInformation != nil {
+
+		if swag.IsZero(o.ErrorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ErrorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "errorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "errorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateFraudMarkingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FraudMarkingInformation != nil {
+
+		if swag.IsZero(o.FraudMarkingInformation) { // not required
+			return nil
+		}
+
+		if err := o.FraudMarkingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "fraudMarkingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "fraudMarkingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateInstallmentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InstallmentInformation != nil {
+
+		if swag.IsZero(o.InstallmentInformation) { // not required
+			return nil
+		}
+
+		if err := o.InstallmentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "installmentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "installmentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateMerchantDefinedInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.MerchantDefinedInformation); i++ {
+
+		if o.MerchantDefinedInformation[i] != nil {
+
+			if swag.IsZero(o.MerchantDefinedInformation[i]) { // not required
+				return nil
+			}
+
+			if err := o.MerchantDefinedInformation[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "merchantDefinedInformation" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateOrderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.OrderInformation != nil {
+
+		if swag.IsZero(o.OrderInformation) { // not required
+			return nil
+		}
+
+		if err := o.OrderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "orderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidatePaymentInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentInformation != nil {
+
+		if swag.IsZero(o.PaymentInformation) { // not required
+			return nil
+		}
+
+		if err := o.PaymentInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidatePointOfSaleInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PointOfSaleInformation != nil {
+
+		if swag.IsZero(o.PointOfSaleInformation) { // not required
+			return nil
+		}
+
+		if err := o.PointOfSaleInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "pointOfSaleInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "pointOfSaleInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateProcessorInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessorInformation != nil {
+
+		if swag.IsZero(o.ProcessorInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessorInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateRiskInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.RiskInformation != nil {
+
+		if swag.IsZero(o.RiskInformation) { // not required
+			return nil
+		}
+
+		if err := o.RiskInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "riskInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBody) contextValidateSenderInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.SenderInformation != nil {
+
+		if swag.IsZero(o.SenderInformation) { // not required
+			return nil
+		}
+
+		if err := o.SenderInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "senderInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "senderInformation")
 			}
 			return err
 		}
@@ -693,7 +1278,8 @@ func (o *GetTransactionOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyApplicationInformation get transaction o k body application information
+/*
+GetTransactionOKBodyApplicationInformation get transaction o k body application information
 swagger:model GetTransactionOKBodyApplicationInformation
 */
 type GetTransactionOKBodyApplicationInformation struct {
@@ -743,7 +1329,6 @@ func (o *GetTransactionOKBodyApplicationInformation) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyApplicationInformation) validateApplications(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Applications) { // not required
 		return nil
 	}
@@ -757,6 +1342,47 @@ func (o *GetTransactionOKBodyApplicationInformation) validateApplications(format
 			if err := o.Applications[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body application information based on the context it is used
+func (o *GetTransactionOKBodyApplicationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateApplications(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyApplicationInformation) contextValidateApplications(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Applications); i++ {
+
+		if o.Applications[i] != nil {
+
+			if swag.IsZero(o.Applications[i]) { // not required
+				return nil
+			}
+
+			if err := o.Applications[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "applicationInformation" + "." + "applications" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -785,7 +1411,8 @@ func (o *GetTransactionOKBodyApplicationInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyApplicationInformationApplicationsItems0 get transaction o k body application information applications items0
+/*
+GetTransactionOKBodyApplicationInformationApplicationsItems0 get transaction o k body application information applications items0
 swagger:model GetTransactionOKBodyApplicationInformationApplicationsItems0
 */
 type GetTransactionOKBodyApplicationInformationApplicationsItems0 struct {
@@ -830,6 +1457,11 @@ func (o *GetTransactionOKBodyApplicationInformationApplicationsItems0) Validate(
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body application information applications items0 based on context it is used
+func (o *GetTransactionOKBodyApplicationInformationApplicationsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyApplicationInformationApplicationsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -848,7 +1480,8 @@ func (o *GetTransactionOKBodyApplicationInformationApplicationsItems0) Unmarshal
 	return nil
 }
 
-/*GetTransactionOKBodyBuyerInformation get transaction o k body buyer information
+/*
+GetTransactionOKBodyBuyerInformation get transaction o k body buyer information
 swagger:model GetTransactionOKBodyBuyerInformation
 */
 type GetTransactionOKBodyBuyerInformation struct {
@@ -902,12 +1535,11 @@ func (o *GetTransactionOKBodyBuyerInformation) Validate(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBodyBuyerInformation) validateHashedPassword(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HashedPassword) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"buyerInformation"+"."+"hashedPassword", "body", string(o.HashedPassword), 100); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"buyerInformation"+"."+"hashedPassword", "body", o.HashedPassword, 100); err != nil {
 		return err
 	}
 
@@ -915,15 +1547,19 @@ func (o *GetTransactionOKBodyBuyerInformation) validateHashedPassword(formats st
 }
 
 func (o *GetTransactionOKBodyBuyerInformation) validateMerchantCustomerID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantCustomerID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", string(o.MerchantCustomerID), 100); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"buyerInformation"+"."+"merchantCustomerId", "body", o.MerchantCustomerID, 100); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body buyer information based on context it is used
+func (o *GetTransactionOKBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -945,7 +1581,8 @@ func (o *GetTransactionOKBodyBuyerInformation) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyClientReferenceInformation get transaction o k body client reference information
+/*
+GetTransactionOKBodyClientReferenceInformation get transaction o k body client reference information
 swagger:model GetTransactionOKBodyClientReferenceInformation
 */
 type GetTransactionOKBodyClientReferenceInformation struct {
@@ -994,12 +1631,11 @@ func (o *GetTransactionOKBodyClientReferenceInformation) Validate(formats strfmt
 }
 
 func (o *GetTransactionOKBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -1007,15 +1643,19 @@ func (o *GetTransactionOKBodyClientReferenceInformation) validateCode(formats st
 }
 
 func (o *GetTransactionOKBodyClientReferenceInformation) validateComments(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Comments) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"clientReferenceInformation"+"."+"comments", "body", string(o.Comments), 255); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"clientReferenceInformation"+"."+"comments", "body", o.Comments, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body client reference information based on context it is used
+func (o *GetTransactionOKBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1037,7 +1677,8 @@ func (o *GetTransactionOKBodyClientReferenceInformation) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*GetTransactionOKBodyConsumerAuthenticationInformation get transaction o k body consumer authentication information
+/*
+GetTransactionOKBodyConsumerAuthenticationInformation get transaction o k body consumer authentication information
 swagger:model GetTransactionOKBodyConsumerAuthenticationInformation
 */
 type GetTransactionOKBodyConsumerAuthenticationInformation struct {
@@ -1087,12 +1728,11 @@ func (o *GetTransactionOKBodyConsumerAuthenticationInformation) Validate(formats
 }
 
 func (o *GetTransactionOKBodyConsumerAuthenticationInformation) validateCavv(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Cavv) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"cavv", "body", string(o.Cavv), 40); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"cavv", "body", o.Cavv, 40); err != nil {
 		return err
 	}
 
@@ -1100,12 +1740,11 @@ func (o *GetTransactionOKBodyConsumerAuthenticationInformation) validateCavv(for
 }
 
 func (o *GetTransactionOKBodyConsumerAuthenticationInformation) validateEciRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EciRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"eciRaw", "body", string(o.EciRaw), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"eciRaw", "body", o.EciRaw, 2); err != nil {
 		return err
 	}
 
@@ -1113,15 +1752,19 @@ func (o *GetTransactionOKBodyConsumerAuthenticationInformation) validateEciRaw(f
 }
 
 func (o *GetTransactionOKBodyConsumerAuthenticationInformation) validateXid(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Xid) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"xid", "body", string(o.Xid), 40); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"consumerAuthenticationInformation"+"."+"xid", "body", o.Xid, 40); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body consumer authentication information based on context it is used
+func (o *GetTransactionOKBodyConsumerAuthenticationInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1143,7 +1786,8 @@ func (o *GetTransactionOKBodyConsumerAuthenticationInformation) UnmarshalBinary(
 	return nil
 }
 
-/*GetTransactionOKBodyDeviceInformation get transaction o k body device information
+/*
+GetTransactionOKBodyDeviceInformation get transaction o k body device information
 swagger:model GetTransactionOKBodyDeviceInformation
 */
 type GetTransactionOKBodyDeviceInformation struct {
@@ -1183,12 +1827,11 @@ func (o *GetTransactionOKBodyDeviceInformation) Validate(formats strfmt.Registry
 }
 
 func (o *GetTransactionOKBodyDeviceInformation) validateHostName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.HostName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"deviceInformation"+"."+"hostName", "body", string(o.HostName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"deviceInformation"+"."+"hostName", "body", o.HostName, 60); err != nil {
 		return err
 	}
 
@@ -1196,15 +1839,19 @@ func (o *GetTransactionOKBodyDeviceInformation) validateHostName(formats strfmt.
 }
 
 func (o *GetTransactionOKBodyDeviceInformation) validateIPAddress(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IPAddress) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"deviceInformation"+"."+"ipAddress", "body", string(o.IPAddress), 48); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"deviceInformation"+"."+"ipAddress", "body", o.IPAddress, 48); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body device information based on context it is used
+func (o *GetTransactionOKBodyDeviceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1226,7 +1873,8 @@ func (o *GetTransactionOKBodyDeviceInformation) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*GetTransactionOKBodyErrorInformation get transaction o k body error information
+/*
+GetTransactionOKBodyErrorInformation get transaction o k body error information
 swagger:model GetTransactionOKBodyErrorInformation
 */
 type GetTransactionOKBodyErrorInformation struct {
@@ -1258,7 +1906,6 @@ func (o *GetTransactionOKBodyErrorInformation) Validate(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBodyErrorInformation) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -1272,6 +1919,47 @@ func (o *GetTransactionOKBodyErrorInformation) validateDetails(formats strfmt.Re
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body error information based on the context it is used
+func (o *GetTransactionOKBodyErrorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyErrorInformation) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "errorInformation" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1300,7 +1988,8 @@ func (o *GetTransactionOKBodyErrorInformation) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyErrorInformationDetailsItems0 get transaction o k body error information details items0
+/*
+GetTransactionOKBodyErrorInformationDetailsItems0 get transaction o k body error information details items0
 swagger:model GetTransactionOKBodyErrorInformationDetailsItems0
 */
 type GetTransactionOKBodyErrorInformationDetailsItems0 struct {
@@ -1322,6 +2011,11 @@ func (o *GetTransactionOKBodyErrorInformationDetailsItems0) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body error information details items0 based on context it is used
+func (o *GetTransactionOKBodyErrorInformationDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyErrorInformationDetailsItems0) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -1340,7 +2034,8 @@ func (o *GetTransactionOKBodyErrorInformationDetailsItems0) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyFraudMarkingInformation get transaction o k body fraud marking information
+/*
+GetTransactionOKBodyFraudMarkingInformation get transaction o k body fraud marking information
 swagger:model GetTransactionOKBodyFraudMarkingInformation
 */
 type GetTransactionOKBodyFraudMarkingInformation struct {
@@ -1358,6 +2053,11 @@ type GetTransactionOKBodyFraudMarkingInformation struct {
 
 // Validate validates this get transaction o k body fraud marking information
 func (o *GetTransactionOKBodyFraudMarkingInformation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body fraud marking information based on context it is used
+func (o *GetTransactionOKBodyFraudMarkingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1379,7 +2079,8 @@ func (o *GetTransactionOKBodyFraudMarkingInformation) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*GetTransactionOKBodyInstallmentInformation get transaction o k body installment information
+/*
+GetTransactionOKBodyInstallmentInformation get transaction o k body installment information
 swagger:model GetTransactionOKBodyInstallmentInformation
 */
 type GetTransactionOKBodyInstallmentInformation struct {
@@ -1390,6 +2091,11 @@ type GetTransactionOKBodyInstallmentInformation struct {
 
 // Validate validates this get transaction o k body installment information
 func (o *GetTransactionOKBodyInstallmentInformation) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body installment information based on context it is used
+func (o *GetTransactionOKBodyInstallmentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1411,7 +2117,8 @@ func (o *GetTransactionOKBodyInstallmentInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyLinks get transaction o k body links
+/*
+GetTransactionOKBodyLinks get transaction o k body links
 swagger:model GetTransactionOKBodyLinks
 */
 type GetTransactionOKBodyLinks struct {
@@ -1442,7 +2149,6 @@ func (o *GetTransactionOKBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GetTransactionOKBodyLinks) validateRelatedTransactions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RelatedTransactions) { // not required
 		return nil
 	}
@@ -1456,6 +2162,8 @@ func (o *GetTransactionOKBodyLinks) validateRelatedTransactions(formats strfmt.R
 			if err := o.RelatedTransactions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "_links" + "." + "relatedTransactions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "_links" + "." + "relatedTransactions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1467,7 +2175,6 @@ func (o *GetTransactionOKBodyLinks) validateRelatedTransactions(formats strfmt.R
 }
 
 func (o *GetTransactionOKBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -1476,6 +2183,72 @@ func (o *GetTransactionOKBodyLinks) validateSelf(formats strfmt.Registry) error 
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body links based on the context it is used
+func (o *GetTransactionOKBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateRelatedTransactions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyLinks) contextValidateRelatedTransactions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.RelatedTransactions); i++ {
+
+		if o.RelatedTransactions[i] != nil {
+
+			if swag.IsZero(o.RelatedTransactions[i]) { // not required
+				return nil
+			}
+
+			if err := o.RelatedTransactions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "_links" + "." + "relatedTransactions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "_links" + "." + "relatedTransactions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -1502,7 +2275,8 @@ func (o *GetTransactionOKBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyLinksRelatedTransactionsItems0 get transaction o k body links related transactions items0
+/*
+GetTransactionOKBodyLinksRelatedTransactionsItems0 get transaction o k body links related transactions items0
 swagger:model GetTransactionOKBodyLinksRelatedTransactionsItems0
 */
 type GetTransactionOKBodyLinksRelatedTransactionsItems0 struct {
@@ -1516,6 +2290,11 @@ type GetTransactionOKBodyLinksRelatedTransactionsItems0 struct {
 
 // Validate validates this get transaction o k body links related transactions items0
 func (o *GetTransactionOKBodyLinksRelatedTransactionsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body links related transactions items0 based on context it is used
+func (o *GetTransactionOKBodyLinksRelatedTransactionsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1537,7 +2316,8 @@ func (o *GetTransactionOKBodyLinksRelatedTransactionsItems0) UnmarshalBinary(b [
 	return nil
 }
 
-/*GetTransactionOKBodyLinksSelf get transaction o k body links self
+/*
+GetTransactionOKBodyLinksSelf get transaction o k body links self
 swagger:model GetTransactionOKBodyLinksSelf
 */
 type GetTransactionOKBodyLinksSelf struct {
@@ -1551,6 +2331,11 @@ type GetTransactionOKBodyLinksSelf struct {
 
 // Validate validates this get transaction o k body links self
 func (o *GetTransactionOKBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body links self based on context it is used
+func (o *GetTransactionOKBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1572,7 +2357,122 @@ func (o *GetTransactionOKBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyMerchantInformation get transaction o k body merchant information
+/*
+GetTransactionOKBodyMerchantDefinedInformationItems0 get transaction o k body merchant defined information items0
+swagger:model GetTransactionOKBodyMerchantDefinedInformationItems0
+*/
+type GetTransactionOKBodyMerchantDefinedInformationItems0 struct {
+
+	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
+	//
+	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
+	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
+	// transaction.
+	//
+	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// Max Length: 50
+	Key string `json:"key,omitempty"`
+
+	// The value you assign for your merchant-defined data field.
+	//
+	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
+	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
+	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
+	//
+	// #### CyberSource through VisaNet
+	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
+	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
+	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
+	//
+	// For installment payments with Mastercard in Brazil:
+	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 25-44
+	//   - Field: Reference Field 2
+	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
+	//   - Record: CP07 TCR5
+	//   - Position: 45-64
+	//   - Field: Reference Field 3
+	//
+	// Max Length: 255
+	Value string `json:"value,omitempty"`
+}
+
+// Validate validates this get transaction o k body merchant defined information items0
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.validateKey(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
+	if swag.IsZero(o.Key) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("key", "body", o.Key, 50); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
+	if swag.IsZero(o.Value) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("value", "body", o.Value, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body merchant defined information items0 based on context it is used
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetTransactionOKBodyMerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
+	var res GetTransactionOKBodyMerchantDefinedInformationItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetTransactionOKBodyMerchantInformation get transaction o k body merchant information
 swagger:model GetTransactionOKBodyMerchantInformation
 */
 type GetTransactionOKBodyMerchantInformation struct {
@@ -1596,7 +2496,6 @@ func (o *GetTransactionOKBodyMerchantInformation) Validate(formats strfmt.Regist
 }
 
 func (o *GetTransactionOKBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -1605,6 +2504,43 @@ func (o *GetTransactionOKBodyMerchantInformation) validateMerchantDescriptor(for
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body merchant information based on the context it is used
+func (o *GetTransactionOKBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -1631,7 +2567,8 @@ func (o *GetTransactionOKBodyMerchantInformation) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*GetTransactionOKBodyMerchantInformationMerchantDescriptor get transaction o k body merchant information merchant descriptor
+/*
+GetTransactionOKBodyMerchantInformationMerchantDescriptor get transaction o k body merchant information merchant descriptor
 swagger:model GetTransactionOKBodyMerchantInformationMerchantDescriptor
 */
 type GetTransactionOKBodyMerchantInformationMerchantDescriptor struct {
@@ -1647,6 +2584,11 @@ type GetTransactionOKBodyMerchantInformationMerchantDescriptor struct {
 
 // Validate validates this get transaction o k body merchant information merchant descriptor
 func (o *GetTransactionOKBodyMerchantInformationMerchantDescriptor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body merchant information merchant descriptor based on context it is used
+func (o *GetTransactionOKBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1668,7 +2610,8 @@ func (o *GetTransactionOKBodyMerchantInformationMerchantDescriptor) UnmarshalBin
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformation get transaction o k body order information
+/*
+GetTransactionOKBodyOrderInformation get transaction o k body order information
 swagger:model GetTransactionOKBodyOrderInformation
 */
 type GetTransactionOKBodyOrderInformation struct {
@@ -1720,7 +2663,6 @@ func (o *GetTransactionOKBodyOrderInformation) Validate(formats strfmt.Registry)
 }
 
 func (o *GetTransactionOKBodyOrderInformation) validateAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AmountDetails) { // not required
 		return nil
 	}
@@ -1729,6 +2671,8 @@ func (o *GetTransactionOKBodyOrderInformation) validateAmountDetails(formats str
 		if err := o.AmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "amountDetails")
 			}
 			return err
 		}
@@ -1738,7 +2682,6 @@ func (o *GetTransactionOKBodyOrderInformation) validateAmountDetails(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformation) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -1747,6 +2690,8 @@ func (o *GetTransactionOKBodyOrderInformation) validateBillTo(formats strfmt.Reg
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "billTo")
 			}
 			return err
 		}
@@ -1756,7 +2701,6 @@ func (o *GetTransactionOKBodyOrderInformation) validateBillTo(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyOrderInformation) validateLineItems(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LineItems) { // not required
 		return nil
 	}
@@ -1770,6 +2714,8 @@ func (o *GetTransactionOKBodyOrderInformation) validateLineItems(formats strfmt.
 			if err := o.LineItems[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1781,7 +2727,6 @@ func (o *GetTransactionOKBodyOrderInformation) validateLineItems(formats strfmt.
 }
 
 func (o *GetTransactionOKBodyOrderInformation) validateShipTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShipTo) { // not required
 		return nil
 	}
@@ -1790,6 +2735,8 @@ func (o *GetTransactionOKBodyOrderInformation) validateShipTo(formats strfmt.Reg
 		if err := o.ShipTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shipTo")
 			}
 			return err
 		}
@@ -1799,7 +2746,6 @@ func (o *GetTransactionOKBodyOrderInformation) validateShipTo(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyOrderInformation) validateShippingDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingDetails) { // not required
 		return nil
 	}
@@ -1808,6 +2754,147 @@ func (o *GetTransactionOKBodyOrderInformation) validateShippingDetails(formats s
 		if err := o.ShippingDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shippingDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body order information based on the context it is used
+func (o *GetTransactionOKBodyOrderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateLineItems(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShipTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateShippingDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyOrderInformation) contextValidateAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AmountDetails != nil {
+
+		if swag.IsZero(o.AmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.AmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "amountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "amountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyOrderInformation) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyOrderInformation) contextValidateLineItems(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.LineItems); i++ {
+
+		if o.LineItems[i] != nil {
+
+			if swag.IsZero(o.LineItems[i]) { // not required
+				return nil
+			}
+
+			if err := o.LineItems[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "lineItems" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyOrderInformation) contextValidateShipTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShipTo != nil {
+
+		if swag.IsZero(o.ShipTo) { // not required
+			return nil
+		}
+
+		if err := o.ShipTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shipTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shipTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyOrderInformation) contextValidateShippingDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ShippingDetails != nil {
+
+		if swag.IsZero(o.ShippingDetails) { // not required
+			return nil
+		}
+
+		if err := o.ShippingDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shippingDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "orderInformation" + "." + "shippingDetails")
 			}
 			return err
 		}
@@ -1834,7 +2921,8 @@ func (o *GetTransactionOKBodyOrderInformation) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformationAmountDetails get transaction o k body order information amount details
+/*
+GetTransactionOKBodyOrderInformationAmountDetails get transaction o k body order information amount details
 swagger:model GetTransactionOKBodyOrderInformationAmountDetails
 */
 type GetTransactionOKBodyOrderInformationAmountDetails struct {
@@ -1936,12 +3024,11 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) Validate(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateAuthorizedAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizedAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"authorizedAmount", "body", string(o.AuthorizedAmount), 15); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"authorizedAmount", "body", o.AuthorizedAmount, 15); err != nil {
 		return err
 	}
 
@@ -1949,12 +3036,11 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateAuthorizedAm
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1962,12 +3048,11 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateCurrency(for
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateSettlementAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", string(o.SettlementAmount), 12); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementAmount", "body", o.SettlementAmount, 12); err != nil {
 		return err
 	}
 
@@ -1975,12 +3060,11 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateSettlementAm
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateSettlementCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SettlementCurrency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", string(o.SettlementCurrency), 3); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"settlementCurrency", "body", o.SettlementCurrency, 3); err != nil {
 		return err
 	}
 
@@ -1988,12 +3072,11 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateSettlementCu
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", string(o.TaxAmount), 12); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"taxAmount", "body", o.TaxAmount, 12); err != nil {
 		return err
 	}
 
@@ -2001,15 +3084,19 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateTaxAmount(fo
 }
 
 func (o *GetTransactionOKBodyOrderInformationAmountDetails) validateTotalAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TotalAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", string(o.TotalAmount), 19); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"amountDetails"+"."+"totalAmount", "body", o.TotalAmount, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body order information amount details based on context it is used
+func (o *GetTransactionOKBodyOrderInformationAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2031,7 +3118,8 @@ func (o *GetTransactionOKBodyOrderInformationAmountDetails) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformationBillTo get transaction o k body order information bill to
+/*
+GetTransactionOKBodyOrderInformationBillTo get transaction o k body order information bill to
 swagger:model GetTransactionOKBodyOrderInformationBillTo
 */
 type GetTransactionOKBodyOrderInformationBillTo struct {
@@ -2318,12 +3406,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2331,12 +3418,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateAddress1(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -2344,12 +3430,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateAddress2(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -2357,12 +3442,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateAdministrativeArea(
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -2370,12 +3454,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateCompany(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2383,12 +3466,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateCountry(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", string(o.Email), 255); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"email", "body", o.Email, 255); err != nil {
 		return err
 	}
 
@@ -2396,12 +3478,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateEmail(formats strfm
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -2409,12 +3490,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateFirstName(formats s
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -2422,12 +3502,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateLastName(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -2435,12 +3514,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateLocality(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateMiddleName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MiddleName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"middleName", "body", string(o.MiddleName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"middleName", "body", o.MiddleName, 60); err != nil {
 		return err
 	}
 
@@ -2448,12 +3526,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateMiddleName(formats 
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateNameSuffix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NameSuffix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"nameSuffix", "body", string(o.NameSuffix), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"nameSuffix", "body", o.NameSuffix, 60); err != nil {
 		return err
 	}
 
@@ -2461,12 +3538,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validateNameSuffix(formats 
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -2474,12 +3550,11 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validatePhoneNumber(formats
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
@@ -2487,15 +3562,19 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) validatePostalCode(formats 
 }
 
 func (o *GetTransactionOKBodyOrderInformationBillTo) validateTitle(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Title) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"title", "body", string(o.Title), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"billTo"+"."+"title", "body", o.Title, 60); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body order information bill to based on context it is used
+func (o *GetTransactionOKBodyOrderInformationBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2517,7 +3596,8 @@ func (o *GetTransactionOKBodyOrderInformationBillTo) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformationLineItemsItems0 get transaction o k body order information line items items0
+/*
+GetTransactionOKBodyOrderInformationLineItemsItems0 get transaction o k body order information line items items0
 swagger:model GetTransactionOKBodyOrderInformationLineItemsItems0
 */
 type GetTransactionOKBodyOrderInformationLineItemsItems0 struct {
@@ -2616,12 +3696,11 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) Validate(formats s
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productCode", "body", string(o.ProductCode), 255); err != nil {
+	if err := validate.MaxLength("productCode", "body", o.ProductCode, 255); err != nil {
 		return err
 	}
 
@@ -2629,12 +3708,11 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductCod
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productName", "body", string(o.ProductName), 255); err != nil {
+	if err := validate.MaxLength("productName", "body", o.ProductName, 255); err != nil {
 		return err
 	}
 
@@ -2642,12 +3720,11 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductNam
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductSku(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProductSku) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("productSku", "body", string(o.ProductSku), 255); err != nil {
+	if err := validate.MaxLength("productSku", "body", o.ProductSku, 255); err != nil {
 		return err
 	}
 
@@ -2655,16 +3732,15 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateProductSku
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateQuantity(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Quantity) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("quantity", "body", int64(o.Quantity), 1, false); err != nil {
+	if err := validate.MinimumInt("quantity", "body", o.Quantity, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("quantity", "body", int64(o.Quantity), 9.99999999e+08, false); err != nil {
+	if err := validate.MaximumInt("quantity", "body", o.Quantity, 9.99999999e+08, false); err != nil {
 		return err
 	}
 
@@ -2672,12 +3748,11 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateQuantity(f
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateTaxAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TaxAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("taxAmount", "body", string(o.TaxAmount), 15); err != nil {
+	if err := validate.MaxLength("taxAmount", "body", o.TaxAmount, 15); err != nil {
 		return err
 	}
 
@@ -2685,15 +3760,19 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateTaxAmount(
 }
 
 func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) validateUnitPrice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UnitPrice) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("unitPrice", "body", string(o.UnitPrice), 15); err != nil {
+	if err := validate.MaxLength("unitPrice", "body", o.UnitPrice, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body order information line items items0 based on context it is used
+func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2715,7 +3794,8 @@ func (o *GetTransactionOKBodyOrderInformationLineItemsItems0) UnmarshalBinary(b 
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformationShipTo get transaction o k body order information ship to
+/*
+GetTransactionOKBodyOrderInformationShipTo get transaction o k body order information ship to
 swagger:model GetTransactionOKBodyOrderInformationShipTo
 */
 type GetTransactionOKBodyOrderInformationShipTo struct {
@@ -2855,12 +3935,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -2868,12 +3947,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateAddress1(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -2881,12 +3959,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateAddress2(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -2894,12 +3971,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateAdministrativeArea(
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -2907,12 +3983,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateCompany(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
@@ -2920,12 +3995,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateCountry(formats str
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -2933,12 +4007,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateFirstName(formats s
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -2946,12 +4019,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateLastName(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -2959,12 +4031,11 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validateLocality(formats st
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 15); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"phoneNumber", "body", o.PhoneNumber, 15); err != nil {
 		return err
 	}
 
@@ -2972,15 +4043,19 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) validatePhoneNumber(formats
 }
 
 func (o *GetTransactionOKBodyOrderInformationShipTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shipTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body order information ship to based on context it is used
+func (o *GetTransactionOKBodyOrderInformationShipTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3002,7 +4077,8 @@ func (o *GetTransactionOKBodyOrderInformationShipTo) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyOrderInformationShippingDetails get transaction o k body order information shipping details
+/*
+GetTransactionOKBodyOrderInformationShippingDetails get transaction o k body order information shipping details
 swagger:model GetTransactionOKBodyOrderInformationShippingDetails
 */
 type GetTransactionOKBodyOrderInformationShippingDetails struct {
@@ -3045,15 +4121,19 @@ func (o *GetTransactionOKBodyOrderInformationShippingDetails) Validate(formats s
 }
 
 func (o *GetTransactionOKBodyOrderInformationShippingDetails) validateShippingMethod(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ShippingMethod) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", string(o.ShippingMethod), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"orderInformation"+"."+"shippingDetails"+"."+"shippingMethod", "body", o.ShippingMethod, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body order information shipping details based on context it is used
+func (o *GetTransactionOKBodyOrderInformationShippingDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3075,7 +4155,8 @@ func (o *GetTransactionOKBodyOrderInformationShippingDetails) UnmarshalBinary(b 
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformation get transaction o k body payment information
+/*
+GetTransactionOKBodyPaymentInformation get transaction o k body payment information
 swagger:model GetTransactionOKBodyPaymentInformation
 */
 type GetTransactionOKBodyPaymentInformation struct {
@@ -3134,7 +4215,6 @@ func (o *GetTransactionOKBodyPaymentInformation) Validate(formats strfmt.Registr
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validateAccountFeatures(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountFeatures) { // not required
 		return nil
 	}
@@ -3143,6 +4223,8 @@ func (o *GetTransactionOKBodyPaymentInformation) validateAccountFeatures(formats
 		if err := o.AccountFeatures.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "accountFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "accountFeatures")
 			}
 			return err
 		}
@@ -3152,7 +4234,6 @@ func (o *GetTransactionOKBodyPaymentInformation) validateAccountFeatures(formats
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validateBank(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Bank) { // not required
 		return nil
 	}
@@ -3161,6 +4242,8 @@ func (o *GetTransactionOKBodyPaymentInformation) validateBank(formats strfmt.Reg
 		if err := o.Bank.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank")
 			}
 			return err
 		}
@@ -3170,7 +4253,6 @@ func (o *GetTransactionOKBodyPaymentInformation) validateBank(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -3179,6 +4261,8 @@ func (o *GetTransactionOKBodyPaymentInformation) validateCard(formats strfmt.Reg
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "card")
 			}
 			return err
 		}
@@ -3188,7 +4272,6 @@ func (o *GetTransactionOKBodyPaymentInformation) validateCard(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validateCustomer(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Customer) { // not required
 		return nil
 	}
@@ -3197,6 +4280,8 @@ func (o *GetTransactionOKBodyPaymentInformation) validateCustomer(formats strfmt
 		if err := o.Customer.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "customer")
 			}
 			return err
 		}
@@ -3206,7 +4291,6 @@ func (o *GetTransactionOKBodyPaymentInformation) validateCustomer(formats strfmt
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validateInvoice(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Invoice) { // not required
 		return nil
 	}
@@ -3215,6 +4299,8 @@ func (o *GetTransactionOKBodyPaymentInformation) validateInvoice(formats strfmt.
 		if err := o.Invoice.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "invoice")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "invoice")
 			}
 			return err
 		}
@@ -3224,7 +4310,6 @@ func (o *GetTransactionOKBodyPaymentInformation) validateInvoice(formats strfmt.
 }
 
 func (o *GetTransactionOKBodyPaymentInformation) validatePaymentType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentType) { // not required
 		return nil
 	}
@@ -3233,6 +4318,168 @@ func (o *GetTransactionOKBodyPaymentInformation) validatePaymentType(formats str
 		if err := o.PaymentType.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body payment information based on the context it is used
+func (o *GetTransactionOKBodyPaymentInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccountFeatures(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBank(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCustomer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInvoice(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePaymentType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidateAccountFeatures(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AccountFeatures != nil {
+
+		if swag.IsZero(o.AccountFeatures) { // not required
+			return nil
+		}
+
+		if err := o.AccountFeatures.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "accountFeatures")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "accountFeatures")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidateBank(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Bank != nil {
+
+		if swag.IsZero(o.Bank) { // not required
+			return nil
+		}
+
+		if err := o.Bank.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidateCustomer(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Customer != nil {
+
+		if swag.IsZero(o.Customer) { // not required
+			return nil
+		}
+
+		if err := o.Customer.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "customer")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "customer")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidateInvoice(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Invoice != nil {
+
+		if swag.IsZero(o.Invoice) { // not required
+			return nil
+		}
+
+		if err := o.Invoice.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "invoice")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "invoice")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformation) contextValidatePaymentType(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PaymentType != nil {
+
+		if swag.IsZero(o.PaymentType) { // not required
+			return nil
+		}
+
+		if err := o.PaymentType.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType")
 			}
 			return err
 		}
@@ -3259,7 +4506,8 @@ func (o *GetTransactionOKBodyPaymentInformation) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationAccountFeatures get transaction o k body payment information account features
+/*
+GetTransactionOKBodyPaymentInformationAccountFeatures get transaction o k body payment information account features
 swagger:model GetTransactionOKBodyPaymentInformationAccountFeatures
 */
 type GetTransactionOKBodyPaymentInformationAccountFeatures struct {
@@ -3305,12 +4553,11 @@ func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) Validate(formats
 }
 
 func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) validateBalanceAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BalanceAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmount", "body", string(o.BalanceAmount), 12); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"balanceAmount", "body", o.BalanceAmount, 12); err != nil {
 		return err
 	}
 
@@ -3318,12 +4565,11 @@ func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) validateBalanceA
 }
 
 func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"currency", "body", string(o.Currency), 5); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"currency", "body", o.Currency, 5); err != nil {
 		return err
 	}
 
@@ -3331,15 +4577,19 @@ func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) validateCurrency
 }
 
 func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) validatePreviousBalanceAmount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousBalanceAmount) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"previousBalanceAmount", "body", string(o.PreviousBalanceAmount), 12); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"accountFeatures"+"."+"previousBalanceAmount", "body", o.PreviousBalanceAmount, 12); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body payment information account features based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3361,7 +4611,8 @@ func (o *GetTransactionOKBodyPaymentInformationAccountFeatures) UnmarshalBinary(
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationBank get transaction o k body payment information bank
+/*
+GetTransactionOKBodyPaymentInformationBank get transaction o k body payment information bank
 swagger:model GetTransactionOKBodyPaymentInformationBank
 */
 type GetTransactionOKBodyPaymentInformationBank struct {
@@ -3429,7 +4680,6 @@ func (o *GetTransactionOKBodyPaymentInformationBank) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyPaymentInformationBank) validateAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Account) { // not required
 		return nil
 	}
@@ -3438,6 +4688,8 @@ func (o *GetTransactionOKBodyPaymentInformationBank) validateAccount(formats str
 		if err := o.Account.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "account")
 			}
 			return err
 		}
@@ -3447,7 +4699,6 @@ func (o *GetTransactionOKBodyPaymentInformationBank) validateAccount(formats str
 }
 
 func (o *GetTransactionOKBodyPaymentInformationBank) validateMandate(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Mandate) { // not required
 		return nil
 	}
@@ -3456,6 +4707,68 @@ func (o *GetTransactionOKBodyPaymentInformationBank) validateMandate(formats str
 		if err := o.Mandate.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "mandate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "mandate")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body payment information bank based on the context it is used
+func (o *GetTransactionOKBodyPaymentInformationBank) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMandate(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformationBank) contextValidateAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Account != nil {
+
+		if swag.IsZero(o.Account) { // not required
+			return nil
+		}
+
+		if err := o.Account.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "account")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformationBank) contextValidateMandate(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Mandate != nil {
+
+		if swag.IsZero(o.Mandate) { // not required
+			return nil
+		}
+
+		if err := o.Mandate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "mandate")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "bank" + "." + "mandate")
 			}
 			return err
 		}
@@ -3482,7 +4795,8 @@ func (o *GetTransactionOKBodyPaymentInformationBank) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationBankAccount get transaction o k body payment information bank account
+/*
+GetTransactionOKBodyPaymentInformationBankAccount get transaction o k body payment information bank account
 swagger:model GetTransactionOKBodyPaymentInformationBankAccount
 */
 type GetTransactionOKBodyPaymentInformationBankAccount struct {
@@ -3562,12 +4876,11 @@ func (o *GetTransactionOKBodyPaymentInformationBankAccount) Validate(formats str
 }
 
 func (o *GetTransactionOKBodyPaymentInformationBankAccount) validateCheckNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CheckNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", string(o.CheckNumber), 8); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"checkNumber", "body", o.CheckNumber, 8); err != nil {
 		return err
 	}
 
@@ -3575,12 +4888,11 @@ func (o *GetTransactionOKBodyPaymentInformationBankAccount) validateCheckNumber(
 }
 
 func (o *GetTransactionOKBodyPaymentInformationBankAccount) validateEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", string(o.EncoderID), 3); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"encoderId", "body", o.EncoderID, 3); err != nil {
 		return err
 	}
 
@@ -3588,15 +4900,19 @@ func (o *GetTransactionOKBodyPaymentInformationBankAccount) validateEncoderID(fo
 }
 
 func (o *GetTransactionOKBodyPaymentInformationBankAccount) validateType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Type) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", string(o.Type), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"bank"+"."+"account"+"."+"type", "body", o.Type, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body payment information bank account based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3618,7 +4934,8 @@ func (o *GetTransactionOKBodyPaymentInformationBankAccount) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationBankMandate get transaction o k body payment information bank mandate
+/*
+GetTransactionOKBodyPaymentInformationBankMandate get transaction o k body payment information bank mandate
 swagger:model GetTransactionOKBodyPaymentInformationBankMandate
 */
 type GetTransactionOKBodyPaymentInformationBankMandate struct {
@@ -3653,6 +4970,11 @@ func (o *GetTransactionOKBodyPaymentInformationBankMandate) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body payment information bank mandate based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationBankMandate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyPaymentInformationBankMandate) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -3671,7 +4993,8 @@ func (o *GetTransactionOKBodyPaymentInformationBankMandate) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationCard get transaction o k body payment information card
+/*
+GetTransactionOKBodyPaymentInformationCard get transaction o k body payment information card
 swagger:model GetTransactionOKBodyPaymentInformationCard
 */
 type GetTransactionOKBodyPaymentInformationCard struct {
@@ -3846,12 +5169,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateAccountEncoderID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AccountEncoderID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", string(o.AccountEncoderID), 3); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"accountEncoderId", "body", o.AccountEncoderID, 3); err != nil {
 		return err
 	}
 
@@ -3859,12 +5181,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateAccountEncoderID(fo
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -3872,12 +5193,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateExpirationMonth(for
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -3885,12 +5205,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateExpirationYear(form
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 5); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 5); err != nil {
 		return err
 	}
 
@@ -3898,12 +5217,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateIssueNumber(formats
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validatePrefix(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Prefix) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"prefix", "body", string(o.Prefix), 6); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"prefix", "body", o.Prefix, 6); err != nil {
 		return err
 	}
 
@@ -3911,12 +5229,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validatePrefix(formats strf
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -3924,12 +5241,11 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateStartMonth(formats 
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
@@ -3937,15 +5253,19 @@ func (o *GetTransactionOKBodyPaymentInformationCard) validateStartYear(formats s
 }
 
 func (o *GetTransactionOKBodyPaymentInformationCard) validateUseAs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.UseAs) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"useAs", "body", string(o.UseAs), 20); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"paymentInformation"+"."+"card"+"."+"useAs", "body", o.UseAs, 20); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body payment information card based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3967,7 +5287,8 @@ func (o *GetTransactionOKBodyPaymentInformationCard) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationCustomer get transaction o k body payment information customer
+/*
+GetTransactionOKBodyPaymentInformationCustomer get transaction o k body payment information customer
 swagger:model GetTransactionOKBodyPaymentInformationCustomer
 */
 type GetTransactionOKBodyPaymentInformationCustomer struct {
@@ -3990,6 +5311,11 @@ func (o *GetTransactionOKBodyPaymentInformationCustomer) Validate(formats strfmt
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body payment information customer based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationCustomer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyPaymentInformationCustomer) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -4008,7 +5334,8 @@ func (o *GetTransactionOKBodyPaymentInformationCustomer) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationInvoice get transaction o k body payment information invoice
+/*
+GetTransactionOKBodyPaymentInformationInvoice get transaction o k body payment information invoice
 swagger:model GetTransactionOKBodyPaymentInformationInvoice
 */
 type GetTransactionOKBodyPaymentInformationInvoice struct {
@@ -4025,6 +5352,11 @@ type GetTransactionOKBodyPaymentInformationInvoice struct {
 
 // Validate validates this get transaction o k body payment information invoice
 func (o *GetTransactionOKBodyPaymentInformationInvoice) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body payment information invoice based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationInvoice) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4046,7 +5378,8 @@ func (o *GetTransactionOKBodyPaymentInformationInvoice) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationPaymentType get transaction o k body payment information payment type
+/*
+GetTransactionOKBodyPaymentInformationPaymentType get transaction o k body payment information payment type
 swagger:model GetTransactionOKBodyPaymentInformationPaymentType
 */
 type GetTransactionOKBodyPaymentInformationPaymentType struct {
@@ -4086,7 +5419,6 @@ func (o *GetTransactionOKBodyPaymentInformationPaymentType) Validate(formats str
 }
 
 func (o *GetTransactionOKBodyPaymentInformationPaymentType) validateFundingSource(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FundingSource) { // not required
 		return nil
 	}
@@ -4095,6 +5427,43 @@ func (o *GetTransactionOKBodyPaymentInformationPaymentType) validateFundingSourc
 		if err := o.FundingSource.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType" + "." + "fundingSource")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType" + "." + "fundingSource")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body payment information payment type based on the context it is used
+func (o *GetTransactionOKBodyPaymentInformationPaymentType) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateFundingSource(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyPaymentInformationPaymentType) contextValidateFundingSource(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.FundingSource != nil {
+
+		if swag.IsZero(o.FundingSource) { // not required
+			return nil
+		}
+
+		if err := o.FundingSource.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType" + "." + "fundingSource")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "paymentInformation" + "." + "paymentType" + "." + "fundingSource")
 			}
 			return err
 		}
@@ -4121,7 +5490,8 @@ func (o *GetTransactionOKBodyPaymentInformationPaymentType) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource get transaction o k body payment information payment type funding source
+/*
+GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource get transaction o k body payment information payment type funding source
 swagger:model GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource
 */
 type GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource struct {
@@ -4152,6 +5522,11 @@ func (o *GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource) Validat
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body payment information payment type funding source based on context it is used
+func (o *GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -4170,7 +5545,8 @@ func (o *GetTransactionOKBodyPaymentInformationPaymentTypeFundingSource) Unmarsh
 	return nil
 }
 
-/*GetTransactionOKBodyPointOfSaleInformation get transaction o k body point of sale information
+/*
+GetTransactionOKBodyPointOfSaleInformation get transaction o k body point of sale information
 swagger:model GetTransactionOKBodyPointOfSaleInformation
 */
 type GetTransactionOKBodyPointOfSaleInformation struct {
@@ -4227,12 +5603,11 @@ func (o *GetTransactionOKBodyPointOfSaleInformation) Validate(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyPointOfSaleInformation) validateEntryMode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EntryMode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"entryMode", "body", string(o.EntryMode), 11); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"entryMode", "body", o.EntryMode, 11); err != nil {
 		return err
 	}
 
@@ -4240,19 +5615,23 @@ func (o *GetTransactionOKBodyPointOfSaleInformation) validateEntryMode(formats s
 }
 
 func (o *GetTransactionOKBodyPointOfSaleInformation) validateTerminalCapability(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TerminalCapability) { // not required
 		return nil
 	}
 
-	if err := validate.MinimumInt("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", int64(o.TerminalCapability), 1, false); err != nil {
+	if err := validate.MinimumInt("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", o.TerminalCapability, 1, false); err != nil {
 		return err
 	}
 
-	if err := validate.MaximumInt("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", int64(o.TerminalCapability), 5, false); err != nil {
+	if err := validate.MaximumInt("getTransactionOK"+"."+"pointOfSaleInformation"+"."+"terminalCapability", "body", o.TerminalCapability, 5, false); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body point of sale information based on context it is used
+func (o *GetTransactionOKBodyPointOfSaleInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4274,7 +5653,8 @@ func (o *GetTransactionOKBodyPointOfSaleInformation) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyProcessingInformation get transaction o k body processing information
+/*
+GetTransactionOKBodyProcessingInformation get transaction o k body processing information
 swagger:model GetTransactionOKBodyProcessingInformation
 */
 type GetTransactionOKBodyProcessingInformation struct {
@@ -4344,7 +5724,6 @@ func (o *GetTransactionOKBodyProcessingInformation) Validate(formats strfmt.Regi
 }
 
 func (o *GetTransactionOKBodyProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -4353,6 +5732,8 @@ func (o *GetTransactionOKBodyProcessingInformation) validateAuthorizationOptions
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -4362,7 +5743,6 @@ func (o *GetTransactionOKBodyProcessingInformation) validateAuthorizationOptions
 }
 
 func (o *GetTransactionOKBodyProcessingInformation) validateBankTransferOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankTransferOptions) { // not required
 		return nil
 	}
@@ -4371,6 +5751,8 @@ func (o *GetTransactionOKBodyProcessingInformation) validateBankTransferOptions(
 		if err := o.BankTransferOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "bankTransferOptions")
 			}
 			return err
 		}
@@ -4380,12 +5762,11 @@ func (o *GetTransactionOKBodyProcessingInformation) validateBankTransferOptions(
 }
 
 func (o *GetTransactionOKBodyProcessingInformation) validateCommerceIndicator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CommerceIndicator) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"commerceIndicator", "body", string(o.CommerceIndicator), 20); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"commerceIndicator", "body", o.CommerceIndicator, 20); err != nil {
 		return err
 	}
 
@@ -4393,13 +5774,72 @@ func (o *GetTransactionOKBodyProcessingInformation) validateCommerceIndicator(fo
 }
 
 func (o *GetTransactionOKBodyProcessingInformation) validatePaymentSolution(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PaymentSolution) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"paymentSolution", "body", string(o.PaymentSolution), 12); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"paymentSolution", "body", o.PaymentSolution, 12); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body processing information based on the context it is used
+func (o *GetTransactionOKBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankTransferOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessingInformation) contextValidateBankTransferOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankTransferOptions != nil {
+
+		if swag.IsZero(o.BankTransferOptions) { // not required
+			return nil
+		}
+
+		if err := o.BankTransferOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processingInformation" + "." + "bankTransferOptions")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4423,7 +5863,8 @@ func (o *GetTransactionOKBodyProcessingInformation) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*GetTransactionOKBodyProcessingInformationAuthorizationOptions get transaction o k body processing information authorization options
+/*
+GetTransactionOKBodyProcessingInformationAuthorizationOptions get transaction o k body processing information authorization options
 swagger:model GetTransactionOKBodyProcessingInformationAuthorizationOptions
 */
 type GetTransactionOKBodyProcessingInformationAuthorizationOptions struct {
@@ -4466,15 +5907,19 @@ func (o *GetTransactionOKBodyProcessingInformationAuthorizationOptions) Validate
 }
 
 func (o *GetTransactionOKBodyProcessingInformationAuthorizationOptions) validateAuthType(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthType) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authType", "body", string(o.AuthType), 15); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"authType", "body", o.AuthType, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processing information authorization options based on context it is used
+func (o *GetTransactionOKBodyProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4496,7 +5941,8 @@ func (o *GetTransactionOKBodyProcessingInformationAuthorizationOptions) Unmarsha
 	return nil
 }
 
-/*GetTransactionOKBodyProcessingInformationBankTransferOptions get transaction o k body processing information bank transfer options
+/*
+GetTransactionOKBodyProcessingInformationBankTransferOptions get transaction o k body processing information bank transfer options
 swagger:model GetTransactionOKBodyProcessingInformationBankTransferOptions
 */
 type GetTransactionOKBodyProcessingInformationBankTransferOptions struct {
@@ -4521,6 +5967,11 @@ func (o *GetTransactionOKBodyProcessingInformationBankTransferOptions) Validate(
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body processing information bank transfer options based on context it is used
+func (o *GetTransactionOKBodyProcessingInformationBankTransferOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyProcessingInformationBankTransferOptions) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -4539,7 +5990,8 @@ func (o *GetTransactionOKBodyProcessingInformationBankTransferOptions) Unmarshal
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformation get transaction o k body processor information
+/*
+GetTransactionOKBodyProcessorInformation get transaction o k body processor information
 swagger:model GetTransactionOKBodyProcessorInformation
 */
 type GetTransactionOKBodyProcessorInformation struct {
@@ -4685,7 +6137,6 @@ func (o *GetTransactionOKBodyProcessorInformation) Validate(formats strfmt.Regis
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateAchVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AchVerification) { // not required
 		return nil
 	}
@@ -4694,6 +6145,8 @@ func (o *GetTransactionOKBodyProcessorInformation) validateAchVerification(forma
 		if err := o.AchVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "achVerification")
 			}
 			return err
 		}
@@ -4703,7 +6156,6 @@ func (o *GetTransactionOKBodyProcessorInformation) validateAchVerification(forma
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateAvs(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Avs) { // not required
 		return nil
 	}
@@ -4712,6 +6164,8 @@ func (o *GetTransactionOKBodyProcessorInformation) validateAvs(formats strfmt.Re
 		if err := o.Avs.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "avs")
 			}
 			return err
 		}
@@ -4721,7 +6175,6 @@ func (o *GetTransactionOKBodyProcessorInformation) validateAvs(formats strfmt.Re
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateCardVerification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CardVerification) { // not required
 		return nil
 	}
@@ -4730,6 +6183,8 @@ func (o *GetTransactionOKBodyProcessorInformation) validateCardVerification(form
 		if err := o.CardVerification.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "cardVerification")
 			}
 			return err
 		}
@@ -4739,7 +6194,6 @@ func (o *GetTransactionOKBodyProcessorInformation) validateCardVerification(form
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateElectronicVerificationResults(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ElectronicVerificationResults) { // not required
 		return nil
 	}
@@ -4748,6 +6202,8 @@ func (o *GetTransactionOKBodyProcessorInformation) validateElectronicVerificatio
 		if err := o.ElectronicVerificationResults.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "electronicVerificationResults")
 			}
 			return err
 		}
@@ -4757,7 +6213,6 @@ func (o *GetTransactionOKBodyProcessorInformation) validateElectronicVerificatio
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateProcessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Processor) { // not required
 		return nil
 	}
@@ -4766,6 +6221,8 @@ func (o *GetTransactionOKBodyProcessorInformation) validateProcessor(formats str
 		if err := o.Processor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "processor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "processor")
 			}
 			return err
 		}
@@ -4775,12 +6232,11 @@ func (o *GetTransactionOKBodyProcessorInformation) validateProcessor(formats str
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateResponseCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"responseCode", "body", string(o.ResponseCode), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"responseCode", "body", o.ResponseCode, 10); err != nil {
 		return err
 	}
 
@@ -4788,12 +6244,11 @@ func (o *GetTransactionOKBodyProcessorInformation) validateResponseCode(formats 
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateResponseCodeSource(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResponseCodeSource) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"responseCodeSource", "body", string(o.ResponseCodeSource), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"responseCodeSource", "body", o.ResponseCodeSource, 1); err != nil {
 		return err
 	}
 
@@ -4801,12 +6256,11 @@ func (o *GetTransactionOKBodyProcessorInformation) validateResponseCodeSource(fo
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateSystemTraceAuditNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SystemTraceAuditNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", string(o.SystemTraceAuditNumber), 6); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"systemTraceAuditNumber", "body", o.SystemTraceAuditNumber, 6); err != nil {
 		return err
 	}
 
@@ -4814,13 +6268,147 @@ func (o *GetTransactionOKBodyProcessorInformation) validateSystemTraceAuditNumbe
 }
 
 func (o *GetTransactionOKBodyProcessorInformation) validateTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.TransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"transactionId", "body", string(o.TransactionID), 50); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"transactionId", "body", o.TransactionID, 50); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body processor information based on the context it is used
+func (o *GetTransactionOKBodyProcessorInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAchVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateAvs(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCardVerification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateElectronicVerificationResults(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessorInformation) contextValidateAchVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AchVerification != nil {
+
+		if swag.IsZero(o.AchVerification) { // not required
+			return nil
+		}
+
+		if err := o.AchVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "achVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "achVerification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessorInformation) contextValidateAvs(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Avs != nil {
+
+		if swag.IsZero(o.Avs) { // not required
+			return nil
+		}
+
+		if err := o.Avs.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "avs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "avs")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessorInformation) contextValidateCardVerification(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.CardVerification != nil {
+
+		if swag.IsZero(o.CardVerification) { // not required
+			return nil
+		}
+
+		if err := o.CardVerification.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "cardVerification")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "cardVerification")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessorInformation) contextValidateElectronicVerificationResults(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ElectronicVerificationResults != nil {
+
+		if swag.IsZero(o.ElectronicVerificationResults) { // not required
+			return nil
+		}
+
+		if err := o.ElectronicVerificationResults.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "electronicVerificationResults")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyProcessorInformation) contextValidateProcessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Processor != nil {
+
+		if swag.IsZero(o.Processor) { // not required
+			return nil
+		}
+
+		if err := o.Processor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "processor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "processorInformation" + "." + "processor")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4844,7 +6432,8 @@ func (o *GetTransactionOKBodyProcessorInformation) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformationAchVerification get transaction o k body processor information ach verification
+/*
+GetTransactionOKBodyProcessorInformationAchVerification get transaction o k body processor information ach verification
 swagger:model GetTransactionOKBodyProcessorInformationAchVerification
 */
 type GetTransactionOKBodyProcessorInformationAchVerification struct {
@@ -4881,12 +6470,11 @@ func (o *GetTransactionOKBodyProcessorInformationAchVerification) Validate(forma
 }
 
 func (o *GetTransactionOKBodyProcessorInformationAchVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", string(o.ResultCode), 2); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCode", "body", o.ResultCode, 2); err != nil {
 		return err
 	}
 
@@ -4894,15 +6482,19 @@ func (o *GetTransactionOKBodyProcessorInformationAchVerification) validateResult
 }
 
 func (o *GetTransactionOKBodyProcessorInformationAchVerification) validateResultCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", string(o.ResultCodeRaw), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"achVerification"+"."+"resultCodeRaw", "body", o.ResultCodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processor information ach verification based on context it is used
+func (o *GetTransactionOKBodyProcessorInformationAchVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4924,7 +6516,8 @@ func (o *GetTransactionOKBodyProcessorInformationAchVerification) UnmarshalBinar
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformationAvs get transaction o k body processor information avs
+/*
+GetTransactionOKBodyProcessorInformationAvs get transaction o k body processor information avs
 swagger:model GetTransactionOKBodyProcessorInformationAvs
 */
 type GetTransactionOKBodyProcessorInformationAvs struct {
@@ -4960,12 +6553,11 @@ func (o *GetTransactionOKBodyProcessorInformationAvs) Validate(formats strfmt.Re
 }
 
 func (o *GetTransactionOKBodyProcessorInformationAvs) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", string(o.Code), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"avs"+"."+"code", "body", o.Code, 1); err != nil {
 		return err
 	}
 
@@ -4973,15 +6565,19 @@ func (o *GetTransactionOKBodyProcessorInformationAvs) validateCode(formats strfm
 }
 
 func (o *GetTransactionOKBodyProcessorInformationAvs) validateCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"avs"+"."+"codeRaw", "body", string(o.CodeRaw), 10); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"avs"+"."+"codeRaw", "body", o.CodeRaw, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processor information avs based on context it is used
+func (o *GetTransactionOKBodyProcessorInformationAvs) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5003,7 +6599,8 @@ func (o *GetTransactionOKBodyProcessorInformationAvs) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformationCardVerification get transaction o k body processor information card verification
+/*
+GetTransactionOKBodyProcessorInformationCardVerification get transaction o k body processor information card verification
 swagger:model GetTransactionOKBodyProcessorInformationCardVerification
 */
 type GetTransactionOKBodyProcessorInformationCardVerification struct {
@@ -5031,15 +6628,19 @@ func (o *GetTransactionOKBodyProcessorInformationCardVerification) Validate(form
 }
 
 func (o *GetTransactionOKBodyProcessorInformationCardVerification) validateResultCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ResultCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCode", "body", string(o.ResultCode), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"cardVerification"+"."+"resultCode", "body", o.ResultCode, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processor information card verification based on context it is used
+func (o *GetTransactionOKBodyProcessorInformationCardVerification) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5061,7 +6662,8 @@ func (o *GetTransactionOKBodyProcessorInformationCardVerification) UnmarshalBina
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformationElectronicVerificationResults get transaction o k body processor information electronic verification results
+/*
+GetTransactionOKBodyProcessorInformationElectronicVerificationResults get transaction o k body processor information electronic verification results
 swagger:model GetTransactionOKBodyProcessorInformationElectronicVerificationResults
 */
 type GetTransactionOKBodyProcessorInformationElectronicVerificationResults struct {
@@ -5172,12 +6774,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"email", "body", string(o.Email), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"email", "body", o.Email, 1); err != nil {
 		return err
 	}
 
@@ -5185,12 +6786,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateEmailRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.EmailRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"emailRaw", "body", string(o.EmailRaw), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"emailRaw", "body", o.EmailRaw, 1); err != nil {
 		return err
 	}
 
@@ -5198,12 +6798,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
@@ -5211,12 +6810,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateNameRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.NameRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"nameRaw", "body", string(o.NameRaw), 30); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"nameRaw", "body", o.NameRaw, 30); err != nil {
 		return err
 	}
 
@@ -5224,12 +6822,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumber", "body", string(o.PhoneNumber), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumber", "body", o.PhoneNumber, 1); err != nil {
 		return err
 	}
 
@@ -5237,12 +6834,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validatePhoneNumberRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumberRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumberRaw", "body", string(o.PhoneNumberRaw), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"phoneNumberRaw", "body", o.PhoneNumberRaw, 1); err != nil {
 		return err
 	}
 
@@ -5250,12 +6846,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCode", "body", string(o.PostalCode), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCode", "body", o.PostalCode, 1); err != nil {
 		return err
 	}
 
@@ -5263,12 +6858,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validatePostalCodeRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCodeRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCodeRaw", "body", string(o.PostalCodeRaw), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"postalCodeRaw", "body", o.PostalCodeRaw, 1); err != nil {
 		return err
 	}
 
@@ -5276,12 +6870,11 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateStreet(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Street) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"street", "body", string(o.Street), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"street", "body", o.Street, 1); err != nil {
 		return err
 	}
 
@@ -5289,15 +6882,19 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 }
 
 func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) validateStreetRaw(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StreetRaw) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"streetRaw", "body", string(o.StreetRaw), 1); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"electronicVerificationResults"+"."+"streetRaw", "body", o.StreetRaw, 1); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processor information electronic verification results based on context it is used
+func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5319,7 +6916,8 @@ func (o *GetTransactionOKBodyProcessorInformationElectronicVerificationResults) 
 	return nil
 }
 
-/*GetTransactionOKBodyProcessorInformationProcessor get transaction o k body processor information processor
+/*
+GetTransactionOKBodyProcessorInformationProcessor get transaction o k body processor information processor
 swagger:model GetTransactionOKBodyProcessorInformationProcessor
 */
 type GetTransactionOKBodyProcessorInformationProcessor struct {
@@ -5345,15 +6943,19 @@ func (o *GetTransactionOKBodyProcessorInformationProcessor) Validate(formats str
 }
 
 func (o *GetTransactionOKBodyProcessorInformationProcessor) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"processor"+"."+"name", "body", string(o.Name), 30); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"processorInformation"+"."+"processor"+"."+"name", "body", o.Name, 30); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body processor information processor based on context it is used
+func (o *GetTransactionOKBodyProcessorInformationProcessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5375,7 +6977,8 @@ func (o *GetTransactionOKBodyProcessorInformationProcessor) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformation get transaction o k body risk information
+/*
+GetTransactionOKBodyRiskInformation get transaction o k body risk information
 swagger:model GetTransactionOKBodyRiskInformation
 */
 type GetTransactionOKBodyRiskInformation struct {
@@ -5430,7 +7033,6 @@ func (o *GetTransactionOKBodyRiskInformation) Validate(formats strfmt.Registry) 
 }
 
 func (o *GetTransactionOKBodyRiskInformation) validatePassiveProfile(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PassiveProfile) { // not required
 		return nil
 	}
@@ -5439,6 +7041,8 @@ func (o *GetTransactionOKBodyRiskInformation) validatePassiveProfile(formats str
 		if err := o.PassiveProfile.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveProfile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveProfile")
 			}
 			return err
 		}
@@ -5448,7 +7052,6 @@ func (o *GetTransactionOKBodyRiskInformation) validatePassiveProfile(formats str
 }
 
 func (o *GetTransactionOKBodyRiskInformation) validatePassiveRules(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PassiveRules) { // not required
 		return nil
 	}
@@ -5462,6 +7065,8 @@ func (o *GetTransactionOKBodyRiskInformation) validatePassiveRules(formats strfm
 			if err := o.PassiveRules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveRules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveRules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -5473,7 +7078,6 @@ func (o *GetTransactionOKBodyRiskInformation) validatePassiveRules(formats strfm
 }
 
 func (o *GetTransactionOKBodyRiskInformation) validateProfile(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Profile) { // not required
 		return nil
 	}
@@ -5482,6 +7086,8 @@ func (o *GetTransactionOKBodyRiskInformation) validateProfile(formats strfmt.Reg
 		if err := o.Profile.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "profile")
 			}
 			return err
 		}
@@ -5491,7 +7097,6 @@ func (o *GetTransactionOKBodyRiskInformation) validateProfile(formats strfmt.Reg
 }
 
 func (o *GetTransactionOKBodyRiskInformation) validateRules(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Rules) { // not required
 		return nil
 	}
@@ -5505,6 +7110,8 @@ func (o *GetTransactionOKBodyRiskInformation) validateRules(formats strfmt.Regis
 			if err := o.Rules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -5516,7 +7123,6 @@ func (o *GetTransactionOKBodyRiskInformation) validateRules(formats strfmt.Regis
 }
 
 func (o *GetTransactionOKBodyRiskInformation) validateScore(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Score) { // not required
 		return nil
 	}
@@ -5525,6 +7131,151 @@ func (o *GetTransactionOKBodyRiskInformation) validateScore(formats strfmt.Regis
 		if err := o.Score.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "score")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "score")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get transaction o k body risk information based on the context it is used
+func (o *GetTransactionOKBodyRiskInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePassiveProfile(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidatePassiveRules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProfile(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateRules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateScore(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetTransactionOKBodyRiskInformation) contextValidatePassiveProfile(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.PassiveProfile != nil {
+
+		if swag.IsZero(o.PassiveProfile) { // not required
+			return nil
+		}
+
+		if err := o.PassiveProfile.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveProfile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveProfile")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyRiskInformation) contextValidatePassiveRules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.PassiveRules); i++ {
+
+		if o.PassiveRules[i] != nil {
+
+			if swag.IsZero(o.PassiveRules[i]) { // not required
+				return nil
+			}
+
+			if err := o.PassiveRules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveRules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "passiveRules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyRiskInformation) contextValidateProfile(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Profile != nil {
+
+		if swag.IsZero(o.Profile) { // not required
+			return nil
+		}
+
+		if err := o.Profile.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "profile")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "profile")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyRiskInformation) contextValidateRules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Rules); i++ {
+
+		if o.Rules[i] != nil {
+
+			if swag.IsZero(o.Rules[i]) { // not required
+				return nil
+			}
+
+			if err := o.Rules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "rules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (o *GetTransactionOKBodyRiskInformation) contextValidateScore(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Score != nil {
+
+		if swag.IsZero(o.Score) { // not required
+			return nil
+		}
+
+		if err := o.Score.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "score")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getTransactionOK" + "." + "riskInformation" + "." + "score")
 			}
 			return err
 		}
@@ -5551,7 +7302,8 @@ func (o *GetTransactionOKBodyRiskInformation) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformationPassiveProfile get transaction o k body risk information passive profile
+/*
+GetTransactionOKBodyRiskInformationPassiveProfile get transaction o k body risk information passive profile
 swagger:model GetTransactionOKBodyRiskInformationPassiveProfile
 */
 type GetTransactionOKBodyRiskInformationPassiveProfile struct {
@@ -5573,6 +7325,11 @@ func (o *GetTransactionOKBodyRiskInformationPassiveProfile) Validate(formats str
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body risk information passive profile based on context it is used
+func (o *GetTransactionOKBodyRiskInformationPassiveProfile) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyRiskInformationPassiveProfile) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -5591,7 +7348,8 @@ func (o *GetTransactionOKBodyRiskInformationPassiveProfile) UnmarshalBinary(b []
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformationPassiveRulesItems0 Names of one or more rules that were processed, and the decisions made by the rules.
+/*
+GetTransactionOKBodyRiskInformationPassiveRulesItems0 Names of one or more rules that were processed, and the decisions made by the rules.
 swagger:model GetTransactionOKBodyRiskInformationPassiveRulesItems0
 */
 type GetTransactionOKBodyRiskInformationPassiveRulesItems0 struct {
@@ -5630,12 +7388,11 @@ func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) Validate(formats
 }
 
 func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) validateDecision(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Decision) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("decision", "body", string(o.Decision), 255); err != nil {
+	if err := validate.MaxLength("decision", "body", o.Decision, 255); err != nil {
 		return err
 	}
 
@@ -5643,15 +7400,19 @@ func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) validateDecision
 }
 
 func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("name", "body", string(o.Name), 255); err != nil {
+	if err := validate.MaxLength("name", "body", o.Name, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body risk information passive rules items0 based on context it is used
+func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5673,7 +7434,8 @@ func (o *GetTransactionOKBodyRiskInformationPassiveRulesItems0) UnmarshalBinary(
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformationProfile get transaction o k body risk information profile
+/*
+GetTransactionOKBodyRiskInformationProfile get transaction o k body risk information profile
 swagger:model GetTransactionOKBodyRiskInformationProfile
 */
 type GetTransactionOKBodyRiskInformationProfile struct {
@@ -5695,6 +7457,11 @@ func (o *GetTransactionOKBodyRiskInformationProfile) Validate(formats strfmt.Reg
 	return nil
 }
 
+// ContextValidate validates this get transaction o k body risk information profile based on context it is used
+func (o *GetTransactionOKBodyRiskInformationProfile) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetTransactionOKBodyRiskInformationProfile) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -5713,7 +7480,8 @@ func (o *GetTransactionOKBodyRiskInformationProfile) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformationRulesItems0 Names of one or more rules that were processed, and the decisions made by the rules.
+/*
+GetTransactionOKBodyRiskInformationRulesItems0 Names of one or more rules that were processed, and the decisions made by the rules.
 swagger:model GetTransactionOKBodyRiskInformationRulesItems0
 */
 type GetTransactionOKBodyRiskInformationRulesItems0 struct {
@@ -5752,12 +7520,11 @@ func (o *GetTransactionOKBodyRiskInformationRulesItems0) Validate(formats strfmt
 }
 
 func (o *GetTransactionOKBodyRiskInformationRulesItems0) validateDecision(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Decision) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("decision", "body", string(o.Decision), 255); err != nil {
+	if err := validate.MaxLength("decision", "body", o.Decision, 255); err != nil {
 		return err
 	}
 
@@ -5765,15 +7532,19 @@ func (o *GetTransactionOKBodyRiskInformationRulesItems0) validateDecision(format
 }
 
 func (o *GetTransactionOKBodyRiskInformationRulesItems0) validateName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Name) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("name", "body", string(o.Name), 255); err != nil {
+	if err := validate.MaxLength("name", "body", o.Name, 255); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body risk information rules items0 based on context it is used
+func (o *GetTransactionOKBodyRiskInformationRulesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5795,7 +7566,8 @@ func (o *GetTransactionOKBodyRiskInformationRulesItems0) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*GetTransactionOKBodyRiskInformationScore get transaction o k body risk information score
+/*
+GetTransactionOKBodyRiskInformationScore get transaction o k body risk information score
 swagger:model GetTransactionOKBodyRiskInformationScore
 */
 type GetTransactionOKBodyRiskInformationScore struct {
@@ -5810,6 +7582,11 @@ type GetTransactionOKBodyRiskInformationScore struct {
 
 // Validate validates this get transaction o k body risk information score
 func (o *GetTransactionOKBodyRiskInformationScore) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body risk information score based on context it is used
+func (o *GetTransactionOKBodyRiskInformationScore) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5831,7 +7608,8 @@ func (o *GetTransactionOKBodyRiskInformationScore) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*GetTransactionOKBodySenderInformation get transaction o k body sender information
+/*
+GetTransactionOKBodySenderInformation get transaction o k body sender information
 swagger:model GetTransactionOKBodySenderInformation
 */
 type GetTransactionOKBodySenderInformation struct {
@@ -5856,15 +7634,19 @@ func (o *GetTransactionOKBodySenderInformation) Validate(formats strfmt.Registry
 }
 
 func (o *GetTransactionOKBodySenderInformation) validateReferenceNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReferenceNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("getTransactionOK"+"."+"senderInformation"+"."+"referenceNumber", "body", string(o.ReferenceNumber), 19); err != nil {
+	if err := validate.MaxLength("getTransactionOK"+"."+"senderInformation"+"."+"referenceNumber", "body", o.ReferenceNumber, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this get transaction o k body sender information based on context it is used
+func (o *GetTransactionOKBodySenderInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5879,116 +7661,6 @@ func (o *GetTransactionOKBodySenderInformation) MarshalBinary() ([]byte, error) 
 // UnmarshalBinary interface implementation
 func (o *GetTransactionOKBodySenderInformation) UnmarshalBinary(b []byte) error {
 	var res GetTransactionOKBodySenderInformation
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
-	return nil
-}
-
-/*MerchantDefinedInformationItems0 merchant defined information items0
-swagger:model MerchantDefinedInformationItems0
-*/
-type MerchantDefinedInformationItems0 struct {
-
-	// The number you assign for as the key for your merchant-defined data field. Valid values are 0 to 100.
-	//
-	// For example, to set or access the key for the 2nd merchant-defined data field in the array, you would reference `merchantDefinedInformation[1].key`.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].key` and
-	// `merchantDefinedInformation[1].key` for data that you want to provide to the issuer to identify the
-	// transaction.
-	//
-	// For details, see the `merchant_defined_data1` request-level field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// Max Length: 50
-	Key string `json:"key,omitempty"`
-
-	// The value you assign for your merchant-defined data field.
-	//
-	// For details, see `merchant_defined_data1` field description in the [Credit Card Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// **Warning** Merchant-defined data fields are not intended to and must not be used to capture personally identifying information. Accordingly, merchants are prohibited from capturing, obtaining, and/or transmitting any personally identifying information in or via the merchant-defined data fields. Personally identifying information includes, but is not
-	// limited to, address, credit card number, social security number, driver's license number, state-issued identification number, passport number, and card verification numbers (CVV,
-	// CVC2, CVV2, CID, CVN). In the event CyberSource discovers that a merchant is capturing and/or transmitting personally identifying information via the merchant-defined data fields, whether or not intentionally, CyberSource will immediately suspend the merchant's account, which will result in a rejection of any and all transaction requests submitted by the merchant after the point of suspension.
-	//
-	// #### CyberSource through VisaNet
-	// For installment payments with Mastercard in Brazil, use `merchantDefinedInformation[0].value` and
-	// `merchantDefinedInformation[1].value` for data that you want to provide to the issuer to identify the
-	// transaction. For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For details, see "Installment Payments on CyberSource through VisaNet" in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm)
-	//
-	// For installment payments with Mastercard in Brazil:
-	// - The value for merchantDefinedInformation[0].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 25-44
-	//   - Field: Reference Field 2
-	// - The value for merchantDefinedInformation[1].value corresponds to the following data in the TC 33 capture file5:
-	//   - Record: CP07 TCR5
-	//   - Position: 45-64
-	//   - Field: Reference Field 3
-	//
-	// Max Length: 255
-	Value string `json:"value,omitempty"`
-}
-
-// Validate validates this merchant defined information items0
-func (o *MerchantDefinedInformationItems0) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateKey(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := o.validateValue(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateKey(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Key) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("key", "body", string(o.Key), 50); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (o *MerchantDefinedInformationItems0) validateValue(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Value) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("value", "body", string(o.Value), 255); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *MerchantDefinedInformationItems0) UnmarshalBinary(b []byte) error {
-	var res MerchantDefinedInformationItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

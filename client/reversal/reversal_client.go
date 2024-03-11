@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new reversal API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	AuthReversal(params *AuthReversalParams, opts ...ClientOption) (*AuthReversalCreated, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 AuthReversal processes an authorization reversal
 
 Include the payment ID in the POST request to reverse the payment amount.
 */
-func (a *Client) AuthReversal(params *AuthReversalParams) (*AuthReversalCreated, error) {
+func (a *Client) AuthReversal(params *AuthReversalParams, opts ...ClientOption) (*AuthReversalCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAuthReversalParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "authReversal",
 		Method:             "POST",
 		PathPattern:        "/pts/v2/payments/{id}/reversals",
@@ -48,7 +56,12 @@ func (a *Client) AuthReversal(params *AuthReversalParams) (*AuthReversalCreated,
 		Reader:             &AuthReversalReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

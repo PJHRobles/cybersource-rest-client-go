@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ErrorResponseWithHAL error response with h a l
+//
 // swagger:model ErrorResponseWithHAL
 type ErrorResponseWithHAL []*ErrorResponseWithHALItems0
 
@@ -31,6 +32,8 @@ func (m ErrorResponseWithHAL) Validate(formats strfmt.Registry) error {
 			if err := m[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName(strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName(strconv.Itoa(i))
 				}
 				return err
 			}
@@ -53,7 +56,6 @@ func (m ErrorResponseWithHAL) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -62,6 +64,8 @@ func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
 		if err := m.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -71,7 +75,6 @@ func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Links) { // not required
 		return nil
 	}
@@ -80,6 +83,88 @@ func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
 		if err := m.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response with h a l based on the context it is used
+func (m ErrorResponseWithHAL) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	for i := 0; i < len(m); i++ {
+
+		if m[i] != nil {
+
+			if swag.IsZero(m[i]) { // not required
+				return nil
+			}
+
+			if err := m[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName(strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName(strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponseWithHAL) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ErrorResponseWithHAL) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
 			}
 			return err
 		}
@@ -89,6 +174,7 @@ func (m *ErrorResponseWithHAL) validateLinks(formats strfmt.Registry) error {
 }
 
 // ErrorResponseWithHALItems0 error response with h a l items0
+//
 // swagger:model ErrorResponseWithHALItems0
 type ErrorResponseWithHALItems0 struct {
 
@@ -117,7 +203,6 @@ func (m *ErrorResponseWithHALItems0) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseWithHALItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Details) { // not required
 		return nil
 	}
@@ -126,6 +211,43 @@ func (m *ErrorResponseWithHALItems0) validateDetails(formats strfmt.Registry) er
 		if err := m.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response with h a l items0 based on the context it is used
+func (m *ErrorResponseWithHALItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponseWithHALItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Details != nil {
+
+		if swag.IsZero(m.Details) { // not required
+			return nil
+		}
+
+		if err := m.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -153,6 +275,7 @@ func (m *ErrorResponseWithHALItems0) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseWithHALItems0Details error response with h a l items0 details
+//
 // swagger:model ErrorResponseWithHALItems0Details
 type ErrorResponseWithHALItems0Details struct {
 
@@ -165,6 +288,11 @@ type ErrorResponseWithHALItems0Details struct {
 
 // Validate validates this error response with h a l items0 details
 func (m *ErrorResponseWithHALItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response with h a l items0 details based on context it is used
+func (m *ErrorResponseWithHALItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -187,6 +315,7 @@ func (m *ErrorResponseWithHALItems0Details) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseWithHALLinks error response with h a l links
+//
 // swagger:model ErrorResponseWithHALLinks
 type ErrorResponseWithHALLinks struct {
 
@@ -209,7 +338,6 @@ func (m *ErrorResponseWithHALLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ErrorResponseWithHALLinks) validatePaymentInstruments(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.PaymentInstruments) { // not required
 		return nil
 	}
@@ -218,6 +346,43 @@ func (m *ErrorResponseWithHALLinks) validatePaymentInstruments(formats strfmt.Re
 		if err := m.PaymentInstruments.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("_links" + "." + "paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "paymentInstruments")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this error response with h a l links based on the context it is used
+func (m *ErrorResponseWithHALLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePaymentInstruments(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ErrorResponseWithHALLinks) contextValidatePaymentInstruments(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PaymentInstruments != nil {
+
+		if swag.IsZero(m.PaymentInstruments) { // not required
+			return nil
+		}
+
+		if err := m.PaymentInstruments.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "paymentInstruments")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "paymentInstruments")
 			}
 			return err
 		}
@@ -245,15 +410,22 @@ func (m *ErrorResponseWithHALLinks) UnmarshalBinary(b []byte) error {
 }
 
 // ErrorResponseWithHALLinksPaymentInstruments error response with h a l links payment instruments
+//
 // swagger:model ErrorResponseWithHALLinksPaymentInstruments
 type ErrorResponseWithHALLinksPaymentInstruments struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789/paymentinstruments
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this error response with h a l links payment instruments
 func (m *ErrorResponseWithHALLinksPaymentInstruments) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error response with h a l links payment instruments based on context it is used
+func (m *ErrorResponseWithHALLinksPaymentInstruments) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

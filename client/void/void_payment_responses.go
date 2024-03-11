@@ -6,16 +6,16 @@ package void
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // VoidPaymentReader is a Reader for the VoidPayment structure.
@@ -44,9 +44,8 @@ func (o *VoidPaymentReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pts/v2/payments/{id}/voids] voidPayment", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewVoidPaymentCreated() *VoidPaymentCreated {
 	return &VoidPaymentCreated{}
 }
 
-/*VoidPaymentCreated handles this case with default header values.
+/*
+VoidPaymentCreated describes a response with status code 201, with default header values.
 
 Successful response.
 */
@@ -63,7 +63,41 @@ type VoidPaymentCreated struct {
 	Payload *VoidPaymentCreatedBody
 }
 
+// IsSuccess returns true when this void payment created response has a 2xx status code
+func (o *VoidPaymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this void payment created response has a 3xx status code
+func (o *VoidPaymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void payment created response has a 4xx status code
+func (o *VoidPaymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void payment created response has a 5xx status code
+func (o *VoidPaymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void payment created response a status code equal to that given
+func (o *VoidPaymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the void payment created response
+func (o *VoidPaymentCreated) Code() int {
+	return 201
+}
+
 func (o *VoidPaymentCreated) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentCreated  %+v", 201, o.Payload)
+}
+
+func (o *VoidPaymentCreated) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentCreated  %+v", 201, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewVoidPaymentBadRequest() *VoidPaymentBadRequest {
 	return &VoidPaymentBadRequest{}
 }
 
-/*VoidPaymentBadRequest handles this case with default header values.
+/*
+VoidPaymentBadRequest describes a response with status code 400, with default header values.
 
 Invalid request.
 */
@@ -96,7 +131,41 @@ type VoidPaymentBadRequest struct {
 	Payload *VoidPaymentBadRequestBody
 }
 
+// IsSuccess returns true when this void payment bad request response has a 2xx status code
+func (o *VoidPaymentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void payment bad request response has a 3xx status code
+func (o *VoidPaymentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void payment bad request response has a 4xx status code
+func (o *VoidPaymentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this void payment bad request response has a 5xx status code
+func (o *VoidPaymentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this void payment bad request response a status code equal to that given
+func (o *VoidPaymentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the void payment bad request response
+func (o *VoidPaymentBadRequest) Code() int {
+	return 400
+}
+
 func (o *VoidPaymentBadRequest) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *VoidPaymentBadRequest) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,7 +190,8 @@ func NewVoidPaymentBadGateway() *VoidPaymentBadGateway {
 	return &VoidPaymentBadGateway{}
 }
 
-/*VoidPaymentBadGateway handles this case with default header values.
+/*
+VoidPaymentBadGateway describes a response with status code 502, with default header values.
 
 Unexpected system error or system timeout.
 */
@@ -129,7 +199,41 @@ type VoidPaymentBadGateway struct {
 	Payload *VoidPaymentBadGatewayBody
 }
 
+// IsSuccess returns true when this void payment bad gateway response has a 2xx status code
+func (o *VoidPaymentBadGateway) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this void payment bad gateway response has a 3xx status code
+func (o *VoidPaymentBadGateway) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this void payment bad gateway response has a 4xx status code
+func (o *VoidPaymentBadGateway) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this void payment bad gateway response has a 5xx status code
+func (o *VoidPaymentBadGateway) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this void payment bad gateway response a status code equal to that given
+func (o *VoidPaymentBadGateway) IsCode(code int) bool {
+	return code == 502
+}
+
+// Code gets the status code for the void payment bad gateway response
+func (o *VoidPaymentBadGateway) Code() int {
+	return 502
+}
+
 func (o *VoidPaymentBadGateway) Error() string {
+	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentBadGateway  %+v", 502, o.Payload)
+}
+
+func (o *VoidPaymentBadGateway) String() string {
 	return fmt.Sprintf("[POST /pts/v2/payments/{id}/voids][%d] voidPaymentBadGateway  %+v", 502, o.Payload)
 }
 
@@ -149,7 +253,8 @@ func (o *VoidPaymentBadGateway) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-/*VoidPaymentBadGatewayBody ptsV2PaymentsVoidsPost502Response
+/*
+VoidPaymentBadGatewayBody ptsV2PaymentsVoidsPost502Response
 swagger:model VoidPaymentBadGatewayBody
 */
 type VoidPaymentBadGatewayBody struct {
@@ -186,6 +291,11 @@ func (o *VoidPaymentBadGatewayBody) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+// ContextValidate validates this void payment bad gateway body based on context it is used
+func (o *VoidPaymentBadGatewayBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *VoidPaymentBadGatewayBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -204,13 +314,14 @@ func (o *VoidPaymentBadGatewayBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentBadRequestBody ptsV2PaymentsVoidsPost400Response
+/*
+VoidPaymentBadRequestBody ptsV2PaymentsVoidsPost400Response
 swagger:model VoidPaymentBadRequestBody
 */
 type VoidPaymentBadRequestBody struct {
 
 	// details
-	Details []*DetailsItems0 `json:"details"`
+	Details []*VoidPaymentBadRequestBodyDetailsItems0 `json:"details"`
 
 	// The detail message related to the status and reason listed above.
 	Message string `json:"message,omitempty"`
@@ -255,7 +366,6 @@ func (o *VoidPaymentBadRequestBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentBadRequestBody) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -269,6 +379,47 @@ func (o *VoidPaymentBadRequestBody) validateDetails(formats strfmt.Registry) err
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("voidPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void payment bad request body based on the context it is used
+func (o *VoidPaymentBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidPaymentBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("voidPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("voidPaymentBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -297,7 +448,55 @@ func (o *VoidPaymentBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentBody void payment body
+/*
+VoidPaymentBadRequestBodyDetailsItems0 void payment bad request body details items0
+swagger:model VoidPaymentBadRequestBodyDetailsItems0
+*/
+type VoidPaymentBadRequestBodyDetailsItems0 struct {
+
+	// This is the flattened JSON object field name/path that is either missing or invalid.
+	Field string `json:"field,omitempty"`
+
+	// Possible reasons for the error.
+	//
+	// Possible values:
+	//  - MISSING_FIELD
+	//  - INVALID_DATA
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this void payment bad request body details items0
+func (o *VoidPaymentBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void payment bad request body details items0 based on context it is used
+func (o *VoidPaymentBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *VoidPaymentBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *VoidPaymentBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res VoidPaymentBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+VoidPaymentBody void payment body
+// Example: {"clientReferenceInformation":{"code":"test_void"}}
 swagger:model VoidPaymentBody
 */
 type VoidPaymentBody struct {
@@ -321,7 +520,6 @@ func (o *VoidPaymentBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -330,6 +528,43 @@ func (o *VoidPaymentBody) validateClientReferenceInformation(formats strfmt.Regi
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void payment body based on the context it is used
+func (o *VoidPaymentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidPaymentBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -356,7 +591,9 @@ func (o *VoidPaymentBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentCreatedBody ptsV2PaymentsVoidsPost201Response
+/*
+VoidPaymentCreatedBody ptsV2PaymentsVoidsPost201Response
+// Example: {"_links":{"self":{"href":"/pts/v2/voids/4963015122056179201545","method":"GET"}},"clientReferenceInformation":{"code":"test_void"},"id":"4963015122056179201545","orderInformation":{"amountDetails":{"currency":"USD"}},"status":"VOIDED","submitTimeUtc":"2017-06-01T071832Z","voidAmountDetails":{"currency":"usd","voidAmount":"102.21"}}
 swagger:model VoidPaymentCreatedBody
 */
 type VoidPaymentCreatedBody struct {
@@ -415,7 +652,6 @@ func (o *VoidPaymentCreatedBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -424,6 +660,8 @@ func (o *VoidPaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -433,7 +671,6 @@ func (o *VoidPaymentCreatedBody) validateLinks(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentCreatedBody) validateClientReferenceInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ClientReferenceInformation) { // not required
 		return nil
 	}
@@ -442,6 +679,8 @@ func (o *VoidPaymentCreatedBody) validateClientReferenceInformation(formats strf
 		if err := o.ClientReferenceInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "clientReferenceInformation")
 			}
 			return err
 		}
@@ -451,12 +690,11 @@ func (o *VoidPaymentCreatedBody) validateClientReferenceInformation(formats strf
 }
 
 func (o *VoidPaymentCreatedBody) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentCreated"+"."+"id", "body", string(o.ID), 26); err != nil {
+	if err := validate.MaxLength("voidPaymentCreated"+"."+"id", "body", o.ID, 26); err != nil {
 		return err
 	}
 
@@ -464,7 +702,6 @@ func (o *VoidPaymentCreatedBody) validateID(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentCreatedBody) validateVoidAmountDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.VoidAmountDetails) { // not required
 		return nil
 	}
@@ -473,6 +710,93 @@ func (o *VoidPaymentCreatedBody) validateVoidAmountDetails(formats strfmt.Regist
 		if err := o.VoidAmountDetails.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "voidAmountDetails")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void payment created body based on the context it is used
+func (o *VoidPaymentCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateClientReferenceInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateVoidAmountDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidPaymentCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidPaymentCreatedBody) contextValidateClientReferenceInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ClientReferenceInformation != nil {
+
+		if swag.IsZero(o.ClientReferenceInformation) { // not required
+			return nil
+		}
+
+		if err := o.ClientReferenceInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentCreated" + "." + "clientReferenceInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "clientReferenceInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *VoidPaymentCreatedBody) contextValidateVoidAmountDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.VoidAmountDetails != nil {
+
+		if swag.IsZero(o.VoidAmountDetails) { // not required
+			return nil
+		}
+
+		if err := o.VoidAmountDetails.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentCreated" + "." + "voidAmountDetails")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "voidAmountDetails")
 			}
 			return err
 		}
@@ -499,7 +823,8 @@ func (o *VoidPaymentCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentCreatedBodyClientReferenceInformation void payment created body client reference information
+/*
+VoidPaymentCreatedBodyClientReferenceInformation void payment created body client reference information
 swagger:model VoidPaymentCreatedBodyClientReferenceInformation
 */
 type VoidPaymentCreatedBodyClientReferenceInformation struct {
@@ -554,12 +879,11 @@ func (o *VoidPaymentCreatedBodyClientReferenceInformation) Validate(formats strf
 }
 
 func (o *VoidPaymentCreatedBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidPaymentCreated"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -567,15 +891,19 @@ func (o *VoidPaymentCreatedBodyClientReferenceInformation) validateCode(formats 
 }
 
 func (o *VoidPaymentCreatedBodyClientReferenceInformation) validateSubmitLocalDateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SubmitLocalDateTime) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", string(o.SubmitLocalDateTime), 14); err != nil {
+	if err := validate.MaxLength("voidPaymentCreated"+"."+"clientReferenceInformation"+"."+"submitLocalDateTime", "body", o.SubmitLocalDateTime, 14); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void payment created body client reference information based on context it is used
+func (o *VoidPaymentCreatedBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -597,7 +925,8 @@ func (o *VoidPaymentCreatedBodyClientReferenceInformation) UnmarshalBinary(b []b
 	return nil
 }
 
-/*VoidPaymentCreatedBodyLinks void payment created body links
+/*
+VoidPaymentCreatedBodyLinks void payment created body links
 swagger:model VoidPaymentCreatedBodyLinks
 */
 type VoidPaymentCreatedBodyLinks struct {
@@ -621,7 +950,6 @@ func (o *VoidPaymentCreatedBodyLinks) Validate(formats strfmt.Registry) error {
 }
 
 func (o *VoidPaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -630,6 +958,43 @@ func (o *VoidPaymentCreatedBodyLinks) validateSelf(formats strfmt.Registry) erro
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void payment created body links based on the context it is used
+func (o *VoidPaymentCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidPaymentCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -656,7 +1021,8 @@ func (o *VoidPaymentCreatedBodyLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentCreatedBodyLinksSelf void payment created body links self
+/*
+VoidPaymentCreatedBodyLinksSelf void payment created body links self
 swagger:model VoidPaymentCreatedBodyLinksSelf
 */
 type VoidPaymentCreatedBodyLinksSelf struct {
@@ -670,6 +1036,11 @@ type VoidPaymentCreatedBodyLinksSelf struct {
 
 // Validate validates this void payment created body links self
 func (o *VoidPaymentCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this void payment created body links self based on context it is used
+func (o *VoidPaymentCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -691,7 +1062,8 @@ func (o *VoidPaymentCreatedBodyLinksSelf) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*VoidPaymentCreatedBodyVoidAmountDetails void payment created body void amount details
+/*
+VoidPaymentCreatedBodyVoidAmountDetails void payment created body void amount details
 swagger:model VoidPaymentCreatedBodyVoidAmountDetails
 */
 type VoidPaymentCreatedBodyVoidAmountDetails struct {
@@ -730,15 +1102,19 @@ func (o *VoidPaymentCreatedBodyVoidAmountDetails) Validate(formats strfmt.Regist
 }
 
 func (o *VoidPaymentCreatedBodyVoidAmountDetails) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentCreated"+"."+"voidAmountDetails"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("voidPaymentCreated"+"."+"voidAmountDetails"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void payment created body void amount details based on context it is used
+func (o *VoidPaymentCreatedBodyVoidAmountDetails) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -760,7 +1136,8 @@ func (o *VoidPaymentCreatedBodyVoidAmountDetails) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*VoidPaymentParamsBodyClientReferenceInformation void payment params body client reference information
+/*
+VoidPaymentParamsBodyClientReferenceInformation void payment params body client reference information
 swagger:model VoidPaymentParamsBodyClientReferenceInformation
 */
 type VoidPaymentParamsBodyClientReferenceInformation struct {
@@ -802,12 +1179,11 @@ func (o *VoidPaymentParamsBodyClientReferenceInformation) Validate(formats strfm
 }
 
 func (o *VoidPaymentParamsBodyClientReferenceInformation) validateCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Code) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", string(o.Code), 50); err != nil {
+	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"code", "body", o.Code, 50); err != nil {
 		return err
 	}
 
@@ -815,7 +1191,6 @@ func (o *VoidPaymentParamsBodyClientReferenceInformation) validateCode(formats s
 }
 
 func (o *VoidPaymentParamsBodyClientReferenceInformation) validatePartner(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Partner) { // not required
 		return nil
 	}
@@ -824,6 +1199,43 @@ func (o *VoidPaymentParamsBodyClientReferenceInformation) validatePartner(format
 		if err := o.Partner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this void payment params body client reference information based on the context it is used
+func (o *VoidPaymentParamsBodyClientReferenceInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePartner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *VoidPaymentParamsBodyClientReferenceInformation) contextValidatePartner(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Partner != nil {
+
+		if swag.IsZero(o.Partner) { // not required
+			return nil
+		}
+
+		if err := o.Partner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("voidPaymentRequest" + "." + "clientReferenceInformation" + "." + "partner")
 			}
 			return err
 		}
@@ -850,7 +1262,8 @@ func (o *VoidPaymentParamsBodyClientReferenceInformation) UnmarshalBinary(b []by
 	return nil
 }
 
-/*VoidPaymentParamsBodyClientReferenceInformationPartner void payment params body client reference information partner
+/*
+VoidPaymentParamsBodyClientReferenceInformationPartner void payment params body client reference information partner
 swagger:model VoidPaymentParamsBodyClientReferenceInformationPartner
 */
 type VoidPaymentParamsBodyClientReferenceInformationPartner struct {
@@ -894,12 +1307,11 @@ func (o *VoidPaymentParamsBodyClientReferenceInformationPartner) Validate(format
 }
 
 func (o *VoidPaymentParamsBodyClientReferenceInformationPartner) validateDeveloperID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DeveloperID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", string(o.DeveloperID), 8); err != nil {
+	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"developerId", "body", o.DeveloperID, 8); err != nil {
 		return err
 	}
 
@@ -907,15 +1319,19 @@ func (o *VoidPaymentParamsBodyClientReferenceInformationPartner) validateDevelop
 }
 
 func (o *VoidPaymentParamsBodyClientReferenceInformationPartner) validateSolutionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.SolutionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", string(o.SolutionID), 8); err != nil {
+	if err := validate.MaxLength("voidPaymentRequest"+"."+"clientReferenceInformation"+"."+"partner"+"."+"solutionId", "body", o.SolutionID, 8); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this void payment params body client reference information partner based on context it is used
+func (o *VoidPaymentParamsBodyClientReferenceInformationPartner) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

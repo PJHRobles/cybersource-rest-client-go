@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new conversion details API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,18 +25,27 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	GetConversionDetail(params *GetConversionDetailParams, opts ...ClientOption) (*GetConversionDetailOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 GetConversionDetail gets conversion detail transactions
 
 Get conversion detail of transactions for a merchant.
 */
-func (a *Client) GetConversionDetail(params *GetConversionDetailParams) (*GetConversionDetailOK, error) {
+func (a *Client) GetConversionDetail(params *GetConversionDetailParams, opts ...ClientOption) (*GetConversionDetailOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetConversionDetailParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getConversionDetail",
 		Method:             "GET",
 		PathPattern:        "/reporting/v3/conversion-details",
@@ -48,7 +56,12 @@ func (a *Client) GetConversionDetail(params *GetConversionDetailParams) (*GetCon
 		Reader:             &GetConversionDetailReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

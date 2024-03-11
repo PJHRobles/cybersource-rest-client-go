@@ -6,16 +6,16 @@ package payment_instrument
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // CreatePaymentInstrumentReader is a Reader for the CreatePaymentInstrument structure.
@@ -56,9 +56,8 @@ func (o *CreatePaymentInstrumentReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /tms/v1/paymentinstruments] createPaymentInstrument", response, response.Code())
 	}
 }
 
@@ -67,19 +66,55 @@ func NewCreatePaymentInstrumentCreated() *CreatePaymentInstrumentCreated {
 	return &CreatePaymentInstrumentCreated{}
 }
 
-/*CreatePaymentInstrumentCreated handles this case with default header values.
+/*
+CreatePaymentInstrumentCreated describes a response with status code 201, with default header values.
 
 A new Payment Instrument has been created.
 */
 type CreatePaymentInstrumentCreated struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload *CreatePaymentInstrumentCreatedBody
 }
 
+// IsSuccess returns true when this create payment instrument created response has a 2xx status code
+func (o *CreatePaymentInstrumentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create payment instrument created response has a 3xx status code
+func (o *CreatePaymentInstrumentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment instrument created response has a 4xx status code
+func (o *CreatePaymentInstrumentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment instrument created response has a 5xx status code
+func (o *CreatePaymentInstrumentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment instrument created response a status code equal to that given
+func (o *CreatePaymentInstrumentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create payment instrument created response
+func (o *CreatePaymentInstrumentCreated) Code() int {
+	return 201
+}
+
 func (o *CreatePaymentInstrumentCreated) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreatePaymentInstrumentCreated) String() string {
 	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentCreated  %+v", 201, o.Payload)
 }
 
@@ -89,8 +124,12 @@ func (o *CreatePaymentInstrumentCreated) GetPayload() *CreatePaymentInstrumentCr
 
 func (o *CreatePaymentInstrumentCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	o.Payload = new(CreatePaymentInstrumentCreatedBody)
 
@@ -107,19 +146,55 @@ func NewCreatePaymentInstrumentBadRequest() *CreatePaymentInstrumentBadRequest {
 	return &CreatePaymentInstrumentBadRequest{}
 }
 
-/*CreatePaymentInstrumentBadRequest handles this case with default header values.
+/*
+CreatePaymentInstrumentBadRequest describes a response with status code 400, with default header values.
 
 Bad Request. A required header value could be missing.
 */
 type CreatePaymentInstrumentBadRequest struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreatePaymentInstrumentBadRequestBodyItems0
 }
 
+// IsSuccess returns true when this create payment instrument bad request response has a 2xx status code
+func (o *CreatePaymentInstrumentBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment instrument bad request response has a 3xx status code
+func (o *CreatePaymentInstrumentBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment instrument bad request response has a 4xx status code
+func (o *CreatePaymentInstrumentBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment instrument bad request response has a 5xx status code
+func (o *CreatePaymentInstrumentBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment instrument bad request response a status code equal to that given
+func (o *CreatePaymentInstrumentBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create payment instrument bad request response
+func (o *CreatePaymentInstrumentBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreatePaymentInstrumentBadRequest) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreatePaymentInstrumentBadRequest) String() string {
 	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentBadRequest  %+v", 400, o.Payload)
 }
 
@@ -129,8 +204,12 @@ func (o *CreatePaymentInstrumentBadRequest) GetPayload() []*CreatePaymentInstrum
 
 func (o *CreatePaymentInstrumentBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -145,19 +224,55 @@ func NewCreatePaymentInstrumentForbidden() *CreatePaymentInstrumentForbidden {
 	return &CreatePaymentInstrumentForbidden{}
 }
 
-/*CreatePaymentInstrumentForbidden handles this case with default header values.
+/*
+CreatePaymentInstrumentForbidden describes a response with status code 403, with default header values.
 
 Forbidden. The profile might not have permission to perform the token operation.
 */
 type CreatePaymentInstrumentForbidden struct {
-	/*A globally unique ID associated with your request.
+
+	/* A globally unique ID associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreatePaymentInstrumentForbiddenBodyItems0
 }
 
+// IsSuccess returns true when this create payment instrument forbidden response has a 2xx status code
+func (o *CreatePaymentInstrumentForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment instrument forbidden response has a 3xx status code
+func (o *CreatePaymentInstrumentForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment instrument forbidden response has a 4xx status code
+func (o *CreatePaymentInstrumentForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment instrument forbidden response has a 5xx status code
+func (o *CreatePaymentInstrumentForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment instrument forbidden response a status code equal to that given
+func (o *CreatePaymentInstrumentForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create payment instrument forbidden response
+func (o *CreatePaymentInstrumentForbidden) Code() int {
+	return 403
+}
+
 func (o *CreatePaymentInstrumentForbidden) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreatePaymentInstrumentForbidden) String() string {
 	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentForbidden  %+v", 403, o.Payload)
 }
 
@@ -167,8 +282,12 @@ func (o *CreatePaymentInstrumentForbidden) GetPayload() []*CreatePaymentInstrume
 
 func (o *CreatePaymentInstrumentForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -183,19 +302,55 @@ func NewCreatePaymentInstrumentFailedDependency() *CreatePaymentInstrumentFailed
 	return &CreatePaymentInstrumentFailedDependency{}
 }
 
-/*CreatePaymentInstrumentFailedDependency handles this case with default header values.
+/*
+CreatePaymentInstrumentFailedDependency describes a response with status code 424, with default header values.
 
 Failed Dependency: e.g. The profile represented by the profile-id may not exist or the profile-id was entered incorrectly.
 */
 type CreatePaymentInstrumentFailedDependency struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreatePaymentInstrumentFailedDependencyBodyItems0
 }
 
+// IsSuccess returns true when this create payment instrument failed dependency response has a 2xx status code
+func (o *CreatePaymentInstrumentFailedDependency) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment instrument failed dependency response has a 3xx status code
+func (o *CreatePaymentInstrumentFailedDependency) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment instrument failed dependency response has a 4xx status code
+func (o *CreatePaymentInstrumentFailedDependency) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create payment instrument failed dependency response has a 5xx status code
+func (o *CreatePaymentInstrumentFailedDependency) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create payment instrument failed dependency response a status code equal to that given
+func (o *CreatePaymentInstrumentFailedDependency) IsCode(code int) bool {
+	return code == 424
+}
+
+// Code gets the status code for the create payment instrument failed dependency response
+func (o *CreatePaymentInstrumentFailedDependency) Code() int {
+	return 424
+}
+
 func (o *CreatePaymentInstrumentFailedDependency) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentFailedDependency  %+v", 424, o.Payload)
+}
+
+func (o *CreatePaymentInstrumentFailedDependency) String() string {
 	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentFailedDependency  %+v", 424, o.Payload)
 }
 
@@ -205,8 +360,12 @@ func (o *CreatePaymentInstrumentFailedDependency) GetPayload() []*CreatePaymentI
 
 func (o *CreatePaymentInstrumentFailedDependency) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -221,19 +380,55 @@ func NewCreatePaymentInstrumentInternalServerError() *CreatePaymentInstrumentInt
 	return &CreatePaymentInstrumentInternalServerError{}
 }
 
-/*CreatePaymentInstrumentInternalServerError handles this case with default header values.
+/*
+CreatePaymentInstrumentInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected error.
 */
 type CreatePaymentInstrumentInternalServerError struct {
-	/*A globally unique id associated with your request.
+
+	/* A globally unique id associated with your request.
 	 */
 	UniqueTransactionID string
 
 	Payload []*CreatePaymentInstrumentInternalServerErrorBodyItems0
 }
 
+// IsSuccess returns true when this create payment instrument internal server error response has a 2xx status code
+func (o *CreatePaymentInstrumentInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create payment instrument internal server error response has a 3xx status code
+func (o *CreatePaymentInstrumentInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create payment instrument internal server error response has a 4xx status code
+func (o *CreatePaymentInstrumentInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create payment instrument internal server error response has a 5xx status code
+func (o *CreatePaymentInstrumentInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create payment instrument internal server error response a status code equal to that given
+func (o *CreatePaymentInstrumentInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create payment instrument internal server error response
+func (o *CreatePaymentInstrumentInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreatePaymentInstrumentInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreatePaymentInstrumentInternalServerError) String() string {
 	return fmt.Sprintf("[POST /tms/v1/paymentinstruments][%d] createPaymentInstrumentInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -243,8 +438,12 @@ func (o *CreatePaymentInstrumentInternalServerError) GetPayload() []*CreatePayme
 
 func (o *CreatePaymentInstrumentInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header uniqueTransactionID
-	o.UniqueTransactionID = response.GetHeader("uniqueTransactionID")
+	// hydrates response header uniqueTransactionID
+	hdrUniqueTransactionID := response.GetHeader("uniqueTransactionID")
+
+	if hdrUniqueTransactionID != "" {
+		o.UniqueTransactionID = hdrUniqueTransactionID
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -254,7 +453,8 @@ func (o *CreatePaymentInstrumentInternalServerError) readResponse(response runti
 	return nil
 }
 
-/*CreatePaymentInstrumentBadRequestBodyItems0 create payment instrument bad request body items0
+/*
+CreatePaymentInstrumentBadRequestBodyItems0 create payment instrument bad request body items0
 swagger:model CreatePaymentInstrumentBadRequestBodyItems0
 */
 type CreatePaymentInstrumentBadRequestBodyItems0 struct {
@@ -284,7 +484,6 @@ func (o *CreatePaymentInstrumentBadRequestBodyItems0) Validate(formats strfmt.Re
 }
 
 func (o *CreatePaymentInstrumentBadRequestBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -293,6 +492,43 @@ func (o *CreatePaymentInstrumentBadRequestBodyItems0) validateDetails(formats st
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument bad request body items0 based on the context it is used
+func (o *CreatePaymentInstrumentBadRequestBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBadRequestBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -319,7 +555,8 @@ func (o *CreatePaymentInstrumentBadRequestBodyItems0) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*CreatePaymentInstrumentBadRequestBodyItems0Details create payment instrument bad request body items0 details
+/*
+CreatePaymentInstrumentBadRequestBodyItems0Details create payment instrument bad request body items0 details
 swagger:model CreatePaymentInstrumentBadRequestBodyItems0Details
 */
 type CreatePaymentInstrumentBadRequestBodyItems0Details struct {
@@ -333,6 +570,11 @@ type CreatePaymentInstrumentBadRequestBodyItems0Details struct {
 
 // Validate validates this create payment instrument bad request body items0 details
 func (o *CreatePaymentInstrumentBadRequestBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument bad request body items0 details based on context it is used
+func (o *CreatePaymentInstrumentBadRequestBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -354,7 +596,8 @@ func (o *CreatePaymentInstrumentBadRequestBodyItems0Details) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreatePaymentInstrumentBody create payment instrument body
+/*
+CreatePaymentInstrumentBody create payment instrument body
 swagger:model CreatePaymentInstrumentBody
 */
 type CreatePaymentInstrumentBody struct {
@@ -375,6 +618,7 @@ type CreatePaymentInstrumentBody struct {
 	Card *CreatePaymentInstrumentParamsBodyCard `json:"card,omitempty"`
 
 	// Unique identification number assigned by CyberSource to the submitted request.
+	// Example: 1234567890123456800
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
@@ -392,6 +636,7 @@ type CreatePaymentInstrumentBody struct {
 	// Valid values:
 	// - paymentInstrument
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -404,6 +649,7 @@ type CreatePaymentInstrumentBody struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -455,7 +701,6 @@ func (o *CreatePaymentInstrumentBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *CreatePaymentInstrumentBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -464,6 +709,8 @@ func (o *CreatePaymentInstrumentBody) validateLinks(formats strfmt.Registry) err
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links")
 			}
 			return err
 		}
@@ -473,7 +720,6 @@ func (o *CreatePaymentInstrumentBody) validateLinks(formats strfmt.Registry) err
 }
 
 func (o *CreatePaymentInstrumentBody) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -482,6 +728,8 @@ func (o *CreatePaymentInstrumentBody) validateBankAccount(formats strfmt.Registr
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -491,7 +739,6 @@ func (o *CreatePaymentInstrumentBody) validateBankAccount(formats strfmt.Registr
 }
 
 func (o *CreatePaymentInstrumentBody) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -500,6 +747,8 @@ func (o *CreatePaymentInstrumentBody) validateBillTo(formats strfmt.Registry) er
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "billTo")
 			}
 			return err
 		}
@@ -509,7 +758,6 @@ func (o *CreatePaymentInstrumentBody) validateBillTo(formats strfmt.Registry) er
 }
 
 func (o *CreatePaymentInstrumentBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -518,6 +766,8 @@ func (o *CreatePaymentInstrumentBody) validateBuyerInformation(formats strfmt.Re
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -527,7 +777,6 @@ func (o *CreatePaymentInstrumentBody) validateBuyerInformation(formats strfmt.Re
 }
 
 func (o *CreatePaymentInstrumentBody) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -536,6 +785,8 @@ func (o *CreatePaymentInstrumentBody) validateCard(formats strfmt.Registry) erro
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "card")
 			}
 			return err
 		}
@@ -545,7 +796,6 @@ func (o *CreatePaymentInstrumentBody) validateCard(formats strfmt.Registry) erro
 }
 
 func (o *CreatePaymentInstrumentBody) validateInstrumentIdentifier(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InstrumentIdentifier) { // not required
 		return nil
 	}
@@ -554,6 +804,8 @@ func (o *CreatePaymentInstrumentBody) validateInstrumentIdentifier(formats strfm
 		if err := o.InstrumentIdentifier.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier")
 			}
 			return err
 		}
@@ -563,7 +815,6 @@ func (o *CreatePaymentInstrumentBody) validateInstrumentIdentifier(formats strfm
 }
 
 func (o *CreatePaymentInstrumentBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -572,6 +823,8 @@ func (o *CreatePaymentInstrumentBody) validateMerchantInformation(formats strfmt
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -581,7 +834,6 @@ func (o *CreatePaymentInstrumentBody) validateMerchantInformation(formats strfmt
 }
 
 func (o *CreatePaymentInstrumentBody) validateMetaData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MetaData) { // not required
 		return nil
 	}
@@ -590,6 +842,8 @@ func (o *CreatePaymentInstrumentBody) validateMetaData(formats strfmt.Registry) 
 		if err := o.MetaData.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "metaData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "metaData")
 			}
 			return err
 		}
@@ -599,7 +853,6 @@ func (o *CreatePaymentInstrumentBody) validateMetaData(formats strfmt.Registry) 
 }
 
 func (o *CreatePaymentInstrumentBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -608,9 +861,285 @@ func (o *CreatePaymentInstrumentBody) validateProcessingInformation(formats strf
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument body based on the context it is used
+func (o *CreatePaymentInstrumentBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInstrumentIdentifier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetaData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentRequest"+"."+"id", "body", string(o.ID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateInstrumentIdentifier(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InstrumentIdentifier != nil {
+
+		if swag.IsZero(o.InstrumentIdentifier) { // not required
+			return nil
+		}
+
+		if err := o.InstrumentIdentifier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateMetaData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MetaData != nil {
+
+		if swag.IsZero(o.MetaData) { // not required
+			return nil
+		}
+
+		if err := o.MetaData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "metaData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "metaData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentRequest"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentBody) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentRequest"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -634,7 +1163,8 @@ func (o *CreatePaymentInstrumentBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBody tmsV1PaymentInstrumentsPost201Response
+/*
+CreatePaymentInstrumentCreatedBody tmsV1PaymentInstrumentsPost201Response
 swagger:model CreatePaymentInstrumentCreatedBody
 */
 type CreatePaymentInstrumentCreatedBody struct {
@@ -655,6 +1185,7 @@ type CreatePaymentInstrumentCreatedBody struct {
 	Card *CreatePaymentInstrumentCreatedBodyCard `json:"card,omitempty"`
 
 	// Unique identification number assigned by CyberSource to the submitted request.
+	// Example: 1234567890123456800
 	// Read Only: true
 	ID string `json:"id,omitempty"`
 
@@ -672,6 +1203,7 @@ type CreatePaymentInstrumentCreatedBody struct {
 	// Valid values:
 	// - paymentInstrument
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -684,6 +1216,7 @@ type CreatePaymentInstrumentCreatedBody struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -735,7 +1268,6 @@ func (o *CreatePaymentInstrumentCreatedBody) Validate(formats strfmt.Registry) e
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -744,6 +1276,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateLinks(formats strfmt.Regist
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links")
 			}
 			return err
 		}
@@ -753,7 +1287,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateLinks(formats strfmt.Regist
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -762,6 +1295,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBankAccount(formats strfmt.
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -771,7 +1306,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBankAccount(formats strfmt.
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateBillTo(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BillTo) { // not required
 		return nil
 	}
@@ -780,6 +1314,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBillTo(formats strfmt.Regis
 		if err := o.BillTo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "billTo")
 			}
 			return err
 		}
@@ -789,7 +1325,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBillTo(formats strfmt.Regis
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateBuyerInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BuyerInformation) { // not required
 		return nil
 	}
@@ -798,6 +1333,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBuyerInformation(formats st
 		if err := o.BuyerInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation")
 			}
 			return err
 		}
@@ -807,7 +1344,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateBuyerInformation(formats st
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -816,6 +1352,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateCard(formats strfmt.Registr
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "card")
 			}
 			return err
 		}
@@ -825,7 +1363,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateCard(formats strfmt.Registr
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateInstrumentIdentifier(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.InstrumentIdentifier) { // not required
 		return nil
 	}
@@ -834,6 +1371,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateInstrumentIdentifier(format
 		if err := o.InstrumentIdentifier.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier")
 			}
 			return err
 		}
@@ -843,7 +1382,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateInstrumentIdentifier(format
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateMerchantInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInformation) { // not required
 		return nil
 	}
@@ -852,6 +1390,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateMerchantInformation(formats
 		if err := o.MerchantInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation")
 			}
 			return err
 		}
@@ -861,7 +1401,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateMerchantInformation(formats
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateMetaData(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MetaData) { // not required
 		return nil
 	}
@@ -870,6 +1409,8 @@ func (o *CreatePaymentInstrumentCreatedBody) validateMetaData(formats strfmt.Reg
 		if err := o.MetaData.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "metaData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "metaData")
 			}
 			return err
 		}
@@ -879,7 +1420,6 @@ func (o *CreatePaymentInstrumentCreatedBody) validateMetaData(formats strfmt.Reg
 }
 
 func (o *CreatePaymentInstrumentCreatedBody) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -888,9 +1428,285 @@ func (o *CreatePaymentInstrumentCreatedBody) validateProcessingInformation(forma
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBillTo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBuyerInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateInstrumentIdentifier(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMerchantInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetaData(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateBillTo(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BillTo != nil {
+
+		if swag.IsZero(o.BillTo) { // not required
+			return nil
+		}
+
+		if err := o.BillTo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "billTo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "billTo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateBuyerInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BuyerInformation != nil {
+
+		if swag.IsZero(o.BuyerInformation) { // not required
+			return nil
+		}
+
+		if err := o.BuyerInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentCreated"+"."+"id", "body", string(o.ID)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateInstrumentIdentifier(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.InstrumentIdentifier != nil {
+
+		if swag.IsZero(o.InstrumentIdentifier) { // not required
+			return nil
+		}
+
+		if err := o.InstrumentIdentifier.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateMerchantInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInformation != nil {
+
+		if swag.IsZero(o.MerchantInformation) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateMetaData(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MetaData != nil {
+
+		if swag.IsZero(o.MetaData) { // not required
+			return nil
+		}
+
+		if err := o.MetaData.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "metaData")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "metaData")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentCreated"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBody) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentCreated"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -914,7 +1730,8 @@ func (o *CreatePaymentInstrumentCreatedBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyBankAccount create payment instrument created body bank account
+/*
+CreatePaymentInstrumentCreatedBodyBankAccount create payment instrument created body bank account
 swagger:model CreatePaymentInstrumentCreatedBodyBankAccount
 */
 type CreatePaymentInstrumentCreatedBodyBankAccount struct {
@@ -925,11 +1742,17 @@ type CreatePaymentInstrumentCreatedBodyBankAccount struct {
 	//   * X: corporate checking (USD only)
 	//   * G: general ledger
 	//
+	// Example: savings
 	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this create payment instrument created body bank account
 func (o *CreatePaymentInstrumentCreatedBodyBankAccount) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body bank account based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -951,7 +1774,8 @@ func (o *CreatePaymentInstrumentCreatedBodyBankAccount) UnmarshalBinary(b []byte
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyBillTo create payment instrument created body bill to
+/*
+CreatePaymentInstrumentCreatedBodyBillTo create payment instrument created body bill to
 swagger:model CreatePaymentInstrumentCreatedBodyBillTo
 */
 type CreatePaymentInstrumentCreatedBodyBillTo struct {
@@ -963,10 +1787,12 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12 Main Street
 	// Max Length: 60
 	Address1 string `json:"address1,omitempty"`
 
 	// Additional address information.
+	// Example: 20 My Street
 	// Max Length: 60
 	Address2 string `json:"address2,omitempty"`
 
@@ -977,6 +1803,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CA
 	// Max Length: 20
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 
@@ -987,6 +1814,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CyberSource
 	// Max Length: 60
 	Company string `json:"company,omitempty"`
 
@@ -996,6 +1824,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: US
 	// Max Length: 3
 	// Min Length: 2
 	Country string `json:"country,omitempty"`
@@ -1006,6 +1835,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: john.smith@example.com
 	// Max Length: 320
 	Email string `json:"email,omitempty"`
 
@@ -1016,6 +1846,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: John
 	// Max Length: 60
 	FirstName string `json:"firstName,omitempty"`
 
@@ -1026,6 +1857,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Smith
 	// Max Length: 60
 	LastName string `json:"lastName,omitempty"`
 
@@ -1036,6 +1868,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Foster City
 	// Max Length: 50
 	Locality string `json:"locality,omitempty"`
 
@@ -1044,6 +1877,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	//   * Electronic checks — contact your payment processor representative to find out if this field is required or optional.
 	//   * PINless debits — optional.
 	//
+	// Example: 555123456
 	// Max Length: 32
 	// Min Length: 6
 	PhoneNumber string `json:"phoneNumber,omitempty"`
@@ -1064,6 +1898,7 @@ type CreatePaymentInstrumentCreatedBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 90200
 	// Max Length: 10
 	PostalCode string `json:"postalCode,omitempty"`
 }
@@ -1123,12 +1958,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) Validate(formats strfmt.Regis
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -1136,12 +1970,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAddress1(formats strf
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -1149,12 +1982,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAddress2(formats strf
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -1162,12 +1994,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateAdministrativeArea(fo
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -1175,16 +2006,15 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateCompany(formats strfm
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -1192,12 +2022,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateCountry(formats strfm
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"email", "body", string(o.Email), 320); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"email", "body", o.Email, 320); err != nil {
 		return err
 	}
 
@@ -1205,12 +2034,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateEmail(formats strfmt.
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -1218,12 +2046,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateFirstName(formats str
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -1231,12 +2058,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateLastName(formats strf
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -1244,16 +2070,15 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validateLocality(formats strf
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 6); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 6); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 32); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 32); err != nil {
 		return err
 	}
 
@@ -1261,15 +2086,19 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) validatePhoneNumber(formats s
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body bill to based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1291,7 +2120,8 @@ func (o *CreatePaymentInstrumentCreatedBodyBillTo) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyBuyerInformation create payment instrument created body buyer information
+/*
+CreatePaymentInstrumentCreatedBodyBuyerInformation create payment instrument created body buyer information
 swagger:model CreatePaymentInstrumentCreatedBodyBuyerInformation
 */
 type CreatePaymentInstrumentCreatedBodyBuyerInformation struct {
@@ -1301,10 +2131,12 @@ type CreatePaymentInstrumentCreatedBodyBuyerInformation struct {
 	// **Important**:
 	// Contact your TeleCheck representative to find out whether this field is required or optional.
 	//
+	// Example: 1234567890123456800
 	// Max Length: 9
 	CompanyTaxID string `json:"companyTaxID,omitempty"`
 
 	// Currency used by the customer. Accepts input in the ISO 4217 standard, stores as ISO 4217 Alpha.
+	// Example: USD
 	// Max Length: 3
 	// Min Length: 3
 	Currency string `json:"currency,omitempty"`
@@ -1313,6 +2145,7 @@ type CreatePaymentInstrumentCreatedBodyBuyerInformation struct {
 	//
 	// Format: `YYYY-MM-DD` or `YYYYMMDD`
 	//
+	// Example: 1960-12-30
 	// Max Length: 10
 	// Min Length: 8
 	DateOBirth string `json:"dateOBirth,omitempty"`
@@ -1348,12 +2181,11 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) Validate(formats st
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateCompanyTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CompanyTaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"companyTaxID", "body", string(o.CompanyTaxID), 9); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"companyTaxID", "body", o.CompanyTaxID, 9); err != nil {
 		return err
 	}
 
@@ -1361,16 +2193,15 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateCompanyTaxI
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -1378,16 +2209,15 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateCurrency(fo
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateDateOBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"dateOBirth", "body", string(o.DateOBirth), 8); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"dateOBirth", "body", o.DateOBirth, 8); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"dateOBirth", "body", string(o.DateOBirth), 10); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"buyerInformation"+"."+"dateOBirth", "body", o.DateOBirth, 10); err != nil {
 		return err
 	}
 
@@ -1395,7 +2225,6 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validateDateOBirth(
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validatePersonalIdentification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PersonalIdentification) { // not required
 		return nil
 	}
@@ -1409,6 +2238,47 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) validatePersonalIde
 			if err := o.PersonalIdentification[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body buyer information based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePersonalIdentification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) contextValidatePersonalIdentification(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.PersonalIdentification); i++ {
+
+		if o.PersonalIdentification[i] != nil {
+
+			if swag.IsZero(o.PersonalIdentification[i]) { // not required
+				return nil
+			}
+
+			if err := o.PersonalIdentification[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentInstrumentCreated" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1437,7 +2307,8 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformation) UnmarshalBinary(b [
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0 create payment instrument created body buyer information personal identification items0
+/*
+CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0 create payment instrument created body buyer information personal identification items0
 swagger:model CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0
 */
 type CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0 struct {
@@ -1447,6 +2318,7 @@ type CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationIte
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: 1234567890
 	ID string `json:"id,omitempty"`
 
 	// issued by
@@ -1459,6 +2331,7 @@ type CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationIte
 	// Valid values:
 	// - driver license
 	//
+	// Example: driver license
 	Type string `json:"type,omitempty"`
 }
 
@@ -1477,7 +2350,6 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificatio
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0) validateIssuedBy(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssuedBy) { // not required
 		return nil
 	}
@@ -1486,6 +2358,43 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificatio
 		if err := o.IssuedBy.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body buyer information personal identification items0 based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateIssuedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0) contextValidateIssuedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IssuedBy != nil {
+
+		if swag.IsZero(o.IssuedBy) { // not required
+			return nil
+		}
+
+		if err := o.IssuedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
 			}
 			return err
 		}
@@ -1512,7 +2421,8 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificatio
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy create payment instrument created body buyer information personal identification items0 issued by
+/*
+CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy create payment instrument created body buyer information personal identification items0 issued by
 swagger:model CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy
 */
 type CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy struct {
@@ -1522,11 +2432,17 @@ type CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationIte
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: CA
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 }
 
 // Validate validates this create payment instrument created body buyer information personal identification items0 issued by
 func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body buyer information personal identification items0 issued by based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificationItems0IssuedBy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1548,7 +2464,8 @@ func (o *CreatePaymentInstrumentCreatedBodyBuyerInformationPersonalIdentificatio
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyCard create payment instrument created body card
+/*
+CreatePaymentInstrumentCreatedBodyCard create payment instrument created body card
 swagger:model CreatePaymentInstrumentCreatedBodyCard
 */
 type CreatePaymentInstrumentCreatedBodyCard struct {
@@ -1562,6 +2479,7 @@ type CreatePaymentInstrumentCreatedBodyCard struct {
 	// Important:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	ExpirationMonth string `json:"expirationMonth,omitempty"`
@@ -1577,11 +2495,13 @@ type CreatePaymentInstrumentCreatedBodyCard struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.'
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	ExpirationYear string `json:"expirationYear,omitempty"`
 
 	// Number of times a Maestro (UK Domestic) card has been issued to the account holder.
+	// Example: 01
 	// Max Length: 2
 	// Min Length: 1
 	IssueNumber string `json:"issueNumber,omitempty"`
@@ -1591,6 +2511,7 @@ type CreatePaymentInstrumentCreatedBodyCard struct {
 	// Format: `MM`.
 	// Possible values: `01` through `12`.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	StartMonth string `json:"startMonth,omitempty"`
@@ -1600,6 +2521,7 @@ type CreatePaymentInstrumentCreatedBodyCard struct {
 	// Format: `YYYY`.
 	// Possible values: `1900` through `2099`.
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	StartYear string `json:"startYear,omitempty"`
@@ -1665,6 +2587,7 @@ type CreatePaymentInstrumentCreatedBodyCard struct {
 	Type *string `json:"type"`
 
 	// Card Use As Field. Supported value of `pinless debit` only. Only for use with Pinless Debit tokens.
+	// Example: pinless debit
 	UseAs string `json:"useAs,omitempty"`
 }
 
@@ -1703,16 +2626,15 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) Validate(formats strfmt.Registr
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -1720,16 +2642,15 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) validateExpirationMonth(formats
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -1737,16 +2658,15 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) validateExpirationYear(formats 
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 2); err != nil {
 		return err
 	}
 
@@ -1754,16 +2674,15 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) validateIssueNumber(formats str
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -1771,16 +2690,15 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) validateStartMonth(formats strf
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
@@ -1793,6 +2711,11 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) validateType(formats strfmt.Reg
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body card based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -1814,7 +2737,8 @@ func (o *CreatePaymentInstrumentCreatedBodyCard) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifier create payment instrument created body instrument identifier
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifier create payment instrument created body instrument identifier
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifier
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifier struct {
@@ -1829,6 +2753,7 @@ type CreatePaymentInstrumentCreatedBodyInstrumentIdentifier struct {
 	Card *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard `json:"card,omitempty"`
 
 	// The ID of the existing instrument identifier to be linked to the newly created payment instrument.
+	// Example: 1234567890123456789
 	// Max Length: 32
 	// Min Length: 16
 	ID string `json:"id,omitempty"`
@@ -1841,6 +2766,7 @@ type CreatePaymentInstrumentCreatedBodyInstrumentIdentifier struct {
 	// Valid values:
 	// - instrumentIdentifier
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -1853,6 +2779,7 @@ type CreatePaymentInstrumentCreatedBodyInstrumentIdentifier struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -1892,7 +2819,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) Validate(format
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -1901,6 +2827,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateLinks(f
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links")
 			}
 			return err
 		}
@@ -1910,7 +2838,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateLinks(f
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -1919,6 +2846,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateBankAcc
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -1928,7 +2857,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateBankAcc
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -1937,6 +2865,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateCard(fo
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "card")
 			}
 			return err
 		}
@@ -1946,16 +2876,15 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateCard(fo
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"id", "body", string(o.ID), 16); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"id", "body", o.ID, 16); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"id", "body", string(o.ID), 32); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"id", "body", o.ID, 32); err != nil {
 		return err
 	}
 
@@ -1963,7 +2892,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateID(form
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateMetadata(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Metadata) { // not required
 		return nil
 	}
@@ -1972,6 +2900,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateMetadat
 		if err := o.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "metadata")
 			}
 			return err
 		}
@@ -1981,7 +2911,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateMetadat
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -1990,9 +2919,172 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) validateProcess
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Metadata != nil {
+
+		if swag.IsZero(o.Metadata) { // not required
+			return nil
+		}
+
+		if err := o.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -2016,17 +3108,20 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifier) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount create payment instrument created body instrument identifier bank account
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount create payment instrument created body instrument identifier bank account
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -2051,16 +3146,15 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) Vali
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", o.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -2068,19 +3162,23 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) vali
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier bank account based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2102,12 +3200,14 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierBankAccount) Unma
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard create payment instrument created body instrument identifier card
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard create payment instrument created body instrument identifier card
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -2128,19 +3228,23 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard) Validate(fo
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", string(o.Number), 12); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", o.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier card based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2162,7 +3266,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierCard) UnmarshalBi
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks create payment instrument created body instrument identifier links
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks create payment instrument created body instrument identifier links
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks struct {
@@ -2200,7 +3305,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) Validate(f
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -2209,6 +3313,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateAn
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -2218,7 +3324,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateAn
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -2227,6 +3332,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateSe
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -2236,7 +3343,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateSe
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -2245,6 +3351,93 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) validateSu
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier links based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -2271,17 +3464,24 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinks) UnmarshalB
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor create payment instrument created body instrument identifier links ancestor
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor create payment instrument created body instrument identifier links ancestor
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body instrument identifier links ancestor
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier links ancestor based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2303,17 +3503,24 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksAncestor) Un
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf create payment instrument created body instrument identifier links self
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf create payment instrument created body instrument identifier links self
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body instrument identifier links self
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier links self based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2335,17 +3542,24 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSelf) Unmars
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor create payment instrument created body instrument identifier links successor
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor create payment instrument created body instrument identifier links successor
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body instrument identifier links successor
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier links successor based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2367,17 +3581,29 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierLinksSuccessor) U
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata create payment instrument created body instrument identifier metadata
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata create payment instrument created body instrument identifier metadata
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create payment instrument created body instrument identifier metadata
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier metadata based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -2399,7 +3625,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierMetadata) Unmarsh
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation create payment instrument created body instrument identifier processing information
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation create payment instrument created body instrument identifier processing information
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation struct {
@@ -2423,7 +3650,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -2432,6 +3658,43 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier processing information based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -2458,7 +3721,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions create payment instrument created body instrument identifier processing information authorization options
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions create payment instrument created body instrument identifier processing information authorization options
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions struct {
@@ -2482,7 +3746,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Initiator) { // not required
 		return nil
 	}
@@ -2491,6 +3754,43 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 		if err := o.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier processing information authorization options based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Initiator != nil {
+
+		if swag.IsZero(o.Initiator) { // not required
+			return nil
+		}
+
+		if err := o.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -2517,7 +3817,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator create payment instrument created body instrument identifier processing information authorization options initiator
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator create payment instrument created body instrument identifier processing information authorization options initiator
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator struct {
@@ -2541,7 +3842,6 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -2550,6 +3850,43 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 		if err := o.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body instrument identifier processing information authorization options initiator based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -2576,12 +3913,14 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment instrument created body instrument identifier processing information authorization options initiator merchant initiated transaction
+/*
+CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment instrument created body instrument identifier processing information authorization options initiator merchant initiated transaction
 swagger:model CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 */
 type CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -2601,15 +3940,19 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(o.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentCreated"+"."+"instrumentIdentifier"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", o.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body instrument identifier processing information authorization options initiator merchant initiated transaction based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2631,7 +3974,8 @@ func (o *CreatePaymentInstrumentCreatedBodyInstrumentIdentifierProcessingInforma
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyLinks create payment instrument created body links
+/*
+CreatePaymentInstrumentCreatedBodyLinks create payment instrument created body links
 swagger:model CreatePaymentInstrumentCreatedBodyLinks
 */
 type CreatePaymentInstrumentCreatedBodyLinks struct {
@@ -2669,7 +4013,6 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) Validate(formats strfmt.Regist
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -2678,6 +4021,8 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) validateAncestor(formats strfm
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -2687,7 +4032,6 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) validateAncestor(formats strfm
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -2696,6 +4040,8 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) validateSelf(formats strfmt.Re
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -2705,7 +4051,6 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) validateSelf(formats strfmt.Re
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -2714,6 +4059,93 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) validateSuccessor(formats strf
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body links based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -2740,17 +4172,24 @@ func (o *CreatePaymentInstrumentCreatedBodyLinks) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyLinksAncestor create payment instrument created body links ancestor
+/*
+CreatePaymentInstrumentCreatedBodyLinksAncestor create payment instrument created body links ancestor
 swagger:model CreatePaymentInstrumentCreatedBodyLinksAncestor
 */
 type CreatePaymentInstrumentCreatedBodyLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body links ancestor
 func (o *CreatePaymentInstrumentCreatedBodyLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body links ancestor based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2772,17 +4211,24 @@ func (o *CreatePaymentInstrumentCreatedBodyLinksAncestor) UnmarshalBinary(b []by
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyLinksSelf create payment instrument created body links self
+/*
+CreatePaymentInstrumentCreatedBodyLinksSelf create payment instrument created body links self
 swagger:model CreatePaymentInstrumentCreatedBodyLinksSelf
 */
 type CreatePaymentInstrumentCreatedBodyLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body links self
 func (o *CreatePaymentInstrumentCreatedBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body links self based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2804,17 +4250,24 @@ func (o *CreatePaymentInstrumentCreatedBodyLinksSelf) UnmarshalBinary(b []byte) 
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyLinksSuccessor create payment instrument created body links successor
+/*
+CreatePaymentInstrumentCreatedBodyLinksSuccessor create payment instrument created body links successor
 swagger:model CreatePaymentInstrumentCreatedBodyLinksSuccessor
 */
 type CreatePaymentInstrumentCreatedBodyLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument created body links successor
 func (o *CreatePaymentInstrumentCreatedBodyLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body links successor based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2836,7 +4289,8 @@ func (o *CreatePaymentInstrumentCreatedBodyLinksSuccessor) UnmarshalBinary(b []b
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyMerchantInformation create payment instrument created body merchant information
+/*
+CreatePaymentInstrumentCreatedBodyMerchantInformation create payment instrument created body merchant information
 swagger:model CreatePaymentInstrumentCreatedBodyMerchantInformation
 */
 type CreatePaymentInstrumentCreatedBodyMerchantInformation struct {
@@ -2860,7 +4314,6 @@ func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) Validate(formats
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -2869,6 +4322,43 @@ func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) validateMerchant
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body merchant information based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -2895,17 +4385,24 @@ func (o *CreatePaymentInstrumentCreatedBodyMerchantInformation) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor create payment instrument created body merchant information merchant descriptor
+/*
+CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor create payment instrument created body merchant information merchant descriptor
 swagger:model CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor
 */
 type CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor struct {
 
 	// Alternate information for your business. This API field overrides the company entry description value in your CyberSource account.
+	// Example: Branch Name
 	AlternateName string `json:"alternateName,omitempty"`
 }
 
 // Validate validates this create payment instrument created body merchant information merchant descriptor
 func (o *CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body merchant information merchant descriptor based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -2927,17 +4424,29 @@ func (o *CreatePaymentInstrumentCreatedBodyMerchantInformationMerchantDescriptor
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyMetaData create payment instrument created body meta data
+/*
+CreatePaymentInstrumentCreatedBodyMetaData create payment instrument created body meta data
 swagger:model CreatePaymentInstrumentCreatedBodyMetaData
 */
 type CreatePaymentInstrumentCreatedBodyMetaData struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create payment instrument created body meta data
 func (o *CreatePaymentInstrumentCreatedBodyMetaData) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body meta data based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyMetaData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -2959,7 +4468,8 @@ func (o *CreatePaymentInstrumentCreatedBodyMetaData) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyProcessingInformation create payment instrument created body processing information
+/*
+CreatePaymentInstrumentCreatedBodyProcessingInformation create payment instrument created body processing information
 swagger:model CreatePaymentInstrumentCreatedBodyProcessingInformation
 */
 type CreatePaymentInstrumentCreatedBodyProcessingInformation struct {
@@ -2971,6 +4481,7 @@ type CreatePaymentInstrumentCreatedBodyProcessingInformation struct {
 	//   * false: Not a Visa Bill Payment.
 	//   * true: Visa Bill Payment.
 	//
+	// Example: true
 	BillPaymentProgramEnabled *bool `json:"billPaymentProgramEnabled,omitempty"`
 }
 
@@ -2989,7 +4500,6 @@ func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) Validate(forma
 }
 
 func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) validateBankTransferOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankTransferOptions) { // not required
 		return nil
 	}
@@ -2998,6 +4508,43 @@ func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) validateBankTr
 		if err := o.BankTransferOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument created body processing information based on the context it is used
+func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBankTransferOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) contextValidateBankTransferOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankTransferOptions != nil {
+
+		if swag.IsZero(o.BankTransferOptions) { // not required
+			return nil
+		}
+
+		if err := o.BankTransferOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentCreated" + "." + "processingInformation" + "." + "bankTransferOptions")
 			}
 			return err
 		}
@@ -3024,7 +4571,8 @@ func (o *CreatePaymentInstrumentCreatedBodyProcessingInformation) UnmarshalBinar
 	return nil
 }
 
-/*CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions create payment instrument created body processing information bank transfer options
+/*
+CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions create payment instrument created body processing information bank transfer options
 swagger:model CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions
 */
 type CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions struct {
@@ -3038,11 +4586,17 @@ type CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions 
 	// - **TEL**: telephone-initiated entry. One-time charge against a personal checking or savings account. You can originate a TEL entry only when there is a business relationship between you and the customer or when the customer initiates a telephone call to you. For a TEL entry, you must obtain a payment authorization from the customer over the telephone. There is no recurring billing option for TEL.
 	// - **WEB**: internet-initiated entry—charge against a personal checking or savings account. You can originate a one-time or recurring WEB entry when the customer initiates the transaction over the Internet. For a WEB entry, you must obtain payment authorization from the customer over the Internet.
 	//
+	// Example: WEB
 	SECCode string `json:"SECCode,omitempty"`
 }
 
 // Validate validates this create payment instrument created body processing information bank transfer options
 func (o *CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument created body processing information bank transfer options based on context it is used
+func (o *CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3064,7 +4618,8 @@ func (o *CreatePaymentInstrumentCreatedBodyProcessingInformationBankTransferOpti
 	return nil
 }
 
-/*CreatePaymentInstrumentFailedDependencyBodyItems0 create payment instrument failed dependency body items0
+/*
+CreatePaymentInstrumentFailedDependencyBodyItems0 create payment instrument failed dependency body items0
 swagger:model CreatePaymentInstrumentFailedDependencyBodyItems0
 */
 type CreatePaymentInstrumentFailedDependencyBodyItems0 struct {
@@ -3094,7 +4649,6 @@ func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) Validate(formats str
 }
 
 func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -3103,6 +4657,43 @@ func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) validateDetails(form
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument failed dependency body items0 based on the context it is used
+func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -3129,7 +4720,8 @@ func (o *CreatePaymentInstrumentFailedDependencyBodyItems0) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentInstrumentFailedDependencyBodyItems0Details create payment instrument failed dependency body items0 details
+/*
+CreatePaymentInstrumentFailedDependencyBodyItems0Details create payment instrument failed dependency body items0 details
 swagger:model CreatePaymentInstrumentFailedDependencyBodyItems0Details
 */
 type CreatePaymentInstrumentFailedDependencyBodyItems0Details struct {
@@ -3143,6 +4735,11 @@ type CreatePaymentInstrumentFailedDependencyBodyItems0Details struct {
 
 // Validate validates this create payment instrument failed dependency body items0 details
 func (o *CreatePaymentInstrumentFailedDependencyBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument failed dependency body items0 details based on context it is used
+func (o *CreatePaymentInstrumentFailedDependencyBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3164,7 +4761,8 @@ func (o *CreatePaymentInstrumentFailedDependencyBodyItems0Details) UnmarshalBina
 	return nil
 }
 
-/*CreatePaymentInstrumentForbiddenBodyItems0 create payment instrument forbidden body items0
+/*
+CreatePaymentInstrumentForbiddenBodyItems0 create payment instrument forbidden body items0
 swagger:model CreatePaymentInstrumentForbiddenBodyItems0
 */
 type CreatePaymentInstrumentForbiddenBodyItems0 struct {
@@ -3194,7 +4792,6 @@ func (o *CreatePaymentInstrumentForbiddenBodyItems0) Validate(formats strfmt.Reg
 }
 
 func (o *CreatePaymentInstrumentForbiddenBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -3203,6 +4800,43 @@ func (o *CreatePaymentInstrumentForbiddenBodyItems0) validateDetails(formats str
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument forbidden body items0 based on the context it is used
+func (o *CreatePaymentInstrumentForbiddenBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentForbiddenBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -3229,7 +4863,8 @@ func (o *CreatePaymentInstrumentForbiddenBodyItems0) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreatePaymentInstrumentForbiddenBodyItems0Details create payment instrument forbidden body items0 details
+/*
+CreatePaymentInstrumentForbiddenBodyItems0Details create payment instrument forbidden body items0 details
 swagger:model CreatePaymentInstrumentForbiddenBodyItems0Details
 */
 type CreatePaymentInstrumentForbiddenBodyItems0Details struct {
@@ -3243,6 +4878,11 @@ type CreatePaymentInstrumentForbiddenBodyItems0Details struct {
 
 // Validate validates this create payment instrument forbidden body items0 details
 func (o *CreatePaymentInstrumentForbiddenBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument forbidden body items0 details based on context it is used
+func (o *CreatePaymentInstrumentForbiddenBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3264,7 +4904,8 @@ func (o *CreatePaymentInstrumentForbiddenBodyItems0Details) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentInstrumentInternalServerErrorBodyItems0 create payment instrument internal server error body items0
+/*
+CreatePaymentInstrumentInternalServerErrorBodyItems0 create payment instrument internal server error body items0
 swagger:model CreatePaymentInstrumentInternalServerErrorBodyItems0
 */
 type CreatePaymentInstrumentInternalServerErrorBodyItems0 struct {
@@ -3294,7 +4935,6 @@ func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) Validate(formats 
 }
 
 func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) validateDetails(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Details) { // not required
 		return nil
 	}
@@ -3303,6 +4943,43 @@ func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) validateDetails(f
 		if err := o.Details.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument internal server error body items0 based on the context it is used
+func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Details != nil {
+
+		if swag.IsZero(o.Details) { // not required
+			return nil
+		}
+
+		if err := o.Details.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("details")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("details")
 			}
 			return err
 		}
@@ -3329,7 +5006,8 @@ func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0) UnmarshalBinary(b
 	return nil
 }
 
-/*CreatePaymentInstrumentInternalServerErrorBodyItems0Details create payment instrument internal server error body items0 details
+/*
+CreatePaymentInstrumentInternalServerErrorBodyItems0Details create payment instrument internal server error body items0 details
 swagger:model CreatePaymentInstrumentInternalServerErrorBodyItems0Details
 */
 type CreatePaymentInstrumentInternalServerErrorBodyItems0Details struct {
@@ -3343,6 +5021,11 @@ type CreatePaymentInstrumentInternalServerErrorBodyItems0Details struct {
 
 // Validate validates this create payment instrument internal server error body items0 details
 func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0Details) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument internal server error body items0 details based on context it is used
+func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0Details) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3364,7 +5047,8 @@ func (o *CreatePaymentInstrumentInternalServerErrorBodyItems0Details) UnmarshalB
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyBankAccount create payment instrument params body bank account
+/*
+CreatePaymentInstrumentParamsBodyBankAccount create payment instrument params body bank account
 swagger:model CreatePaymentInstrumentParamsBodyBankAccount
 */
 type CreatePaymentInstrumentParamsBodyBankAccount struct {
@@ -3375,11 +5059,17 @@ type CreatePaymentInstrumentParamsBodyBankAccount struct {
 	//   * X: corporate checking (USD only)
 	//   * G: general ledger
 	//
+	// Example: savings
 	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this create payment instrument params body bank account
 func (o *CreatePaymentInstrumentParamsBodyBankAccount) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body bank account based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3401,7 +5091,8 @@ func (o *CreatePaymentInstrumentParamsBodyBankAccount) UnmarshalBinary(b []byte)
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyBillTo create payment instrument params body bill to
+/*
+CreatePaymentInstrumentParamsBodyBillTo create payment instrument params body bill to
 swagger:model CreatePaymentInstrumentParamsBodyBillTo
 */
 type CreatePaymentInstrumentParamsBodyBillTo struct {
@@ -3413,10 +5104,12 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12 Main Street
 	// Max Length: 60
 	Address1 string `json:"address1,omitempty"`
 
 	// Additional address information.
+	// Example: 20 My Street
 	// Max Length: 60
 	Address2 string `json:"address2,omitempty"`
 
@@ -3427,6 +5120,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CA
 	// Max Length: 20
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 
@@ -3437,6 +5131,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: CyberSource
 	// Max Length: 60
 	Company string `json:"company,omitempty"`
 
@@ -3446,6 +5141,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: US
 	// Max Length: 3
 	// Min Length: 2
 	Country string `json:"country,omitempty"`
@@ -3456,6 +5152,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: john.smith@example.com
 	// Max Length: 320
 	Email string `json:"email,omitempty"`
 
@@ -3466,6 +5163,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: John
 	// Max Length: 60
 	FirstName string `json:"firstName,omitempty"`
 
@@ -3476,6 +5174,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Smith
 	// Max Length: 60
 	LastName string `json:"lastName,omitempty"`
 
@@ -3486,6 +5185,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: Foster City
 	// Max Length: 50
 	Locality string `json:"locality,omitempty"`
 
@@ -3494,6 +5194,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	//   * Electronic checks — contact your payment processor representative to find out if this field is required or optional.
 	//   * PINless debits — optional.
 	//
+	// Example: 555123456
 	// Max Length: 32
 	// Min Length: 6
 	PhoneNumber string `json:"phoneNumber,omitempty"`
@@ -3514,6 +5215,7 @@ type CreatePaymentInstrumentParamsBodyBillTo struct {
 	// **Important**:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 90200
 	// Max Length: 10
 	PostalCode string `json:"postalCode,omitempty"`
 }
@@ -3573,12 +5275,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) Validate(formats strfmt.Regist
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAddress1(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address1) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"address1", "body", string(o.Address1), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"address1", "body", o.Address1, 60); err != nil {
 		return err
 	}
 
@@ -3586,12 +5287,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAddress1(formats strfm
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAddress2(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Address2) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"address2", "body", string(o.Address2), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"address2", "body", o.Address2, 60); err != nil {
 		return err
 	}
 
@@ -3599,12 +5299,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAddress2(formats strfm
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAdministrativeArea(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AdministrativeArea) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"administrativeArea", "body", string(o.AdministrativeArea), 20); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"administrativeArea", "body", o.AdministrativeArea, 20); err != nil {
 		return err
 	}
 
@@ -3612,12 +5311,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateAdministrativeArea(for
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateCompany(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Company) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"company", "body", string(o.Company), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"company", "body", o.Company, 60); err != nil {
 		return err
 	}
 
@@ -3625,16 +5323,15 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateCompany(formats strfmt
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateCountry(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Country) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"country", "body", string(o.Country), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"country", "body", o.Country, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"country", "body", string(o.Country), 3); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"country", "body", o.Country, 3); err != nil {
 		return err
 	}
 
@@ -3642,12 +5339,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateCountry(formats strfmt
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateEmail(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Email) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"email", "body", string(o.Email), 320); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"email", "body", o.Email, 320); err != nil {
 		return err
 	}
 
@@ -3655,12 +5351,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateEmail(formats strfmt.R
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateFirstName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.FirstName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"firstName", "body", string(o.FirstName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"firstName", "body", o.FirstName, 60); err != nil {
 		return err
 	}
 
@@ -3668,12 +5363,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateFirstName(formats strf
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateLastName(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.LastName) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"lastName", "body", string(o.LastName), 60); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"lastName", "body", o.LastName, 60); err != nil {
 		return err
 	}
 
@@ -3681,12 +5375,11 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateLastName(formats strfm
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validateLocality(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Locality) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"locality", "body", string(o.Locality), 50); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"locality", "body", o.Locality, 50); err != nil {
 		return err
 	}
 
@@ -3694,16 +5387,15 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validateLocality(formats strfm
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validatePhoneNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PhoneNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 6); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 6); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"phoneNumber", "body", string(o.PhoneNumber), 32); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"phoneNumber", "body", o.PhoneNumber, 32); err != nil {
 		return err
 	}
 
@@ -3711,15 +5403,19 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) validatePhoneNumber(formats st
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBillTo) validatePostalCode(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PostalCode) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"postalCode", "body", string(o.PostalCode), 10); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"billTo"+"."+"postalCode", "body", o.PostalCode, 10); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body bill to based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyBillTo) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3741,7 +5437,8 @@ func (o *CreatePaymentInstrumentParamsBodyBillTo) UnmarshalBinary(b []byte) erro
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyBuyerInformation create payment instrument params body buyer information
+/*
+CreatePaymentInstrumentParamsBodyBuyerInformation create payment instrument params body buyer information
 swagger:model CreatePaymentInstrumentParamsBodyBuyerInformation
 */
 type CreatePaymentInstrumentParamsBodyBuyerInformation struct {
@@ -3751,10 +5448,12 @@ type CreatePaymentInstrumentParamsBodyBuyerInformation struct {
 	// **Important**:
 	// Contact your TeleCheck representative to find out whether this field is required or optional.
 	//
+	// Example: 1234567890123456800
 	// Max Length: 9
 	CompanyTaxID string `json:"companyTaxID,omitempty"`
 
 	// Currency used by the customer. Accepts input in the ISO 4217 standard, stores as ISO 4217 Alpha.
+	// Example: USD
 	// Max Length: 3
 	// Min Length: 3
 	Currency string `json:"currency,omitempty"`
@@ -3763,6 +5462,7 @@ type CreatePaymentInstrumentParamsBodyBuyerInformation struct {
 	//
 	// Format: `YYYY-MM-DD` or `YYYYMMDD`
 	//
+	// Example: 1960-12-30
 	// Max Length: 10
 	// Min Length: 8
 	DateOBirth string `json:"dateOBirth,omitempty"`
@@ -3798,12 +5498,11 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) Validate(formats str
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateCompanyTaxID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.CompanyTaxID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"companyTaxID", "body", string(o.CompanyTaxID), 9); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"companyTaxID", "body", o.CompanyTaxID, 9); err != nil {
 		return err
 	}
 
@@ -3811,16 +5510,15 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateCompanyTaxID
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateCurrency(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Currency) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"currency", "body", string(o.Currency), 3); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"currency", "body", o.Currency, 3); err != nil {
 		return err
 	}
 
@@ -3828,16 +5526,15 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateCurrency(for
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateDateOBirth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.DateOBirth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"dateOBirth", "body", string(o.DateOBirth), 8); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"dateOBirth", "body", o.DateOBirth, 8); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"dateOBirth", "body", string(o.DateOBirth), 10); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"buyerInformation"+"."+"dateOBirth", "body", o.DateOBirth, 10); err != nil {
 		return err
 	}
 
@@ -3845,7 +5542,6 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validateDateOBirth(f
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validatePersonalIdentification(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PersonalIdentification) { // not required
 		return nil
 	}
@@ -3859,6 +5555,47 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) validatePersonalIden
 			if err := o.PersonalIdentification[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body buyer information based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidatePersonalIdentification(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) contextValidatePersonalIdentification(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.PersonalIdentification); i++ {
+
+		if o.PersonalIdentification[i] != nil {
+
+			if swag.IsZero(o.PersonalIdentification[i]) { // not required
+				return nil
+			}
+
+			if err := o.PersonalIdentification[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("createPaymentInstrumentRequest" + "." + "buyerInformation" + "." + "personalIdentification" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -3887,7 +5624,8 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformation) UnmarshalBinary(b []
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0 create payment instrument params body buyer information personal identification items0
+/*
+CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0 create payment instrument params body buyer information personal identification items0
 swagger:model CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0
 */
 type CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0 struct {
@@ -3897,6 +5635,7 @@ type CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItem
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: 1234567890
 	ID string `json:"id,omitempty"`
 
 	// issued by
@@ -3909,6 +5648,7 @@ type CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItem
 	// Valid values:
 	// - driver license
 	//
+	// Example: driver license
 	Type string `json:"type,omitempty"`
 }
 
@@ -3927,7 +5667,6 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentification
 }
 
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0) validateIssuedBy(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssuedBy) { // not required
 		return nil
 	}
@@ -3936,6 +5675,43 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentification
 		if err := o.IssuedBy.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body buyer information personal identification items0 based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateIssuedBy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0) contextValidateIssuedBy(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.IssuedBy != nil {
+
+		if swag.IsZero(o.IssuedBy) { // not required
+			return nil
+		}
+
+		if err := o.IssuedBy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("issuedBy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("issuedBy")
 			}
 			return err
 		}
@@ -3962,7 +5738,8 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentification
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy create payment instrument params body buyer information personal identification items0 issued by
+/*
+CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy create payment instrument params body buyer information personal identification items0 issued by
 swagger:model CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy
 */
 type CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy struct {
@@ -3972,11 +5749,17 @@ type CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItem
 	// **Important**:
 	// Contact your TeleCheck representative to learn whether this field is required or optional.
 	//
+	// Example: CA
 	AdministrativeArea string `json:"administrativeArea,omitempty"`
 }
 
 // Validate validates this create payment instrument params body buyer information personal identification items0 issued by
 func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body buyer information personal identification items0 issued by based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentificationItems0IssuedBy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -3998,7 +5781,8 @@ func (o *CreatePaymentInstrumentParamsBodyBuyerInformationPersonalIdentification
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyCard create payment instrument params body card
+/*
+CreatePaymentInstrumentParamsBodyCard create payment instrument params body card
 swagger:model CreatePaymentInstrumentParamsBodyCard
 */
 type CreatePaymentInstrumentParamsBodyCard struct {
@@ -4012,6 +5796,7 @@ type CreatePaymentInstrumentParamsBodyCard struct {
 	// Important:
 	// It is your responsibility to determine whether a field is required for the transaction you are requesting.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	ExpirationMonth string `json:"expirationMonth,omitempty"`
@@ -4027,11 +5812,13 @@ type CreatePaymentInstrumentParamsBodyCard struct {
 	//
 	// **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.'
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	ExpirationYear string `json:"expirationYear,omitempty"`
 
 	// Number of times a Maestro (UK Domestic) card has been issued to the account holder.
+	// Example: 01
 	// Max Length: 2
 	// Min Length: 1
 	IssueNumber string `json:"issueNumber,omitempty"`
@@ -4041,6 +5828,7 @@ type CreatePaymentInstrumentParamsBodyCard struct {
 	// Format: `MM`.
 	// Possible values: `01` through `12`.
 	//
+	// Example: 12
 	// Max Length: 2
 	// Min Length: 2
 	StartMonth string `json:"startMonth,omitempty"`
@@ -4050,6 +5838,7 @@ type CreatePaymentInstrumentParamsBodyCard struct {
 	// Format: `YYYY`.
 	// Possible values: `1900` through `2099`.
 	//
+	// Example: 2022
 	// Max Length: 4
 	// Min Length: 4
 	StartYear string `json:"startYear,omitempty"`
@@ -4115,6 +5904,7 @@ type CreatePaymentInstrumentParamsBodyCard struct {
 	Type *string `json:"type"`
 
 	// Card Use As Field. Supported value of `pinless debit` only. Only for use with Pinless Debit tokens.
+	// Example: pinless debit
 	UseAs string `json:"useAs,omitempty"`
 }
 
@@ -4153,16 +5943,15 @@ func (o *CreatePaymentInstrumentParamsBodyCard) Validate(formats strfmt.Registry
 }
 
 func (o *CreatePaymentInstrumentParamsBodyCard) validateExpirationMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationMonth", "body", string(o.ExpirationMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationMonth", "body", o.ExpirationMonth, 2); err != nil {
 		return err
 	}
 
@@ -4170,16 +5959,15 @@ func (o *CreatePaymentInstrumentParamsBodyCard) validateExpirationMonth(formats 
 }
 
 func (o *CreatePaymentInstrumentParamsBodyCard) validateExpirationYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ExpirationYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationYear", "body", string(o.ExpirationYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"expirationYear", "body", o.ExpirationYear, 4); err != nil {
 		return err
 	}
 
@@ -4187,16 +5975,15 @@ func (o *CreatePaymentInstrumentParamsBodyCard) validateExpirationYear(formats s
 }
 
 func (o *CreatePaymentInstrumentParamsBodyCard) validateIssueNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.IssueNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"issueNumber", "body", string(o.IssueNumber), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"issueNumber", "body", o.IssueNumber, 2); err != nil {
 		return err
 	}
 
@@ -4204,16 +5991,15 @@ func (o *CreatePaymentInstrumentParamsBodyCard) validateIssueNumber(formats strf
 }
 
 func (o *CreatePaymentInstrumentParamsBodyCard) validateStartMonth(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartMonth) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startMonth", "body", string(o.StartMonth), 2); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startMonth", "body", o.StartMonth, 2); err != nil {
 		return err
 	}
 
@@ -4221,16 +6007,15 @@ func (o *CreatePaymentInstrumentParamsBodyCard) validateStartMonth(formats strfm
 }
 
 func (o *CreatePaymentInstrumentParamsBodyCard) validateStartYear(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.StartYear) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startYear", "body", string(o.StartYear), 4); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"card"+"."+"startYear", "body", o.StartYear, 4); err != nil {
 		return err
 	}
 
@@ -4243,6 +6028,11 @@ func (o *CreatePaymentInstrumentParamsBodyCard) validateType(formats strfmt.Regi
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body card based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4264,7 +6054,8 @@ func (o *CreatePaymentInstrumentParamsBodyCard) UnmarshalBinary(b []byte) error 
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifier create payment instrument params body instrument identifier
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifier create payment instrument params body instrument identifier
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifier
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifier struct {
@@ -4279,6 +6070,7 @@ type CreatePaymentInstrumentParamsBodyInstrumentIdentifier struct {
 	Card *CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard `json:"card,omitempty"`
 
 	// The ID of the existing instrument identifier to be linked to the newly created payment instrument.
+	// Example: 1234567890123456789
 	// Max Length: 32
 	// Min Length: 16
 	ID string `json:"id,omitempty"`
@@ -4291,6 +6083,7 @@ type CreatePaymentInstrumentParamsBodyInstrumentIdentifier struct {
 	// Valid values:
 	// - instrumentIdentifier
 	//
+	// Example: instrumentIdentifier
 	// Read Only: true
 	Object string `json:"object,omitempty"`
 
@@ -4303,6 +6096,7 @@ type CreatePaymentInstrumentParamsBodyInstrumentIdentifier struct {
 	// - ACTIVE
 	// - CLOSED
 	//
+	// Example: ACTIVE
 	// Read Only: true
 	State string `json:"state,omitempty"`
 }
@@ -4342,7 +6136,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) Validate(formats
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Links) { // not required
 		return nil
 	}
@@ -4351,6 +6144,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateLinks(fo
 		if err := o.Links.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links")
 			}
 			return err
 		}
@@ -4360,7 +6155,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateLinks(fo
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateBankAccount(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankAccount) { // not required
 		return nil
 	}
@@ -4369,6 +6163,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateBankAcco
 		if err := o.BankAccount.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "bankAccount")
 			}
 			return err
 		}
@@ -4378,7 +6174,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateBankAcco
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateCard(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Card) { // not required
 		return nil
 	}
@@ -4387,6 +6182,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateCard(for
 		if err := o.Card.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "card")
 			}
 			return err
 		}
@@ -4396,16 +6193,15 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateCard(for
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ID) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"id", "body", string(o.ID), 16); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"id", "body", o.ID, 16); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"id", "body", string(o.ID), 32); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"id", "body", o.ID, 32); err != nil {
 		return err
 	}
 
@@ -4413,7 +6209,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateID(forma
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateMetadata(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Metadata) { // not required
 		return nil
 	}
@@ -4422,6 +6217,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateMetadata
 		if err := o.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "metadata")
 			}
 			return err
 		}
@@ -4431,7 +6228,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateMetadata
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateProcessingInformation(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ProcessingInformation) { // not required
 		return nil
 	}
@@ -4440,9 +6236,172 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) validateProcessi
 		if err := o.ProcessingInformation.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation")
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateBankAccount(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateCard(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateMetadata(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateObject(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateProcessingInformation(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Links != nil {
+
+		if swag.IsZero(o.Links) { // not required
+			return nil
+		}
+
+		if err := o.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateBankAccount(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankAccount != nil {
+
+		if swag.IsZero(o.BankAccount) { // not required
+			return nil
+		}
+
+		if err := o.BankAccount.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "bankAccount")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateCard(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Card != nil {
+
+		if swag.IsZero(o.Card) { // not required
+			return nil
+		}
+
+		if err := o.Card.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "card")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "card")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Metadata != nil {
+
+		if swag.IsZero(o.Metadata) { // not required
+			return nil
+		}
+
+		if err := o.Metadata.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "metadata")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"object", "body", string(o.Object)); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateProcessingInformation(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ProcessingInformation != nil {
+
+		if swag.IsZero(o.ProcessingInformation) { // not required
+			return nil
+		}
+
+		if err := o.ProcessingInformation.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"state", "body", string(o.State)); err != nil {
+		return err
 	}
 
 	return nil
@@ -4466,17 +6425,20 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifier) UnmarshalBinary(
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount create payment instrument params body instrument identifier bank account
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount create payment instrument params body instrument identifier bank account
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount struct {
 
 	// Checking account number.
+	// Example: 1234567890123456800
 	// Max Length: 19
 	// Min Length: 1
 	Number string `json:"number,omitempty"`
 
 	// Routing number.
+	// Example: 123456789
 	// Max Length: 9
 	// Min Length: 1
 	RoutingNumber string `json:"routingNumber,omitempty"`
@@ -4501,16 +6463,15 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) Valid
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", o.Number, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
@@ -4518,19 +6479,23 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) valid
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) validateRoutingNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.RoutingNumber) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 1); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 1); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", string(o.RoutingNumber), 9); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"bankAccount"+"."+"routingNumber", "body", o.RoutingNumber, 9); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier bank account based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4552,12 +6517,14 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierBankAccount) Unmar
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard create payment instrument params body instrument identifier card
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard create payment instrument params body instrument identifier card
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard struct {
 
 	// Customer’s credit card number.
+	// Example: 1234567890987654
 	// Max Length: 19
 	// Min Length: 12
 	Number string `json:"number,omitempty"`
@@ -4578,19 +6545,23 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard) Validate(for
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard) validateNumber(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Number) { // not required
 		return nil
 	}
 
-	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", string(o.Number), 12); err != nil {
+	if err := validate.MinLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", o.Number, 12); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", string(o.Number), 19); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"card"+"."+"number", "body", o.Number, 19); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier card based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4612,7 +6583,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierCard) UnmarshalBin
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks create payment instrument params body instrument identifier links
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks create payment instrument params body instrument identifier links
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks struct {
@@ -4650,7 +6622,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) Validate(fo
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -4659,6 +6630,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateAnc
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -4668,7 +6641,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateAnc
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -4677,6 +6649,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateSel
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -4686,7 +6660,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateSel
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -4695,6 +6668,93 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) validateSuc
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier links based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -4721,17 +6781,24 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinks) UnmarshalBi
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor create payment instrument params body instrument identifier links ancestor
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor create payment instrument params body instrument identifier links ancestor
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body instrument identifier links ancestor
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier links ancestor based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4753,17 +6820,24 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksAncestor) Unm
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf create payment instrument params body instrument identifier links self
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf create payment instrument params body instrument identifier links self
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body instrument identifier links self
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier links self based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4785,17 +6859,24 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSelf) Unmarsh
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor create payment instrument params body instrument identifier links successor
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor create payment instrument params body instrument identifier links successor
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body instrument identifier links successor
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier links successor based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -4817,17 +6898,29 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierLinksSuccessor) Un
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata create payment instrument params body instrument identifier metadata
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata create payment instrument params body instrument identifier metadata
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create payment instrument params body instrument identifier metadata
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier metadata based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -4849,7 +6942,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierMetadata) Unmarsha
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation create payment instrument params body instrument identifier processing information
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation create payment instrument params body instrument identifier processing information
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation struct {
@@ -4873,7 +6967,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation) validateAuthorizationOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.AuthorizationOptions) { // not required
 		return nil
 	}
@@ -4882,6 +6975,43 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 		if err := o.AuthorizationOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier processing information based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAuthorizationOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformation) contextValidateAuthorizationOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.AuthorizationOptions != nil {
+
+		if swag.IsZero(o.AuthorizationOptions) { // not required
+			return nil
+		}
+
+		if err := o.AuthorizationOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions")
 			}
 			return err
 		}
@@ -4908,7 +7038,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions create payment instrument params body instrument identifier processing information authorization options
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions create payment instrument params body instrument identifier processing information authorization options
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions struct {
@@ -4932,7 +7063,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) validateInitiator(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Initiator) { // not required
 		return nil
 	}
@@ -4941,6 +7071,43 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 		if err := o.Initiator.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier processing information authorization options based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateInitiator(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptions) contextValidateInitiator(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Initiator != nil {
+
+		if swag.IsZero(o.Initiator) { // not required
+			return nil
+		}
+
+		if err := o.Initiator.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator")
 			}
 			return err
 		}
@@ -4967,7 +7134,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator create payment instrument params body instrument identifier processing information authorization options initiator
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator create payment instrument params body instrument identifier processing information authorization options initiator
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator struct {
@@ -4991,7 +7159,6 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) validateMerchantInitiatedTransaction(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
 		return nil
 	}
@@ -5000,6 +7167,43 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 		if err := o.MerchantInitiatedTransaction.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body instrument identifier processing information authorization options initiator based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantInitiatedTransaction(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator) contextValidateMerchantInitiatedTransaction(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantInitiatedTransaction != nil {
+
+		if swag.IsZero(o.MerchantInitiatedTransaction) { // not required
+			return nil
+		}
+
+		if err := o.MerchantInitiatedTransaction.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "instrumentIdentifier" + "." + "processingInformation" + "." + "authorizationOptions" + "." + "initiator" + "." + "merchantInitiatedTransaction")
 			}
 			return err
 		}
@@ -5026,12 +7230,14 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment instrument params body instrument identifier processing information authorization options initiator merchant initiated transaction
+/*
+CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction create payment instrument params body instrument identifier processing information authorization options initiator merchant initiated transaction
 swagger:model CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction
 */
 type CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction struct {
 
 	// Previous Consumer Initiated Transaction Id.
+	// Example: 123456789012345
 	// Max Length: 15
 	PreviousTransactionID string `json:"previousTransactionId,omitempty"`
 }
@@ -5051,15 +7257,19 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 }
 
 func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) validatePreviousTransactionID(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.PreviousTransactionID) { // not required
 		return nil
 	}
 
-	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", string(o.PreviousTransactionID), 15); err != nil {
+	if err := validate.MaxLength("createPaymentInstrumentRequest"+"."+"instrumentIdentifier"+"."+"processingInformation"+"."+"authorizationOptions"+"."+"initiator"+"."+"merchantInitiatedTransaction"+"."+"previousTransactionId", "body", o.PreviousTransactionID, 15); err != nil {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body instrument identifier processing information authorization options initiator merchant initiated transaction based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5081,7 +7291,8 @@ func (o *CreatePaymentInstrumentParamsBodyInstrumentIdentifierProcessingInformat
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyLinks create payment instrument params body links
+/*
+CreatePaymentInstrumentParamsBodyLinks create payment instrument params body links
 swagger:model CreatePaymentInstrumentParamsBodyLinks
 */
 type CreatePaymentInstrumentParamsBodyLinks struct {
@@ -5119,7 +7330,6 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) Validate(formats strfmt.Registr
 }
 
 func (o *CreatePaymentInstrumentParamsBodyLinks) validateAncestor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Ancestor) { // not required
 		return nil
 	}
@@ -5128,6 +7338,8 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) validateAncestor(formats strfmt
 		if err := o.Ancestor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "ancestor")
 			}
 			return err
 		}
@@ -5137,7 +7349,6 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) validateAncestor(formats strfmt
 }
 
 func (o *CreatePaymentInstrumentParamsBodyLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Self) { // not required
 		return nil
 	}
@@ -5146,6 +7357,8 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) validateSelf(formats strfmt.Reg
 		if err := o.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "self")
 			}
 			return err
 		}
@@ -5155,7 +7368,6 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) validateSelf(formats strfmt.Reg
 }
 
 func (o *CreatePaymentInstrumentParamsBodyLinks) validateSuccessor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.Successor) { // not required
 		return nil
 	}
@@ -5164,6 +7376,93 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) validateSuccessor(formats strfm
 		if err := o.Successor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "successor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body links based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateAncestor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := o.contextValidateSuccessor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyLinks) contextValidateAncestor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Ancestor != nil {
+
+		if swag.IsZero(o.Ancestor) { // not required
+			return nil
+		}
+
+		if err := o.Ancestor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "ancestor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "ancestor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Self != nil {
+
+		if swag.IsZero(o.Self) { // not required
+			return nil
+		}
+
+		if err := o.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyLinks) contextValidateSuccessor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.Successor != nil {
+
+		if swag.IsZero(o.Successor) { // not required
+			return nil
+		}
+
+		if err := o.Successor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "successor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "_links" + "." + "successor")
 			}
 			return err
 		}
@@ -5190,17 +7489,24 @@ func (o *CreatePaymentInstrumentParamsBodyLinks) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyLinksAncestor create payment instrument params body links ancestor
+/*
+CreatePaymentInstrumentParamsBodyLinksAncestor create payment instrument params body links ancestor
 swagger:model CreatePaymentInstrumentParamsBodyLinksAncestor
 */
 type CreatePaymentInstrumentParamsBodyLinksAncestor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body links ancestor
 func (o *CreatePaymentInstrumentParamsBodyLinksAncestor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body links ancestor based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyLinksAncestor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5222,17 +7528,24 @@ func (o *CreatePaymentInstrumentParamsBodyLinksAncestor) UnmarshalBinary(b []byt
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyLinksSelf create payment instrument params body links self
+/*
+CreatePaymentInstrumentParamsBodyLinksSelf create payment instrument params body links self
 swagger:model CreatePaymentInstrumentParamsBodyLinksSelf
 */
 type CreatePaymentInstrumentParamsBodyLinksSelf struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body links self
 func (o *CreatePaymentInstrumentParamsBodyLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body links self based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5254,17 +7567,24 @@ func (o *CreatePaymentInstrumentParamsBodyLinksSelf) UnmarshalBinary(b []byte) e
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyLinksSuccessor create payment instrument params body links successor
+/*
+CreatePaymentInstrumentParamsBodyLinksSuccessor create payment instrument params body links successor
 swagger:model CreatePaymentInstrumentParamsBodyLinksSuccessor
 */
 type CreatePaymentInstrumentParamsBodyLinksSuccessor struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/1234567890123456789
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this create payment instrument params body links successor
 func (o *CreatePaymentInstrumentParamsBodyLinksSuccessor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body links successor based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyLinksSuccessor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5286,7 +7606,8 @@ func (o *CreatePaymentInstrumentParamsBodyLinksSuccessor) UnmarshalBinary(b []by
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyMerchantInformation create payment instrument params body merchant information
+/*
+CreatePaymentInstrumentParamsBodyMerchantInformation create payment instrument params body merchant information
 swagger:model CreatePaymentInstrumentParamsBodyMerchantInformation
 */
 type CreatePaymentInstrumentParamsBodyMerchantInformation struct {
@@ -5310,7 +7631,6 @@ func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) Validate(formats 
 }
 
 func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) validateMerchantDescriptor(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.MerchantDescriptor) { // not required
 		return nil
 	}
@@ -5319,6 +7639,43 @@ func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) validateMerchantD
 		if err := o.MerchantDescriptor.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body merchant information based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateMerchantDescriptor(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) contextValidateMerchantDescriptor(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.MerchantDescriptor != nil {
+
+		if swag.IsZero(o.MerchantDescriptor) { // not required
+			return nil
+		}
+
+		if err := o.MerchantDescriptor.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "merchantInformation" + "." + "merchantDescriptor")
 			}
 			return err
 		}
@@ -5345,17 +7702,24 @@ func (o *CreatePaymentInstrumentParamsBodyMerchantInformation) UnmarshalBinary(b
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor create payment instrument params body merchant information merchant descriptor
+/*
+CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor create payment instrument params body merchant information merchant descriptor
 swagger:model CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor
 */
 type CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor struct {
 
 	// Alternate information for your business. This API field overrides the company entry description value in your CyberSource account.
+	// Example: Branch Name
 	AlternateName string `json:"alternateName,omitempty"`
 }
 
 // Validate validates this create payment instrument params body merchant information merchant descriptor
 func (o *CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body merchant information merchant descriptor based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -5377,17 +7741,29 @@ func (o *CreatePaymentInstrumentParamsBodyMerchantInformationMerchantDescriptor)
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyMetaData create payment instrument params body meta data
+/*
+CreatePaymentInstrumentParamsBodyMetaData create payment instrument params body meta data
 swagger:model CreatePaymentInstrumentParamsBodyMetaData
 */
 type CreatePaymentInstrumentParamsBodyMetaData struct {
 
 	// The creator of the token.
+	// Example: merchantName
 	Creator string `json:"creator,omitempty"`
 }
 
 // Validate validates this create payment instrument params body meta data
 func (o *CreatePaymentInstrumentParamsBodyMetaData) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body meta data based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyMetaData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
@@ -5409,7 +7785,8 @@ func (o *CreatePaymentInstrumentParamsBodyMetaData) UnmarshalBinary(b []byte) er
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyProcessingInformation create payment instrument params body processing information
+/*
+CreatePaymentInstrumentParamsBodyProcessingInformation create payment instrument params body processing information
 swagger:model CreatePaymentInstrumentParamsBodyProcessingInformation
 */
 type CreatePaymentInstrumentParamsBodyProcessingInformation struct {
@@ -5421,6 +7798,7 @@ type CreatePaymentInstrumentParamsBodyProcessingInformation struct {
 	//   * false: Not a Visa Bill Payment.
 	//   * true: Visa Bill Payment.
 	//
+	// Example: true
 	BillPaymentProgramEnabled *bool `json:"billPaymentProgramEnabled,omitempty"`
 }
 
@@ -5439,7 +7817,6 @@ func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) Validate(format
 }
 
 func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) validateBankTransferOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.BankTransferOptions) { // not required
 		return nil
 	}
@@ -5448,6 +7825,43 @@ func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) validateBankTra
 		if err := o.BankTransferOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this create payment instrument params body processing information based on the context it is used
+func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateBankTransferOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) contextValidateBankTransferOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.BankTransferOptions != nil {
+
+		if swag.IsZero(o.BankTransferOptions) { // not required
+			return nil
+		}
+
+		if err := o.BankTransferOptions.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("createPaymentInstrumentRequest" + "." + "processingInformation" + "." + "bankTransferOptions")
 			}
 			return err
 		}
@@ -5474,7 +7888,8 @@ func (o *CreatePaymentInstrumentParamsBodyProcessingInformation) UnmarshalBinary
 	return nil
 }
 
-/*CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions create payment instrument params body processing information bank transfer options
+/*
+CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions create payment instrument params body processing information bank transfer options
 swagger:model CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions
 */
 type CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions struct {
@@ -5488,11 +7903,17 @@ type CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions s
 	// - **TEL**: telephone-initiated entry. One-time charge against a personal checking or savings account. You can originate a TEL entry only when there is a business relationship between you and the customer or when the customer initiates a telephone call to you. For a TEL entry, you must obtain a payment authorization from the customer over the telephone. There is no recurring billing option for TEL.
 	// - **WEB**: internet-initiated entry—charge against a personal checking or savings account. You can originate a one-time or recurring WEB entry when the customer initiates the transaction over the Internet. For a WEB entry, you must obtain payment authorization from the customer over the Internet.
 	//
+	// Example: WEB
 	SECCode string `json:"SECCode,omitempty"`
 }
 
 // Validate validates this create payment instrument params body processing information bank transfer options
 func (o *CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this create payment instrument params body processing information bank transfer options based on context it is used
+func (o *CreatePaymentInstrumentParamsBodyProcessingInformationBankTransferOptions) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

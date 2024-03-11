@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // ErrorFieldBean Provide validation failed input field details
+//
 // swagger:model ErrorFieldBean
 type ErrorFieldBean struct {
 
@@ -27,6 +29,11 @@ type ErrorFieldBean struct {
 
 // Validate validates this error field bean
 func (m *ErrorFieldBean) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this error field bean based on context it is used
+func (m *ErrorFieldBean) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

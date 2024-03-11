@@ -6,13 +6,15 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // PaymentInstrumentForInstrumentIdentifierLinks payment instrument for instrument identifier links
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinks
 type PaymentInstrumentForInstrumentIdentifierLinks struct {
 
@@ -63,7 +65,6 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) Validate(formats strfmt.
 }
 
 func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateFirst(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.First) { // not required
 		return nil
 	}
@@ -72,6 +73,8 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateFirst(formats st
 		if err := m.First.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("first")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("first")
 			}
 			return err
 		}
@@ -81,7 +84,6 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateFirst(formats st
 }
 
 func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateLast(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Last) { // not required
 		return nil
 	}
@@ -90,6 +92,8 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateLast(formats str
 		if err := m.Last.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("last")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last")
 			}
 			return err
 		}
@@ -99,7 +103,6 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateLast(formats str
 }
 
 func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateNext(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Next) { // not required
 		return nil
 	}
@@ -108,6 +111,8 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateNext(formats str
 		if err := m.Next.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("next")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("next")
 			}
 			return err
 		}
@@ -117,7 +122,6 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateNext(formats str
 }
 
 func (m *PaymentInstrumentForInstrumentIdentifierLinks) validatePrev(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Prev) { // not required
 		return nil
 	}
@@ -126,6 +130,8 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validatePrev(formats str
 		if err := m.Prev.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("prev")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("prev")
 			}
 			return err
 		}
@@ -135,7 +141,6 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validatePrev(formats str
 }
 
 func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateSelf(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Self) { // not required
 		return nil
 	}
@@ -144,6 +149,143 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) validateSelf(formats str
 		if err := m.Self.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this payment instrument for instrument identifier links based on the context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFirst(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLast(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNext(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePrev(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) contextValidateFirst(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.First != nil {
+
+		if swag.IsZero(m.First) { // not required
+			return nil
+		}
+
+		if err := m.First.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("first")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("first")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) contextValidateLast(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Last != nil {
+
+		if swag.IsZero(m.Last) { // not required
+			return nil
+		}
+
+		if err := m.Last.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("last")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("last")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) contextValidateNext(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Next != nil {
+
+		if swag.IsZero(m.Next) { // not required
+			return nil
+		}
+
+		if err := m.Next.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("next")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("next")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) contextValidatePrev(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Prev != nil {
+
+		if swag.IsZero(m.Prev) { // not required
+			return nil
+		}
+
+		if err := m.Prev.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("prev")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("prev")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *PaymentInstrumentForInstrumentIdentifierLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("self")
 			}
 			return err
 		}
@@ -171,15 +313,22 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinks) UnmarshalBinary(b []byte
 }
 
 // PaymentInstrumentForInstrumentIdentifierLinksFirst payment instrument for instrument identifier links first
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinksFirst
 type PaymentInstrumentForInstrumentIdentifierLinksFirst struct {
 
 	// A link to the collection starting at offset zero for the supplied limit.
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=0\u0026limit=5
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this payment instrument for instrument identifier links first
 func (m *PaymentInstrumentForInstrumentIdentifierLinksFirst) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument for instrument identifier links first based on context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinksFirst) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -202,15 +351,22 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinksFirst) UnmarshalBinary(b [
 }
 
 // PaymentInstrumentForInstrumentIdentifierLinksLast payment instrument for instrument identifier links last
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinksLast
 type PaymentInstrumentForInstrumentIdentifierLinksLast struct {
 
 	// A link to the last collection containing the remaining objects.
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=35\u0026limit=5
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this payment instrument for instrument identifier links last
 func (m *PaymentInstrumentForInstrumentIdentifierLinksLast) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument for instrument identifier links last based on context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinksLast) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -233,15 +389,22 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinksLast) UnmarshalBinary(b []
 }
 
 // PaymentInstrumentForInstrumentIdentifierLinksNext payment instrument for instrument identifier links next
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinksNext
 type PaymentInstrumentForInstrumentIdentifierLinksNext struct {
 
 	// A link to the next collection starting at the supplied offset plus the supplied limit.
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=25\u0026limit=5
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this payment instrument for instrument identifier links next
 func (m *PaymentInstrumentForInstrumentIdentifierLinksNext) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument for instrument identifier links next based on context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinksNext) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -264,15 +427,22 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinksNext) UnmarshalBinary(b []
 }
 
 // PaymentInstrumentForInstrumentIdentifierLinksPrev A link to the previous collection starting at the supplied offset minus the supplied limit.
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinksPrev
 type PaymentInstrumentForInstrumentIdentifierLinksPrev struct {
 
 	// href
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=15\u0026limit=5
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this payment instrument for instrument identifier links prev
 func (m *PaymentInstrumentForInstrumentIdentifierLinksPrev) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument for instrument identifier links prev based on context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinksPrev) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -295,15 +465,22 @@ func (m *PaymentInstrumentForInstrumentIdentifierLinksPrev) UnmarshalBinary(b []
 }
 
 // PaymentInstrumentForInstrumentIdentifierLinksSelf payment instrument for instrument identifier links self
+//
 // swagger:model PaymentInstrumentForInstrumentIdentifierLinksSelf
 type PaymentInstrumentForInstrumentIdentifierLinksSelf struct {
 
 	// A link to the current requested collection.
+	// Example: https://api.cybersource.com/tms/v1/instrumentidentifiers/5B32CE6167B09343E05333B9D30A53E1/paymentinstruments?offset=20\u0026limit=5\
 	Href string `json:"href,omitempty"`
 }
 
 // Validate validates this payment instrument for instrument identifier links self
 func (m *PaymentInstrumentForInstrumentIdentifierLinksSelf) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this payment instrument for instrument identifier links self based on context it is used
+func (m *PaymentInstrumentForInstrumentIdentifierLinksSelf) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

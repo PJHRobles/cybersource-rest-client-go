@@ -6,13 +6,15 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // KeyResult key result
+//
 // swagger:model KeyResult
 type KeyResult struct {
 
@@ -45,7 +47,6 @@ func (m *KeyResult) Validate(formats strfmt.Registry) error {
 }
 
 func (m *KeyResult) validateDer(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Der) { // not required
 		return nil
 	}
@@ -54,6 +55,8 @@ func (m *KeyResult) validateDer(formats strfmt.Registry) error {
 		if err := m.Der.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("der")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("der")
 			}
 			return err
 		}
@@ -63,7 +66,6 @@ func (m *KeyResult) validateDer(formats strfmt.Registry) error {
 }
 
 func (m *KeyResult) validateJwk(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Jwk) { // not required
 		return nil
 	}
@@ -72,6 +74,68 @@ func (m *KeyResult) validateJwk(formats strfmt.Registry) error {
 		if err := m.Jwk.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("jwk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("jwk")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this key result based on the context it is used
+func (m *KeyResult) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDer(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateJwk(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *KeyResult) contextValidateDer(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Der != nil {
+
+		if swag.IsZero(m.Der) { // not required
+			return nil
+		}
+
+		if err := m.Der.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("der")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("der")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *KeyResult) contextValidateJwk(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Jwk != nil {
+
+		if swag.IsZero(m.Jwk) { // not required
+			return nil
+		}
+
+		if err := m.Jwk.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("jwk")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("jwk")
 			}
 			return err
 		}
@@ -99,6 +163,7 @@ func (m *KeyResult) UnmarshalBinary(b []byte) error {
 }
 
 // KeyResultDer The public key in DER format. Used to validate the response from the Tokenize Card request. Additionally this format is useful for client side encryption in Android and iOS implementations.
+//
 // swagger:model KeyResultDer
 type KeyResultDer struct {
 
@@ -114,6 +179,11 @@ type KeyResultDer struct {
 
 // Validate validates this key result der
 func (m *KeyResultDer) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this key result der based on context it is used
+func (m *KeyResultDer) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
@@ -136,6 +206,7 @@ func (m *KeyResultDer) UnmarshalBinary(b []byte) error {
 }
 
 // KeyResultJwk The public key in JSON Web Key (JWK) format. This format is useful for client side encryption in JavaScript based implementations.
+//
 // swagger:model KeyResultJwk
 type KeyResultJwk struct {
 
@@ -157,6 +228,11 @@ type KeyResultJwk struct {
 
 // Validate validates this key result jwk
 func (m *KeyResultJwk) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this key result jwk based on context it is used
+func (m *KeyResultJwk) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

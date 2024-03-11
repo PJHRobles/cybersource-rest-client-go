@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new instrument identifier API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,16 +25,33 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	CreateInstrumentIdentifier(params *CreateInstrumentIdentifierParams, opts ...ClientOption) (*CreateInstrumentIdentifierOK, *CreateInstrumentIdentifierCreated, error)
+
+	DeleteInstrumentIdentifier(params *DeleteInstrumentIdentifierParams, opts ...ClientOption) (*DeleteInstrumentIdentifierNoContent, error)
+
+	GetAllPaymentInstruments(params *GetAllPaymentInstrumentsParams, opts ...ClientOption) (*GetAllPaymentInstrumentsOK, error)
+
+	GetInstrumentIdentifier(params *GetInstrumentIdentifierParams, opts ...ClientOption) (*GetInstrumentIdentifierOK, error)
+
+	UpdateInstrumentIdentifier(params *UpdateInstrumentIdentifierParams, opts ...ClientOption) (*UpdateInstrumentIdentifierOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 CreateInstrumentIdentifier creates an instrument identifier
 */
-func (a *Client) CreateInstrumentIdentifier(params *CreateInstrumentIdentifierParams) (*CreateInstrumentIdentifierOK, *CreateInstrumentIdentifierCreated, error) {
+func (a *Client) CreateInstrumentIdentifier(params *CreateInstrumentIdentifierParams, opts ...ClientOption) (*CreateInstrumentIdentifierOK, *CreateInstrumentIdentifierCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateInstrumentIdentifierParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createInstrumentIdentifier",
 		Method:             "POST",
 		PathPattern:        "/tms/v1/instrumentidentifiers",
@@ -46,7 +62,12 @@ func (a *Client) CreateInstrumentIdentifier(params *CreateInstrumentIdentifierPa
 		Reader:             &CreateInstrumentIdentifierReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -64,13 +85,12 @@ func (a *Client) CreateInstrumentIdentifier(params *CreateInstrumentIdentifierPa
 /*
 DeleteInstrumentIdentifier deletes an instrument identifier
 */
-func (a *Client) DeleteInstrumentIdentifier(params *DeleteInstrumentIdentifierParams) (*DeleteInstrumentIdentifierNoContent, error) {
+func (a *Client) DeleteInstrumentIdentifier(params *DeleteInstrumentIdentifierParams, opts ...ClientOption) (*DeleteInstrumentIdentifierNoContent, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteInstrumentIdentifierParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "deleteInstrumentIdentifier",
 		Method:             "DELETE",
 		PathPattern:        "/tms/v1/instrumentidentifiers/{tokenId}",
@@ -81,7 +101,12 @@ func (a *Client) DeleteInstrumentIdentifier(params *DeleteInstrumentIdentifierPa
 		Reader:             &DeleteInstrumentIdentifierReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -98,13 +123,12 @@ func (a *Client) DeleteInstrumentIdentifier(params *DeleteInstrumentIdentifierPa
 /*
 GetAllPaymentInstruments retrieves all payment instruments
 */
-func (a *Client) GetAllPaymentInstruments(params *GetAllPaymentInstrumentsParams) (*GetAllPaymentInstrumentsOK, error) {
+func (a *Client) GetAllPaymentInstruments(params *GetAllPaymentInstrumentsParams, opts ...ClientOption) (*GetAllPaymentInstrumentsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAllPaymentInstrumentsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getAllPaymentInstruments",
 		Method:             "GET",
 		PathPattern:        "/tms/v1/instrumentidentifiers/{tokenId}/paymentinstruments",
@@ -115,7 +139,12 @@ func (a *Client) GetAllPaymentInstruments(params *GetAllPaymentInstrumentsParams
 		Reader:             &GetAllPaymentInstrumentsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -132,13 +161,12 @@ func (a *Client) GetAllPaymentInstruments(params *GetAllPaymentInstrumentsParams
 /*
 GetInstrumentIdentifier retrieves an instrument identifier
 */
-func (a *Client) GetInstrumentIdentifier(params *GetInstrumentIdentifierParams) (*GetInstrumentIdentifierOK, error) {
+func (a *Client) GetInstrumentIdentifier(params *GetInstrumentIdentifierParams, opts ...ClientOption) (*GetInstrumentIdentifierOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetInstrumentIdentifierParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getInstrumentIdentifier",
 		Method:             "GET",
 		PathPattern:        "/tms/v1/instrumentidentifiers/{tokenId}",
@@ -149,7 +177,12 @@ func (a *Client) GetInstrumentIdentifier(params *GetInstrumentIdentifierParams) 
 		Reader:             &GetInstrumentIdentifierReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -166,13 +199,12 @@ func (a *Client) GetInstrumentIdentifier(params *GetInstrumentIdentifierParams) 
 /*
 UpdateInstrumentIdentifier updates a instrument identifier
 */
-func (a *Client) UpdateInstrumentIdentifier(params *UpdateInstrumentIdentifierParams) (*UpdateInstrumentIdentifierOK, error) {
+func (a *Client) UpdateInstrumentIdentifier(params *UpdateInstrumentIdentifierParams, opts ...ClientOption) (*UpdateInstrumentIdentifierOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUpdateInstrumentIdentifierParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "updateInstrumentIdentifier",
 		Method:             "PATCH",
 		PathPattern:        "/tms/v1/instrumentidentifiers/{tokenId}",
@@ -183,7 +215,12 @@ func (a *Client) UpdateInstrumentIdentifier(params *UpdateInstrumentIdentifierPa
 		Reader:             &UpdateInstrumentIdentifierReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

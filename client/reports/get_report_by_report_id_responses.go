@@ -6,16 +6,16 @@ package reports
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // GetReportByReportIDReader is a Reader for the GetReportByReportID structure.
@@ -44,9 +44,8 @@ func (o *GetReportByReportIDReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /reporting/v3/reports/{reportId}] getReportByReportId", response, response.Code())
 	}
 }
 
@@ -55,7 +54,8 @@ func NewGetReportByReportIDOK() *GetReportByReportIDOK {
 	return &GetReportByReportIDOK{}
 }
 
-/*GetReportByReportIDOK handles this case with default header values.
+/*
+GetReportByReportIDOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -63,7 +63,41 @@ type GetReportByReportIDOK struct {
 	Payload *GetReportByReportIDOKBody
 }
 
+// IsSuccess returns true when this get report by report Id o k response has a 2xx status code
+func (o *GetReportByReportIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get report by report Id o k response has a 3xx status code
+func (o *GetReportByReportIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report by report Id o k response has a 4xx status code
+func (o *GetReportByReportIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get report by report Id o k response has a 5xx status code
+func (o *GetReportByReportIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report by report Id o k response a status code equal to that given
+func (o *GetReportByReportIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get report by report Id o k response
+func (o *GetReportByReportIDOK) Code() int {
+	return 200
+}
+
 func (o *GetReportByReportIDOK) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdOK  %+v", 200, o.Payload)
+}
+
+func (o *GetReportByReportIDOK) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdOK  %+v", 200, o.Payload)
 }
 
@@ -88,7 +122,8 @@ func NewGetReportByReportIDBadRequest() *GetReportByReportIDBadRequest {
 	return &GetReportByReportIDBadRequest{}
 }
 
-/*GetReportByReportIDBadRequest handles this case with default header values.
+/*
+GetReportByReportIDBadRequest describes a response with status code 400, with default header values.
 
 Invalid Request
 */
@@ -96,7 +131,41 @@ type GetReportByReportIDBadRequest struct {
 	Payload *GetReportByReportIDBadRequestBody
 }
 
+// IsSuccess returns true when this get report by report Id bad request response has a 2xx status code
+func (o *GetReportByReportIDBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report by report Id bad request response has a 3xx status code
+func (o *GetReportByReportIDBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report by report Id bad request response has a 4xx status code
+func (o *GetReportByReportIDBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report by report Id bad request response has a 5xx status code
+func (o *GetReportByReportIDBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report by report Id bad request response a status code equal to that given
+func (o *GetReportByReportIDBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get report by report Id bad request response
+func (o *GetReportByReportIDBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetReportByReportIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetReportByReportIDBadRequest) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdBadRequest  %+v", 400, o.Payload)
 }
 
@@ -121,14 +190,49 @@ func NewGetReportByReportIDNotFound() *GetReportByReportIDNotFound {
 	return &GetReportByReportIDNotFound{}
 }
 
-/*GetReportByReportIDNotFound handles this case with default header values.
+/*
+GetReportByReportIDNotFound describes a response with status code 404, with default header values.
 
 No Reports Found
 */
 type GetReportByReportIDNotFound struct {
 }
 
+// IsSuccess returns true when this get report by report Id not found response has a 2xx status code
+func (o *GetReportByReportIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report by report Id not found response has a 3xx status code
+func (o *GetReportByReportIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report by report Id not found response has a 4xx status code
+func (o *GetReportByReportIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report by report Id not found response has a 5xx status code
+func (o *GetReportByReportIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report by report Id not found response a status code equal to that given
+func (o *GetReportByReportIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get report by report Id not found response
+func (o *GetReportByReportIDNotFound) Code() int {
+	return 404
+}
+
 func (o *GetReportByReportIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdNotFound ", 404)
+}
+
+func (o *GetReportByReportIDNotFound) String() string {
 	return fmt.Sprintf("[GET /reporting/v3/reports/{reportId}][%d] getReportByReportIdNotFound ", 404)
 }
 
@@ -137,7 +241,8 @@ func (o *GetReportByReportIDNotFound) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*GetReportByReportIDBadRequestBody reportingV3ReportsIdPost400Response
+/*
+GetReportByReportIDBadRequestBody reportingV3ReportsIdPost400Response
 //
 // HTTP status code for client application
 swagger:model GetReportByReportIDBadRequestBody
@@ -147,20 +252,23 @@ type GetReportByReportIDBadRequestBody struct {
 	// Error field list
 	//
 	// Required: true
-	Details []*DetailsItems0 `json:"details"`
+	Details []*GetReportByReportIDBadRequestBodyDetailsItems0 `json:"details"`
 
 	// Short descriptive message to the user.
 	//
+	// Example: One or more fields contains invalid data
 	// Required: true
 	Message *string `json:"message"`
 
 	// Documented reason code
 	//
+	// Example: INVALID_DATA
 	// Required: true
 	Reason *string `json:"reason"`
 
 	// Time of request in UTC.
 	//
+	// Example: 2016-08-11T22:47:57Z
 	// Required: true
 	// Format: date-time
 	SubmitTimeUtc *strfmt.DateTime `json:"submitTimeUtc"`
@@ -207,6 +315,8 @@ func (o *GetReportByReportIDBadRequestBody) validateDetails(formats strfmt.Regis
 			if err := o.Details[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("getReportByReportIdBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getReportByReportIdBadRequest" + "." + "details" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -248,6 +358,45 @@ func (o *GetReportByReportIDBadRequestBody) validateSubmitTimeUtc(formats strfmt
 	return nil
 }
 
+// ContextValidate validate this get report by report ID bad request body based on the context it is used
+func (o *GetReportByReportIDBadRequestBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateDetails(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetReportByReportIDBadRequestBody) contextValidateDetails(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(o.Details); i++ {
+
+		if o.Details[i] != nil {
+
+			if swag.IsZero(o.Details[i]) { // not required
+				return nil
+			}
+
+			if err := o.Details[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("getReportByReportIdBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("getReportByReportIdBadRequest" + "." + "details" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (o *GetReportByReportIDBadRequestBody) MarshalBinary() ([]byte, error) {
 	if o == nil {
@@ -266,7 +415,52 @@ func (o *GetReportByReportIDBadRequestBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetReportByReportIDOKBody reportingV3ReportsIdGet200Response
+/*
+GetReportByReportIDBadRequestBodyDetailsItems0 Provides failed validation input field detail
+//
+swagger:model GetReportByReportIDBadRequestBodyDetailsItems0
+*/
+type GetReportByReportIDBadRequestBodyDetailsItems0 struct {
+
+	// Field in request that caused an error
+	//
+	Field string `json:"field,omitempty"`
+
+	// Documented reason code
+	//
+	Reason string `json:"reason,omitempty"`
+}
+
+// Validate validates this get report by report ID bad request body details items0
+func (o *GetReportByReportIDBadRequestBodyDetailsItems0) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get report by report ID bad request body details items0 based on context it is used
+func (o *GetReportByReportIDBadRequestBodyDetailsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (o *GetReportByReportIDBadRequestBodyDetailsItems0) MarshalBinary() ([]byte, error) {
+	if o == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(o)
+}
+
+// UnmarshalBinary interface implementation
+func (o *GetReportByReportIDBadRequestBodyDetailsItems0) UnmarshalBinary(b []byte) error {
+	var res GetReportByReportIDBadRequestBodyDetailsItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*o = res
+	return nil
+}
+
+/*
+GetReportByReportIDOKBody reportingV3ReportsIdGet200Response
 //
 // Report Log
 swagger:model GetReportByReportIDOKBody
@@ -274,22 +468,28 @@ swagger:model GetReportByReportIDOKBody
 type GetReportByReportIDOKBody struct {
 
 	// Id for selected group.
+	// Example: 12345
 	GroupID string `json:"groupId,omitempty"`
 
 	// CyberSource merchant id
+	// Example: myMerchantId
 	OrganizationID string `json:"organizationId,omitempty"`
 
 	// Report definition Id
+	// Example: 210
 	ReportDefinitionID string `json:"reportDefinitionId,omitempty"`
 
 	// Report End Time Value
+	// Example: 2017-10-02T10:10:10+05:00
 	// Format: date-time
 	ReportEndTime strfmt.DateTime `json:"reportEndTime,omitempty"`
 
 	// List of Integer Values
+	// Example: ["Request.RequestID","Request.TransactionDate","Request.MerchantID"]
 	ReportFields []string `json:"reportFields"`
 
 	// List of filters to apply
+	// Example: {"Application.Name":["ics_auth","ics_bill"]}
 	ReportFilters map[string][]string `json:"reportFilters,omitempty"`
 
 	// Report Frequency Value
@@ -300,9 +500,11 @@ type GetReportByReportIDOKBody struct {
 	// - MONTHLY
 	// - ADHOC
 	//
+	// Example: DAILY
 	ReportFrequency string `json:"reportFrequency,omitempty"`
 
 	// Report ID Value
+	// Example: 6da01922-bb8e-a1fb-e053-7cb8d30ade29
 	ReportID string `json:"reportId,omitempty"`
 
 	// Report Format
@@ -311,15 +513,18 @@ type GetReportByReportIDOKBody struct {
 	// - application/xml
 	// - text/csv
 	//
+	// Example: application/xml
 	ReportMimeType string `json:"reportMimeType,omitempty"`
 
 	// Report Name
+	// Example: My Transaction Request report
 	ReportName string `json:"reportName,omitempty"`
 
 	// report preferences
 	ReportPreferences *GetReportByReportIDOKBodyReportPreferences `json:"reportPreferences,omitempty"`
 
 	// Report Start Time Value
+	// Example: 2017-10-01T10:10:10+05:00
 	// Format: date-time
 	ReportStartTime strfmt.DateTime `json:"reportStartTime,omitempty"`
 
@@ -337,6 +542,7 @@ type GetReportByReportIDOKBody struct {
 	ReportStatus string `json:"reportStatus,omitempty"`
 
 	// Time Zone Value
+	// Example: America/Chicago
 	Timezone string `json:"timezone,omitempty"`
 }
 
@@ -363,7 +569,6 @@ func (o *GetReportByReportIDOKBody) Validate(formats strfmt.Registry) error {
 }
 
 func (o *GetReportByReportIDOKBody) validateReportEndTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportEndTime) { // not required
 		return nil
 	}
@@ -376,7 +581,6 @@ func (o *GetReportByReportIDOKBody) validateReportEndTime(formats strfmt.Registr
 }
 
 func (o *GetReportByReportIDOKBody) validateReportPreferences(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportPreferences) { // not required
 		return nil
 	}
@@ -385,6 +589,8 @@ func (o *GetReportByReportIDOKBody) validateReportPreferences(formats strfmt.Reg
 		if err := o.ReportPreferences.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("getReportByReportIdOK" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getReportByReportIdOK" + "." + "reportPreferences")
 			}
 			return err
 		}
@@ -394,13 +600,47 @@ func (o *GetReportByReportIDOKBody) validateReportPreferences(formats strfmt.Reg
 }
 
 func (o *GetReportByReportIDOKBody) validateReportStartTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(o.ReportStartTime) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("getReportByReportIdOK"+"."+"reportStartTime", "body", "date-time", o.ReportStartTime.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this get report by report ID o k body based on the context it is used
+func (o *GetReportByReportIDOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := o.contextValidateReportPreferences(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (o *GetReportByReportIDOKBody) contextValidateReportPreferences(ctx context.Context, formats strfmt.Registry) error {
+
+	if o.ReportPreferences != nil {
+
+		if swag.IsZero(o.ReportPreferences) { // not required
+			return nil
+		}
+
+		if err := o.ReportPreferences.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("getReportByReportIdOK" + "." + "reportPreferences")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("getReportByReportIdOK" + "." + "reportPreferences")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -424,7 +664,8 @@ func (o *GetReportByReportIDOKBody) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-/*GetReportByReportIDOKBodyReportPreferences Report Preferences
+/*
+GetReportByReportIDOKBodyReportPreferences Report Preferences
 swagger:model GetReportByReportIDOKBodyReportPreferences
 */
 type GetReportByReportIDOKBodyReportPreferences struct {
@@ -443,6 +684,11 @@ type GetReportByReportIDOKBodyReportPreferences struct {
 
 // Validate validates this get report by report ID o k body report preferences
 func (o *GetReportByReportIDOKBodyReportPreferences) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get report by report ID o k body report preferences based on context it is used
+func (o *GetReportByReportIDOKBodyReportPreferences) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
