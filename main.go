@@ -4,9 +4,9 @@ import (
 	"log"
 
 	"github.com/go-openapi/strfmt"
-	"github.com/tooolbox/cybersource-rest-client-go/client"
-	"github.com/tooolbox/cybersource-rest-client-go/client/payments"
-	"github.com/tooolbox/cybersource-rest-client-go/config"
+	"github.com/pjhrobles/cybersource-rest-client-go/client"
+	"github.com/pjhrobles/cybersource-rest-client-go/client/payments"
+	"github.com/pjhrobles/cybersource-rest-client-go/config"
 )
 
 func main() {
